@@ -1,0 +1,16 @@
+{
+  "name": "memorial-assil-math",
+  "version": "1.0.0",
+  "description": "Plateforme commémorative et éducative dédiée aux mathématiques avancées",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('Build completed successfully')\""
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^2.4.0"
+  }
+}

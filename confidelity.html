@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FS9YCCEDT9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FS9YCCEDT9');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Olympiad Problems</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #e0f7fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        .problem {
+            background-color: #fff9c4;
+            border: 1px solid #f0f4c3;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .problem:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .problem-title {
+            font-size: 26px;
+            color: #00796b;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .problem-content {
+            background-color: #f1f8e9;
+            padding: 15px;
+            border-radius: 5px;
+            color: #555;
+        }
+
+        .problem-stats {
+            background-color: #e8f5e9;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .problem-stats p {
+            margin: 5px 0;
+        }
+
+        nav {
+            background-color: #00796b;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #004d40;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffeb3b;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', serif;
+            color: #00796b;
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #fff9c4;
+            color: #555;
+            border-top: 1px solid #f0f4c3;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        body {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .problem {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Retour Permanente -->
+    <div style="background: #1A1514; width: 100%; box-sizing: border-box; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 16px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Confidentialité & Règles
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <nav>
+        <a href="#privacy-policy">Privacy Policy</a>
+        <a href="#rules">Rules</a>
+    </nav>
+    <div class="container">
+        <h2 id="privacy-policy">Privacy Policy</h2>
+        <p>
+            Welcome to the Math Olympiad website. Your privacy is very important to us. This privacy policy explains how we collect, use, disclose, and safeguard your personal information.
+        </p>
+        <h3>1. Information We Collect</h3>
+        <p>
+            Personal information: Name, email address, phone number.<br>
+            Browsing information: IP address, browser type, pages visited, time spent on the site.<br>
+            Cookies: We use cookies to improve your user experience.
+        </p>
+        <h3>2. Use of Information</h3>
+        <p>
+            Providing, operating, and maintaining our website.<br>
+            Improving, personalizing, and expanding our website.<br>
+            Understanding and analyzing how you use our website.<br>
+            Developing new products, services, features, and functionality.<br>
+            Communicating with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes.
+        </p>
+        <h3>3. Sharing of Information</h3>
+        <p>
+            With third-party service providers to help us operate our website and conduct our business.<br>
+            To comply with applicable laws and regulations, respond to a subpoena, search warrant or other lawful request for information we receive, or to protect our rights.
+        </p>
+        <h3>4. Data Security</h3>
+        <p>
+            We implement security measures to protect your personal information from unauthorized access, use, or disclosure.
+        </p>
+        <h3>5. Your Rights</h3>
+        <p>
+            You have the right to access, correct, update, or request deletion of your personal information. To exercise these rights, please contact us at the following email address: privacymatholympiad40@gmail.com.
+        </p>
+        <h3>6. Changes to This Privacy Policy</h3>
+        <p>
+            We may update our privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page. We advise you to review this privacy policy periodically for any changes.
+        </p>
+        <h3>7. Contact Us</h3>
+        <p>
+            If you have any questions about this privacy policy, please contact us by email at the following address: privacymatholympiad40@gmail.com.
+        </p>
+        <h2 id="rules">Rules</h2>
+        <p>
+            1) Individual Work: Encourage users to work individually on the proposed problems. This promotes personal reflection and independent problem-solving in mathematics.<br>
+            2) Individual Writing: Ask users to write their solutions and responses individually. This ensures the originality and authenticity of submitted work.<br>
+            3) Anti-Fraud Policy: Clearly inform users that any form of cheating, including copying or plagiarism, is strictly prohibited and will result in disciplinary measures.<br>
+            4) Sanctions for Fraud: Specify that anyone caught cheating will be subject to sanctions. For example, access to the math olympiad site may be temporarily or permanently blocked, depending on the severity of the offense.<br>
+            5) Duration of Block: Indicate that the duration of the block will be determined by the site administrator, based on the nature of the fraud committed. This may vary for first-time offenses, but harsher measures may be taken for repeat offenses.<br>
+            6) User Responsibility: Emphasize the importance for each user to uphold academic integrity and site rules. Encourage them to report any suspicious activity or rule violations.<br>
+            7) Education and Awareness: Provide educational resources on academic ethics and the importance of integrity in mathematical competitions. This may include tips on recognizing and avoiding fraud.<br>
+            😎 To succeed in the Olympiads, it is crucial to understand the requirements and prepare effectively. First and foremost, manage your time wisely: with only 4 and a half hours to solve 6 problems, every minute counts. Prioritize problems based on their complexity and focus on those you can solve most quickly. Be sure to read the instructions carefully and follow the guidelines for each problem to avoid costly errors. Additionally, accuracy is paramount: submit            Additionally, accuracy is paramount: submit your solutions only when you are confident in their correctness, as submissions after the deadline will be rejected. Also, avoid any form of plagiarism: organizers and graders are vigilant and the consequences of being caught can be severe, including disqualification. Finally, remember that participation in the Olympiads is an opportunity to challenge yourself and learn; so stay calm, stay focused, and do your best!
+        </p>
+        <h3>8. Problem Sources</h3>
+        <p>
+            Please note that the problems featured on this website are sourced from various previous Math Olympiads and similar competitions. These problems are included to provide a diverse range of challenging questions and to help you prepare effectively for future competitions. We acknowledge the contributions of the original sources and strive to use these problems responsibly in the spirit of academic enrichment.
+        </p>
+    </div>
+    <footer>
+        <p>&copy; 2024 Math Olympiad. All rights reserved. Last updated 22 August.</p>
+    </footer>
+</body>
+</html>

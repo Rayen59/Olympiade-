@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Rankings & Statistics - Assil Hamdi Memorial</title>
+    <meta name="description" content="Official Leaderboard and Examination Statistics of the Assil Hamdi Memorial International Mathematics Olympiad.">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --primary: #0f172a;
+            --gold: #d97706;
+            --gold-light: #fef3c7;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header.navbar {
+            background-color: #0f172a;
+            color: #ffffff;
+            border-bottom: 2px solid #d97706;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 99999;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.25);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-left-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-back-btn:hover {
+            background: #d97706;
+            color: #ffffff;
+            border-color: #d97706;
+            transform: translateX(-2px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            background: #1e293b;
+            color: #f59e0b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            border: 1px solid #d97706;
+        }
+
+        .brand-text h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 500;
+            font-size: 0.88rem;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: #0f172a;
+            margin: 0.25rem 0;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        /* Table Card */
+        .table-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            margin-bottom: 2.5rem;
+        }
+
+        .table-header-box {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        table.leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        table.leaderboard-table th {
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #475569;
+            border-bottom: 1px solid var(--border);
+        }
+
+        table.leaderboard-table td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        tr.rank-1 td { background: #fffbeb; }
+        tr.rank-2 td { background: #f8fafc; }
+        tr.rank-3 td { background: #fff7ed; }
+
+        .rank-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .rank-badge.gold { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+        .rank-badge.silver { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+        .rank-badge.bronze { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
+        .rank-badge.normal { background: transparent; color: var(--text-muted); }
+
+        .score-cell {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #0f172a;
+        }
+
+        /* Countries list */
+        .countries-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .country-pill {
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        @media (max-width: 768px) {
+            header.navbar { flex-direction: column; gap: 1rem; padding: 1rem; }
+            table.leaderboard-table th, table.leaderboard-table td { padding: 0.75rem 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-left-group">
+            <button type="button" class="nav-back-btn" onclick="smartGoBack()" title="Retour au Mémorial">
+                <span style="font-size: 1.15rem; line-height: 1;">&larr;</span>
+                <span>Retour / Back</span>
+            </button>
+
+            <a href="index.html" class="brand">
+                <div class="brand-logo">&Sigma;</div>
+                <div class="brand-text">
+                    <h1>Assil Hamdi Memorial</h1>
+                </div>
+            </a>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="exam.html" class="nav-link">Olympiad Test Portal</a>
+            <a href="leaderboard.html" class="nav-link active">Rankings & Stats</a>
+            <a href="courses and problems.html" class="nav-link">Problem Archive</a>
+            <a href="exam.html" class="btn btn-gold" style="padding: 0.45rem 1rem; font-size: 0.85rem;">Take Exam &rarr;</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+            <h1 style="font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Official Leaderboard & Academic Analytics</h1>
+            <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto;">
+                Real-time official standings for the Assil Hamdi Memorial International Mathematics Olympiad. Ranked by verified examiner score on the international 42-point scale.
+            </p>
+        </div>
+
+        <!-- Global Stats Row -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Registered Candidates</div>
+                <div class="stat-value" id="statCandidates">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Submissions Evaluated</div>
+                <div class="stat-value" id="statEvaluated">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Average Score (IMO Scale)</div>
+                <div class="stat-value" id="statAverage" style="color: #d97706;">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Maximum Available Points</div>
+                <div class="stat-value">42.0</div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Table -->
+        <div class="table-card">
+            <div class="table-header-box">
+                <div>
+                    <h2 style="font-size: 1.25rem; font-weight: 700;">Official Examination Standings ("Classement")</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Evaluated by the Examination Directorate</span>
+                </div>
+                <a href="exam.html" class="btn btn-gold">&#x25B6; Participate in Examination</a>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Rank</th>
+                            <th>Candidate Name</th>
+                            <th>Country</th>
+                            <th>Official Score</th>
+                            <th>Submission Date</th>
+                            <th>Examiner Recognition</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardTbody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                                Loading certified standings...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Top Countries Representation -->
+        <div class="stat-card" style="text-align: left; padding: 2rem;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Participating Nations & Regional Delegations:</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Number of registered mathematical talents by nation.</p>
+            <div class="countries-flex" id="countriesPillsContainer"></div>
+        </div>
+
+    </div>
+
+    <script>
+        async function loadLeaderboardAndStats() {
+            try {
+                // 1. Fetch Leaderboard
+                const rankRes = await fetch('/api/leaderboard');
+                const rankData = await rankRes.json();
+                
+                // 2. Fetch Stats
+                const statsRes = await fetch('/api/statistics');
+                const statsData = await statsRes.json();
+
+                // Populate stats
+                document.getElementById('statCandidates').textContent = statsData.totalRegistered || '0';
+                document.getElementById('statEvaluated').textContent = statsData.totalGraded || '0';
+                document.getElementById('statAverage').textContent = statsData.averageScore || '0';
+
+                // Populate countries
+                const pillsContainer = document.getElementById('countriesPillsContainer');
+                pillsContainer.innerHTML = '';
+                (statsData.topCountries || []).forEach(c => {
+                    const pill = document.createElement('div');
+                    pill.className = 'country-pill';
+                    pill.innerHTML = `<span>${c.country}</span> <span style="color: var(--gold); font-weight: 700;">(${c.count})</span>`;
+                    pillsContainer.appendChild(pill);
+                });
+
+                // Populate table
+                const tbody = document.getElementById('leaderboardTbody');
+                tbody.innerHTML = '';
+
+                if (!rankData.rankings || rankData.rankings.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+                                No graded submissions yet. Be the first to take the test and earn the top rank!
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                rankData.rankings.forEach(r => {
+                    const tr = document.createElement('tr');
+                    if (r.rank === 1) tr.className = 'rank-1';
+                    else if (r.rank === 2) tr.className = 'rank-2';
+                    else if (r.rank === 3) tr.className = 'rank-3';
+
+                    let rankBadgeClass = 'normal';
+                    if (r.rank === 1) rankBadgeClass = 'gold';
+                    else if (r.rank === 2) rankBadgeClass = 'silver';
+                    else if (r.rank === 3) rankBadgeClass = 'bronze';
+
+                    const dateStr = r.submittedAt ? new Date(r.submittedAt).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) : '--';
+
+                    tr.innerHTML = `
+                        <td><span class="rank-badge ${rankBadgeClass}">#${r.rank}</span></td>
+                        <td><strong>${r.candidateName}</strong></td>
+                        <td>${r.country}</td>
+                        <td class="score-cell">${r.score} <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">/ ${r.maxScore}</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.85rem;">${dateStr}</td>
+                        <td style="font-size: 0.85rem; color: #475569;">${r.feedback ? r.feedback : '<span style="color: #94a3b8;">Full marks confirmed</span>'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function smartGoBack() {
+            if (window.history.length > 1 && document.referrer) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadLeaderboardAndStats);
+    </script>
+</body>
+</html>

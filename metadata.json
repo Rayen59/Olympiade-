@@ -1,0 +1,8 @@
+{
+  "name": "Mémorial Assil Hamdi pour les Mathématiques Avancées",
+  "description": "Plateforme commémorative et éducative dédiée aux mathématiques avancées, aux olympiades et à la recherche mathématique.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "permissions": []
+}

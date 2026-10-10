@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Nexus Labs Journal & Announcement</title>
+    <style>
+        /* Existing styles */
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 900px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #00539C;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .header .date {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+        }
+
+        .navbar {
+            background-color: #e3e3e3;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #00539C;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .main-content {
+            columns: 2 300px;
+            column-gap: 40px;
+            padding: 10px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00539C;
+            column-span: all;
+        }
+
+        article {
+            margin-bottom: 20px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        article h3 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        article p {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .author {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .date-published {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background-color: #00539C;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .announcement-header {
+            font-size: 26px;
+            font-weight: bold;
+            color: #3f51b5;
+            margin-bottom: 10px;
+        }
+
+        .announcement-subtitle {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .announcement-content {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #e91e63;
+        }
+
+        .extra-info {
+            font-size: 14px;
+            color: #555;
+            background-color: #fff3e0;
+            padding: 10px;
+            border-left: 4px solid #ff9800;
+            border-radius: 3px;
+        }
+
+        .extra-info p {
+            margin: 5px 0;
+        }
+
+        .footer-container {
+            background-color: #204759;
+            color: #ffffff;
+            padding: 40px 0;
+            text-align: left;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h2 {
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .footer-section ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #50b3a2;
+        }
+
+        .socials {
+            margin-top: 15px;
+        }
+
+        .socials a {
+            color: #ffffff;
+            font-size: 18px;
+            margin-right: 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .socials a:hover {
+            color: #50b3a2;
+        }
+
+        .new-badge {
+            background-color: #ff4081;
+            color: #ffffff;
+            padding: 2px 8px;
+            font-size: 12px;
+            border-radius: 12px;
+            margin-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #18344d;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .update-section {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .update-section h2 {
+            color: #1976d2;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .update-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .update-section img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Retour Permanente -->
+    <div style="background: #1A1514; width: 100%; box-sizing: border-box; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 16px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Actualités du Centre
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <div class="container">
+        <header class="header">
+            <h1>Quantum Nexus Labs Journal</h1>
+            <p class="date">August 3, 2024</p>
+        </header>
+        <!-- New Image Section -->
+        <section class="image-container">
+            <img src="https://i.ibb.co/fvCbh0R/5473d6a3-d260-4065-8978-95fdd027711a.jpg" alt="Company Image">
+        </section>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#news">News</a></li>
+                <li><a href="#developments">Developments</a></li>
+                <li><a href="#technology">Technology</a></li>
+                <li><a href="#research">Research</a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <section id="news" class="news-section">
+                <h2>Latest News</h2>
+                <article class="news-article">
+                    <h3>Site Maintenance and Future Updates</h3>
+                    <p class="date-published">August 3, 2024</p>
+                    <p class="author">By Med Rayen Bouazizi</p>
+                    <p>
+                        We apologize for the recent maintenance and server issues. The servers have now been corrected
+                        and are fully operational. We are excited to announce upcoming changes to our site, including the
+                        launch of an Olympiad with medals to be awarded in version 3.1. Our primary focus remains on
+                        advancing research and technology.
+                    </p>
+                </article>
+                <article class="news-article">
+                    <h3>Future Developments</h3>
+                    <p class="date-published">August 3, 2024</p>
+                    <p>
+                        We are committed to enhancing our platform and providing innovative solutions. Stay tuned for
+                        more updates and improvements in the near future.
+                    </p>
+                </article>
+            </section>
+            <section id="announcement" class="announcement-section">
+                <div class="content">
+                    <div class="announcement-header">Latest News</div>
+                    <div class="announcement-subtitle">By Med Rayen Bouazizi<br>August 1, 2024 - 10:00 AM, Online</div>
+                    <div class="announcement-content">
+                        We are pleased to announce that our Math Olympiad site is now published on Uptodown! Download
+                        our app now to explore the <span class="highlight">new features and enhancements</span>. This
+                        version includes updates and additions not available on the site.
+                    </div>
+                    <div class="extra-info">
+                        <p><strong>Time:</strong> August 3, 2024 - 10:00 AM</p>
+                        <p><strong>Location:</strong> Online</p>
+                        <p><strong>Updates Include:</strong></p>
+                        <ul>
+                            <li>New interactive math challenges</li>
+                            <li>Improved user interface with enhanced navigation</li>
+                            <li>Exclusive access to premium content</li>
+                        </ul>
+                        <p>Thank you to all our users for your unwavering support!</p>
+                    </div>
+                </div>
+            </section>
+            <section id="developments" class="developments-section">
+                <h2>Recent Developments</h2>
+                <article class="development-article">
+                    <h3>Launch of New AI Platform</h3>
+                    <p class="date-published">August 3, 2024</p>
+                    <p class="author">By Med Rayen Bouazizi</p>
+                    <p>
+                        We are excited to introduce our latest AI platform, designed to enhance productivity and
+                        streamline operations across various sectors. The platform leverages state-of-the-art machine
+                        learning algorithms to deliver real-time insights and analytics.
+                    </p>
+                </article>
+                <article class="development-article">
+                    <h3>Partnership with Leading Tech Companies</h3>
+                    <p class="date-published">August 3, 2024</p>
+                    <p>
+                        We are proud to announce our partnership with several leading technology companies to further
+                        drive innovation and development in the industry. This collaboration aims to foster the exchange
+                        of knowledge and resources to create groundbreaking solutions.
+                    </p>
+                </article>
+            </section>
+            <section id="technology" class="technology-section">
+                <h2>Technology Insights</h2>
+                <article class="technology-article">
+                    <h3>Advancements in Quantum Computing</h3>
+                    <p class="date-published">August 3, 2024</p>
+                    <p class="author">By Med Rayen Bouazizi</p>
+                    <p>
+                        Quantum computing is revolutionizing the tech industry with its ability to process complex
+                        calculations at unprecedented speeds. Researchers are exploring new algorithms and applications
+                        to leverage the full potential of quantum computing in various fields, including cryptography,
+                        healthcare, and finance.
+                    </p>
+                </article>
+                <article class="technology-article">
+                    <h3>Exploring the Future of Blockchain Technology</h3>
+                    <p class="date-published">August 3, 2024</p>
+                    <p>
+                        Blockchain technology is transforming industries by providing secure and transparent
+                        transaction systems. Experts are exploring innovative use cases beyond cryptocurrencies,
+                        including supply chain management, identity verification, and voting systems.
+                    </p>
+                </article>
+            </section>
+            <section id="research" class="research-section">
+                <h2>Research Highlights</h2>
+                <article class="research-article">
+                    <h3>Breakthroughs in Artificial Intelligence</h3>
+                    <p class="date-published">August 3, 2024</p>
+                    <p class="author">By Med Rayen Bouazizi</p>
+                    <p>
+                        Artificial Intelligence continues to make significant strides in various domains, from natural
+                        language processing to computer vision. Researchers are developing new techniques to improve AI
+                        models' accuracy and efficiency, leading to more intelligent and capable systems.
+                    </p>
+                </article>
+                <article class="research-article">
+                    <h3>Exploring the Frontiers of Space Exploration</h3>
+                    <p class="date-published">August 3, 2024</p>
+                    <p>
+                        Space exploration is entering a new era with advancements in rocket technology and spacecraft
+                        design. Scientists are working on missions to explore distant planets, study asteroids, and
+                        search for signs of extraterrestrial life. These efforts are expanding our understanding of the
+                        universe and opening up new possibilities for human exploration.
+                    </p>
+                </article>
+            </section>
+            <!-- New Section Added -->
+            <section id="updates" class="update-section">
+                <h2>Company Efforts and Updates</h2>
+                <p>
+                    Quantum Nexus Labs is dedicated to continuous improvement and development of our site. We are
+                    putting forth every effort to enhance user experience and functionality. Below is an update from
+                    the last meeting of Med Rayen Bouazizi, the previous site manager.
+                </p>
+                <p>After the recent meeting, it was confirmed that significant progress has been made towards the
+                    development and refinement of the site. We are committed to delivering a high-quality user
+                    experience and appreciate your ongoing support.</p>
+                <a href="https://ibb.co/72dWS7Y">
+                    <img src="https://i.ibb.co/Ch37wx1/fa06f135-7ff7-463f-b6d3-7168d30a5577.jpg" alt="fa06f135-7ff7-463f-b6d3-7168d30a5577">
+                </a>
+            </section>
+            <!-- New Security Update Section -->
+            <section id="security" class="update-section">
+                <h2>Backend Security Enhancements</h2>
+                <p>
+                    We are actively working on improving the security of our backend systems to provide a safer and more secure experience for our users. Our team is implementing advanced security measures to protect your data and enhance overall site security. Thank you for your patience as we make these important updates.
+                </p>
+                <a href="https://ibb.co/CQP2Qyg">
+                    <img src="https://i.ibb.co/3cRzcb2/75fd70c3-7482-4603-bf65-fcbd6a3dda96.jpg" alt="Security Update Image">
+                </a>
+            </section>
+            . 
+            .  
+            <section id="Remercimemt" class="update-section">
+                <h2>Lovely Users</h2>
+                <p>
+                    We hope this message finds you well.
+
+We wanted to take a moment to express our deepest gratitude for your continued support and engagement with Quantum Nexus Labs. Your commitment and enthusiasm have been instrumental in driving our mission forward and making our advancements possible.
+
+Your feedback, insights, and suggestions have played a crucial role in helping us refine and enhance our services. We are thrilled to have such a dedicated community of users who are as passionate about innovation and excellence as we are.
+
+As a token of our appreciation, we are excited to share some upcoming updates and features that we believe will further enrich your experience with us. Stay tuned for more details!
+
+Thank you once again for being an invaluable part of our journey. We look forward to achieving even greater milestones together.
+
+With sincere thanks,
+
+The Quantum Nexus Labs Team
+                </p>
+                <a href="https://ibb.co/3TtML9H"><img src="https://i.ibb.co/b6p28Mn/45e00f50-e53f-4c7a-ba81-92ce803e4086.jpg" alt="45e00f50-e53f-4c7a-ba81-92ce803e4086" border="0"></a>
+            </section>
+        </main>
+        <footer class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h2>Quantum Nexus Labs</h2>
+                    <p>
+                        Quantum Nexus Labs is an innovative company dedicated to the research and development of advanced
+                        technological solutions. Our mission is to push the boundaries of technology to deliver world-class products
+                        and services.
+                    </p>
+                    <div class="socials">
+                        <a href="https://www.facebook.com/profile.php?id=100083277064965&locale=en_US"><i
+                                class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h2>Products and Services</h2>
+                    <ul>
+                        <li><a href="https://rayen59.github.io/society.com/">Quantum Nexus Labs <span
+                                class="new-badge">NEW</span></a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h2>Contact Us</h2>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:rayenbouazizi336@gmail.com">rayenbouazizi336@gmail.com</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Tunisia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Quantum Nexus Labs. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
+

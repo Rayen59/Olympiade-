@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Announcements</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 40px;
+        }
+        .course {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 20px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .course:hover {
+            background-color: #e9ecef;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .course h2 {
+            margin-top: 0;
+            color: #343a40;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .course ul {
+            list-style: none;
+            padding: 0;
+        }
+        .course ul li {
+            margin: 10px 0;
+        }
+        .course ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .course ul li a:hover {
+            color: #0056b3;
+        }
+        .exercise-platform {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .exercise-platform h2 {
+            margin-top: 0;
+        }
+        .exercise-platform a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #0056b3;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .exercise-platform a:hover {
+            background-color: #003d80;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: -20px; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); margin: -20px -20px 30px -20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Cours & Problèmes
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <h1>Course Announcements</h1>
+
+    <div class="course">
+        <h2>Geometry</h2>
+        <ul>
+            <li><a href="geometry.html" style="font-weight: bold; color: #007bff;">Complex Geometry (Main Course)</a></li>
+            <li><a href="Cocyclic points.html">Cocyclic Points</a></li>
+            <li><a href="geometry-subpage2.html">Sub-page 2</a></li>
+            <li><a href="geometry-subpage3.html">Sub-page 3</a></li>
+            <li><a href="geometry-subpage4.html">Sub-page 4</a></li>
+        </ul>
+    </div>
+
+    <div class="course">
+        <h2>Inequalities</h2>
+        <ul>
+            <li><a href="inequality.html" style="font-weight: bold; color: #007bff;">Inequalities of Means (Main Course)</a></li>
+            <li><a href="inequality1.html">12 Extreme Olympiad Problems</a></li>
+            <li><a href="inequalities-subpage2.html">Sub-page 2</a></li>
+            <li><a href="inequalities-subpage3.html">Sub-page 3</a></li>
+            <li><a href="inequalities-subpage4.html">Sub-page 4</a></li>
+        </ul>
+    </div>
+
+    <div class="course">
+        <h2>Number Theory</h2>
+        <ul>
+            <li><a href="number theory.html" style="font-weight: bold; color: #007bff;">Mastering Number Theory (Main Course)</a></li>
+            <li><a href="p-adique-valuation.html">P-adic valuation</a></li>
+            <li><a href="number-theory-subpage2.html">Sub-page 2</a></li>
+            <li><a href="number-theory-subpage3.html">Sub-page 3</a></li>
+            <li><a href="number-theory-subpage4.html">Sub-page 4</a></li>
+        </ul>
+    </div>
+
+    <div class="course">
+        <h2>Algebra</h2>
+        <ul>
+            <li><a href="equation.html">Equations</a></li>
+            <li><a href="viete .html">Viete formula</a></li>
+            <li><a href="algebra-subpage3.html">Sub-page 3</a></li>
+            <li><a href="algebra-subpage4.html">Sub-page 4</a></li>
+        </ul>
+    </div>
+
+    <div class="exercise-platform">
+        <h2>Exercise Platform</h2>
+        <p>To access the exercise platform, click the link below:</p>
+        <a href="exercice.html">Access the Exercise Platform</a>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FS9YCCEDT9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FS9YCCEDT9');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Geometry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #ff8a00, #e52e71, #dce35b, #45a247);
+            background-size: 400% 400%;
+            animation: gradientBackground 30s ease infinite;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 900px;
+        }
+
+        .problem {
+            background-color: #ffffff;
+            border: 1px solid #d1d1d1;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .problem:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .statement {
+            background-color: #e0f7fa;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            border: 1px solid #b2ebf2;
+        }
+
+        nav {
+            background-color: #343a40;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: #4aa3df;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        .title {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 42px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 24px;
+            font-size: 22px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Géométrie Complexe
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <div class="title">Complex Geometry</div>
+    <div class="container">
+        <div class="problem">
+            <div class="statement">
+                Let \( \triangle ABC \) be a triangle such that \( AB \neq AC \) and \( \angle BAC \neq 90^\circ \). Let \( M \) and \( N \) be the midpoints of segments \( [AB] \) and \( [AC] \), respectively. Let \( E \) and \( F \) be the feet of the altitudes from vertices \( B \) and \( C \), respectively. Let \( O \) be the center of the circumcircle of triangle \( ABC \) and let \( H \) be the orthocenter of triangle \( ABC \). The tangent to the circumcircle of triangle \( ABC \) at \( A \) intersects line \( (MN) \) at point \( P \). Let \( Q \) be the second point of intersection of the circumcircles of triangles \( ABC \) and \( AEF \). Lines \( (EF) \) and \( (AQ) \) intersect at point \( R \). Show that lines \( (OH) \) and \( (PR) \) are perpendicular.
+            </div>
+        </div>
+        <div class="problem">
+            <div class="statement">
+                Let \( \triangle ABC \) be a triangle, and let \( E \) and \( F \) be the feet of the altitudes from vertices \( B \) and \( C \), respectively. Let \( P \) be the intersection point of the altitude from vertex \( A \) with the circumcircle of triangle \( ABC \). Line \( (PE) \) intersects the circumcircle of triangle \( ABC \) at point \( Q \). Show that line \( (BQ) \) intersects segment \( [EF] \) at its midpoint.
+            </div>
+        </div>
+        <div class="problem">
+            <div class="statement">
+                Let \( \triangle ABC \) be a triangle, \( I \) the center of its inscribed circle, and \( \Gamma \) its circumcircle. Let \( M \) be the midpoint of segment \( [BC] \). Let \( D \) be the orthogonal projection of point \( I \) onto segment \( [BC] \). The perpendicular to line \( (AI) \) passing through point \( I \) intersects segment \( [AB] \) at point \( E \) and segment \( [AC] \) at point \( F \). Let \( X \) be the second point of intersection of the circumcircles of triangles \( ABC \) and \( AEF \). Show that lines \( (XD) \) and \( (AM) \) intersect on the circle \( \Gamma \).
+            </div>
+        </div>
+        <div class="problem">
+            <div class="statement">
+                Let \( \triangle ABC \) be an isosceles triangle with vertex at \( A \). Let \( I \) be the center of its inscribed circle. Line \( (BI) \) intersects line \( (AC) \) at point \( D \), and the line perpendicular to line \( (AC) \) passing through \( D \) intersects line \( (AI) \) at point \( E \). Show that the symmetrical point of \( I \) with respect to line \( (AC) \) belongs to the circumcircle of triangle \( BDE \).
+            </div>
+        </div>
+        <div class="problem">
+            <div class="statement">
+                Let \( \triangle ABC \) be a triangle with \( \angle CAB > \angle ABC \). Let \( I \) be the center of its inscribed circle. Let \( D \) be a point on segment \( [BC] \) such that \( \angle CAD = \angle CBA \). Let \( \omega \) be the circle tangent to segment \( [AC] \) at point \( A \) and passing through point \( I \). Let \( X \) be the second point of intersection of circle \( \omega \) with the circumcircle of triangle \( ABC \). Show that the angle bisectors of \( \angle DAB \) and \( \angle CXB \) intersect on segment \( [BC] \).
+            </div>
+        </div>
+        <div class="problem">
+            <div class="statement">
+                Let \( \triangle ABC \) be an acute-angled triangle, and let \( O \) be the center of its circumcircle. Let \( D \), \( E \), and \( F \) be the midpoints of sides \( [BC] \), \( [CA] \), and \( [AB] \), respectively. Let \( M \) be a point distinct from point \( D \) on segment \( [BC] \). Let \( N \) be the intersection point of lines \( (EF) \) and \( (AM) \). The line \( (ON) \) intersects the circumcircle of triangle \( ODM \) at point \( P \). Show that the symmetrical point of \( M \) with respect to line \( (DP) \) belongs to the Euler's circle of triangle \( ABC \).
+            </div>
+        </div>
+        <div class="problem">
+            <div class="statement">
+                Let \( \triangle ABC \) be a triangle and \( \Omega \) its circumcircle. Consider a circle \( \omega \) internally tangent to circle \( \Omega \) at point \( A \). Let \( P \) and \( Q \) be the intersection points (distinct from point \( A \)) of circle \( \omega \) with sides \( [AB] \) and \( [AC] \), respectively. Let \( O \) be the intersection point of lines \( (BQ) \) and \( (CP) \). Let \( A_0 \) be the symmetrical point of \( A \) with respect to line \( (BC) \), and let \( S \) be the intersection point of line \( (OA_0) \) with circle \( \omega \) such that point \( S \) lies on the arc \( PQ \) not containing point \( A \). Show that the circumcircle of triangle \( BSC \) is tangent to circle \( \omega \).
+            </div>
+        </div>
+        <div class="problem">
+            <div class="statement">
+                Let \( \triangle ABC \) be an acute-angled triangle such that \( AB < AC \). Let \( D \), \( E \), and \( F \) be the respective points of contact of the inscribed circle of triangle \( ABC \) with sides \( [BC] \), \( [CA] \), and \( [AB] \). The line perpendicular to segment \( [EF] \) passing through point \( D \) intersects segment \( [AB] \) at point \( G \). The circumcircle of triangle \( AEF \) intersects the circumcircle of triangle \( ABC \) at point \( X \). Show that points \( X \), \( G \), \( D \), and \( B \) are concyclic.
+            </div>
+        </div>
+        <div class="problem">
+            <div class="statement">
+                Let \( \triangle ABC \) be an acute-angled triangle. Let \( D \), \( E \), and \( F \) be the feet of the altitudes from vertices \( A \), \( B \), and \( C \), respectively. Let \( I_1 \) and \( I_2 \) be the centers of the circles inscribed in triangles \( AEF \) and \( BDF \), respectively. Let \( O_1 \) and \( O_2 \) be the centers of the circumcircles of triangles \( ACI_1 \) and \( BCI_2 \), respectively. Show that lines \( (O_1O_2) \) and \( (I_1I_2) \) are parallel.
+            </div>
+        </div>
+    </div>
+    <button><a href="submitproblem.html">Submit your solutions</a></button>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Problems</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+        .problem-container {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #343a40;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .problem-container.correct {
+            border-color: #28a745; /* Green border for correct answer */
+        }
+        .problem-container.incorrect {
+            border-color: #dc3545; /* Red border for incorrect answer */
+        }
+        .problem-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .answer-input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #343a40;
+            border-radius: 5px;
+        }
+        .submit-button {
+            padding: 10px 15px;
+            background-color: #495057;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #343a40;
+        }
+        .charisma-circle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #ffc107;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #343a40;
+            font-weight: bold;
+        }
+        .score {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Math Problems
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <div style="padding: 20px;">
+        <h1>Math Problems</h1>
+        <h2 style="font-size: 16px; color: #666; font-weight: normal; margin-top: -10px; margin-bottom: 25px;">Enter -1 if there is no solution</h2>
+<div id="problem-list">
+    <!-- Problem 1 -->
+    <div class="problem-container" id="problem1">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">1) Find the remainder of the division of \( 3^{100} \) by 100.</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer1">
+        <button class="submit-button" onclick="checkAnswer('problem1', 'answer1', 1)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 2 -->
+    <div class="problem-container" id="problem2">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">2) Let \( a, b, c \) be three strictly positive real numbers such that \( a + b + c = 1 \). What is the value of \( \frac{1}{a^2+1} + \frac{1}{b^2+1} + \frac{1}{c^2+1} \)?</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer2">
+        <button class="submit-button" onclick="checkAnswer('problem2', 'answer2', 15)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 3 -->
+    <div class="problem-container" id="problem3">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">3) What is the sum of all positive integers such that \( (n-1)! + n! = (n+1)! \)?</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer3">
+        <button class="submit-button" onclick="checkAnswer('problem3', 'answer3', 15)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 4 -->
+    <div class="problem-container" id="problem4">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">4) Let \( a, b, c \) be three integers such that \( a^2 + b^2 = c^2 \). Suppose that \( c + b < 50 \) and \( a < 10 \). What is the maximum sum of \( a + b + c \)?</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer4">
+        <button class="submit-button" onclick="checkAnswer('problem4', 'answer4', 35)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 5 -->
+    <div class="problem-container" id="problem5">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">5) Find the sum of the roots of \( x^4 - 8x^3 + 18x^2 - 8x = 0 \).</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer5">
+        <button class="submit-button" onclick="checkAnswer('problem5', 'answer5', 35)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 6 -->
+    <div class="problem-container" id="problem6">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">6) Let \( f \) be a function from \( \mathbb{R} \) to \( \mathbb{R} \) such that \( f(x) = x^3 - 3x^2 - 9x - 5 \). Calculate \( f(f(f(2))) \).</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer6">
+        <button class="submit-button" onclick="checkAnswer('problem6', 'answer6', 35)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 7 -->
+    <div class="problem-container" id="problem7">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">7) Find an integer \( 100 < n < 2025 \) such that the sum of the digits of \( n \) and \( 2n \) is equal to 1234.</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer7">
+        <button class="submit-button" onclick="checkAnswer('problem7', 'answer7', 60)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 8 -->
+    <div class="problem-container" id="problem8">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">8) Find the number of integers \( n \) such that \( 2^{n-1} \cdot n + 1 \) is a perfect square.</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer8">
+        <button class="submit-button" onclick="checkAnswer('problem8', 'answer8', 60)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 9 -->
+    <div class="problem-container" id="problem9">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">9) Find the number of integers \( n \) such that \( 2^n + 17 \) is a perfect square.</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer9">
+        <button class="submit-button" onclick="checkAnswer('problem9', 'answer9', 60)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 10 -->
+    <div class="problem-container" id="problem10">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">10) What is the sum of all prime numbers \( p \) such that $$ 16p^{2024}(p^{2023}+2025)$$ is a perfect square and is divisible by 6.?</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer10">
+        <button class="submit-button" onclick="checkAnswer('problem10', 'answer10', 75)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 11 -->
+    <div class="problem-container" id="problem11">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">11) a,b and c are 3 positif reel numbers  such that abc=1.Suppose that c>0 find the minimum of the expression $$a^{3}+b^{3}+c^{3}$$.</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer11">
+        <button class="submit-button" onclick="checkAnswer('problem11', 'answer11', 75)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 12 -->
+    <div class="problem-container" id="problem12">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">12) Find the largest number of consecutive integers starting from 1 that can be the sum of the squares of the digits of some integer.</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer12">
+        <button class="submit-button" onclick="checkAnswer('problem12', 'answer12', 90)">Submit Answer</button>
+    </div>
+
+    <!-- Problem 13 -->
+    <div class="problem-container" id="problem13">
+        <div class="charisma-circle">C</div>
+        <div class="problem-title">13) If \(a, b, c\), and \(d\) are 4 integers such that \(a + b + c + d = 2025\) and \( (abcd)^2 = 2025 \), find the sum of \(a^4 + b + d^2 + 7\).</div>
+        <input type="text" class="answer-input" placeholder="Your answer here" id="answer13">
+        <button class="submit-button" onclick="checkAnswer('problem13', 'answer13', 100)">Submit Answer</button>
+    </div>
+</div>
+
+<div class="score" id="score">Score: 0</div>
+
+<script>
+    // Update the score in local storage
+    function updateScore(newScore) {
+        localStorage.setItem('score', newScore);
+        document.getElementById('score').textContent = 'Score: ' + newScore;
+    }
+
+    // Initialize score from local storage
+    function initializeScore() {
+        const storedScore = localStorage.getItem('score');
+        if (storedScore) {
+            document.getElementById('score').textContent = 'Score: ' + storedScore;
+        } else {
+            updateScore(0);
+        }
+    }
+
+    // Check answer and store response status
+    function checkAnswer(problemId, answerId, problemScore) {
+        const userAnswer = document.getElementById(answerId).value.trim();
+        const storedAnswer = localStorage.getItem(problemId);
+
+        if (storedAnswer) {
+            alert('You have already answered this problem.');
+            return;
+        }
+
+        // Correct answer check (replace with actual logic)
+        const correctAnswers = {
+            'problem1': '1', // Example correct answer
+            'problem2': '0.98', // Example correct answer
+            'problem3': '1', // Example correct answer
+            'problem4': '49', // Example correct answer
+            'problem5': '8', // Example correct answer
+            'problem6': '-147', // Example correct answer
+            'problem7': '820', // Example correct answer
+            'problem8': '1', // Example correct answer
+            'problem9': '0', // Example correct answer
+            'problem10': '3', // Example correct answer
+            'problem11': '109089', // Example correct answer
+            'problem12': '5', // Example correct answer
+            'problem13': '-1'  // Example correct answer for new problem
+        };
+
+        const correctAnswer = correctAnswers[problemId];
+        if (userAnswer === correctAnswer) {
+            document.getElementById(problemId).classList.add('correct');
+            updateScore(parseInt(localStorage.getItem('score')) + problemScore);
+            localStorage.setItem(problemId, 'answered');
+        } else {
+            document.getElementById(problemId).classList.add('incorrect');
+        }
+    }
+
+    window.onload = initializeScore;
+</script>
+
+</body>
+</html>
+

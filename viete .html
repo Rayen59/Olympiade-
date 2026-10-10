@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vieta's Formulas - Detailed Lesson</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007acc;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #007acc;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .equation {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+            overflow: auto;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .example, .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .example h3, .exercise h3 {
+            color: #0056b3;
+        }
+
+        .example p, .exercise p {
+            margin: 10px 0;
+        }
+
+        footer {
+            background-color: #007acc;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .equation {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Formules de Viète
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+
+    <header>
+        <h1>Vieta's Formulas</h1>
+        <p>A Detailed Lesson on Polynomial Roots</p>
+    </header>
+
+    <div class="container">
+        <!-- Introduction Section -->
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Vieta's Formulas relate the coefficients of a polynomial to sums and products of its roots. They are named after the French mathematician François Viète and are very useful in algebra, especially for solving polynomial equations.</p>
+        </div>
+
+        <!-- General Polynomial Section -->
+        <div class="section">
+            <h2>General Polynomial</h2>
+            <p>Consider a general polynomial of degree \( n \):</p>
+            <div class="equation">
+                $$ a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 = 0 $$
+            </div>
+            <p>Where \( a_n, a_{n-1}, \dots, a_1, a_0 \) are real coefficients and \( a_n \neq 0 \).</p>
+        </div>
+
+        <!-- Vieta's Formulas Section -->
+        <div class="section">
+            <h2>Vieta's Formulas</h2>
+            <p>For the polynomial \( a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 = 0 \) with roots \( x_1, x_2, \dots, x_n \), Vieta's Formulas are:</p>
+            <ul>
+                <li>The sum of the roots (taken one at a time) is given by:</li>
+                <div class="equation">
+                    $$ x_1 + x_2 + \cdots + x_n = -\frac{a_{n-1}}{a_n} $$
+                </div>
+                <li>The sum of the products of the roots taken two at a time is given by:</li>
+                <div class="equation">
+                    $$ x_1 x_2 + x_1 x_3 + \cdots + x_{n-1} x_n = \frac{a_{n-2}}{a_n} $$
+                </div>
+                <li>In general, the sum of the products of the roots taken \( k \) at a time is:</li>
+                <div class="equation">
+                    $$ \sum_{1 \leq i_1 < i_2 < \cdots < i_k \leq n} x_{i_1} x_{i_2} \cdots x_{i_k} = (-1)^k \frac{a_{n-k}}{a_n} $$
+                </div>
+                <li>The product of all the roots is:</li>
+                <div class="equation">
+                    $$ x_1 x_2 \cdots x_n = (-1)^n \frac{a_0}{a_n} $$
+                </div>
+            </ul>
+        </div>
+
+        <!-- Examples Section -->
+        <div class="section">
+            <h2>Examples</h2>
+            <div class="example">
+                <h3>Example 1</h3>
+                <p>Consider the polynomial \( 2x^3 - 6x^2 + 2x - 1 = 0 \). Apply Vieta's Formulas:</p>
+                <ul>
+                    <li>The sum of the roots is:</li>
+                    <div class="equation">
+                        $$ x_1 + x_2 + x_3 = -\frac{-6}{2} = 3 $$
+                    </div>
+                    <li>The sum of the products of the roots taken two at a time is:</li>
+                    <div class="equation">
+                        $$ x_1 x_2 + x_1 x_3 + x_2 x_3 = \frac{2}{2} = 1 $$
+                    </div>
+                    <li>The product of all the roots is:</li>
+                    <div class="equation">
+                        $$ x_1 x_2 x_3 = (-1)^3 \frac{-1}{2} = \frac{1}{2} $$
+                    </div>
+                </ul>
+            </div>
+
+            <div class="example">
+                <h3>Example 2</h3>
+                <p>For the polynomial \( x^2 - 5x + 6 = 0 \):</p>
+                <ul>
+                    <li>The sum of the roots:</li>
+                    <div class="equation">
+                        $$ x_1 + x_2 = -\frac{-5}{1} = 5 $$
+                    </div>
+                    <li>The product of the roots:</li>
+                    <div class="equation">
+                        $$ x_1 x_2 = \frac{6}{1} = 6 $$
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Exercises Section -->
+        <div class="section">
+            <h2>Exercises</h2>
+            <div class="exercise">
+                <h3>Exercise 1</h3>
+                <p>Solve the polynomial equation \( x^3 + 2x^2 - 5x - 6 = 0 \) using Vieta's Formulas.</p>
+            </div>
+
+            <div class="exercise">
+                <h3>Exercise 2</h3>
+                <p>Find the roots of the polynomial \( 3x^2 - 11x + 6 = 0 \) and verify using Vieta's Formulas.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Math Olympiad. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

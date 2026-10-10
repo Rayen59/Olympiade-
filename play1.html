@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Grid Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #ff6f61, #d6a4a4);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #game-container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        }
+
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .tile {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            font-weight: bold;
+            background-color: #1e90ff;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .tile.empty {
+            background-color: transparent;
+            cursor: default;
+        }
+
+        .tile:hover {
+            background-color: #4682b4;
+            transform: scale(1.1);
+        }
+
+        #info {
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #reset-button {
+            padding: 12px 25px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff4500;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #reset-button:hover {
+            background-color: #dc143c;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Retour Permanente -->
+    <div style="background: #1A1514; width: 100%; box-sizing: border-box; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 16px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Jeux d'Esprit
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <div id="game-container" style="margin: auto;">
+        <h1><strong>Number Grid Game</strong></h1>
+        <div id="grid-container">
+            <!-- Grid tiles will be generated here -->
+        </div>
+        <div id="info">
+            <div><strong>Time:</strong> <span id="time">0</span> seconds</div>
+            <div><strong>Moves:</strong> <span id="moves">0</span></div>
+        </div>
+        <button id="reset-button">Reset</button>
+    </div>
+    <script>
+        const gridContainer = document.getElementById('grid-container');
+        const timeDisplay = document.getElementById('time');
+        const movesDisplay = document.getElementById('moves');
+        const resetButton = document.getElementById('reset-button');
+
+        let grid = [];
+        let emptyIndex = 9;
+        let moves = 0;
+        let time = 0;
+        let timer;
+
+        function initGame() {
+            grid = [1, 2, 3, 4, 5, 6, 7, 8, 9, null];
+            grid.sort(() => Math.random() - 0.5);
+            emptyIndex = grid.indexOf(null);
+            moves = 0;
+            time = 0;
+            updateGrid();
+            updateInfo();
+            clearInterval(timer);
+            timer = setInterval(() => {
+                time++;
+                updateInfo();
+            }, 1000);
+        }
+
+        function updateGrid() {
+            gridContainer.innerHTML = '';
+            grid.forEach((value, index) => {
+                const tile = document.createElement('div');
+                tile.className = 'tile';
+                if (value !== null) {
+                    tile.textContent = value;
+                    tile.addEventListener('click', () => moveTile(index));
+                } else {
+                    tile.classList.add('empty');
+                }
+                gridContainer.appendChild(tile);
+            });
+        }
+
+        function moveTile(index) {
+            const validMoves = [emptyIndex - 1, emptyIndex + 1, emptyIndex - 4, emptyIndex + 4];
+            if (validMoves.includes(index)) {
+                [grid[emptyIndex], grid[index]] = [grid[index], grid[emptyIndex]];
+                emptyIndex = index;
+                moves++;
+                updateGrid();
+                updateInfo();
+                checkWin();
+            }
+        }
+
+        function updateInfo() {
+            timeDisplay.textContent = time;
+            movesDisplay.textContent = moves;
+        }
+
+        function checkWin() {
+            const isSorted = grid.slice(0, 9).every((value, index) => value === index + 1);
+            if (isSorted && emptyIndex === 9) {
+                clearInterval(timer);
+                setTimeout(() => alert(`Congratulations! You won in ${time} seconds with ${moves} moves.`), 100);
+            }
+        }
+
+        resetButton.addEventListener('click', initGame);
+
+        initGame();
+    </script>
+</body>
+</html>

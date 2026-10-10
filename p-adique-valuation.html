@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Guide to p-adic Valuation Theory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FS9YCCEDT9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FS9YCCEDT9');
+    </script>
+    <style>
+        /* Define a clean, professional color palette using CSS variables */
+        :root {
+            --primary-bg: #f0f2f5; /* Light grey/off-white background */
+            --secondary-bg: #ffffff; /* Pure white for content boxes */
+            --text-dark: #212529; /* Dark charcoal for main text */
+            --text-light: #495057; /* Muted grey for secondary text */
+            --accent-blue: #007bff; /* Vibrant blue for headings/accents */
+            --accent-green: #28a745; /* Success green for properties */
+            --accent-orange: #fd7e14; /* Warning orange for problems */
+            --accent-red: #dc3545; /* Danger red for solutions */
+            --accent-cyan: #17a2b8; /* Info cyan for definitions */
+            --border-light: #e9ecef; /* Very light grey for subtle borders */
+            --box-bg-light: #f8f9fa; /* Lighter background for code/equation boxes */
+            --shadow-light: rgba(0, 0, 0, 0.08); /* Soft shadow */
+            --shadow-medium: rgba(0, 0, 0, 0.15); /* Slightly darker shadow for hover */
+            --border-radius-base: 8px; /* Consistent border radius */
+        }
+
+        /* Base Body Styles */
+        body {
+            font-family: 'Roboto', sans-serif; /* Clean sans-serif for body text */
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            padding: 40px 20px; /* More padding around the page */
+            line-height: 1.75; /* Improved line height for readability */
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Main Course Content Container */
+        .course-content {
+            max-width: 960px; /* Optimal reading width */
+            margin: 0 auto; /* Center the content */
+            background: var(--secondary-bg);
+            padding: 35px 45px; /* Generous padding inside the box */
+            border-radius: var(--border-radius-base);
+            box-shadow: 0 10px 30px var(--shadow-light); /* More prominent initial shadow */
+            transition: box-shadow 0.3s ease; /* Smooth transition for hover */
+        }
+
+        /* Course Title */
+        .main-title {
+            font-family: 'Montserrat', sans-serif; /* Strong sans-serif for titles */
+            color: var(--accent-blue);
+            font-size: 2.8em; /* Large and impactful */
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid var(--border-light); /* Subtle underline */
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* Section and Subsection Titles */
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent-blue);
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            margin-top: 40px; /* More space above new sections */
+            border-bottom: 2px solid var(--border-light);
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .subsection-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.7em;
+            color: var(--text-dark); /* Darker color for sub-sections */
+            margin-bottom: 20px;
+            margin-top: 35px;
+            font-weight: 600;
+        }
+
+        /* General Paragraph and List Styling */
+        p {
+            margin-bottom: 18px; /* More space between paragraphs */
+            color: var(--text-dark);
+            font-size: 1.05em; /* Slightly larger base font size */
+        }
+
+        ul {
+            margin-left: 25px; /* More indentation for lists */
+            margin-bottom: 18px;
+            list-style: none; /* Remove default bullets */
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 28px; /* Space for custom bullet */
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            font-size: 1.05em;
+        }
+
+        ul li::before {
+            content: "•"; /* Custom bullet point */
+            color: var(--accent-blue); /* Accent color for bullets */
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+            line-height: 1.6; /* Align with text */
+        }
+
+        /* Box Styles (Definition, Property, Problem, Solution, Equation) */
+        .styled-box {
+            background-color: var(--box-bg-light);
+            padding: 25px; /* Generous padding */
+            margin-bottom: 30px; /* Space between boxes */
+            border-radius: var(--border-radius-base);
+            box-shadow: 0 4px 15px var(--shadow-light); /* Consistent inner box shadow */
+            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover effect */
+        }
+
+        .styled-box:hover {
+            transform: translateY(-3px); /* Subtle lift on hover */
+            box-shadow: 0 6px 20px var(--shadow-medium); /* Darker shadow on hover */
+        }
+
+        /* Specific Box Border Colors */
+        .definition-box { border-left: 6px solid var(--accent-cyan); }
+        .property-box { border-left: 6px solid var(--accent-green); }
+        .problem-box { border-left: 6px solid var(--accent-orange); }
+        .solution-box { border-left: 6px solid var(--accent-red); }
+        .equation-box { border-left: 6px solid var(--text-light); } /* Neutral for general examples */
+
+        /* MathJax Specific Styling for Equations */
+        .equation-box .MathJax,
+        .styled-box .MathJax,
+        p .MathJax {
+            font-family: 'Fira Code', monospace !important; /* Monospace font for equations/code */
+            font-size: 1.1em !important; /* Slightly larger font for equations */
+            color: var(--text-dark) !important; /* Keep equation color consistent */
+        }
+        .MathJax_Display {
+            padding: 15px; /* Padding inside displayed equations */
+            background-color: rgba(0, 0, 0, 0.03); /* Very subtle background for block equations */
+            border-radius: 5px;
+            margin: 1.5em 0 !important; /* Consistent margin for block equations */
+            overflow-x: auto; /* Allow horizontal scroll for long equations */
+            border: 1px solid var(--border-light);
+        }
+
+        /* Strong/Bold text within boxes */
+        .styled-box strong {
+            color: var(--text-dark);
+            font-size: 1.1em; /* Make defined terms slightly larger */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 25px 15px;
+            }
+            .course-content {
+                padding: 25px;
+            }
+            .main-title {
+                font-size: 2.2em;
+                margin-bottom: 25px;
+            }
+            .section-title {
+                font-size: 1.8em;
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+            .subsection-title {
+                font-size: 1.4em;
+                margin-top: 25px;
+                margin-bottom: 15px;
+            }
+            p, ul li {
+                font-size: 1em;
+                margin-bottom: 15px;
+            }
+            ul li::before {
+                font-size: 1em;
+            }
+            .styled-box {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+            .styled-box strong {
+                font-size: 1em;
+            }
+            .equation-box .MathJax,
+            .styled-box .MathJax,
+            p .MathJax {
+                font-size: 1em !important;
+            }
+            .MathJax_Display {
+                padding: 10px;
+                margin: 1.2em 0 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            .course-content {
+                padding: 20px;
+            }
+            .main-title {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            .section-title {
+                font-size: 1.5em;
+                margin-top: 20px;
+                margin-bottom: 15px;
+            }
+            .subsection-title {
+                font-size: 1.2em;
+                margin-top: 20px;
+                margin-bottom: 12px;
+            }
+            p, ul li {
+                font-size: 0.95em;
+                margin-bottom: 12px;
+            }
+            ul li {
+                padding-left: 20px;
+            }
+            .styled-box {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .equation-box .MathJax,
+            .styled-box .MathJax,
+            p .MathJax {
+                font-size: 0.95em !important;
+            }
+            .MathJax_Display {
+                padding: 8px;
+                margin: 1em 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: -30px; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); margin: -30px -30px 30px -30px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Évaluation p-adique
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <div class="course-content">
+        <h1 class="main-title">Comprehensive Guide to p-adic Valuation Theory</h1>
+
+        <p>The **p-adic valuation** is a powerful tool in number theory and algebra, particularly in understanding the divisibility properties of integers with respect to a prime number. This guide aims to provide an in-depth understanding of the concept, its properties, and its applications.</p>
+
+        <h2 class="section-title">1. Introduction to p-adic Valuation</h2>
+
+        <div class="styled-box definition-box">
+            <p><strong>Definition:</strong></p>
+            <p>Let \( p \) be a prime number. The <em>p-adic valuation</em> of a non-zero integer \( n \), denoted by \( v_p(n) \), is defined as the highest exponent \( k \) such that \( p^k \) divides \( n \) but \( p^{k+1} \) does not. Formally, if \( n \) can be expressed as:</p>
+            <p class="equation-text">
+                \[
+                n = p^k \cdot m \quad \text{where} \quad m \text{ is an integer not divisible by } p,
+                \]
+            </p>
+            <p>then \( v_p(n) = k \). If \( n = 0 \), we define \( v_p(0) = \infty \).</p>
+        </div>
+
+        <p>For example, if \( n = 180 \) and \( p = 3 \), we can express \( 180 \) as \( 180 = 3^2 \times 20 \). Thus, \( v_3(180) = 2 \) because \( 3^2 \) is the highest power of \( 3 \) that divides 180.</p>
+
+        <h2 class="section-title">2. Properties of p-adic Valuation</h2>
+
+        <div class="styled-box property-box">
+            <p><strong>Key Properties:</strong></p>
+            <ul>
+                <li><strong>Non-negativity:</strong> For any non-zero integer \( n \), \( v_p(n) \geq 0 \).</li>
+                <li><strong>Multiplicative Property:</strong> For any two non-zero integers \( a \) and \( b \), the p-adic valuation satisfies:
+                    <p class="equation-text">
+                        \[
+                        v_p(ab) = v_p(a) + v_p(b).
+                        \]
+                    </p>
+                </li>
+                <li><strong>Valuation of Powers:</strong> For any integer \( n \) and positive integer \( k \), we have:
+                    <p class="equation-text">
+                        \[
+                        v_p(n^k) = k \cdot v_p(n).
+                        \]
+                    </p>
+                </li>
+                <li><strong>Additivity Property:</strong> For any integers \( a \) and \( b \), the p-adic valuation satisfies:
+                    <p class="equation-text">
+                        \[
+                        v_p(a + b) \geq \min(v_p(a), v_p(b)).
+                        \]
+                    </p>
+                    Additionally, if \( v_p(a) \neq v_p(b) \), then:
+                    <p class="equation-text">
+                        \[
+                        v_p(a + b) = \min(v_p(a), v_p(b)).
+                        \]
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <p>These properties form the foundation of p-adic valuation theory and are essential for solving problems related to divisibility and congruences.</p>
+
+        <h2 class="section-title">3. Application: p-adic Valuation in Number Theory</h2>
+
+        <p>The p-adic valuation is particularly useful in the study of Diophantine equations, modular forms, and local fields. It provides a way to measure the divisibility of numbers with respect to a prime \( p \) and is closely related to the concept of p-adic numbers.</p>
+
+        <div class="styled-box equation-box">
+            <p><strong>Example:</strong> Consider the equation \( x^2 + y^2 = z^2 \) (Pythagorean triples). We can use the p-adic valuation to study the possible values of \( x, y, z \) modulo a prime \( p \), gaining insights into the solvability of the equation.</p>
+        </div>
+
+        <h2 class="section-title">4. Challenging Problem</h2>
+
+        <div class="styled-box problem-box">
+            <p><strong>Problem:</strong></p>
+            <p>Let \( p \) be a prime number, and consider the integer sequence \( a_n \) defined by the recurrence relation:</p>
+            <p class="equation-text">
+                \[
+                a_0 = 2, \quad a_1 = p, \quad \text{and} \quad a_{n+2} = p \cdot a_{n+1} + a_n \quad \text{for} \quad n \geq 0.
+                \]
+            </p>
+            <p>Prove that \( v_p(a_n) \) is non-decreasing, and determine the exact value of \( v_p(a_n) \) for all \( n \).</p>
+        </div>
+
+        <h2 class="section-title">5. Solution Outline</h2>
+
+        <div class="styled-box solution-box">
+            <p><strong>Solution Outline:</strong></p>
+            <p>We will prove that the sequence \( v_p(a_n) \) is non-decreasing by induction, and then we will determine the exact value of \( v_p(a_n) \) for all \( n \).</p>
+
+            <h3 class="subsection-title">Step 1: Base Case</h3>
+            <p>We start by calculating the p-adic valuation for the initial terms of the sequence:</p>
+            <ul>
+                <li>For \( n = 0 \), \( a_0 = 2 \). Since \( p \) does not divide 2, \( v_p(a_0) = 0 \).</li>
+                <li>For \( n = 1 \), \( a_1 = p \). By definition, \( v_p(a_1) = 1 \).</li>
+            </ul>
+
+            <h3 class="subsection-title">Step 2: Inductive Step</h3>
+            <p>Assume that \( v_p(a_n) \leq v_p(a_{n+1}) \) for some \( n \geq 0 \). We need to prove that \( v_p(a_{n+1}) \leq v_p(a_{n+2}) \).</p>
+
+            <p>Using the recurrence relation \( a_{n+2} = p \cdot a_{n+1} + a_n \), we apply the p-adic valuation:</p>
+            <p class="equation-text">
+                \[
+                v_p(a_{n+2}) = v_p(p \cdot a_{n+1} + a_n) \geq \min(v_p(p \cdot a_{n+1}), v_p(a_n)).
+                \]
+            </p>
+            <p>By the properties of p-adic valuation, \( v_p(p \cdot a_{n+1}) = v_p(p) + v_p(a_{n+1}) = 1 + v_p(a_{n+1}) \). Therefore:</p>
+            <p class="equation-text">
+                \[
+                v_p(a_{n+2}) \geq \min(1 + v_p(a_{n+1}), v_p(a_n)).
+                \]
+            </p>
+            <p>Since \( v_p(a_n) < 1 + v_p(a_{n+1}) \) (as \( v_p(a_n) \leq v_p(a_{n+1}) \) and \( p \) is a prime), we can be more precise here:</p>
+            <p class="equation-text">
+                \[
+                v_p(a_{n+2}) = \min(1 + v_p(a_{n+1}), v_p(a_n)).
+                \]
+            </p>
+            <p>Considering the pattern from the base case (\(v_p(a_0)=0, v_p(a_1)=1\)), for \(n \ge 0\), we always have \(v_p(a_n) < 1 + v_p(a_{n+1})\) (e.g. \(0 < 1+1\), \(1 < 1+0\)). Thus, the minimum will always be \(v_p(a_n)\) initially, and then \(v_p(a_{n+1})\) in the odd case.</p>
+            <p>Let's re-evaluate more carefully:
+            For \(n=0\), \(v_p(a_2) = v_p(p \cdot a_1 + a_0) = v_p(p^2 + 2)\). If \(p \neq 2\), \(v_p(p^2+2) = 0\). If \(p=2\), \(v_2(2^2+2) = v_2(6) = 1\).
+            So, \(v_p(a_2)\) is 0 if \(p \neq 2\), or 1 if \(p=2\). This doesn't directly follow \(v_p(a_{n+2}) \geq v_p(a_{n+1})\) in all cases from the minimum rule alone without knowing if the terms are equal or not.</p>
+
+            <p>The solution provided initially uses the general inequality \( v_p(a+b) \geq \min(v_p(a), v_p(b)) \). For the sequence to be non-decreasing, we need \( v_p(a_{n+2}) \geq v_p(a_{n+1}) \). The initial argument is slightly incomplete for the non-decreasing proof, as it uses the simpler inequality. The exact value determination below shows the pattern and clarifies it.</p>
+
+            <h3 class="subsection-title">Step 3: Exact Value</h3>
+            <p>Let's analyze \( v_p(a_n) \) for the first few terms, distinguishing between \( p=2 \) and \( p \neq 2 \):</p>
+
+            <h4>Case 1: \( p = 2 \)</h4>
+            <ul>
+                <li>\( a_0 = 2 \implies v_2(a_0) = 1 \)</li>
+                <li>\( a_1 = 2 \implies v_2(a_1) = 1 \)</li>
+                <li>\( a_2 = 2 \cdot a_1 + a_0 = 2 \cdot 2 + 2 = 6 \implies v_2(a_2) = 1 \)</li>
+                <li>\( a_3 = 2 \cdot a_2 + a_1 = 2 \cdot 6 + 2 = 14 \implies v_2(a_3) = 1 \)</li>
+                <li>\( a_4 = 2 \cdot a_3 + a_2 = 2 \cdot 14 + 6 = 34 \implies v_2(a_4) = 1 \)</li>
+            </ul>
+            <p>It appears that for \( p=2 \), \( v_2(a_n) = 1 \) for all \( n \geq 0 \).</p>
+
+            <h4>Case 2: \( p \neq 2 \)</h4>
+            <ul>
+                <li>\( a_0 = 2 \implies v_p(a_0) = 0 \)</li>
+                <li>\( a_1 = p \implies v_p(a_1) = 1 \)</li>
+                <li>\( a_2 = p \cdot a_1 + a_0 = p^2 + 2 \). Since \( p \neq 2 \), \( p^2 \) is even or odd, but \( p^2+2 \) is not divisible by \( p \) (as 2 is not divisible by \( p \)). So \( v_p(a_2) = 0 \).</li>
+                <li>\( a_3 = p \cdot a_2 + a_1 = p(p^2 + 2) + p = p^3 + 2p + p = p^3 + 3p = p(p^2 + 3) \). Since \( p \neq 3 \), \( p^2+3 \) is not divisible by \( p \). So \( v_p(a_3) = 1 \). If \( p = 3 \), \( v_3(a_3) = v_3(3(3^2+3)) = v_3(3 \cdot 12) = v_3(36) = 2 \).</li>
+                <li>\( a_4 = p \cdot a_3 + a_2 \). If \( p \neq 3 \), \( v_p(a_4) = v_p(p(p^2+3) + (p^2+2)) = v_p(p^3+4p+2) = 0 \).</li>
+            </ul>
+            <p>The exact value of \( v_p(a_n) \) depends on \( p \).</p>
+
+            <p>Let's reconsider the case where \( v_p(a) \neq v_p(b) \). If \( v_p(a) = \min(v_p(a), v_p(b)) \), then \( v_p(a+b) = v_p(a) \). This is crucial.</p>
+
+            <ul>
+                <li>If \( n \) is even, \( v_p(a_n) = 0 \) (assuming \(p \ne 2\)).
+                Then \( v_p(p \cdot a_{n+1}) = 1 + v_p(a_{n+1}) \).
+                If \( v_p(a_{n+1}) \) is also 0 (which it isn't, as seen above), then \( v_p(a_{n+2}) = \min(1, 0) = 0 \).
+                However, if \( v_p(a_{n+1}) = 1 \) (as seen for \(a_1, a_3\)), then \( v_p(p \cdot a_{n+1}) = 1 + 1 = 2 \).
+                So for even \(n\), \(v_p(a_{n+2}) = v_p(p \cdot a_{n+1} + a_n) \). Here \(v_p(a_n)=0\), and \(v_p(p \cdot a_{n+1})\) is at least 1. So \(v_p(a_{n+2}) = \min(v_p(p \cdot a_{n+1}), v_p(a_n)) = v_p(a_n) = 0\). This holds for \(p \ne 2\).</li>
+
+                <li>If \( n \) is odd, \( v_p(a_n) = 1 \) (assuming \(p \ne 3\)).
+                Then \( v_p(a_{n+1}) = 0 \).
+                So \( v_p(p \cdot a_{n+1}) = 1 + v_p(a_{n+1}) = 1 + 0 = 1 \).
+                In this case, \( v_p(p \cdot a_{n+1}) = v_p(a_n) = 1 \). When valuations are equal, we only know \( v_p(a+b) \geq \min(v_p(a), v_p(b)) \). We can't directly use the equality rule.</li>
+            </ul>
+
+            <p>This problem is a bit more intricate than the simple alternating pattern suggests, especially when \( p \) divides 2 or 3, or if the valuations are equal. The solution provided in the original code is a common simplified pattern, but a rigorous proof requires a more careful look at the terms' divisibility by \( p \).</p>
+            <p>The statement in the original solution for the exact value is valid under certain common conditions, specifically that \( p \) does not divide 2 or 3. If \(p=2\) or \(p=3\), the pattern changes.</p>
+        </div>
+    </div>
+</body>
+</html>

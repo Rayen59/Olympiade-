@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Challenges: Testez Vos Connaissances !</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FS9YCCEDT9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FS9YCCEDT9');
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* Define a dark, modern color palette using CSS variables */
+        :root {
+            --primary-bg: #1a1a2e; /* Deep indigo for main background */
+            --secondary-bg: #16213e; /* Slightly lighter indigo for problem boxes */
+            --text-light: #e0e0e0; /* Off-white for general text */
+            --text-accent: #ffffff; /* Pure white for important text/headings */
+            --accent-blue: #0f4c75; /* A strong, deep blue */
+            --accent-green: #38a753; /* Vibrant success green */
+            --accent-red: #e05260; /* Soft error red */
+            --border-color: #0d111c; /* Very dark border for subtle separation */
+            --input-bg: #222e4d; /* Darker blue for input fields */
+            --button-bg: #3282b8; /* A bright, appealing button blue */
+            --button-hover-bg: #2a6591; /* Darker blue on button hover */
+            --disabled-bg: #5f6a7d; /* Muted grey for disabled elements */
+            --shadow-color: rgba(0, 0, 0, 0.3); /* Dark shadow for depth */
+            --border-radius-size: 8px; /* Consistent border radius */
+        }
+
+        /* Base body styles */
+        body {
+            font-family: 'Lato', sans-serif; /* Clean sans-serif for body */
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            line-height: 1.7; /* Enhanced line height for readability */
+            margin: 0;
+            padding: 0; /* Full width for sticky header */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        /* Main title styling */
+        h1 {
+            font-family: 'Montserrat', sans-serif; /* Bold, impactful font for main title */
+            text-align: center;
+            font-size: 3.5em; /* Larger title */
+            color: var(--text-accent); /* Pure white for contrast */
+            margin-bottom: 40px; /* More space below title */
+            letter-spacing: 0.05em; /* Slightly increased letter spacing */
+            text-shadow: 2px 2px 5px var(--shadow-color); /* Subtle text shadow for depth */
+        }
+
+        /* Score and Charisma sections */
+        .score-charisma-wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 30px;
+            padding: 15px 25px;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius-size);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            align-items: center;
+        }
+
+        .score {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-accent);
+            text-shadow: 1px 1px 3px var(--shadow-color);
+        }
+
+        .charisma {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .charisma span {
+            font-size: 2.2em;
+            width: 55px; /* Fixed width for perfect circle */
+            height: 55px; /* Fixed height for perfect circle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: var(--accent-blue); /* Default blue for neutral state */
+            color: var(--text-accent);
+            font-weight: 700;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .charisma span.green {
+            background-color: var(--accent-green);
+        }
+        .charisma span.red {
+            background-color: var(--accent-red);
+        }
+
+        .charisma span.pop {
+            animation: pop 0.3s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* Problem container styling */
+        .problem-container {
+            width: 100%;
+            max-width: 900px; /* Align with score/charisma width */
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* Space between problem cards */
+        }
+
+        .problem {
+            background-color: var(--secondary-bg);
+            padding: 25px 30px; /* More padding inside problem boxes */
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-size);
+            box-shadow: 0 5px 20px var(--shadow-color);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .problem:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .problem p {
+            font-size: 1.2em; /* Larger problem text */
+            margin-bottom: 20px; /* Space below problem statement */
+            color: var(--text-light);
+        }
+
+        /* MathJax equation specific styling */
+        .problem p .MathJax {
+            display: inline-block; /* Ensure MathJax equations are properly rendered */
+            margin: 0; /* Adjust margin if needed for inline display */
+            font-size: 1.1em; /* Slightly larger MathJax font */
+            vertical-align: middle; /* Align with surrounding text */
+            color: var(--text-accent) !important; /* Make MathJax standout */
+        }
+        .problem .MathJax_Display {
+            margin: 1em 0 !important; /* Proper block display margin */
+            font-size: 1.15em !important; /* Slightly larger for block equations */
+        }
+
+
+        /* Input field styling */
+        .problem input {
+            width: calc(100% - 22px); /* Account for padding and border */
+            padding: 12px; /* More padding */
+            margin: 15px 0;
+            border: 1px solid var(--accent-blue); /* Accent color border */
+            border-radius: var(--border-radius-size);
+            font-size: 1.1em; /* Larger font in input */
+            background-color: var(--input-bg);
+            color: var(--text-accent);
+            outline: none; /* Remove default outline */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .problem input:focus {
+            border-color: var(--button-bg); /* Highlight on focus */
+            box-shadow: 0 0 0 3px rgba(50, 130, 184, 0.5); /* Soft glow */
+        }
+
+        /* Button styling */
+        .problem button {
+            padding: 12px 25px; /* More padding */
+            background-color: var(--button-bg);
+            color: var(--text-accent);
+            border: none;
+            border-radius: var(--border-radius-size);
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .problem button:hover:not(:disabled) {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        .problem button:active:not(:disabled) {
+            transform: translateY(0); /* Press effect */
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .problem button:disabled {
+            background-color: var(--disabled-bg);
+            cursor: not-allowed;
+            opacity: 0.7;
+            box-shadow: none;
+        }
+
+        /* Feedback messages (optional - not in original HTML but good for UX) */
+        .feedback {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-accent); /* Make feedback stand out */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2.8em;
+                margin-bottom: 30px;
+            }
+            .score-charisma-wrapper {
+                flex-direction: column; /* Stack score and charisma on smaller screens */
+                gap: 15px;
+                padding: 15px;
+            }
+            .score, .charisma {
+                width: 100%;
+                text-align: center;
+            }
+            .charisma span {
+                font-size: 2em;
+                width: 50px;
+                height: 50px;
+            }
+            .problem-container {
+                gap: 20px;
+            }
+            .problem {
+                padding: 20px;
+            }
+            .problem p {
+                font-size: 1.1em;
+            }
+            .problem input, .problem button {
+                font-size: 1em;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2.2em;
+                margin-bottom: 25px;
+            }
+            .score {
+                font-size: 1.6em;
+            }
+            .charisma span {
+                font-size: 1.8em;
+                width: 45px;
+                height: 45px;
+            }
+            .problem {
+                padding: 18px;
+            }
+            .problem p {
+                font-size: 1em;
+            }
+            .problem input, .problem button {
+                font-size: 0.95em;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; width: 100%; box-sizing: border-box; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Défis d'Exercices
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <div style="padding: 25px 20px 40px 20px; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center;">
+    <h1>Math Challenges</h1>
+
+    <div class="score-charisma-wrapper">
+        <div id="score" class="score">Score: 0</div>
+        <div class="charisma">
+            <span id="charisma-circle"></span>
+        </div>
+    </div>
+    
+    <div class="problem-container">
+        <div class="problem" id="problem1">
+            <p>1. By how many zeros does the number \(460^{1500} - 216000^{500}\) end in decimal notation?</p>
+            <input type="number" id="answer1" placeholder="Enter your answer">
+            <button onclick="checkAnswer(1, 1504)">Submit</button>
+            <div id="feedback1" class="feedback"></div>
+        </div>
+        <div class="problem" id="problem2">
+            <p>2. What is the largest value of \(k\) such that \(2^k\) divides \(23^{2^{2016}} + 7^{2^{2016}}\)?</p>
+            <input type="number" id="answer2" placeholder="Enter your answer">
+            <button onclick="checkAnswer(2, 1)">Submit</button>
+            <div id="feedback2" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem3">
+            <p>3. How many pairs \((a, b)\) of strictly positive integers satisfy \(a > b\) and \((a - b)^9 = a^8 - b^8\)?</p>
+            <input type="number" id="answer3" placeholder="Enter your answer">
+            <button onclick="checkAnswer(3, 0)">Submit</button>
+            <div id="feedback3" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem4">
+            <p>4. What is the difference between the quadratic mean and the harmonic mean of 1, 10, 100, and 1000?</p>
+            <input type="number" id="answer4" placeholder="Enter your answer ()">
+            <button onclick="checkAnswer(4, 498.919)">Submit</button>
+            <div id="feedback4" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem5">
+            <p>5. Consider three numbers \(a, b, c > 0\) with an arithmetic mean of 14. Suppose the geometric mean of \(a\) and \(b\) is 6, the geometric mean of \(a\) and \(c\) is 9, and the geometric mean of \(b\) and \(c\) is 18. What is the quadratic mean of the three numbers?</p>
+            <input type="number" id="answer5" placeholder="Enter your answer ()">
+            <button onclick="checkAnswer(5, 17.14)">Submit</button>
+            <div id="feedback5" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem6">
+            <p>6. Find the number of zeros at the end of \(10^{2000} - 5^{1999}\) in decimal representation.</p>
+            <input type="number" id="answer6" placeholder="Enter your answer">
+            <button onclick="checkAnswer(6, 1999)">Submit</button>
+            <div id="feedback6" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem7">
+            <p>7. What is the largest integer \(k\) such that \(3^k\) divides \(7^{2^{2015}} + 5^{2^{2015}}\)?</p>
+            <input type="number" id="answer7" placeholder="Enter your answer">
+            <button onclick="checkAnswer(7, 1)">Submit</button>
+            <div id="feedback7" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem8">
+            <p>8. How many positive integer solutions \((x, y)\) satisfy \(x^3 - y^3 = 8\)?</p>
+            <input type="number" id="answer8" placeholder="Enter your answer">
+            <button onclick="checkAnswer(8, 1)">Submit</button>
+            <div id="feedback8" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem9">
+            <p>9. What is the value of \(\sqrt{a^2 + b^2}\) if \(a\) and \(b\) are such that \(a^2 + b^2 = 10^4\) and \(a \geq b\)?</p>
+            <input type="number" id="answer9" placeholder="Enter your answer">
+            <button onclick="checkAnswer(9, 100)">Submit</button>
+            <div id="feedback9" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem10">
+            <p>10. Find the number of positive integers \(n\) such that \(2^n + 1\) is divisible by \(n\).</p>
+            <input type="number" id="answer10" placeholder="Enter your answer">
+            <button onclick="checkAnswer(10, 1)">Submit</button>
+            <div id="feedback10" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem11">
+            <p>11. Determine the largest integer \(k\) for which \(4^k\) divides \(5^{2^{2017}} - 3^{2^{2017}}\).</p>
+            <input type="number" id="answer11" placeholder="Enter your answer">
+            <button onclick="checkAnswer(11, 2)">Submit</button>
+            <div id="feedback11" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem12">
+            <p>12. How many positive integers \(m\) satisfy \(m^3 - m = 2^k\) for some integer \(k\)?</p>
+            <input type="number" id="answer12" placeholder="Enter your answer">
+            <button onclick="checkAnswer(12, 1)">Submit</button>
+            <div id="feedback12" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem13">
+            <p>13. What is the difference between the arithmetic mean and the geometric mean of \(2, 3, 7, 21\)?</p>
+            <input type="number" id="answer13" placeholder="Enter your answer ()">
+            <button onclick="checkAnswer(13, 8.86)">Submit</button>
+            <div id="feedback13" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem14">
+            <p>14. Find the largest integer \(k\) such that \(5^k\) divides \(6^{2^{2018}} + 4^{2^{2018}}\).</p>
+            <input type="number" id="answer14" placeholder="Enter your answer">
+            <button onclick="checkAnswer(14, 2)">Submit</button>
+            <div id="feedback14" class="feedback"></div>
+        </div>
+
+        <div class="problem" id="problem15">
+            <p>15. Determine the number of distinct solutions to the equation \(x^4 - 4x^2 + 4 = 0\).</p>
+            <input type="number" id="answer15" placeholder="Enter your answer">
+            <button onclick="checkAnswer(15, 2)">Submit</button>
+            <div id="feedback15" class="feedback"></div>
+        </div>
+    </div> 
+
+    <script>
+        // Initialize score, error counts, and timers from local storage or set defaults
+        let score = parseInt(localStorage.getItem('mathChallengeScore')) || 0;
+        let problemErrors = JSON.parse(localStorage.getItem('problemErrors')) || {}; // {1: 0, 2: 1, ...}
+        let problemTimers = JSON.parse(localStorage.getItem('problemTimers')) || {}; // {1: timestamp, 2: null, ...}
+
+        document.getElementById('score').innerText = 'Score: ' + score;
+
+        const PENALTY_DURATION_MS = 3 * 60 * 1000; // 3 minutes in milliseconds
+        const MAX_ERRORS = 3;
+
+        /**
+         * Checks if a user is currently locked out of a problem.
+         * @param {number} problemNumber - The ID of the problem.
+         * @returns {boolean} - True if locked out, false otherwise.
+         */
+        function isLocked(problemNumber) {
+            const unlockTime = problemTimers[problemNumber];
+            if (unlockTime) {
+                return new Date().getTime() < unlockTime;
+            }
+            return false;
+        }
+
+        /**
+         * Updates the timer display for a locked problem.
+         * @param {number} problemNumber - The ID of the problem.
+         */
+        function updateTimerDisplay(problemNumber) {
+            const feedbackDiv = document.getElementById('feedback' + problemNumber);
+            const submitButton = document.querySelector('#problem' + problemNumber + ' button');
+            const answerInput = document.getElementById('answer' + problemNumber);
+            
+            // Clear previous updates to avoid multiple setTimeouts
+            if (window['timer_' + problemNumber]) {
+                clearInterval(window['timer_' + problemNumber]);
+            }
+            
+            if (isLocked(problemNumber)) {
+                const unlockTime = problemTimers[problemNumber];
+                
+                const tick = () => {
+                    const currentTime = new Date().getTime();
+                    const remaining = unlockTime - currentTime;
+
+                    if (remaining <= 0) {
+                        // Timer expired
+                        clearInterval(window['timer_' + problemNumber]);
+                        delete problemTimers[problemNumber];
+                        localStorage.setItem('problemTimers', JSON.stringify(problemTimers));
+                        
+                        feedbackDiv.innerHTML = '<span style="color: var(--accent-blue);">you can answer another time.</span>';
+                        submitButton.disabled = false;
+                        answerInput.disabled = false;
+                        answerInput.value = ""; // Clear input after penalty
+
+                        
+                        // Clear the error count for this problem after the penalty
+                        problemErrors[problemNumber] = 0;
+                        localStorage.setItem('problemErrors', JSON.stringify(problemErrors));
+
+                    } else {
+                        // Update countdown
+                        const minutes = Math.floor(remaining / 60000);
+                        const seconds = Math.floor((remaining % 60000) / 1000);
+                        
+                        submitButton.disabled = true;
+                        answerInput.disabled = true;
+                        feedbackDiv.innerHTML = `<span style="color: var(--accent-red);">Timer : ${minutes}m ${seconds}s. (3 erreurs)</span>`;
+                    }
+                };
+
+                tick(); // Call immediately to avoid a 1-second delay on load
+                window['timer_' + problemNumber] = setInterval(tick, 1000);
+            } else if (problemErrors[problemNumber] > 0) {
+                // Ensure correct feedback when not locked but errors exist
+                 feedbackDiv.innerHTML = `<span style="color: var(--text-light);">Erreurs accumulées : ${problemErrors[problemNumber]}/${MAX_ERRORS}</span>`;
+            }
+        }
+
+
+        /**
+         * Function to check the answer and update the score/UI
+         * @param {number} problemNumber - The ID of the problem.
+         * @param {number} correctAnswer - The correct numerical answer.
+         */
+        function checkAnswer(problemNumber, correctAnswer) {
+            const problemNumberStr = String(problemNumber);
+            const answerInput = document.getElementById('answer' + problemNumberStr);
+            const userAnswer = parseFloat(answerInput.value);
+            const submitButton = document.querySelector('#problem' + problemNumberStr + ' button');
+            const charismaCircle = document.getElementById('charisma-circle');
+            const feedbackDiv = document.getElementById('feedback' + problemNumberStr);
+
+            // 1. Check if the problem is already solved
+            if (localStorage.getItem('solvedProblem' + problemNumberStr)) {
+                feedbackDiv.innerHTML = '<span style="color: var(--accent-blue);"> you have already answered this exercise correctly!</span>';
+                submitButton.disabled = true;
+                answerInput.disabled = true;
+                return;
+            }
+            
+            // 2. Check for timer lock
+            if (isLocked(problemNumber)) {
+                updateTimerDisplay(problemNumber); // Ensure the timer is displayed correctly
+                return; 
+            }
+
+            // Determine if the answer is correct (allowing for floating point precision)
+            const isCorrect = Math.abs(userAnswer - correctAnswer) < 0.01; // Tolerance for floats
+
+            if (isCorrect) {
+                // --- CORRECT ANSWER LOGIC ---
+                score++;
+                localStorage.setItem('mathChallengeScore', score);
+                
+                // Mark as solved and disable further attempts
+                localStorage.setItem('solvedProblem' + problemNumberStr, true);
+                submitButton.disabled = true; 
+                answerInput.disabled = true;
+                
+                // Reset errors for this problem upon correct answer
+                problemErrors[problemNumberStr] = 0;
+                localStorage.setItem('problemErrors', JSON.stringify(problemErrors));
+                
+                // UI Feedback
+                charismaCircle.innerText = '✔️';
+                charismaCircle.classList.remove('red');
+                charismaCircle.classList.add('green', 'pop');
+                feedbackDiv.innerHTML = '<span style="color: var(--accent-green);">Correct ! Outstanding! (+1 point)</span>';
+
+            } else {
+                // --- INCORRECT ANSWER LOGIC ---
+                
+                // Increment error count
+                problemErrors[problemNumberStr] = (problemErrors[problemNumberStr] || 0) + 1;
+                localStorage.setItem('problemErrors', JSON.stringify(problemErrors));
+
+                // UI Feedback for incorrect attempt
+                charismaCircle.innerText = '❌';
+                charismaCircle.classList.remove('green');
+                charismaCircle.classList.add('red', 'pop');
+                feedbackDiv.innerHTML = '<span style="color: var(--accent-red);">False.</span>';
+                
+                // Check for penalty
+                if (problemErrors[problemNumberStr] >= MAX_ERRORS) {
+                    // Apply 3-minute penalty
+                    const unlockTime = new Date().getTime() + PENALTY_DURATION_MS;
+                    problemTimers[problemNumberStr] = unlockTime;
+                    localStorage.setItem('problemTimers', JSON.stringify(problemTimers));
+                    
+                    // Start the timer countdown
+                    updateTimerDisplay(problemNumber); 
+                    
+                } else {
+                    // Show current error count if not locked
+                    feedbackDiv.innerHTML += `<br><span style="color: var(--accent-red);">mistakes : ${problemErrors[problemNumberStr]}/${MAX_ERRORS} </span>`;
+                }
+            }
+
+            document.getElementById('score').innerText = 'Score: ' + score;
+            
+            // Remove pop animation class after it completes
+            charismaCircle.addEventListener('animationend', () => {
+                charismaCircle.classList.remove('pop');
+            }, { once: true });
+        }
+
+        // Disable buttons for already solved problems and start timers on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Determine the total number of problems based on the container children
+            const problemContainers = document.querySelector('.problem-container').children;
+
+            for (let i = 1; i <= problemContainers.length; i++) {
+                const problemNumberStr = String(i);
+                const button = document.querySelector('#problem' + problemNumberStr + ' button');
+                const answerInput = document.getElementById('answer' + problemNumberStr);
+                const feedbackDiv = document.getElementById('feedback' + problemNumberStr);
+                
+                // Check for solved state
+                if (localStorage.getItem('solvedProblem' + problemNumberStr)) {
+                    button.disabled = true;
+                    if (answerInput) {
+                        answerInput.value = "Répondu (Correct)";
+                        answerInput.disabled = true;
+                    }
+                    if (feedbackDiv) {
+                         feedbackDiv.innerHTML = '<span style="color: var(--accent-green);">This problem has been resolved..</span>';
+                    }
+                } 
+                
+                // Check for timer lock and start countdown if necessary
+                else if (isLocked(i)) {
+                    updateTimerDisplay(i);
+                }
+                // Display accumulated errors if not solved or locked
+                else if (problemErrors[problemNumberStr] > 0) {
+                    feedbackDiv.innerHTML = `<span style="color: var(--text-light);">accumulated errors : ${problemErrors[problemNumberStr]}/${MAX_ERRORS}</span>`;
+                }
+            }
+            
+            // Set initial charisma icon if no problems have been answered yet
+            if (document.getElementById('charisma-circle').innerText === '') {
+                 document.getElementById('charisma-circle').innerText = '❓'; // Neutral initial state
+                 document.getElementById('charisma-circle').classList.add('accent-blue');
+            }
+        });
+    </script>
+</body>
+</html>

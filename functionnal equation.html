@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FS9YCCEDT9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-FS9YCCEDT9');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functional Equations Problems - Quantum Nexus Labs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* --- ACADEMIC MINIMALIST PALETTE --- */
+        :root {
+            --primary-bg: #FFFFFF; /* Clean White */
+            --secondary-bg: #F8F8F8; /* Very light grey for containers */
+            --accent-color: #A30000; /* Deep, strong Red (Main highlight) */
+            --highlight-color: #0077B6; /* Professional Blue (Secondary highlight) */
+            --text-dark: #333333; /* Dark grey for general text */
+            --text-light: #666666; /* Lighter grey for subtle text */
+            --border-color: #E0E0E0; /* Light border */
+            --shadow-subtle: rgba(0, 0, 0, 0.08); 
+            --shadow-deep: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Main Title (Header) */
+        header {
+            background: var(--secondary-bg);
+            color: var(--text-dark);
+            padding: 50px 0 30px 0;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color); /* Strong red underline */
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            font-size: 3.8em;
+            font-weight: 700;
+            color: var(--highlight-color); /* Blue for the main title */
+            letter-spacing: 0.08em;
+            text-shadow: 1px 1px 2px var(--shadow-subtle);
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Problems Section Container */
+        .problems {
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        /* Individual Problem Box (Clean Separation) */
+        .problem {
+            margin-bottom: 25px; /* Clear vertical separation */
+            padding: 0;
+            background: var(--primary-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px var(--shadow-subtle);
+            border: 1px solid var(--border-color);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .problem:hover {
+            box-shadow: 0 6px 15px var(--shadow-deep);
+            transform: translateY(-2px);
+        }
+
+        /* Problem Header (Hidden or used for numbering if needed - here we hide the h3) */
+        .problem h3 {
+            display: none; 
+        }
+
+        /* Problem Content Styling */
+        .problem p {
+            margin: 0;
+            padding: 20px 25px;
+            color: var(--text-dark);
+            font-size: 1.05em;
+            line-height: 1.7;
+            /* Blue vertical accent line */
+            border-left: 5px solid var(--highlight-color); 
+            border-radius: 0 10px 10px 0;
+        }
+        
+        /* Highlight on hover */
+        .problem:hover p {
+            border-left-color: var(--accent-color); /* Change accent color on hover */
+            background-color: var(--table-row-hover); /* Light background tint on hover */
+        }
+
+        /* MathJax Styling (for white background) */
+        .problem p .MathJax {
+            font-family: 'Fira Code', monospace !important;
+            font-size: 1.05em !important;
+            color: var(--accent-color) !important; /* Red color for math symbols/text */
+            font-weight: 500;
+        }
+        .problem p .MathJax_Display {
+            margin: 1.5em 0 !important;
+            padding: 10px 15px;
+            background: var(--secondary-bg); /* Light grey background for block equations */
+            border-left: 5px solid var(--highlight-color); /* Blue accent line */
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+
+        /* Button */
+        button {
+            display: block;
+            margin: 30px auto 50px auto;
+            width: 90%;
+            max-width: 350px;
+            padding: 15px 30px;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #FFFFFF; /* White text on button */
+            background: var(--highlight-color); /* Solid blue background */
+            border: 2px solid var(--highlight-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px var(--shadow-deep);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        button a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+        }
+
+        button:hover {
+            background: var(--accent-color); /* Hover to red */
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px var(--shadow-deep);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+                padding: 30px 15px 20px;
+            }
+            .problem p {
+                padding: 15px;
+                font-size: 1em;
+            }
+            button {
+                max-width: 300px;
+                font-size: 1.2em;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Équations Fonctionnelles
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <header>
+        <div class="container">
+            <h1>Functional Equations</h1>
+        </div>
+    </header>
+
+    <section id="problems" class="container">
+        <div class="problems">
+            <div class="problem">
+                <p>Find all functions \( f: \mathbb{R} \to \mathbb{R} \) such that for all \( x, y \in \mathbb{R} \), 
+                \[
+                f(x+y) = f(x) + f(y) + xy.
+                \]</p>
+            </div>
+            
+            <div class="problem">
+                <p>Find all functions \( f: \mathbb{R} \to \mathbb{R} \) such that for all \( x, y \in \mathbb{R} \), 
+                \[
+                f(f(x) + y) = f(f(x) - y) + 4f(x)y.
+                \]</p>
+            </div>
+            
+            <div class="problem">
+                <p>Find all functions \( f: \mathbb{R} \to \mathbb{R} \) such that for all \( x, y \in \mathbb{R} \), 
+                \[
+                f(x^2 + f(y)) = y + f(x)^2.
+                \]</p>
+            </div>
+            
+            <div class="problem">
+                <p>Find all functions \( f: \mathbb{R} \to \mathbb{R} \) such that for all \( x, y \in \mathbb{R} \), 
+                \[
+                f(x+y) = f(x)f(y).
+                \]</p>
+            </div>
+            
+            <div class="problem">
+                <p>Find all functions \( f: \mathbb{R} \to \mathbb{R} \) such that for all \( x, y \in \mathbb{R} \), 
+                \[
+                f(f(x) + y) = f(x + f(y)).
+                \]</p>
+            </div>
+            
+            <div class="problem">
+                <p>Find all functions \( f: \mathbb{R} \to \mathbb{R} \) such that for all \( x, y \in \mathbb{R} \), 
+                \[
+                f(x^2 + y) = f(x)^2 + f(y).
+                \]</p>
+            </div>
+            
+            <div class="problem">
+                <p>Find all functions \( f: \mathbb{R} \to \mathbb{R} \) such that for all \( x, y \in \mathbb{R} \), 
+                \[
+                f(x + f(y)) = y + f(x).
+                \]</p>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container">
+        <button><a href="submitproblem.html">Submit Your Solutions</a></button>
+    </div>
+</body>
+</html>

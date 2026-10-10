@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Nexus Labs | Med Rayen Bouazizi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-white: #ffffff;
+            --section-bg: #f9f9f9;
+            --accent-blue: #0066ff;
+            --text-dark: #1a1a1a;
+            --text-muted: #666666;
+            --border-light: #eeeeee;
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            line-height: 1.8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* شريط المبدع في أعلى الصفحة */
+        .creator-bar {
+            background-color: var(--text-dark);
+            color: var(--bg-white);
+            text-align: center;
+            padding: 8px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .creator-bar span {
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .main-content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+
+        .about-container {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .about-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .main-header {
+            padding: 50px 30px;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: var(--section-bg);
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-dark);
+        }
+
+        .main-header span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            letter-spacing: 2px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .about-section {
+            padding: 40px 50px;
+            border-bottom: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .about-section:last-child { border-bottom: none; }
+
+        .about-section:hover {
+            background: #fafafa;
+        }
+
+        .about-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .about-section h3::before {
+            content: "";
+            width: 4px;
+            height: 20px;
+            background: var(--accent-blue);
+            margin-right: 15px;
+            border-radius: 2px;
+        }
+
+        .about-section p {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .footer {
+            padding: 40px;
+            text-align: center;
+            background: var(--section-bg);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer p {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 5px 0;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            background: var(--text-dark);
+            color: var(--bg-white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .about-section { padding: 30px; }
+            .main-header { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Retour Permanente -->
+    <div style="background: #1A1514; width: 100%; box-sizing: border-box; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 16px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; À Propos
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+
+    <div class="creator-bar">
+        Crafted with Excellence by <span>Med Rayen Bouazizi</span>
+    </div>
+
+    <div class="main-content">
+        <div class="about-container">
+            <div class="main-header">
+                QUANTUM NEXUS
+                <span>ADVANCED MATHEMATICAL SYSTEMS</span>
+            </div>
+            
+            <div class="about-section">
+                <h3>Exciting New Design</h3>
+                <p>We are thrilled to introduce Quantum Nexus Labs, featuring a visually stunning new design that combines sophistication with cutting-edge aesthetics. The redesigned interface incorporates a modern and elegant layout, ensuring every interaction is both pleasant and efficient.</p>
+            </div>
+
+            <div class="about-section">
+                <h3>New Features and Enhancements</h3>
+                <p>Quantum Nexus Labs is packed with new features that take your mathematical journey to the next level. From improved problem-solving tools to interactive challenges, every aspect has been upgraded for the best possible experience.</p>
+            </div>
+
+            <div class="about-section">
+                <h3>Platform for Problems and Exercises</h3>
+                <p>In the first arena, problems are meticulously crafted and corrected by a team of seasoned professors. They provide personalized feedback that is as enlightening as the solution itself, turning every correction into a valuable lesson.</p>
+                <p>In the second arena, we leverage precision automation. Our algorithms check each answer with unwavering consistency, providing instant feedback. Together, these arenas create a journey where every problem solved is a step closer to mathematical mastery.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Quantum Nexus Labs. All rights reserved.</p>
+        <p>// Innovating at the intersection of AI and Advanced Mathematics.</p>
+    </div>
+
+    <div id="scrollToTop" class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑
+    </div>
+
+    <script>
+        window.onscroll = function() {
+            const btn = document.getElementById("scrollToTop");
+            if (document.documentElement.scrollTop > 300) {
+                btn.classList.add("show");
+            } else {
+                btn.classList.remove("show");
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyclic Points and Power of a Point</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-bg: #0a0a0f; /* Deep, dark space-like background */
+            --secondary-bg: #1a1a2e; /* Slightly lighter, deep blue-purple for containers */
+            --accent-color: #00bcd4; /* Cyan/Teal for primary highlights */
+            --accent-glow: #00e5ff; /* Brighter cyan for glow effects */
+            --text-color: #e0e0e0; /* Soft white for general text */
+            --heading-color: #a7e0e3; /* Muted cyan for headings */
+            --border-color: #0d47a1; /* Darker blue for subtle borders */
+            --hover-color: #00bcd4; /* Accent color for interactive elements */
+            --menu-bg: #1c1c3a; /* Darker blue-purple for menu */
+            --menu-item-hover: #2a2a4b; /* Lighter shade for menu item hover */
+            --shadow-strong: rgba(0, 229, 255, 0.25); /* Stronger glow shadow */
+            --shadow-light: rgba(0, 188, 212, 0.15); /* Lighter glow shadow */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--primary-bg) radial-gradient(circle at center, rgba(13, 23, 49, 0.5) 0%, rgba(10, 10, 15, 1) 70%);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            animation: backgroundFadeIn 2s ease-out;
+        }
+
+        @keyframes backgroundFadeIn {
+            from { background-color: #000; opacity: 0; }
+            to { background-color: var(--primary-bg); opacity: 1; }
+        }
+
+        /* --- Header / Navigation (if you add it) --- */
+        /* If you're embedding this page into the existing Quantum Nexus structure,
+           you might not need the top-bar, sliding-panel, etc. on THIS specific page.
+           I've included them commented out for completeness in case it's a standalone. */
+        /*
+        .top-bar {
+            background-color: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px var(--shadow-strong);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .site-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            color: var(--accent-glow);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-color);
+            transition: text-shadow 0.3s ease-in-out;
+        }
+
+        .site-title:hover {
+            text-shadow: 0 0 15px var(--accent-glow), 0 0 30px var(--accent-color), 0 0 40px var(--accent-glow);
+        }
+
+        .menu-icon {
+            width: 38px;
+            height: 28px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1010;
+        }
+
+        .menu-icon div {
+            width: 100%;
+            height: 4px;
+            background-color: var(--accent-glow);
+            transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 2px;
+            box-shadow: 0 0 5px var(--accent-glow);
+        }
+
+        .menu-icon.active .bar1 {
+            transform: rotate(-45deg) translate(-8px, 8px);
+        }
+
+        .menu-icon.active .bar2 {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .menu-icon.active .bar3 {
+            transform: rotate(45deg) translate(-8px, -8px);
+        }
+
+        .sliding-panel {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--menu-bg);
+            color: var(--text-color);
+            transition: left 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 4px 0 20px var(--shadow-strong);
+            z-index: 1005;
+            padding: 80px 0 20px;
+            overflow-y: auto;
+            border-right: 2px solid var(--border-color);
+        }
+
+        .sliding-panel.active {
+            left: 0;
+        }
+
+        .sliding-panel a {
+            display: block;
+            padding: 18px 40px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            border-left: 5px solid transparent;
+            transition: background-color 0.3s ease, color 0.3s ease, border-left-color 0.3s ease, text-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sliding-panel a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.1), transparent);
+            transition: left 0.4s ease;
+        }
+
+        .sliding-panel a:hover::before {
+            left: 0;
+        }
+
+        .sliding-panel a:hover {
+            background-color: var(--menu-item-hover);
+            color: var(--accent-glow);
+            border-left-color: var(--accent-glow);
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1004;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        */
+
+        /* --- Main Content Container --- */
+        .content-wrapper {
+            padding: 40px 20px;
+            max-width: 1000px; /* Consistent max-width for content */
+            margin: 40px auto;
+            background-color: var(--secondary-bg);
+            border-radius: 15px;
+            box-shadow: 0 6px 25px var(--shadow-strong);
+            border: 2px solid var(--border-color);
+            animation: fadeInScale 1s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.98);
+        }
+
+        @keyframes fadeInScale {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .content-wrapper h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8em;
+            color: var(--accent-glow);
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 0 15px var(--accent-glow);
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .section-block { /* Renamed from .section to avoid conflict and make it clearer */
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--primary-bg); /* Darker background for inner blocks */
+            border-radius: 10px;
+            box-shadow: inset 0 0 15px var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-block:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 0 25px var(--shadow-strong), 0 5px 15px var(--shadow-strong);
+        }
+
+        .section-block h2 {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--heading-color);
+            font-size: 1.8em;
+            border-bottom: 1px dashed var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(167, 224, 227, 0.4);
+        }
+
+        .section-block p {
+            font-size: 1.05em;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .equation {
+            text-align: center;
+            margin: 25px 0;
+            background-color: rgba(0, 188, 212, 0.08); /* Subtle accent background for equations */
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 10px var(--shadow-light);
+        }
+
+        /* MathJax styling - ensure it uses our colors */
+        .MathJax {
+            color: var(--accent-glow) !important;
+            font-family: 'Share Tech Mono', monospace !important;
+            font-size: 1.2em !important;
+        }
+        mjx-container {
+            color: var(--accent-glow) !important;
+            font-family: 'Share Tech Mono', monospace !important;
+            font-size: 1.2em !important;
+        }
+
+        .diagram-section { /* Container for the SVG diagram */
+            background-color: var(--primary-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 0 20px var(--shadow-strong);
+            border: 2px solid var(--accent-color);
+            text-align: center;
+        }
+
+        .diagram-section h2 {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--heading-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(167, 224, 227, 0.4);
+        }
+
+        .diagram-section p {
+            font-size: 1.05em;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        /* SVG specific styling */
+        svg {
+            border: 2px solid var(--accent-color);
+            background-color: var(--secondary-bg); /* Darker background for the SVG area */
+            border-radius: 8px;
+            box-shadow: 0 0 15px var(--shadow-strong);
+            max-width: 100%; /* Ensure responsiveness */
+            height: auto;
+        }
+        svg circle, svg line {
+            stroke: var(--heading-color) !important; /* All lines/circles subtle glow */
+            stroke-width: 2px;
+        }
+        .point {
+            fill: var(--accent-glow) !important; /* Bright glow for points */
+            stroke: var(--accent-color) !important;
+            stroke-width: 3px;
+            filter: drop-shadow(0 0 8px var(--accent-glow)); /* Add glow effect to points */
+        }
+        
+        /* Specific styling for Exercises and Solutions */
+        .exercise {
+            background-color: rgba(0, 188, 212, 0.05); /* Lighter accent background for exercises */
+            border-left: 5px solid var(--accent-color);
+            padding: 15px 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+
+        .exercise h2 {
+            color: var(--accent-color);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.6em;
+            margin-top: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+            text-shadow: none;
+        }
+
+        .solution {
+            background-color: rgba(26, 26, 46, 0.9); /* Slightly darker for solutions */
+            border-left: 5px solid var(--heading-color);
+            padding: 15px 20px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .solution h2 {
+            color: var(--heading-color);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.6em;
+            margin-top: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+            text-shadow: none;
+        }
+
+        /* --- Footer (if you add it) --- */
+        /*
+        .footer {
+            background-color: var(--secondary-bg);
+            padding: 30px;
+            text-align: center;
+            margin-top: 80px;
+            border-top: 2px solid var(--border-color);
+            color: var(--text-color);
+            font-size: 15px;
+            box-shadow: 0 -4px 15px var(--shadow-strong);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .footer p {
+            margin: 8px 0;
+            color: var(--heading-color);
+        }
+
+        .footer p:last-child {
+            color: var(--text-color);
+            font-size: 0.9em;
+        }
+        */
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 25px 15px;
+                margin: 25px auto;
+            }
+            .content-wrapper h1 {
+                font-size: 2.2em;
+                margin-bottom: 30px;
+            }
+            .section-block h2, .diagram-section h2, .exercise h2, .solution h2 {
+                font-size: 1.5em;
+            }
+            .section-block p, .diagram-section p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-wrapper h1 {
+                font-size: 1.8em;
+            }
+            .section-block h2, .diagram-section h2, .exercise h2, .solution h2 {
+                font-size: 1.3em;
+            }
+            .section-block p, .diagram-section p {
+                font-size: 0.95em;
+            }
+            .equation {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Points Cocycliques
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <h1>How to Prove Points are Cyclic and the Power of a Point</h1>
+        
+        <div class="section-block">
+            <h2>Proving Points are Cocyclic</h2>
+            <p>To prove that points \( A \), \( B \), \( C \), and \( D \) are cocyclic, we can use the inscribed angle theorem, the central angle theorem, the power of a point theorem, or the exterior angle criterion.</p>
+            <p class="equation">
+                \[
+                \text{If } \angle ABC = \angle ADC, \text{ then } A, B, C, D \text{ are cocyclic.}
+                \]
+            </p>
+            <p class="equation">
+                \[
+                \text{If } PA \times PC = PB \times PD, \text{ then } A, B, C, D \text{ are cocyclic.}
+                \]
+            </p>
+        </div>
+        
+        <div class="diagram-section">
+            <h2>Illustrative Diagram</h2>
+            <p>In this diagram, points \( A \), \( B \), \( C \), and \( D \) are shown to be on the same circle, proving they are cyclic.</p>
+            <svg width="500" height="500" viewBox="0 0 500 500">
+                <circle cx="250" cy="250" r="200" fill="none" stroke="black" stroke-width="2"/>
+    
+                <circle cx="250" cy="50" r="5" class="point"/>
+                <circle cx="450" cy="250" r="5" class="point"/>
+                <circle cx="250" cy="450" r="5" class="point"/>
+                <circle cx="50" cy="250" r="5" class="point"/>
+    
+                <line x1="250" y1="50" x2="450" y2="250" stroke="black" stroke-width="1"/>
+                <line x1="450" y1="250" x2="250" y2="450" stroke="black" stroke-width="1"/>
+                <line x1="250" y1="450" x2="50" y2="250" stroke="black" stroke-width="1"/>
+                <line x1="50" y1="250" x2="250" y2="50" stroke="black" stroke-width="1"/>
+            </svg>
+        </div>
+
+        <div class="section-block">
+            <h2>Power of a Point</h2>
+            <p>The power of a point \( P \) relative to a circle with center \( O \) and radius \( r \) is defined as the squared distance from \( P \) to \( O \), minus the square of the radius:</p>
+            <p class="equation">
+                \[
+                \text{Power of } P = PO^2 - r^2
+                \]
+            </p>
+            <p>If \( P \) lies on the circle, the power of \( P \) is zero. Otherwise, the power is positive if \( P \) is outside the circle and negative if \( P \) is inside.</p>
+        </div>
+
+        <div class="exercise">
+            <h2>Exercise 1: Proving Points are Cocyclic</h2>
+            <p>Given four points \( A \), \( B \), \( C \), and \( D \) in a plane, prove that these points are cocyclic if the following condition holds:</p>
+            <p class="equation">
+                \[
+                \angle BAC + \angle BDC = 180^\circ
+                \]
+            </p>
+        </div>
+
+        <div class="solution">
+            <h2>Solution to Exercise 1</h2>
+            <p>By the inscribed angle theorem, \( \angle BAC + \angle BDC = 180^\circ \) implies that the points \( A \), \( B \), \( C \), and \( D \) lie on the same circle. Hence, they are cocyclic.</p>
+        </div>
+
+        <div class="exercise">
+            <h2>Exercise 2: Power of a Point</h2>
+            <p>Given a circle with center \( O \) and a point \( P \) outside the circle, show that the power of \( P \) with respect to the circle equals the product of the lengths of the tangents from \( P \) to the circle.</p>
+        </div>
+
+        <div class="solution">
+            <h2>Solution to Exercise 2</h2>
+            <p>The power of \( P \) is given by:</p>
+            <p class="equation">
+                \[
+                \text{Power of } P = PT_1 \times PT_2
+                \]
+            </p>
+            <p>where \( T_1 \) and \( T_2 \) are the points of tangency. This shows that the power of \( P \) is equal to the product of the lengths of the tangents from \( P \) to the circle.</p>
+        </div>
+    </div>
+
+    </body>
+</html>

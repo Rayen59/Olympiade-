@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RayenAI - Your Advanced AI Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #f0a500;
+    }
+    .header p {
+      font-size: 1.1rem;
+    }
+    .iframe-container {
+      width: 100%;
+      max-width: 1200px;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Styles for the top-left button */
+    .open-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #f0a500;
+      border: none;
+      color: #0f172a;
+      padding: 10px 15px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 1001;
+      border-radius: 4px;
+    }
+
+    /* Styles for the "About" overlay */
+    .about-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1002;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    .about-overlay.open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .about-content {
+      background: #1e293b;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      max-height: 80vh; /* Limite la hauteur du contenu */
+      overflow-y: auto; /* Active le défilement vertical */
+    }
+
+    .about-content h2 {
+      font-size: 2rem;
+      color: #f0a500;
+      margin-bottom: 1rem;
+    }
+
+    .about-content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .about-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    .about-content table th,
+    .about-content table td {
+      padding: 10px;
+      border: 1px solid #334155;
+      text-align: left;
+    }
+
+    .about-content table th {
+      background: #334155;
+      color: #f8fafc;
+    }
+
+    .about-content table td {
+      background: #1e293b;
+      color: #f8fafc;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #f8fafc;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <!-- Navigation Retour Permanente -->
+    <div style="background: #1A1514; width: 100%; box-sizing: border-box; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 16px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Portail Intelligent (RayenAI)
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+  <div class="header" style="margin-top: 30px;">
+    <h1>Welcome to RayenAI</h1>
+    <p>Experience unmatched freedom and security with RayenAI, your advanced AI assistant. (Powered by Med Rayen Bouazizi).</p>
+  </div>
+  <div class="iframe-container">
+    <iframe
+      src="https://www.chatbase.co/chatbot-iframe/Hxo1QuOW5vOU0eu47ZvUH"
+      width="100%"
+      style="height: 100%; min-height: 700px"
+      frameborder="0">
+    </iframe>
+  </div>
+
+  <!-- Button to open the "About" overlay -->
+  <button id="openAbout" class="open-btn">&#9776; About</button>
+
+  <!-- Overlay for the "About" section -->
+  <div class="about-overlay" id="aboutOverlay">
+    <div class="about-content">
+      <button id="closeAbout" class="close-btn">&times;</button>
+      <h2>About Med Rayen Bouazizi</h2>
+      <p>
+        Med Rayen Bouazizi is the creator of this chatbot. After countless hours of programming, data processing, and training, this chatbot contains thousands of pieces of information and is capable of solving Olympiad-level math problems, generating code, and providing accurate information. Future updates will include advanced features such as file imports and enhanced security.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Problem Solving</td>
+            <td>Capable of solving complex problems, including Olympiad-level mathematics.</td>
+          </tr>
+          <tr>
+            <td>Code Generation</td>
+            <td>Generates code in multiple programming languages.</td>
+          </tr>
+          <tr>
+            <td>Knowledge Base</td>
+            <td>Contains thousands of pieces of information to answer your questions.</td>
+          </tr>
+          <tr>
+            <td>Security & Encryption</td>
+            <td>Offers cutting-edge security and encryption to protect your data.</td>
+          </tr>
+          <tr>
+            <td>File Import</td>
+            <td>Upcoming feature to allow file imports for advanced processing.</td>
+          </tr>
+          <tr>
+            <td>User-Friendly</td>
+            <td>Designed to provide a seamless and intuitive user experience.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Med Rayen Bouazizi is also the CEO and President of Wavegram, an organization dedicated to developing innovative technologies, creating secure solutions, and promoting digital freedom.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const aboutOverlay = document.getElementById('aboutOverlay');
+      const openAboutBtn = document.getElementById('openAbout');
+      const closeAboutBtn = document.getElementById('closeAbout');
+
+      // Open the "About" overlay
+      openAboutBtn.addEventListener('click', function() {
+        aboutOverlay.classList.add('open');
+      });
+
+      // Close the "About" overlay
+      closeAboutBtn.addEventListener('click', function() {
+        aboutOverlay.classList.remove('open');
+      });
+
+      // Close the "About" overlay when clicking outside
+      aboutOverlay.addEventListener('click', function(event) {
+        if (event.target === aboutOverlay) {
+          aboutOverlay.classList.remove('open');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

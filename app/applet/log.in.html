@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace d'Authentification &bull; Mémorial Assil Hamdi</title>
+    <meta name="description" content="Portail d'authentification sécurisé et ultra-rapide pour candidats et direction du Mémorial Assil Hamdi pour les Mathématiques Avancées.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #06080e;
+            --bg-card: rgba(13, 18, 30, 0.88);
+            --bg-input: #080d18;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-gold: rgba(212, 175, 55, 0.35);
+            --gold-primary: #d4af37;
+            --gold-light: #f6e27a;
+            --gold-hover: #e5c158;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --radius-btn: 7px;
+            --radius-card: 16px;
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(ellipse 65% 35% at 50% 0%, rgba(212, 175, 55, 0.12), transparent 75%),
+                radial-gradient(circle 450px at 85% 90%, rgba(59, 130, 246, 0.05), transparent 70%),
+                radial-gradient(circle 350px at 15% 80%, rgba(212, 175, 55, 0.05), transparent 60%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar - Sleek & Fast */
+        .top-navbar {
+            background: rgba(8, 12, 20, 0.88);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 10px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 99999;
+        }
+
+        /* Extraordinary Compact Button */
+        .btn-sleek {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: var(--radius-btn);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+            line-height: 1.2;
+        }
+        .btn-sleek:hover {
+            background: var(--gold-primary);
+            color: #06080e;
+            border-color: var(--gold-primary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+        }
+        .btn-sleek:active {
+            transform: translateY(0);
+        }
+
+        .brand-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .brand-sigil-mini {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #f6e27a, #b8860b);
+            color: #06080e;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+        }
+        .brand-title-mini {
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            background: linear-gradient(135deg, #ffffff, #f6e27a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Central Auth Container */
+        .auth-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .auth-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.32);
+            border-radius: var(--radius-card);
+            padding: 30px 28px;
+            width: 100%;
+            max-width: 430px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(18px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, #f6e27a, transparent);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .auth-header-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(212, 175, 55, 0.12);
+            color: var(--gold-light);
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            padding: 3px 10px;
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+        }
+        .auth-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        .auth-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        /* 3-Pill Modern Segmented Switcher */
+        .auth-nav-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            background: rgba(6, 9, 15, 0.85);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 3px;
+            margin-bottom: 20px;
+            gap: 2px;
+        }
+        .auth-nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 7px 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .auth-nav-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .auth-nav-btn.active {
+            background: rgba(212, 175, 55, 0.16);
+            color: var(--gold-light);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            font-weight: 700;
+        }
+
+        /* Alerts */
+        .auth-alert {
+            padding: 9px 13px;
+            border-radius: var(--radius-btn);
+            font-size: 0.8rem;
+            margin-bottom: 14px;
+            display: none;
+            line-height: 1.4;
+            animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .auth-alert-error {
+            background: rgba(239, 68, 68, 0.14);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+        }
+        .auth-alert-success {
+            background: rgba(16, 185, 129, 0.14);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #6ee7b7;
+        }
+
+        /* Form fields */
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .form-input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 9px 12px;
+            border-radius: var(--radius-btn);
+            color: #ffffff;
+            font-size: 0.86rem;
+            outline: none;
+            transition: all 0.18s ease;
+            font-family: inherit;
+        }
+        .form-input:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.22);
+            background: #0b1120;
+        }
+        .form-input::placeholder {
+            color: #475569;
+        }
+
+        .eye-toggle-btn {
+            position: absolute;
+            right: 8px;
+            background: transparent;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            padding: 4px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: color 0.15s ease;
+        }
+        .eye-toggle-btn:hover {
+            color: var(--gold-light);
+        }
+
+        /* Extraordinary Primary Action Button */
+        .btn-action-primary {
+            width: 100%;
+            background: linear-gradient(135deg, #f6e27a 0%, #d4af37 60%, #b8860b 100%);
+            color: #06080e;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 10px 16px;
+            border-radius: var(--radius-btn);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.32);
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-action-primary:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+        }
+        .btn-action-primary:active {
+            transform: translateY(0);
+        }
+        .btn-action-primary:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Admin Specialized styling */
+        .admin-notice-box {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px dashed rgba(212, 175, 55, 0.35);
+            border-radius: var(--radius-btn);
+            padding: 10px 12px;
+            font-size: 0.78rem;
+            color: #cbd5e1;
+            margin-bottom: 14px;
+            line-height: 1.45;
+        }
+        .admin-notice-box strong {
+            color: var(--gold-light);
+        }
+
+        /* Quick Links */
+        .auth-extra-links {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+        }
+        .auth-extra-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+        .auth-extra-links a:hover {
+            color: var(--gold-light);
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .site-footer-compact {
+            border-top: 1px solid var(--border-subtle);
+            padding: 14px 20px;
+            text-align: center;
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            background: rgba(6, 8, 14, 0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP NAVIGATION - EXTRAORDINARY SLEEK BAR -->
+    <header class="top-navbar">
+        <button type="button" class="btn-sleek" onclick="smartGoBack()" title="Retour à la page précédente">
+            <span style="font-size: 1rem; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div class="brand-indicator">
+            <div class="brand-sigil-mini">&Sigma;</div>
+            <div class="brand-title-mini">Mémorial Assil Hamdi</div>
+        </div>
+        <a href="index.html" class="btn-sleek" style="border-color: rgba(255,255,255,0.15);">
+            <span>Accueil</span>
+        </a>
+    </header>
+
+    <!-- AUTHENTICATION BODY -->
+    <main class="auth-container">
+        <div class="auth-box">
+            
+            <div class="auth-header">
+                <div class="auth-header-tag" id="authBadge">Espace Candidat</div>
+                <h1 class="auth-title" id="authTitle">Connexion Sécurisée</h1>
+                <p class="auth-desc" id="authDesc">Accédez aux épreuves de 4 heures et à votre suivi</p>
+            </div>
+
+            <!-- TAB CONTROLS (3 Fast Modes) -->
+            <div class="auth-nav-tabs">
+                <button type="button" class="auth-nav-btn active" id="tabBtnLogin" onclick="switchTab('login')">Candidat</button>
+                <button type="button" class="auth-nav-btn" id="tabBtnRegister" onclick="switchTab('register')">Inscription</button>
+                <button type="button" class="auth-nav-btn" id="tabBtnAdmin" onclick="switchTab('admin')">🛡️ Direction</button>
+            </div>
+
+            <div id="authAlert" class="auth-alert"></div>
+
+            <!-- 1. CANDIDATE LOGIN FORM -->
+            <form id="loginForm" onsubmit="handleCandidateLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail">Email du Candidat</label>
+                    <div class="input-wrap">
+                        <input type="email" id="loginEmail" class="form-input" placeholder="candidat@domaine.com" required autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">
+                        <span>Mot de Passe</span>
+                    </label>
+                    <div class="input-wrap">
+                        <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                        <button type="button" class="eye-toggle-btn" onclick="togglePasswordVisibility('loginPassword', this)" title="Afficher/Masquer">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-action-primary" id="loginSubmitBtn">
+                    <span>Entrer aux Épreuves</span>
+                    <span>&rarr;</span>
+                </button>
+            </form>
+
+            <!-- 2. REGISTRATION FORM -->
+            <form id="registerForm" onsubmit="handleRegister(event)" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label" for="regName">Nom Complet ou Pseudonyme</label>
+                    <div class="input-wrap">
+                        <input type="text" id="regName" class="form-input" placeholder="Ex: Mohamed Rayen" required autocomplete="name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="regEmail">Email Valide</label>
+                    <div class="input-wrap">
+                        <input type="email" id="regEmail" class="form-input" placeholder="votre-email@domaine.com" required autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="regPassword">Créer un Mot de Passe</label>
+                    <div class="input-wrap">
+                        <input type="password" id="regPassword" class="form-input" placeholder="Min. 6 caractères" minlength="6" required autocomplete="new-password">
+                        <button type="button" class="eye-toggle-btn" onclick="togglePasswordVisibility('regPassword', this)" title="Afficher/Masquer">👁️</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="regCountry">Pays Représenté</label>
+                    <select id="regCountry" class="form-input" required>
+                        <option value="Tunisia" selected>Tunisie</option>
+                        <option value="France">France</option>
+                        <option value="Algeria">Algérie</option>
+                        <option value="Morocco">Maroc</option>
+                        <option value="Egypt">Égypte</option>
+                        <option value="Lebanon">Liban</option>
+                        <option value="Saudi Arabia">Arabie Saoudite</option>
+                        <option value="UAE">Émirats Arabes Unis</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Germany">Allemagne</option>
+                        <option value="Other">Autre Pays</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-action-primary" id="registerSubmitBtn">
+                    <span>Créer le Compte &bull; Accéder</span>
+                    <span>&rarr;</span>
+                </button>
+            </form>
+
+            <!-- 3. DIRECTION / ADMIN STRICT LOGIN FORM -->
+            <form id="adminForm" onsubmit="handleAdminLoginDirect(event)" style="display: none;">
+                <div class="admin-notice-box">
+                    🔒 <strong>Accès Direction Officielle</strong><br>
+                    Réservé au corps d'inspection et de correction des olympiades. Requiert les identifiants d'administration secrets.
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="adminEmailInput">Email Direction</label>
+                    <div class="input-wrap">
+                        <input type="email" id="adminEmailInput" class="form-input" placeholder="Email officiel de la direction" required autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="adminPasswordInput">Mot de Passe Secret</label>
+                    <div class="input-wrap">
+                        <input type="password" id="adminPasswordInput" class="form-input" placeholder="Mot de passe secret" required autocomplete="off">
+                        <button type="button" class="eye-toggle-btn" onclick="togglePasswordVisibility('adminPasswordInput', this)" title="Afficher/Masquer">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-action-primary" id="adminSubmitBtn" style="background: linear-gradient(135deg, #f6e27a, #d4af37);">
+                    <span>Authentifier la Direction</span>
+                    <span>&rarr;</span>
+                </button>
+            </form>
+
+            <div class="auth-extra-links">
+                <a href="exam.html">Épreuve Olympiade (4h)</a>
+                <span>&bull;</span>
+                <a href="leaderboard.html">Classement</a>
+                <span>&bull;</span>
+                <a href="send.html">Support</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer-compact">
+        &copy; 2026 Mémorial Assil Hamdi pour les Mathématiques Avancées &bull; Concours & Olympiades
+    </footer>
+
+    <script>
+        function smartGoBack() {
+            if (window.history.length > 1 && document.referrer) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        function showAlert(msg, isError = true) {
+            const el = document.getElementById('authAlert');
+            el.textContent = msg;
+            el.className = isError ? 'auth-alert auth-alert-error' : 'auth-alert auth-alert-success';
+            el.style.display = 'block';
+        }
+
+        function clearAlert() {
+            const el = document.getElementById('authAlert');
+            el.style.display = 'none';
+        }
+
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🔒';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+            }
+        }
+
+        function switchTab(mode) {
+            clearAlert();
+            const tabBtnLogin = document.getElementById('tabBtnLogin');
+            const tabBtnReg = document.getElementById('tabBtnRegister');
+            const tabBtnAdm = document.getElementById('tabBtnAdmin');
+
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const adminForm = document.getElementById('adminForm');
+
+            const badge = document.getElementById('authBadge');
+            const title = document.getElementById('authTitle');
+            const desc = document.getElementById('authDesc');
+
+            tabBtnLogin.classList.remove('active');
+            tabBtnReg.classList.remove('active');
+            tabBtnAdm.classList.remove('active');
+
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'none';
+            adminForm.style.display = 'none';
+
+            if (mode === 'login') {
+                tabBtnLogin.classList.add('active');
+                loginForm.style.display = 'block';
+                badge.textContent = 'Espace Candidat';
+                title.textContent = 'Connexion Candidat';
+                desc.textContent = 'Accédez aux épreuves de 4 heures et à votre suivi';
+            } else if (mode === 'register') {
+                tabBtnReg.classList.add('active');
+                registerForm.style.display = 'block';
+                badge.textContent = 'Nouveau Compte';
+                title.textContent = 'Inscription Concours';
+                desc.textContent = 'Enregistrez votre candidature aux Olympiades';
+            } else if (mode === 'admin') {
+                tabBtnAdm.classList.add('active');
+                adminForm.style.display = 'block';
+                badge.textContent = 'Direction des Examens';
+                title.textContent = 'Authentification Direction';
+                desc.textContent = 'Réservé au corps d\'examen et de notation';
+            }
+        }
+
+        async function handleCandidateLogin(e) {
+            e.preventDefault();
+            clearAlert();
+            const btn = document.getElementById('loginSubmitBtn');
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+
+            btn.disabled = true;
+            btn.innerHTML = '<span>Vérification...</span>';
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Identifiants invalides');
+
+                localStorage.setItem('olympiad_token', data.token);
+                showAlert('Connexion validée ! Accès aux épreuves...', false);
+
+                setTimeout(() => {
+                    if (data.user && data.user.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'exam.html';
+                    }
+                }, 600);
+            } catch (err) {
+                showAlert(err.message, true);
+                btn.disabled = false;
+                btn.innerHTML = '<span>Entrer aux Épreuves</span> <span>&rarr;</span>';
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            clearAlert();
+            const btn = document.getElementById('registerSubmitBtn');
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value.trim();
+            const country = document.getElementById('regCountry').value;
+
+            btn.disabled = true;
+            btn.innerHTML = '<span>Création en cours...</span>';
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password, country })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur lors de l\'enregistrement');
+
+                localStorage.setItem('olympiad_token', data.token);
+                showAlert('Compte candidat créé ! Redirection...', false);
+
+                setTimeout(() => {
+                    window.location.href = 'exam.html';
+                }, 600);
+            } catch (err) {
+                showAlert(err.message, true);
+                btn.disabled = false;
+                btn.innerHTML = '<span>Créer le Compte &bull; Accéder</span> <span>&rarr;</span>';
+            }
+        }
+
+        async function handleAdminLoginDirect(e) {
+            e.preventDefault();
+            clearAlert();
+            const btn = document.getElementById('adminSubmitBtn');
+            const email = document.getElementById('adminEmailInput').value.trim();
+            const password = document.getElementById('adminPasswordInput').value.trim();
+
+            btn.disabled = true;
+            btn.innerHTML = '<span>Authentification de la Direction...</span>';
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Accès Direction Refusé');
+
+                if (!data.user || data.user.role !== 'admin') {
+                    throw new Error('Ce compte ne dispose pas des prérogatives de la Direction.');
+                }
+
+                localStorage.setItem('olympiad_token', data.token);
+                showAlert('Direction authentifiée. Ouverture de la console...', false);
+
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 600);
+            } catch (err) {
+                showAlert(err.message, true);
+                btn.disabled = false;
+                btn.innerHTML = '<span>Authentifier la Direction</span> <span>&rarr;</span>';
+            }
+        }
+    </script>
+</body>
+</html>

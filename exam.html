@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympiad Examination Portal - Assil Hamdi Memorial</title>
+    <meta name="description" content="Official 4-Hour Olympiad Examination Submission Portal. Candidate authentication, PDF paper distribution, solution uploads, and strict academic integrity.">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --primary: #1e293b;
+            --primary-accent: #0f172a;
+            --gold: #d97706;
+            --gold-light: #fef3c7;
+            --red: #dc2626;
+            --red-light: #fee2e2;
+            --green: #16a34a;
+            --green-light: #dcfce7;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header.navbar {
+            background-color: #0f172a;
+            color: #ffffff;
+            border-bottom: 2px solid #d97706;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 99999;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.25);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-left-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-back-btn:hover {
+            background: #d97706;
+            color: #ffffff;
+            border-color: #d97706;
+            transform: translateX(-2px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            background: #1e293b;
+            color: #f59e0b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 1px solid #d97706;
+        }
+
+        .brand-text h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .brand-text span {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 500;
+            font-size: 0.88rem;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .user-status-badge {
+            background: #f1f5f9;
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.82rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.18s ease;
+            text-decoration: none;
+            line-height: 1.2;
+        }
+
+        .btn-primary {
+            background-color: #0f172a;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #1e293b;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #b45309, #92400e);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-dark);
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+        }
+
+        .btn-danger {
+            background-color: var(--red);
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Sticky countdown bar */
+        .sticky-countdown-bar {
+            position: sticky;
+            top: 70px;
+            z-index: 90;
+            background: #0f172a;
+            color: #ffffff;
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .countdown-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fbbf24;
+            letter-spacing: 2px;
+        }
+
+        .countdown-pulse {
+            animation: pulse-red 1.5s infinite;
+            color: #f87171 !important;
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Card styles */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .card-header {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Rules Banner */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .rule-item {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--gold);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+        }
+
+        .rule-item.danger {
+            border-left-color: var(--red);
+            background: #fff5f5;
+        }
+
+        .rule-item h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+            color: #0f172a;
+        }
+
+        .rule-item p {
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        /* Auth Form */
+        .auth-container {
+            max-width: 520px;
+            margin: 2rem auto;
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 0.8rem;
+            text-align: center;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .auth-tab.active {
+            color: #0f172a;
+            border-bottom-color: #0f172a;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #ffffff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #0f172a;
+            box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+        }
+
+        /* Suspension Banner */
+        .banned-banner {
+            background-color: var(--red-light);
+            border: 2px solid var(--red);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            color: #991b1b;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .banned-icon {
+            font-size: 2rem;
+        }
+
+        /* Exam Subject Box */
+        .exam-subject-box {
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Image Upload Box */
+        .upload-dropzone {
+            border: 2px dashed #94a3b8;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-dropzone:hover {
+            border-color: #0f172a;
+            background: #f1f5f9;
+        }
+
+        .thumbnails-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .thumbnail-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .thumbnail-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+
+        .thumbnail-info {
+            padding: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .thumbnail-delete {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(220, 38, 38, 0.9);
+            color: #ffffff;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Submission Receipt */
+        .receipt-badge {
+            display: inline-block;
+            background: var(--green-light);
+            color: var(--green);
+            padding: 0.35rem 0.8rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .score-pill {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Lightbox modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 2rem;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            display: block;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2rem;
+            color: #ffffff;
+            cursor: pointer;
+            z-index: 1010;
+        }
+
+        /* Notifications */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #0f172a;
+            color: #ffffff;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 9999;
+            display: none;
+            max-width: 400px;
+            font-size: 0.9rem;
+        }
+
+        .toast.error { background: #dc2626; }
+        .toast.success { background: #16a34a; }
+
+        @media (max-width: 768px) {
+            header.navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .sticky-countdown-bar {
+                top: 0;
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            .countdown-display {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation with Back Arrow -->
+    <header class="navbar">
+        <div class="nav-left-group">
+            <button type="button" class="nav-back-btn" onclick="smartGoBack()" title="Retour au Mémorial">
+                <span style="font-size: 1.15rem; line-height: 1;">&larr;</span>
+                <span>Retour / Back</span>
+            </button>
+
+            <a href="index.html" class="brand">
+                <div class="brand-logo">&Sigma;</div>
+                <div class="brand-text">
+                    <h1>Assil Hamdi Memorial</h1>
+                    <span>Advanced Pure Mathematics</span>
+                </div>
+            </a>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="exam.html" class="nav-link active">Olympiad Test Portal</a>
+            <a href="leaderboard.html" class="nav-link">Rankings & Stats</a>
+            <a href="courses and problems.html" class="nav-link">Problem Archive</a>
+            <a href="admin.html" class="nav-link" id="navAdminLink">Admin Portal</a>
+            <div id="userHeaderBadge" style="display: none;" class="user-status-badge">
+                <span id="userNameHeader">Candidate</span>
+                <button class="btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.75rem; background: rgba(255,255,255,0.1); color: #ffffff;" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- Suspension Notification Banner (Dynamic) -->
+        <div id="banAlert" class="banned-banner" style="display: none;">
+            <div class="banned-icon">&#x26A0;</div>
+            <div>
+                <h3 style="font-weight: 700; margin-bottom: 0.25rem;">Account Suspended by Examination Directorate</h3>
+                <p id="banMessage">Your account has been suspended due to an academic integrity violation. You cannot start or submit tests until the suspension expires.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85rem; font-weight: 600;">Suspension expires: <span id="banExpiresText">--</span></p>
+            </div>
+        </div>
+
+        <!-- Sticky Live Countdown Bar (Only active during in-progress test) -->
+        <div id="stickyTimerBar" class="sticky-countdown-bar" style="display: none;">
+            <div>
+                <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Official Examination Timer</div>
+                <div style="font-weight: 600;">4-Hour Continuous Examination Session</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div id="timerCountdown" class="countdown-display">04:00:00</div>
+                <button class="btn btn-gold" onclick="scrollToSubmission()">Submit Solutions</button>
+            </div>
+        </div>
+
+        <!-- State 1: Authentication Form (When Logged Out) -->
+        <div id="authSection" class="auth-container">
+            <div class="card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="tabRegisterBtn" onclick="switchAuthTab('register')">Sign Up (Candidate)</button>
+                    <button class="auth-tab" id="tabLoginBtn" onclick="switchAuthTab('login')">Log In</button>
+                </div>
+
+                <!-- Register Form -->
+                <form id="registerForm" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="regName">Full Legal Name</label>
+                        <input type="text" id="regName" class="form-control" placeholder="e.g. Rayen Bouazizi" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="regEmail">Email Address</label>
+                        <input type="email" id="regEmail" class="form-control" placeholder="name@domain.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="regPassword">Password</label>
+                        <input type="password" id="regPassword" class="form-control" placeholder="Minimum 6 characters" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="regCountry">Country of Representation</label>
+                        <select id="regCountry" class="form-control" required>
+                            <option value="">-- Select Your Country --</option>
+                            <option value="Tunisia">Tunisia 🇹🇳</option>
+                            <option value="France">France 🇫🇷</option>
+                            <option value="Algeria">Algeria 🇩🇿</option>
+                            <option value="Morocco">Morocco 🇲🇦</option>
+                            <option value="Egypt">Egypt 🇪🇬</option>
+                            <option value="Saudi Arabia">Saudi Arabia 🇸🇦</option>
+                            <option value="United Arab Emirates">United Arab Emirates 🇦🇪</option>
+                            <option value="Lebanon">Lebanon 🇱🇧</option>
+                            <option value="Jordan">Jordan 🇯🇴</option>
+                            <option value="Qatar">Qatar 🇶🇦</option>
+                            <option value="United States">United States 🇺🇸</option>
+                            <option value="Canada">Canada 🇨🇦</option>
+                            <option value="United Kingdom">United Kingdom 🇬🇧</option>
+                            <option value="Germany">Germany 🇩🇪</option>
+                            <option value="Italy">Italy 🇮🇹</option>
+                            <option value="Spain">Spain 🇪🇸</option>
+                            <option value="Switzerland">Switzerland 🇨🇭</option>
+                            <option value="Belgium">Belgium 🇧🇪</option>
+                            <option value="Turkey">Turkey 🇹🇷</option>
+                            <option value="China">China 🇨🇳</option>
+                            <option value="Japan">Japan 🇯🇵</option>
+                            <option value="South Korea">South Korea 🇰🇷</option>
+                            <option value="India">India 🇮🇳</option>
+                            <option value="Brazil">Brazil 🇧🇷</option>
+                            <option value="Other International">Other International 🌍</option>
+                        </select>
+                    </div>
+
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">
+                        By creating an account, you pledge adherence to the Examination Code of Honor. All submitted solutions must be strictly handwritten.
+                    </p>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account & Enter Portal</button>
+                </form>
+
+                <!-- Login Form -->
+                <form id="loginForm" style="display: none;" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="name@domain.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Log In</button>
+
+                    <div style="margin-top: 1.5rem; text-align: center; border-top: 1px solid var(--border); padding-top: 1rem;">
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Exam Administrator?</span>
+                        <a href="admin.html" style="font-size: 0.85rem; font-weight: 600; color: #0f172a; margin-left: 0.5rem;">Access Admin Directorate &rarr;</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- State 2: Main Examination Workspace (When Logged In) -->
+        <div id="examWorkspace" style="display: none;">
+
+            <!-- Header Card with Candidate Info & Honor Code -->
+            <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <h2 class="card-title" id="testTitleDisplay">Assil Hamdi Memorial International Olympiad</h2>
+                            <span class="user-status-badge" id="candidateCountryBadge">🇹🇳 Tunisia</span>
+                        </div>
+                        <p class="card-subtitle" id="testDescDisplay">Strict 4-Hour Pure Mathematics Olympiad Examination.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Allocated Duration</div>
+                        <div style="font-size: 1.25rem; font-weight: 700; color: #0f172a;">4 Hours (240 Minutes)</div>
+                    </div>
+                </div>
+
+                <!-- Academic Integrity & Writing Clarity Mandate -->
+                <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: #0f172a;">Mandatory Examination Regulations & Honor Code:</h3>
+                
+                <div class="rules-grid">
+                    <div class="rule-item danger">
+                        <h4>1. Legible Handwriting & Clear Schemas</h4>
+                        <p>All proofs must be handwritten. Geometric figures and diagrams <strong>MUST be crisp, geometrically accurate, and fully legible</strong>. Any unreadable page or ambiguous schema will automatically receive <strong>0 points</strong>.</p>
+                    </div>
+
+                    <div class="rule-item danger">
+                        <h4>2. Zero-Tolerance for AI & Plagiarism</h4>
+                        <p>Usage of Artificial Intelligence (ChatGPT, Claude, Gemini, MathGPT, etc.) or copying from external sources will result in <strong>immediate disqualification, 0 points, and a multi-day account suspension (1 to 30 days)</strong>.</p>
+                    </div>
+
+                    <div class="rule-item">
+                        <h4>3. Strict 4-Hour Time Window</h4>
+                        <p>The timer begins the moment you click <strong>"Start 4-Hour Examination"</strong>. You must complete your writing, take high-resolution photos, and submit before the countdown reaches zero.</p>
+                    </div>
+                </div>
+
+                <!-- Actions: Start Test or Download PDF -->
+                <div id="preStartArea" style="text-align: center; padding: 1.5rem 0; border-top: 1px solid var(--border); margin-top: 1rem;">
+                    <button class="btn btn-gold" style="font-size: 1.1rem; padding: 0.9rem 2.5rem;" onclick="startExamSession()">
+                        &#x25B6; Start 4-Hour Examination Now
+                    </button>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+                        Note: The 4-hour countdown will initiate immediately and cannot be paused.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Active Test Section: PDF Paper & Solution Submission Form -->
+            <div id="activeTestArea" style="display: none;">
+                
+                <!-- PDF Subject Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Official Examination Subject Paper</h3>
+                        <p class="card-subtitle">Read and solve all problems on separate white paper sheets using blue or black ink.</p>
+                    </div>
+
+                    <div class="exam-subject-box">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2.2rem; color: #dc2626;">&#x1F4C4;</div>
+                            <div>
+                                <h4 style="font-size: 1.05rem; font-weight: 700;" id="pdfFilenameText">Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf</h4>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">Official High-Security Examination PDF</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <a id="downloadPdfBtn" href="#" target="_blank" class="btn btn-primary">
+                                &#x2B07; Open / Download PDF Paper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solution Upload & Final Submission Card -->
+                <div class="card" id="submissionBox">
+                    <div class="card-header">
+                        <h3 class="card-title">Upload Handwritten Solutions & Geometric Diagrams</h3>
+                        <p class="card-subtitle">Take well-lit, sharp photographs or scans of your papers. Multiple images can be uploaded.</p>
+                    </div>
+
+                    <!-- Dropzone -->
+                    <div class="upload-dropzone" onclick="document.getElementById('solutionFileInput').click()">
+                        <div style="font-size: 2.5rem; color: #64748b; margin-bottom: 0.5rem;">&#x1F4F7;</div>
+                        <h4 style="font-weight: 700; margin-bottom: 0.25rem;">Click to Select Solution Photos</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">
+                            PNG, JPG, or WEBP supported. Ensure high resolution, adequate contrast, and proper lighting.
+                        </p>
+                        <input type="file" id="solutionFileInput" accept="image/*" multiple style="display: none;" onchange="handleImageSelection(event)">
+                    </div>
+
+                    <!-- Uploaded Thumbnails Preview -->
+                    <div id="thumbnailsContainer" class="thumbnails-grid"></div>
+
+                    <!-- Candidate Notes -->
+                    <div class="form-group">
+                        <label class="form-label" for="studentRemarks">Candidate Remarks / Problem Numbering Notes (Optional)</label>
+                        <textarea id="studentRemarks" class="form-control" rows="3" placeholder="e.g. Sheet 1: Problems 1 & 2 (Synthetic Geometry with circle lemmas); Sheet 2: Problem 3 (p-adic valuation)..."></textarea>
+                    </div>
+
+                    <!-- Academic Honesty Pledge Checkbox -->
+                    <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.9rem;">
+                            <input type="checkbox" id="pledgeCheckbox" style="margin-top: 0.25rem;" required>
+                            <span>
+                                <strong>Candidate Declaration:</strong> I solemnly declare on my honor that the solutions and geometric schemas uploaded here are entirely my own personal work produced within the allotted 4-hour window, without external assistance, plagiarism, or generative AI. I understand that illegible work receives 0 points.
+                            </span>
+                        </label>
+                    </div>
+
+                    <button id="finalSubmitBtn" class="btn btn-primary" style="font-size: 1.05rem; padding: 0.85rem 2rem; width: 100%;" onclick="submitExamSolutions()">
+                        Submit Official Examination Solutions
+                    </button>
+                </div>
+            </div>
+
+            <!-- Submitted Review State (When Candidate Has Already Submitted) -->
+            <div id="submittedReceiptArea" class="card" style="display: none;">
+                <div class="card-header">
+                    <span class="receipt-badge">&#x2713; Solutions Submitted Successfully</span>
+                    <h3 class="card-title">Official Examination Submission Dossier</h3>
+                    <p class="card-subtitle">Your work is recorded and securely queued for evaluation by the Examination Directorate.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: #f8fafc; padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border);">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Submission Timestamp</div>
+                        <div style="font-weight: 700; font-size: 1.05rem;" id="receiptSubmitDate">--</div>
+                    </div>
+
+                    <div style="background: #f8fafc; padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border);">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Review Status</div>
+                        <div style="font-weight: 700; font-size: 1.05rem;" id="receiptStatusText">Under Review</div>
+                    </div>
+
+                    <div style="background: #f8fafc; padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border);">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Official Score</div>
+                        <div class="score-pill" id="receiptScoreText">Pending</div>
+                    </div>
+                </div>
+
+                <!-- Grader Feedback (If graded) -->
+                <div id="receiptFeedbackContainer" style="display: none; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 1.25rem; margin-bottom: 2rem;">
+                    <h4 style="font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.5rem;">Examiner Comments & Feedback:</h4>
+                    <p id="receiptFeedbackText" style="color: #78350f; font-size: 0.95rem;"></p>
+                </div>
+
+                <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Submitted Solution Pages:</h4>
+                <div id="receiptImagesGrid" class="thumbnails-grid"></div>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <a href="leaderboard.html" class="btn btn-outline">View Global Leaderboard & Statistics &rarr;</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div id="lightboxModal" class="modal" onclick="closeLightbox()">
+        <div class="modal-close">&times;</div>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img id="lightboxImage" src="" alt="Enlarged Solution">
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        let currentUser = null;
+        let activeExam = null;
+        let currentSession = null;
+        let countdownInterval = null;
+        let uploadedImages = [];
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 4000);
+        }
+
+        function switchAuthTab(tab) {
+            const regTab = document.getElementById('tabRegisterBtn');
+            const loginTab = document.getElementById('tabLoginBtn');
+            const regForm = document.getElementById('registerForm');
+            const loginForm = document.getElementById('loginForm');
+
+            if (tab === 'register') {
+                regTab.classList.add('active');
+                loginTab.classList.remove('active');
+                regForm.style.display = 'block';
+                loginForm.style.display = 'none';
+            } else {
+                loginTab.classList.add('active');
+                regTab.classList.remove('active');
+                loginForm.style.display = 'block';
+                regForm.style.display = 'none';
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const country = document.getElementById('regCountry').value;
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password, country })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Registration failed');
+
+                localStorage.setItem('olympiad_token', data.token);
+                currentUser = data.user;
+                showToast(`Welcome, ${currentUser.name}! Registration successful.`, 'success');
+                initPortal();
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Login failed');
+
+                localStorage.setItem('olympiad_token', data.token);
+                currentUser = data.user;
+                showToast(`Logged in successfully as ${currentUser.name}.`, 'success');
+
+                if (currentUser.role === 'admin') {
+                    window.location.href = 'admin.html';
+                    return;
+                }
+                initPortal();
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('olympiad_token');
+            currentUser = null;
+            currentSession = null;
+            if (countdownInterval) clearInterval(countdownInterval);
+            document.getElementById('authSection').style.display = 'block';
+            document.getElementById('examWorkspace').style.display = 'none';
+            document.getElementById('userHeaderBadge').style.display = 'none';
+            document.getElementById('stickyTimerBar').style.display = 'none';
+            showToast('Logged out.');
+        }
+
+        async function initPortal() {
+            const token = localStorage.getItem('olympiad_token');
+            if (!token) {
+                document.getElementById('authSection').style.display = 'block';
+                document.getElementById('examWorkspace').style.display = 'none';
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/exam/active', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    if (res.status === 401) {
+                        logout();
+                        return;
+                    }
+                    throw new Error(data.error || 'Failed to load exam');
+                }
+
+                activeExam = data.test;
+                currentSession = data.session;
+
+                // Fetch user info
+                const userRes = await fetch('/api/auth/me', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const userData = await userRes.json();
+                currentUser = userData.user;
+
+                // Update UI state
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('examWorkspace').style.display = 'block';
+                document.getElementById('userHeaderBadge').style.display = 'flex';
+                document.getElementById('userNameHeader').textContent = currentUser.name;
+                document.getElementById('candidateCountryBadge').textContent = currentUser.country;
+
+                // Check suspension
+                const banAlert = document.getElementById('banAlert');
+                if (data.isBanned && data.banDetails) {
+                    banAlert.style.display = 'flex';
+                    document.getElementById('banMessage').textContent = data.banDetails.banReason || 'Academic integrity suspension.';
+                    document.getElementById('banExpiresText').textContent = new Date(data.banDetails.bannedUntil).toLocaleString();
+                    document.getElementById('preStartArea').style.display = 'none';
+                    return;
+                } else {
+                    banAlert.style.display = 'none';
+                }
+
+                // Render test details
+                document.getElementById('testTitleDisplay').textContent = activeExam.title;
+                document.getElementById('testDescDisplay').textContent = activeExam.description;
+                document.getElementById('pdfFilenameText').textContent = activeExam.pdfFilename || 'Olympiad_Subject_Paper.pdf';
+                document.getElementById('downloadPdfBtn').href = activeExam.pdfUrl || '#';
+
+                // Check session state
+                renderSessionState();
+
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
+        }
+
+        function renderSessionState() {
+            const preStartArea = document.getElementById('preStartArea');
+            const activeTestArea = document.getElementById('activeTestArea');
+            const submittedReceiptArea = document.getElementById('submittedReceiptArea');
+            const stickyTimerBar = document.getElementById('stickyTimerBar');
+
+            if (!currentSession) {
+                // Not started
+                preStartArea.style.display = 'block';
+                activeTestArea.style.display = 'none';
+                submittedReceiptArea.style.display = 'none';
+                stickyTimerBar.style.display = 'none';
+            } else if (currentSession.status === 'in_progress') {
+                // In progress (4-hour countdown)
+                preStartArea.style.display = 'none';
+                activeTestArea.style.display = 'block';
+                submittedReceiptArea.style.display = 'none';
+                stickyTimerBar.style.display = 'flex';
+                startTimerCountdown(currentSession.remainingSeconds);
+
+                // Restore uploaded images if any
+                if (currentSession.images && currentSession.images.length > 0) {
+                    uploadedImages = currentSession.images;
+                    renderThumbnails();
+                }
+            } else if (currentSession.status === 'submitted' || currentSession.status === 'expired') {
+                // Submitted / Graded
+                preStartArea.style.display = 'none';
+                activeTestArea.style.display = 'none';
+                submittedReceiptArea.style.display = 'block';
+                stickyTimerBar.style.display = 'none';
+                renderReceipt(currentSession);
+            }
+        }
+
+        async function startExamSession() {
+            const token = localStorage.getItem('olympiad_token');
+            if (!confirm("Are you ready to begin? The 4-hour countdown will start immediately and cannot be paused.")) {
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/exam/start', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Failed to start exam');
+
+                currentSession = data.session;
+                showToast('4-Hour Examination started! Good luck!', 'success');
+                renderSessionState();
+                window.scrollTo({ top: 300, behavior: 'smooth' });
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
+        }
+
+        function startTimerCountdown(remainingSec) {
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            let secondsLeft = remainingSec;
+            const timerDisplay = document.getElementById('timerCountdown');
+
+            function updateDisplay() {
+                if (secondsLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    timerDisplay.textContent = '00:00:00';
+                    timerDisplay.classList.add('countdown-pulse');
+                    showToast('Time expired! Please submit your solutions immediately.', 'error');
+                    return;
+                }
+
+                const h = Math.floor(secondsLeft / 3600);
+                const m = Math.floor((secondsLeft % 3600) / 60);
+                const s = secondsLeft % 60;
+
+                const pad = (n) => String(n).padStart(2, '0');
+                timerDisplay.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+
+                if (secondsLeft < 1800) { // under 30 mins
+                    timerDisplay.classList.add('countdown-pulse');
+                } else {
+                    timerDisplay.classList.remove('countdown-pulse');
+                }
+
+                secondsLeft--;
+            }
+
+            updateDisplay();
+            countdownInterval = setInterval(updateDisplay, 1000);
+        }
+
+        async function handleImageSelection(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            const token = localStorage.getItem('olympiad_token');
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const formData = new FormData();
+                formData.append('image', file);
+
+                showToast(`Uploading ${file.name}...`);
+                try {
+                    const res = await fetch('/api/exam/upload-image', {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${token}` },
+                        body: formData
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Upload failed');
+
+                    uploadedImages.push(data.image);
+                    renderThumbnails();
+                    showToast(`${file.name} uploaded successfully!`, 'success');
+                } catch (err) {
+                    showToast(`Failed to upload ${file.name}: ${err.message}`, 'error');
+                }
+            }
+        }
+
+        function renderThumbnails() {
+            const container = document.getElementById('thumbnailsContainer');
+            container.innerHTML = '';
+
+            uploadedImages.forEach((img, idx) => {
+                const card = document.createElement('div');
+                card.className = 'thumbnail-card';
+                card.innerHTML = `
+                    <img src="${img.url}" class="thumbnail-img" onclick="openLightbox('${img.url}')" title="Click to enlarge">
+                    <div class="thumbnail-info">Page ${idx + 1}: ${img.name}</div>
+                    <button class="thumbnail-delete" onclick="removeImage(${idx})" title="Remove page">&times;</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function removeImage(index) {
+            uploadedImages.splice(index, 1);
+            renderThumbnails();
+        }
+
+        async function submitExamSolutions() {
+            const token = localStorage.getItem('olympiad_token');
+            const pledge = document.getElementById('pledgeCheckbox').checked;
+
+            if (uploadedImages.length === 0) {
+                showToast('Please upload at least one image showing your handwritten solutions and geometric schemas.', 'error');
+                return;
+            }
+
+            if (!pledge) {
+                showToast('You must certify the Candidate Declaration of academic honesty.', 'error');
+                return;
+            }
+
+            if (!confirm('Are you sure you want to submit your final solutions? You cannot modify them after submission.')) {
+                return;
+            }
+
+            const studentNotes = document.getElementById('studentRemarks').value.trim();
+
+            try {
+                const res = await fetch('/api/exam/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        images: uploadedImages,
+                        studentNotes
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Submission failed');
+
+                currentSession = data.session;
+                showToast('Examination submitted successfully!', 'success');
+                renderSessionState();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
+        }
+
+        function renderReceipt(session) {
+            document.getElementById('receiptSubmitDate').textContent = session.submittedAt ? new Date(session.submittedAt).toLocaleString() : 'Submitted';
+            
+            const statusEl = document.getElementById('receiptStatusText');
+            const scoreEl = document.getElementById('receiptScoreText');
+            const feedbackContainer = document.getElementById('receiptFeedbackContainer');
+            const feedbackText = document.getElementById('receiptFeedbackText');
+
+            if (session.score !== null) {
+                statusEl.textContent = 'Graded & Evaluated';
+                statusEl.style.color = 'var(--green)';
+                scoreEl.textContent = `${session.score} / ${activeExam?.maxScore || 42}`;
+                
+                if (session.feedback) {
+                    feedbackContainer.style.display = 'block';
+                    feedbackText.textContent = session.feedback;
+                } else {
+                    feedbackContainer.style.display = 'none';
+                }
+            } else {
+                statusEl.textContent = 'Under Examiner Review';
+                statusEl.style.color = '#d97706';
+                scoreEl.textContent = 'Pending';
+                feedbackContainer.style.display = 'none';
+            }
+
+            const grid = document.getElementById('receiptImagesGrid');
+            grid.innerHTML = '';
+            (session.images || []).forEach((img, idx) => {
+                const card = document.createElement('div');
+                card.className = 'thumbnail-card';
+                card.innerHTML = `
+                    <img src="${img.url}" class="thumbnail-img" onclick="openLightbox('${img.url}')" title="Click to inspect">
+                    <div class="thumbnail-info">Sheet ${idx + 1}: ${img.name}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openLightbox(url) {
+            document.getElementById('lightboxImage').src = url;
+            document.getElementById('lightboxModal').classList.add('open');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.remove('open');
+        }
+
+        function scrollToSubmission() {
+            document.getElementById('submissionBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function smartGoBack() {
+            if (window.history.length > 1 && document.referrer) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', initPortal);
+    </script>
+</body>
+</html>

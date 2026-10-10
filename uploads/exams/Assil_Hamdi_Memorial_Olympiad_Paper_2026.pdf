@@ -1,0 +1,61 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 520 >>
+stream
+BT
+/F1 18 Tf
+50 780 Td
+(ASSIL HAMDI MEMORIAL MATHEMATICS OLYMPIAD - 2026) Tj
+/F1 12 Tf
+0 -30 Td
+(Official Examination Paper - 4 Hours Strict Duration) Tj
+0 -25 Td
+(Rules: 1. Legible handwriting required. 2. Clear geometric schemas mandatory.) Tj
+0 -15 Td
+(3. Zero tolerance for AI or plagiarism: Result will be 0 points and account ban.) Tj
+0 -35 Td
+(Problem 1 (Geometry - 7 Points):) Tj
+0 -18 Td
+(Let ABC be an acute triangle with circumcircle Omega. Points D and E lie on sides AB) Tj
+0 -15 Td
+(and AC respectively. Prove that the radical axis of the two circles passes through...) Tj
+0 -35 Td
+(Problem 2 (Number Theory - 7 Points):) Tj
+0 -18 Td
+(Find all pairs of positive integers (x, y) such that 2^x + 3^y is a perfect square.) Tj
+0 -35 Td
+(Problem 3 (Functional Equations - 7 Points):) Tj
+0 -18 Td
+(Find all functions f: R -> R satisfying f(xf(y) + f(x)) = 2f(x) + xy for all reals x, y.) Tj
+0 -35 Td
+(Problem 4 (Combinatorics - 7 Points):) Tj
+0 -18 Td
+(A 2026 x 2026 grid is tiled by dominoes. Prove that the number of symmetric tilings is...) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000228 00000 n 
+0000000800 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+869
+%%EOF

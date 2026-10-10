@@ -1,0 +1,201 @@
+{
+  "users": [
+    {
+      "id": "admin-1",
+      "email": "admin12@gmail.com",
+      "password": "admin12",
+      "name": "Examination Directorate",
+      "country": "Tunisia",
+      "role": "admin",
+      "createdAt": "2026-01-15T08:00:00.000Z",
+      "bannedUntil": null,
+      "banReason": null
+    },
+    {
+      "id": "user-demo-1",
+      "email": "sarah.mansouri@gmail.com",
+      "password": "user1234",
+      "name": "Sarah Mansouri",
+      "country": "Tunisia",
+      "role": "user",
+      "createdAt": "2026-02-10T10:00:00.000Z",
+      "bannedUntil": null,
+      "banReason": null
+    },
+    {
+      "id": "user-demo-2",
+      "email": "alexandre.dupont@orange.fr",
+      "password": "user1234",
+      "name": "Alexandre Dupont",
+      "country": "France",
+      "role": "user",
+      "createdAt": "2026-02-11T11:30:00.000Z",
+      "bannedUntil": null,
+      "banReason": null
+    },
+    {
+      "id": "user-demo-3",
+      "email": "mehdi.benali@gmail.com",
+      "password": "user1234",
+      "name": "Mehdi Benali",
+      "country": "Morocco",
+      "role": "user",
+      "createdAt": "2026-02-12T14:15:00.000Z",
+      "bannedUntil": null,
+      "banReason": null
+    },
+    {
+      "id": "user-demo-4",
+      "email": "amina.khelifi@yahoo.fr",
+      "password": "user1234",
+      "name": "Amina Khelifi",
+      "country": "Algeria",
+      "role": "user",
+      "createdAt": "2026-02-13T09:45:00.000Z",
+      "bannedUntil": null,
+      "banReason": null
+    },
+    {
+      "id": "user-819f2db0-834b-4ba7-acd2-f7d14806a39c",
+      "email": "candidate1791277820433@test.com",
+      "password": "securepass123",
+      "name": "Khadija Trabelsi",
+      "country": "Tunisia",
+      "role": "user",
+      "createdAt": "2026-10-06T09:10:20.438Z",
+      "bannedUntil": "2026-10-08T09:10:20.470Z",
+      "banReason": "Testing suspension enforcement"
+    }
+  ],
+  "tests": [
+    {
+      "id": "test-2026-01",
+      "title": "Assil Hamdi Memorial International Mathematics Olympiad - Winter 2026",
+      "description": "Comprehensive 4-Hour Advanced Pure Mathematics Examination covering Synthetic Geometry, Algebraic Number Theory, Functional Inequalities, and Extremal Combinatorics. Candidates have exactly 4 continuous hours from initiation to submit proof images.",
+      "durationMinutes": 240,
+      "maxScore": 42,
+      "totalProblems": 6,
+      "pdfUrl": "/uploads/exams/Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf",
+      "pdfFilename": "Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf",
+      "isActive": true,
+      "createdAt": "2026-01-20T10:00:00.000Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "sub-1",
+      "userId": "user-demo-1",
+      "testId": "test-2026-01",
+      "startedAt": "2026-02-20T08:00:00.000Z",
+      "deadline": "2026-02-20T12:00:00.000Z",
+      "status": "submitted",
+      "submittedAt": "2026-02-20T11:42:15.000Z",
+      "images": [
+        {
+          "id": "img-1-1",
+          "url": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=900&q=80",
+          "name": "Problem 1 & 2 - Geometry Synthetic Proof and Circle Schema.jpg",
+          "uploadedAt": "2026-02-20T11:40:00.000Z"
+        },
+        {
+          "id": "img-1-2",
+          "url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=80",
+          "name": "Problem 3 & 4 - Number Theory p-adic Valuation Steps.jpg",
+          "uploadedAt": "2026-02-20T11:41:20.000Z"
+        }
+      ],
+      "studentNotes": "All solutions written carefully with ruler and compass geometric constructions. P1 solved via radical axis theorem.",
+      "score": 38,
+      "gradedAt": "2026-02-20T15:20:00.000Z",
+      "feedback": "Outstanding synthetic geometry proof. Diagrams are exceptionally clean and well-annotated. Full marks on P1, P2, P3, and P5.",
+      "gradedBy": "Examination Directorate"
+    },
+    {
+      "id": "sub-2",
+      "userId": "user-demo-2",
+      "testId": "test-2026-01",
+      "startedAt": "2026-02-21T09:00:00.000Z",
+      "deadline": "2026-02-21T13:00:00.000Z",
+      "status": "submitted",
+      "submittedAt": "2026-02-21T12:50:10.000Z",
+      "images": [
+        {
+          "id": "img-2-1",
+          "url": "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&w=900&q=80",
+          "name": "Sheet 1 - Functional Equations Induction Proof.jpg",
+          "uploadedAt": "2026-02-21T12:45:00.000Z"
+        }
+      ],
+      "studentNotes": "Completed 5 out of 6 questions.",
+      "score": 34,
+      "gradedAt": "2026-02-21T16:00:00.000Z",
+      "feedback": "Very strong algebraic structure. Minor gap in the Cauchy equation boundary condition for P4, otherwise brilliant work.",
+      "gradedBy": "Examination Directorate"
+    },
+    {
+      "id": "sub-3",
+      "userId": "user-demo-3",
+      "testId": "test-2026-01",
+      "startedAt": "2026-02-22T10:00:00.000Z",
+      "deadline": "2026-02-22T14:00:00.000Z",
+      "status": "submitted",
+      "submittedAt": "2026-02-22T13:30:00.000Z",
+      "images": [
+        {
+          "id": "img-3-1",
+          "url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=80",
+          "name": "Combinatorics Grid Coloring & Extremal Invariant.jpg",
+          "uploadedAt": "2026-02-22T13:28:00.000Z"
+        }
+      ],
+      "studentNotes": "Focused on P1, P3, and P6.",
+      "score": 27,
+      "gradedAt": "2026-02-22T17:10:00.000Z",
+      "feedback": "Clean handwriting and schemas. Solid lemma on P6.",
+      "gradedBy": "Examination Directorate"
+    },
+    {
+      "id": "sub-4",
+      "userId": "user-demo-4",
+      "testId": "test-2026-01",
+      "startedAt": "2026-02-23T11:00:00.000Z",
+      "deadline": "2026-02-23T15:00:00.000Z",
+      "status": "submitted",
+      "submittedAt": "2026-02-23T14:52:00.000Z",
+      "images": [
+        {
+          "id": "img-4-1",
+          "url": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=900&q=80",
+          "name": "Solutions Sheet 1 & 2.jpg",
+          "uploadedAt": "2026-02-23T14:50:00.000Z"
+        }
+      ],
+      "studentNotes": "Attempted all 6 problems.",
+      "score": null,
+      "gradedAt": null,
+      "feedback": null,
+      "gradedBy": null
+    },
+    {
+      "id": "session-90e053b3-4d6d-4307-ae65-87cefc9bcfa9",
+      "userId": "user-819f2db0-834b-4ba7-acd2-f7d14806a39c",
+      "testId": "test-2026-01",
+      "startedAt": "2026-10-06T09:10:20.445Z",
+      "deadline": "2026-10-06T13:10:20.445Z",
+      "status": "submitted",
+      "submittedAt": "2026-10-06T09:10:20.454Z",
+      "images": [
+        {
+          "id": "test-img-1",
+          "url": "/uploads/solutions/sample.jpg",
+          "name": "geometry_proof_schema.jpg"
+        }
+      ],
+      "studentNotes": "P1 solved with cyclic quad lemma",
+      "score": 0,
+      "gradedAt": "2026-10-06T09:10:20.471Z",
+      "feedback": "Disqualified (Score: 0) - Account suspended for 2 day(s). Reason: Testing suspension enforcement",
+      "gradedBy": "Examination Directorate"
+    }
+  ]
+}

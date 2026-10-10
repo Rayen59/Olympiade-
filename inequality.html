@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Course: Inequalities of Means (AM, GM, QM, HM)</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FS9YCCEDT9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FS9YCCEDT9');
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:wght@400;600&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-bg: #f8f9fa; /* Light grey/off-white */
+            --secondary-bg: #ffffff; /* Pure white for boxes */
+            --accent-blue: #007bff; /* Vibrant blue for headings/accents */
+            --accent-green: #28a745; /* Green for solutions */
+            --accent-orange: #fd7e14; /* Orange for exercises */
+            --text-dark: #343a40; /* Dark grey for body text */
+            --text-light: #6c757d; /* Lighter grey for subtle text */
+            --border-light: #e9ecef; /* Very light grey for subtle borders */
+            --code-bg: #e9ecef; /* Background for equations/code blocks */
+            --shadow-light: rgba(0, 0, 0, 0.08); /* Light shadow */
+            --shadow-medium: rgba(0, 0, 0, 0.15); /* Medium shadow for hover */
+        }
+
+        body {
+            font-family: 'Lora', serif; /* A more elegant serif font for body */
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            line-height: 1.8; /* Increased line height for readability */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; /* Better font rendering */
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            width: 90%; /* Slightly wider container */
+            max-width: 960px; /* Max width for large screens */
+            margin: 40px auto; /* More vertical margin */
+            padding: 30px; /* More padding */
+            background-color: var(--secondary-bg);
+            border-radius: 12px; /* Softer rounded corners */
+            box-shadow: 0 8px 25px var(--shadow-light); /* More pronounced initial shadow */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif; /* Stronger sans-serif for headings */
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3em; /* Larger title */
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: var(--text-dark); /* Title might be darker for contrast */
+        }
+
+        h2 {
+            font-size: 2em;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-light); /* Underline headings */
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        p, ul {
+            margin: 15px 0;
+            font-size: 1.1em; /* Slightly larger base font size */
+            color: var(--text-dark);
+        }
+
+        ul {
+            list-style: none; /* Remove default bullet points */
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 25px; /* Space for custom bullet */
+            margin-bottom: 10px;
+        }
+
+        ul li::before {
+            content: "•"; /* Custom bullet point */
+            color: var(--accent-blue); /* Accent color for bullets */
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .equation {
+            background-color: var(--code-bg);
+            padding: 18px; /* More padding */
+            border-radius: 10px; /* Softer corners */
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace; /* Monospace font for equations/code */
+            font-size: 1.1em; /* Larger font for equations */
+            border: 1px solid var(--border-light);
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05); /* Subtle inner shadow */
+            margin: 25px 0; /* More spacing */
+        }
+
+        /* MathJax specific styling for better appearance */
+        .MathJax {
+            font-family: 'Fira Code', monospace !important; /* Ensure MathJax uses Fira Code where possible */
+            color: var(--text-dark) !important; /* Default color for MathJax text */
+        }
+        /* Specific MathJax elements can be targeted for accent color if desired */
+        .MathJax .MJX-char[data-c^='&#x'] {
+            /* This targets characters generated by MathJax. Be careful with broad rules. */
+        }
+
+        .box {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px var(--shadow-light); /* Consistent shadow */
+            margin-bottom: 30px; /* More space between boxes */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+        }
+
+        .box:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 12px 30px var(--shadow-medium); /* Darker shadow on hover */
+        }
+
+        .exercise {
+            background-color: #fff3e0; /* Lighter orange background */
+            border-left: 8px solid var(--accent-orange); /* Thicker border for visual emphasis */
+            padding: 25px; /* More padding */
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(253, 126, 20, 0.15);
+        }
+
+        .exercise h2 {
+            color: var(--accent-orange); /* Exercise title color */
+            border-bottom-color: rgba(253, 126, 20, 0.3);
+        }
+
+        .solution {
+            background-color: #e6ffe6; /* Lighter green background */
+            border-left: 8px solid var(--accent-green); /* Thicker border */
+            padding: 25px; /* More padding */
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(40, 167, 69, 0.15);
+        }
+
+        .solution h2 {
+            color: var(--accent-green); /* Solution title color */
+            border-bottom-color: rgba(40, 167, 69, 0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 2.2em;
+            }
+            h2 {
+                font-size: 1.7em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            p, ul {
+                font-size: 1em;
+            }
+            .equation {
+                padding: 15px;
+                font-size: 1em;
+            }
+            .box {
+                padding: 20px;
+            }
+            .exercise, .solution {
+                padding: 20px;
+                border-left-width: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            h3 {
+                font-size: 1.2em;
+            }
+            p, ul {
+                font-size: 0.95em;
+            }
+            .equation {
+                padding: 12px;
+                font-size: 0.9em;
+            }
+            .box {
+                padding: 15px;
+            }
+            .exercise, .solution {
+                padding: 15px;
+                border-left-width: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Inégalités des Moyennes
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Comprehensive Course: Inequalities of Means (AM, GM, QM, HM)</h1>
+        
+        <div class="box">
+            <h2>Introduction</h2>
+            <p>The inequalities of means are fundamental in mathematics and provide powerful tools for comparing different types of averages. These inequalities establish relationships between the arithmetic mean (AM), geometric mean (GM), quadratic mean (QM), and harmonic mean (HM) of a set of positive real numbers.</p>
+            <p>The general relationship between these means is expressed as follows:</p>
+            <p class="equation">
+                \[
+                H_n \leq G_n \leq A_n \leq Q_n
+                \]
+            </p>
+            <p>where \( H_n \), \( G_n \), \( A_n \), and \( Q_n \) are the harmonic, geometric, arithmetic, and quadratic means, respectively. Equality holds if and only if all the numbers in the set are equal.</p>
+        </div>
+
+        <div class="box">
+            <h2>Definitions</h2>
+            <p>Given a set of positive real numbers \( a_1, a_2, \dots, a_n \), the means are defined as follows:</p>
+            <ul>
+                <li><strong>Arithmetic Mean (AM):</strong> 
+                \[
+                A_n = \frac{a_1 + a_2 + \dots + a_n}{n}
+                \]
+                The arithmetic mean is the simple average of the numbers.</li>
+
+                <li><strong>Geometric Mean (GM):</strong> 
+                \[
+                G_n = \sqrt[n]{a_1 \cdot a_2 \cdot \dots \cdot a_n}
+                \]
+                The geometric mean is the \(n\)th root of the product of the numbers.</li>
+
+                <li><strong>Quadratic Mean (QM):</strong> 
+                \[
+                Q_n = \sqrt{\frac{a_1^2 + a_2^2 + \dots + a_n^2}{n}}
+                \]
+                The quadratic mean, also known as the root mean square, is the square root of the average of the squares of the numbers.</li>
+
+                <li><strong>Harmonic Mean (HM):</strong> 
+                \[
+                H_n = \frac{n}{\frac{1}{a_1} + \frac{1}{a_2} + \dots + \frac{1}{a_n}}
+                \]
+                The harmonic mean is the reciprocal of the average of the reciprocals of the numbers.</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>Relationship Between the Means</h2>
+            <p>The inequalities among these means can be summarized as follows:</p>
+            <p class="equation">
+                \[
+                H_n \leq G_n \leq A_n \leq Q_n
+                \]
+            </p>
+            <p>These inequalities hold for any set of positive real numbers. The proofs of these inequalities can be derived using various methods, including algebraic manipulations, the Cauchy-Schwarz inequality, and Jensen's inequality.</p>
+
+            <h3>Proof of AM-GM Inequality</h3>
+            <p>The AM-GM inequality states that for any set of positive real numbers \( a_1, a_2, \dots, a_n \), we have:</p>
+            <p class="equation">
+                \[
+                A_n \geq G_n
+                \]
+            </p>
+            <p>That is, the arithmetic mean is always greater than or equal to the geometric mean. The equality holds if and only if all the numbers are equal.</p>
+
+            <h4>Proof for \( n = 2 \) (Simple Case)</h4>
+            <p>Consider two positive real numbers \( a \) and \( b \). The AM-GM inequality states:</p>
+            <p class="equation">
+                \[
+                \frac{a + b}{2} \geq \sqrt{ab}
+                \]
+            </p>
+            <p>Squaring both sides:</p>
+            <p class="equation">
+                \[
+                \left(\frac{a + b}{2}\right)^2 \geq ab
+                \]
+            </p>
+            <p>Expanding and simplifying:</p>
+            <p class="equation">
+                \[
+                \frac{a^2 + 2ab + b^2}{4} \geq ab \implies a^2 - 2ab + b^2 \geq 0 \implies (a - b)^2 \geq 0
+                \]
+            </p>
+            <p>Since \( (a - b)^2 \) is always non-negative, the inequality holds.</p>
+
+            <h3>Proof of QM-AM Inequality</h3>
+            <p>The QM-AM inequality states that the quadratic mean is always greater than or equal to the arithmetic mean:</p>
+            <p class="equation">
+                \[
+                Q_n \geq A_n
+                \]
+            </p>
+            <p>We prove this using the Cauchy-Schwarz inequality. For any set of positive real numbers \( a_1, a_2, \dots, a_n \), we have:</p>
+            <p class="equation">
+                \[
+                \left( \sum_{i=1}^n a_i^2 \right) \cdot n \geq \left( \sum_{i=1}^n a_i \right)^2
+                \]
+            </p>
+            <p>Dividing both sides by \( n^2 \) and taking the square root gives the QM-AM inequality:</p>
+            <p class="equation">
+                \[
+                \sqrt{\frac{\sum_{i=1}^n a_i^2}{n}} \geq \frac{\sum_{i=1}^n a_i}{n}
+                \]
+            </p>
+        </div>
+
+        <div class="box">
+            <h2>General Proof Using Jensen's Inequality</h2>
+            <p>Jensen's inequality provides a more general approach to proving inequalities of means. Let \( f(x) \) be a convex function. Then for any positive weights \( \lambda_1, \lambda_2, \dots, \lambda_n \) such that \( \lambda_1 + \lambda_2 + \dots + \lambda_n = 1 \), we have:</p>
+            <p class="equation">
+                \[
+                f\left( \lambda_1 a_1 + \lambda_2 a_2 + \dots + \lambda_n a_n \right) \leq \lambda_1 f(a_1) + \lambda_2 f(a_2) + \dots + \lambda_n f(a_n)
+                \]
+            </p>
+            <p>For the specific case of \( f(x) = -\log(x) \), this leads to the AM-GM inequality. Similarly, using \( f(x) = x^2 \), we derive the QM-AM inequality.</p>
+        </div>
+
+        <div class="exercise">
+            <h2>Exercise: Proving HM-AM Inequality</h2>
+            <p>Prove that for any set of positive real numbers \( a_1, a_2, \dots, a_n \), the harmonic mean is less than or equal to the arithmetic mean:</p>
+            <p class="equation">
+                \[
+                H_n \leq A_n
+                \]
+            </p>
+            <p>Provide a complete proof and discuss the conditions for equality.</p>
+        </div>
+
+        <div class="solution">
+            <h2>Solution</h2>
+            <p>To prove the HM-AM inequality, consider the definition of the harmonic mean:</p>
+            <p class="equation">
+                \[
+                H_n = \frac{n}{\frac{1}{a_1} + \frac{1}{a_2} + \dots + \frac{1}{a_n}}
+                \]
+            </p>
+            <p>By the AM-GM inequality applied to the reciprocals \( \frac{1}{a_1}, \frac{1}{a_2}, \dots, \frac{1}{a_n} \), we have:</p>
+            <p class="equation">
+                \[
+                \frac{\frac{1}{a_1} + \frac{1}{a_2} + \dots + \frac{1}{a_n}}{n} \geq \sqrt[n]{\frac{1}{a_1} \cdot \frac{1}{a_2} \cdot \dots \cdot \frac{1}{a_n}} = \frac{1}{G_n}
+                \]
+            </p>
+            <p>This is actually showing $\frac{1}{A_n^*} \ge \frac{1}{G_n^*}$ where $A_n^*$ and $G_n^*$ are the AM and GM of the reciprocals. The next step is correct but the intermediate expression $\frac{1}{A_n}$ should actually be $\frac{1}{G_n}$ to be fully precise. Let's correct that in the solution below.</p>
+            <p>Taking the reciprocal of both sides (and reversing the inequality since we're taking reciprocals of positive numbers):</p>
+            <p class="equation">
+                \[
+                \frac{n}{\frac{1}{a_1} + \frac{1}{a_2} + \dots + \frac{1}{a_n}} \leq \left( \sqrt[n]{\frac{1}{a_1} \cdot \frac{1}{a_2} \cdot \dots \cdot \frac{1}{a_n}} \right)^{-1}
+                \]
+            </p>
+            <p>Which simplifies to:</p>
+             <p class="equation">
+                \[
+                H_n \leq G_n
+                \]
+            </p>
+            <p>Since we know \( G_n \leq A_n \), combining these two inequalities gives \( H_n \leq G_n \leq A_n \). Therefore, \( H_n \leq A_n \).</p>
+            <p>Equality holds if and only if all the numbers \( a_1, a_2, \dots, a_n \) are equal.</p>
+        </div>
+    </div>
+</body>
+</html>

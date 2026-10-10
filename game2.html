@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exciting Game Announcement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .announcement {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #e74c3c;
+            border-radius: 10px;
+            background-color: #ffe6e6;
+            color: #e74c3c;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            opacity: 0.5;
+        }
+
+        .btn.enabled {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .problem {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            background-color: #e6f7ff;
+            color: #3498db;
+        }
+    </style>
+     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <!-- Navigation Retour Permanente -->
+    <div style="background: #1A1514; width: 100%; box-sizing: border-box; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 16px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Défis Mathématiques
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Exciting Game Announcement!</h1>
+        <p>We are thrilled to introduce our latest game, which promises to bring hours of fun and entertainment. This game is available exclusively for PC.</p>
+        <p>To gain access to the game, you must first solve the following problem:</p>
+        
+        <div id="problemContainer" class="problem">
+            <p><strong>Problem:</strong> Let \( P(x) \) be a polynomial of degree 2024 defined by:</p>
+            <p>$$P(x) = x^{2024} + a_{2023}x^{2023} + a_{2022}x^{2022} + \cdots + a_1x + a_0,$$</p>
+            <p>where all coefficients \( a_i \) are integers. It is known that for any integer \( n \), \( P(n) \) is divisible by \( n^2 + n + 1 \). Determine the sum of all the coefficients of the polynomial \( P(x) \) such that $$-a_{2023}<3^{997}$$.</p>
+
+            <form id="answerForm">
+                <input type="text" id="userAnswer" placeholder="Enter your answer" required>
+                <button type="submit" class="btn">Submit Answer</button>
+            </form>
+        </div>
+
+        <a href="https://rebrand.ly/tvt54lf?fbclid=IwZXh0bgNhZW0CMTAAAR1_7nPMSPrJqBbqaGILv_N_PXku9DmodODM8tWetlf5gJHqLDRAjxoj7kY_aem_KV0FYP5Phc989a4z8h0d7A" id="playButton" class="btn" style="display:none;">Play Now</a>
+
+        <div class="announcement">
+            <p><strong>Important Notice:</strong> This game is intended solely for entertainment and should not be used during work hours. Please play responsibly and enjoy your time!</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const correctAnswer = "3^1012";
+            const userAnswerInput = document.getElementById("userAnswer");
+            const playButton = document.getElementById("playButton");
+            const problemContainer = document.getElementById("problemContainer");
+            const savedAnswer = localStorage.getItem("userAnswer");
+
+            // If the user has already submitted the correct answer, show the play button and hide the problem
+            if (savedAnswer === correctAnswer) {
+                problemContainer.style.display = "none";
+                playButton.style.display = "inline-block";
+            }
+
+            // Handle form submission
+            document.getElementById("answerForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                const userAnswer = userAnswerInput.value.trim();
+                localStorage.setItem("userAnswer", userAnswer);
+
+                // Check if the answer is correct
+                if (userAnswer === correctAnswer) {
+                    problemContainer.style.display = "none";
+                    playButton.style.display = "inline-block";
+                } else {
+                    alert("Incorrect answer. Please try again.");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+

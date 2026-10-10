@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direction & Profil Administrateur &bull; Mémorial Assil Hamdi</title>
+    <meta name="description" content="Tableau de bord et profil officiel de la Direction du Mémorial Assil Hamdi pour les Mathématiques Avancées.">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #07090e;
+            --bg-card: rgba(14, 19, 31, 0.92);
+            --gold: #d4af37;
+            --gold-light: #f6e27a;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-gold: rgba(212, 175, 55, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --radius-btn: 7px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle 500px at 50% 0%, rgba(212, 175, 55, 0.1), transparent 75%),
+                radial-gradient(circle 400px at 90% 90%, rgba(59, 130, 246, 0.05), transparent 70%);
+            background-attachment: fixed;
+        }
+
+        /* Top Bar */
+        .top-navbar {
+            background: rgba(8, 12, 20, 0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 10px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 99999;
+        }
+
+        .btn-sleek {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: var(--radius-btn);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.18s ease;
+        }
+        .btn-sleek:hover {
+            background: var(--gold);
+            color: #07090e;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Security Gate Modal */
+        #adminGateModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 6, 12, 0.97);
+            backdrop-filter: blur(20px);
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .gate-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            padding: 32px 28px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .gate-badge {
+            background: rgba(212, 175, 55, 0.14);
+            color: var(--gold-light);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .gate-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .gate-subtitle {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.45;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 14px;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+        .form-input {
+            width: 100%;
+            background: #080d18;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 9px 12px;
+            border-radius: var(--radius-btn);
+            color: #ffffff;
+            font-size: 0.86rem;
+            outline: none;
+            transition: all 0.18s ease;
+        }
+        .form-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+        }
+
+        .btn-gate-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #f6e27a, #d4af37);
+            color: #07090e;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 10px 16px;
+            border-radius: var(--radius-btn);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+            margin-top: 6px;
+            transition: all 0.18s ease;
+        }
+        .btn-gate-submit:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+
+        /* Profile Card - Sleek & Extraordinary */
+        .profile-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .profile-card {
+            width: 100%;
+            max-width: 480px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(212, 175, 55, 0.08);
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+        }
+
+        .profile-header-banner {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0a0f1d 100%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 30px 24px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-avatar-wrap {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f6e27a, #d4af37);
+            padding: 3px;
+            margin: 0 auto 12px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+        }
+        .profile-avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #090d18;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--gold-light);
+        }
+
+        .profile-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .profile-role-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold-light);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 3px 10px;
+            border-radius: 9999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .profile-content {
+            padding: 24px 28px;
+        }
+
+        .profile-intro {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-grid {
+            background: rgba(8, 12, 22, 0.7);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .info-label {
+            display: block;
+            font-size: 0.72rem;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .info-value {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        /* Action Buttons - Compact & Sleek */
+        .btn-action-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f6e27a, #d4af37);
+            color: #07090e;
+            padding: 10px 18px;
+            border-radius: var(--radius-btn);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.18s ease;
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.28);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-action-primary:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.38);
+        }
+
+        .actions-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .btn-action-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f1f5f9;
+            padding: 9px 14px;
+            border-radius: var(--radius-btn);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.18s ease;
+        }
+        .btn-action-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--gold-light);
+            border-color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP NAVIGATION -->
+    <header class="top-navbar">
+        <button type="button" class="btn-sleek" onclick="smartGoBack()" title="Retour en arrière">
+            <span style="font-size: 1rem; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 700; color: var(--gold-light);">
+            Direction du Mémorial &bull; Profil
+        </div>
+        <button type="button" class="btn-sleek" onclick="lockSession()" style="border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;">
+            <span>Verrouiller</span>
+        </button>
+    </header>
+
+    <!-- STRICT AUTHENTICATION MODAL (LOCKED BY DEFAULT, NO AUTO-BYPASS) -->
+    <div id="adminGateModal">
+        <div class="gate-card">
+            <span class="gate-badge">Session Protégée &bull; Direction</span>
+            <h2 class="gate-title">Accès Direction Réservé</h2>
+            <p class="gate-subtitle">Veuillez renseigner vos identifiants d'administration officiels pour déverrouiller ce tableau de bord.</p>
+
+            <div id="gateAlert" style="display: none; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; margin-bottom: 14px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); color: #fca5a5;"></div>
+
+            <form onsubmit="handleGateAuth(event)">
+                <div class="form-group">
+                    <label class="form-label" for="gateEmail">Email Direction</label>
+                    <input type="email" id="gateEmail" class="form-input" placeholder="Adresse officielle administrateur" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="gatePassword">Mot de Passe Secret</label>
+                    <input type="password" id="gatePassword" class="form-input" placeholder="Mot de passe secret" required autocomplete="off">
+                </div>
+                <button type="submit" class="btn-gate-submit" id="gateSubmitBtn">
+                    Déverrouiller le Profil &rarr;
+                </button>
+            </form>
+
+            <div style="margin-top: 16px;">
+                <a href="index.html" style="font-size: 0.78rem; color: #94a3b8; text-decoration: none;">&larr; Retourner à l'accueil</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFILE CONTENT (REVEALED ONLY AFTER EXPLICIT AUTHENTICATION) -->
+    <main class="profile-container" id="profileMain" style="display: none;">
+        <div class="profile-card">
+            <div class="profile-header-banner">
+                <div class="profile-avatar-wrap">
+                    <div class="profile-avatar-inner">&Sigma;</div>
+                </div>
+                <h1 class="profile-title">Direction des Examens</h1>
+                <span class="profile-role-badge">Super-Administrateur &bull; Fondateur</span>
+            </div>
+
+            <div class="profile-content">
+                <p class="profile-intro">
+                    Espace officiel de coordination des Olympiades et de la recherche mathématique en hommage à <strong>Assil Hamdi</strong>.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-line">
+                        <div class="info-icon">🏛️</div>
+                        <div>
+                            <span class="info-label">Direction</span>
+                            <span class="info-value">Med Rayen Bouazizi</span>
+                        </div>
+                    </div>
+                    <div class="info-line">
+                        <div class="info-icon">📍</div>
+                        <div>
+                            <span class="info-label">Résidence</span>
+                            <span class="info-value">Sidi Bouzid, Tunisie</span>
+                        </div>
+                    </div>
+                    <div class="info-line">
+                        <div class="info-icon">🎓</div>
+                        <div>
+                            <span class="info-label">Institution</span>
+                            <span class="info-value">Lycée Pilote Sidi Bouzid</span>
+                        </div>
+                    </div>
+                    <div class="info-line">
+                        <div class="info-icon">✉️</div>
+                        <div>
+                            <span class="info-label">Contact Officiel</span>
+                            <span class="info-value">admin12@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="admin.html" class="btn-action-primary">
+                    <span>🛡️ Console d'Examen & Notation (Admin)</span>
+                    <span>&rarr;</span>
+                </a>
+
+                <div class="actions-row">
+                    <a href="exam.html" class="btn-action-secondary">Épreuves 4h</a>
+                    <a href="leaderboard.html" class="btn-action-secondary">Classement</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function smartGoBack() {
+            if (window.history.length > 1 && document.referrer) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        function lockSession() {
+            localStorage.removeItem('olympiad_token');
+            document.getElementById('profileMain').style.display = 'none';
+            document.getElementById('adminGateModal').style.display = 'flex';
+            document.getElementById('gatePassword').value = '';
+        }
+
+        async function handleGateAuth(e) {
+            e.preventDefault();
+            const alertBox = document.getElementById('gateAlert');
+            alertBox.style.display = 'none';
+
+            const email = document.getElementById('gateEmail').value.trim();
+            const password = document.getElementById('gatePassword').value.trim();
+            const btn = document.getElementById('gateSubmitBtn');
+
+            btn.disabled = true;
+            btn.textContent = 'Vérification en cours...';
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Identifiants direction invalides');
+
+                if (!data.user || data.user.role !== 'admin') {
+                    throw new Error('Ce compte n\'a pas les prérogatives de la Direction.');
+                }
+
+                localStorage.setItem('olympiad_token', data.token);
+                document.getElementById('adminGateModal').style.display = 'none';
+                document.getElementById('profileMain').style.display = 'flex';
+            } catch (err) {
+                alertBox.textContent = err.message;
+                alertBox.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Déverrouiller le Profil →';
+            }
+        }
+    </script>
+</body>
+</html>

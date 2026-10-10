@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FS9YCCEDT9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FS9YCCEDT9');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Number Theory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* --- NEW COLOR PALETTE: MINIMALIST ACADEMIC (White Background) --- */
+        :root {
+            --primary-bg: #FFFFFF; /* Clean White */
+            --secondary-bg: #F8F8F8; /* Very light grey for containers */
+            --accent-color: #A30000; /* Deep, strong Red (Main highlight) */
+            --highlight-color: #0077B6; /* Professional Blue (Secondary highlight) */
+            --text-dark: #333333; /* Dark grey for general text */
+            --text-light: #666666; /* Lighter grey for subtle text */
+            --border-color: #E0E0E0; /* Light border */
+            --table-row-hover: #FFF7F7; /* Very light red/pink for hover */
+            --shadow-subtle: rgba(0, 0, 0, 0.08); /* Light shadow for depth */
+            --shadow-deep: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Main Title */
+        .title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            padding: 50px 20px 30px;
+            font-size: 3.8em;
+            font-weight: 700;
+            color: var(--highlight-color);
+            letter-spacing: 0.08em;
+            text-shadow: 1px 1px 2px var(--shadow-subtle);
+            background: var(--secondary-bg);
+            border-bottom: 4px solid var(--accent-color);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        /* Table Styling for Individual Problems */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 25px; /* Clear vertical separation between problems */
+            background: var(--primary-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--shadow-subtle);
+            border: 1px solid var(--border-color);
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Hover effect on the entire problem table */
+        table:hover {
+            box-shadow: 0 6px 15px var(--shadow-deep);
+        }
+
+        th, td {
+            padding: 20px 25px;
+            text-align: left;
+            vertical-align: top;
+            border: none; /* No internal borders */
+        }
+        
+        /* Remove unused header styling */
+        th { display: none; }
+
+        tr:hover {
+            background: var(--table-row-hover);
+            transition: background 0.3s ease;
+        }
+        
+        /* Highlight the left edge of the problem statement */
+        td.enonce {
+            border-left: 5px solid var(--highlight-color); /* Blue accent line */
+            border-radius: 0 10px 10px 0;
+        }
+        tr:hover td.enonce {
+            border-left-color: var(--accent-color); /* Red line on hover */
+        }
+
+        /* Problem Statement Text */
+        .enonce {
+            font-size: 1.05em;
+            color: var(--text-dark);
+        }
+
+        /* MathJax equations styling (for white background) */
+        .enonce .MathJax {
+            font-family: 'Fira Code', monospace !important;
+            font-size: 1.05em !important;
+            color: var(--accent-color) !important;
+            font-weight: 500;
+        }
+        .enonce .MathJax_Display {
+            margin: 1.5em 0 !important;
+            padding: 10px 15px;
+            background: var(--secondary-bg);
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        /* Button */
+        button {
+            display: block;
+            margin: 30px auto 50px auto;
+            width: 90%;
+            max-width: 350px;
+            padding: 15px 30px;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #FFFFFF;
+            background: var(--highlight-color);
+            border: 2px solid var(--highlight-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px var(--shadow-deep);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        button a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        button:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px var(--shadow-deep);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px var(--shadow-deep);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            font-size: 0.95em;
+            color: var(--text-light);
+            background: var(--secondary-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5em;
+                padding: 30px 15px 20px;
+            }
+            .container {
+                margin: 20px auto;
+                padding: 10px;
+            }
+            th, td {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+            button {
+                max-width: 300px;
+                font-size: 1.2em;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Back Navigation Bar -->
+    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Théorie des Nombres
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+    <div class="title">
+        Mastering Number Theory
+    </div>
+
+    <div class="container">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Show that the fraction \( \frac{21n + 4}{14n + 3} \) is irreducible for all \( n \in \mathbb{N} \).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Prove the divisibility criterion by 17: The number \( \overline{a_n a_{n-1} \ldots a_1 a_0} \) is divisible by 17 if and only if the number \( \overline{a_n a_{n-1} \ldots a_1} - 5a_0 \) is divisible by 17.
+                        <br>
+                        Example: \( 82858 \rightarrow 8285 - 5 \cdot 8 = 8245 \rightarrow 824 - 5 \cdot 5 = 799 \rightarrow 79 - 5 \cdot 9 = 34 \). Since 34 is divisible by 17, 82858 is also divisible by 17.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Prove that if \( p \) and \( p^2 + 8 \) are primes, then \( p^3 + 8p + 2 \) is also prime.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        How many natural numbers that are multiples of 15 have exactly 15 positive divisors?
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Find all pairs of integers \( (x, y) \) satisfying the equation \( x^4 - y^2 = 17 \).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Show that if a prime number \( p \) is divided by 30, then the remainder is either 1 or a prime number. Is the same true when the divisor is 60 or 90?
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Let \( m \) and \( n \) be non-zero natural numbers such that \( mn + 1 \) is divisible by 24. Show that \( m + n \) is also divisible by 24.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Let \( a \) and \( b \) be distinct natural numbers. Show that there are infinitely many natural numbers \( s \) such that \( a + s \) and \( b + s \) are coprime.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Give an example of a composite number whose decimal representation contains exactly 1994 digits "1" and one "7" (and no other digits).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Show that there exist no \( x, y \in \mathbb{Q} \) such that \( x^2 + y^2 = 3 \).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Let \( n \in \mathbb{N}_0 \). Show that if \( 2^n - 1 \) is prime, then \( n \) is prime. Show that if \( 2^n + 1 \) is prime, then \( n \) is a power of 2.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        For every positive integer \( n \), find the remainder when \( \frac{(7n)!}{7^n \cdot n!} \) is divided by 7.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Find the smallest positive integer \( a \) such that 1971 divides \( 50^n + a \cdot 23^n \) for every odd \( n \).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Determine the greatest common divisor of all numbers of the form \( p^8 - 1 \), where \( p \) is a prime greater than 5.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Find the number of pairs of positive integers \( x, y \) with \( x \leq y \) such that \( \gcd(x, y) = 5! \) and \( \mathrm{lcm}(x, y) = 50! \).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Prove Wilson's theorem: A number \( p \geq 2 \) is prime if and only if \( (p - 1)! \equiv -1 \mod p \).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Find two positive integers \( a \) and \( b \) such that \( (a + b)^7 - a^7 - b^7 \) is divisible by 77 but \( ab(a + b) \) is not divisible by 7.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Find all right triangles where the hypotenuse has an integer length and the other two sides have lengths that are perfect squares.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        If \( p \) and \( q \) are prime numbers, and \( x \in \mathbb{Z} \) such that \( q \mid (x^{p-1} + x^{p-2} + \ldots + x + 1) \), then show that \( p = q \) or \( p \) divides \( q - 1 \).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Determine all positive integers \( n \) such that \( 2^{n - 1} \cdot n + 1 \) is a perfect square.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Show that there are infinitely many non-zero natural numbers \( n \) such that the number \( \frac{1^2 + 2^2 + \ldots + n^2}{n} \) is a perfect square. Clearly, \( 1 \) is the smallest number with this property. Find the next two smallest numbers with this property.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Call an integer \( n \) faithful if there exist positive integers \( a < b < c \) such that \( a \) divides \( b \), \( b \) divides \( c \), and \( n = a + b + c \). Find all unfaithful numbers.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="enonce">
+                        Let \( p_1, p_2, \ldots, p_n \) be distinct prime numbers greater than 3. Show that \( 2^{p_1p_2\ldots p_n} + 1 \) has at least \( 4^n \) divisors.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button>
+            <a href="submitproblem.html" target="_blank">Submit Your Solution</a>
+        </button>
+    </div>
+
+    <div class="footer">
+        © 2023 Mastering Number Theory. All rights reserved.
+    </div>
+</body>
+</html>
+

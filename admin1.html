@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Nexus Labs - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Styles Globaux */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff; /* FOND BLANC DEMANDÉ */
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Carte de profil */
+        .profile-card {
+            width: 100%;
+            max-width: 450px;
+            margin: 30px auto;
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
+            border-radius: 40px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 40px;
+        }
+
+        /* Zone d'en-tête (Dégradé bleu pour l'aspect Quantum) */
+        .header-top {
+            background: linear-gradient(180deg, #00d4ff 0%, #ffffff 100%);
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            background: #ffffff;
+            border-radius: 50%;
+            border: 5px solid #ffffff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .admin-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0;
+            color: #000000;
+            letter-spacing: -1px;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 20px 40px;
+        }
+
+        .welcome-msg {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .welcome-msg strong {
+            color: #000;
+            font-weight: 600;
+        }
+
+        /* Grille d'informations */
+        .info-grid {
+            background: #fcfcfc;
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #f5f5f5;
+        }
+
+        .info-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .info-line:last-child { margin-bottom: 0; }
+
+        .icon {
+            font-size: 1.4rem;
+            margin-right: 15px;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .label {
+            display: block;
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .value {
+            font-weight: 600;
+            color: #000;
+        }
+
+        /* Bouton Noir (votre couleur préférée pour le confort visuel) */
+        .btn-send {
+            display: block;
+            background: #000000;
+            color: #ffffff;
+            padding: 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-send:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            background: #222;
+        }
+
+        /* Selecteur de rapport */
+        .report-box {
+            margin-top: 25px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            background: #fff;
+            color: #888;
+            outline: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Retour Permanente -->
+    <div style="background: #1A1514; width: 100%; box-sizing: border-box; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 16px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
+            <span style="font-size: 18px; line-height: 1;">&larr;</span>
+            <span>Retour / Back</span>
+        </button>
+        <div style="color: #D4AF37; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">
+            Mémorial Assil Hamdi &bull; Profil Administrateur
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
+            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        </div>
+    </div>
+
+    <div class="profile-card">
+        <div class="header-top">
+            <div class="profile-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.5" style="padding: 20px;">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h1 class="admin-title">Admin</h1>
+        </div>
+
+        <div class="content">
+            <p class="welcome-msg">
+                Welcome to the <strong>Quantum Nexus Labs</strong><br>
+                admin profile: Med Rayen Bouazizi
+            </p>
+
+            <div class="info-grid">
+                <div class="info-line">
+                    <span class="icon">🏠</span>
+                    <div>
+                        <span class="label">Current City</span>
+                        <span class="value">Sidi Bouzid, Tunisia</span>
+                    </div>
+                </div>
+                <div class="info-line">
+                    <span class="icon">🎓</span>
+                    <div>
+                        <span class="label">School</span>
+                        <span class="value">Lycée Pilote Sidi Bouzid</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="btn-send">SEND A MESSAGE TO ADMIN</a>
+
+            <div class="report-box">
+                <p style="font-size: 0.8rem; color: #bbb; margin-bottom: 8px;">Report an Issue</p>
+                <select>
+                    <option disabled selected>Select a reason to report...</option>
+                    <option>Technical issue</option>
+                    <option>Information error</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
