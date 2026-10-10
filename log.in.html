@@ -67,19 +67,21 @@
             gap: 6px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            color: #FFFFFF;
-            padding: 7px 14px;
-            border-radius: var(--radius-sm);
-            font-size: 0.82rem;
-            font-weight: 700;
+            color: #cbd5e1;
+            padding: 3px 9px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 600;
             cursor: pointer;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: all 0.18s ease;
+            height: 26px;
         }
         .btn-back:hover {
-            background: var(--gold-primary);
-            color: #0B0F19;
-            transform: translateX(-2px);
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+            color: #FFFFFF;
+            transform: translateX(-1px);
         }
 
         .nav-brand-title {
@@ -275,7 +277,7 @@
     <header class="top-navbar">
         <button type="button" class="btn-back" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}">
             <span>&larr;</span>
-            <span>Retour / Back</span>
+            <span>Retour</span>
         </button>
         <div class="nav-brand-title">Mémorial Assil Hamdi &bull; Authentification</div>
         <a href="index.html" class="btn-back" style="border-color: rgba(255,255,255,0.15);">Accueil</a>

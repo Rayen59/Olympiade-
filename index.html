@@ -7,33 +7,34 @@
     <meta name="description" content="Plateforme commémorative et académique d'élite pour les mathématiques pures, les olympiades et l'héritage intellectuel d'Assil Hamdi.">
     <meta property="og:title" content="Mémorial Assil Hamdi pour les Mathématiques Avancées">
     <meta property="og:description" content="Plateforme commémorative et académique d'élite pour les mathématiques pures, les olympiades et l'héritage intellectuel d'Assil Hamdi.">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-base: #07090E;
-            --bg-surface: #0E131F;
-            --bg-elevated: #151D2E;
-            --bg-card: rgba(18, 26, 42, 0.75);
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-gold: rgba(212, 175, 55, 0.35);
+            --bg-canvas: #080B12;
+            --bg-surface: #0E1320;
+            --bg-surface-elevated: #141B2D;
+            --bg-card: rgba(16, 22, 36, 0.7);
+            --border-hairline: rgba(255, 255, 255, 0.08);
+            --border-gold: rgba(212, 175, 55, 0.28);
+            --border-gold-strong: #D4AF37;
             --gold-primary: #D4AF37;
             --gold-light: #F6E27A;
-            --gold-glow: rgba(212, 175, 55, 0.25);
-            --amber-accent: #F59E0B;
-            --emerald-accent: #10B981;
-            --cyan-accent: #06B6D4;
+            --gold-dark: #996515;
+            --gold-accent: #E5C158;
             --text-primary: #F8FAFC;
             --text-secondary: #94A3B8;
             --text-muted: #64748B;
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 20px;
             --font-display: 'Cinzel', serif;
             --font-body: 'Plus Jakarta Sans', sans-serif;
             --font-arabic: 'Amiri', serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
         }
 
         * {
@@ -42,116 +43,124 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: var(--bg-base);
+            background-color: var(--bg-canvas);
             color: var(--text-primary);
             font-family: var(--font-body);
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 175, 55, 0.15), transparent 70%),
-                radial-gradient(circle 600px at 100% 40%, rgba(6, 182, 212, 0.06), transparent 70%),
-                radial-gradient(circle 600px at 0% 70%, rgba(245, 158, 11, 0.06), transparent 70%);
+                radial-gradient(ellipse 70% 40% at 50% 0%, rgba(212, 175, 55, 0.12), transparent 70%),
+                radial-gradient(circle 500px at 100% 20%, rgba(6, 182, 212, 0.04), transparent 60%),
+                radial-gradient(circle 500px at 0% 50%, rgba(245, 158, 11, 0.04), transparent 60%);
             background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Ambient Glow & Performance */
         a, button, input {
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* 1. TOP CORANIC SACRED MEMORIAL RIBBON */
+        /* 1. SACRED MEMORIAL RIBBON */
         .memorial-sacred-ribbon {
-            background: linear-gradient(90deg, #0A0D14 0%, #171E2D 50%, #0A0D14 100%);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-            padding: 10px 20px;
+            background: linear-gradient(90deg, #06090F 0%, #101524 50%, #06090F 100%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 8px 16px;
             text-align: center;
             font-family: var(--font-arabic);
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             color: #E2E8F0;
             position: relative;
             z-index: 10001;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
         .memorial-sacred-ribbon .ayah {
-            color: #F6E27A;
+            color: var(--gold-light);
             font-weight: 700;
-            text-shadow: 0 0 12px rgba(246, 226, 122, 0.35);
         }
-        .memorial-sacred-ribbon .name-tribute {
+        .memorial-sacred-ribbon .ribbon-sep {
+            color: rgba(212, 175, 55, 0.5);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+        }
+        .memorial-sacred-ribbon .tribute {
             color: #FFFFFF;
             font-weight: 700;
-            padding: 0 4px;
-            border-bottom: 2px solid var(--gold-primary);
         }
 
-        /* 2. EXTRAORDINARY STICKY NAVIGATION BAR */
+        /* 2. TOP BAR CONTRACT (Strict 3 Zones) */
         .top-navbar {
-            background: rgba(11, 15, 25, 0.85);
+            background: rgba(10, 14, 24, 0.88);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-gold);
-            padding: 14px 28px;
+            border-bottom: 1px solid var(--border-hairline);
+            padding: 0 24px;
+            height: 62px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 24px;
             position: sticky;
             top: 0;
-            z-index: 99999;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
         }
 
-        .nav-brand-group {
+        /* Zone 1: Brand & Discreet Back Button */
+        .nav-brand-zone {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
+            shrink-0: 0;
         }
 
-        /* Extraordinary Back Button */
-        .btn-extraordinary-back {
+        .btn-back-compact {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            color: #FFFFFF;
-            padding: 6px 13px;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-secondary);
+            height: 28px;
+            padding: 0 8px;
             border-radius: var(--radius-sm);
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.4px;
+            font-size: 0.72rem;
+            font-weight: 600;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.18s ease;
+            text-decoration: none;
+            white-space: nowrap;
         }
-        .btn-extraordinary-back:hover {
-            background: var(--gold-primary);
-            color: #0B0F19;
-            box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
-            transform: translateX(-2px);
-            border-color: var(--gold-primary);
+        .btn-back-compact:hover {
+            background: rgba(212, 175, 55, 0.12);
+            border-color: rgba(212, 175, 55, 0.4);
+            color: #FFFFFF;
+            transform: translateX(-1px);
         }
-        .btn-extraordinary-back .arrow-icon {
-            font-size: 0.95rem;
-            transition: transform 0.18s ease;
-        }
-        .btn-extraordinary-back:hover .arrow-icon {
-            transform: translateX(-2px);
+        .btn-back-compact .back-arrow {
+            font-size: 0.8rem;
+            line-height: 1;
         }
 
-        .site-brand-logo {
+        .site-brand {
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
+            white-space: nowrap;
         }
-        .brand-sigil {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+        .brand-monogram {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
             background: linear-gradient(135deg, #D4AF37, #996515);
             color: #07090E;
             display: flex;
@@ -159,103 +168,112 @@
             justify-content: center;
             font-family: var(--font-display);
             font-weight: 800;
-            font-size: 1.25rem;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+            font-size: 1.15rem;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.25);
         }
-        .site-title-text {
+        .brand-wordmark {
             font-family: var(--font-display);
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #FFFFFF 0%, #F6E27A 60%, #D4AF37 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.8px;
+            color: #FFFFFF;
+        }
+        .brand-wordmark span {
+            color: var(--gold-primary);
         }
 
-        .nav-actions {
+        /* Zone 2: Single-Line Nav Links */
+        .nav-links-zone {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 20px;
+        }
+        .nav-link {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+            position: relative;
+            padding: 4px 0;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link.active {
+            color: var(--gold-light);
+            font-weight: 600;
         }
 
-        /* Extraordinary Primary Gold Button */
-        .btn-hero-action {
+        /* Zone 3: Primary Action & Menu Trigger */
+        .nav-actions-zone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            shrink-0: 0;
+        }
+        .btn-top-cta {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: linear-gradient(135deg, #F6E27A 0%, #D4AF37 50%, #B8860B 100%);
-            color: #090D16;
-            font-weight: 800;
-            font-size: 0.8rem;
-            padding: 7px 15px;
+            background: linear-gradient(135deg, #F6E27A 0%, #D4AF37 100%);
+            color: #080B12;
+            font-weight: 700;
+            font-size: 0.78rem;
+            padding: 6px 14px;
             border-radius: var(--radius-sm);
             text-decoration: none;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.32);
-            letter-spacing: 0.2px;
-            transition: all 0.18s ease;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+            white-space: nowrap;
         }
-        .btn-hero-action:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+        .btn-top-cta:hover {
             filter: brightness(1.08);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
         }
 
-        /* Menu Trigger Button */
-        .menu-toggle-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 8px 14px;
+        .btn-menu-trigger {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-hairline);
+            height: 32px;
+            padding: 0 10px;
             border-radius: var(--radius-sm);
-            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #E2E8F0;
+            gap: 6px;
+            color: var(--text-secondary);
+            font-size: 0.78rem;
             font-weight: 600;
-            font-size: 0.85rem;
+            cursor: pointer;
         }
-        .menu-toggle-btn:hover {
-            border-color: var(--gold-primary);
-            color: var(--gold-light);
-            background: rgba(212, 175, 55, 0.1);
-        }
-        .menu-bars {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            width: 18px;
-        }
-        .menu-bars span {
-            display: block;
-            height: 2px;
-            background: currentColor;
-            border-radius: 2px;
-            transition: all 0.3s;
+        .btn-menu-trigger:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(212, 175, 55, 0.3);
+            color: #FFFFFF;
         }
 
-        /* 3. HERO SHOWCASE WITH LUXURY ARTWORK */
+        /* 3. HERO SHOWCASE SECTION */
         .hero-section {
-            max-width: 1380px;
-            margin: 30px auto 10px;
+            max-width: 1400px;
+            margin: 28px auto 0;
             padding: 0 24px;
         }
 
-        .hero-banner-card {
-            background: linear-gradient(145deg, rgba(21, 29, 46, 0.95), rgba(11, 15, 25, 0.98));
+        .hero-card {
+            background: linear-gradient(145deg, rgba(16, 22, 36, 0.95), rgba(10, 14, 24, 0.98));
             border: 1px solid var(--border-gold);
             border-radius: var(--radius-lg);
             overflow: hidden;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
             display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            min-height: 440px;
+            grid-template-columns: 1.1fr 0.9fr;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+            min-height: 480px;
         }
 
         .hero-content {
-            padding: 48px;
+            padding: 44px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -263,51 +281,43 @@
             z-index: 2;
         }
 
-        .hero-badge-pill {
-            display: inline-flex;
+        .hero-kicker {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            margin-bottom: 12px;
+            display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(212, 175, 55, 0.12);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            color: var(--gold-light);
-            padding: 6px 14px;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            width: fit-content;
-            margin-bottom: 20px;
         }
-        .hero-badge-pill .pulse-gem {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--gold-primary);
-            box-shadow: 0 0 10px var(--gold-primary);
+        .hero-kicker-sep {
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(2rem, 3.5vw, 2.9rem);
-            font-weight: 800;
-            line-height: 1.15;
+            font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+            font-weight: 700;
+            line-height: 1.18;
             margin-bottom: 16px;
-            letter-spacing: -0.5px;
             color: #FFFFFF;
+            letter-spacing: -0.3px;
+            text-wrap: balance;
         }
-        .hero-title span {
+        .hero-title .gold-gradient {
             background: linear-gradient(135deg, #FFFFFF 20%, #F6E27A 60%, #D4AF37 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-arabic-dedication {
+        .hero-arabic-tribute {
             font-family: var(--font-arabic);
-            font-size: 1.35rem;
+            font-size: 1.28rem;
             color: #FDE68A;
-            margin-bottom: 18px;
-            line-height: 1.6;
+            margin-bottom: 16px;
+            line-height: 1.5;
             direction: rtl;
             border-right: 3px solid var(--gold-primary);
             padding-right: 14px;
@@ -315,57 +325,54 @@
 
         .hero-description {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 28px;
-            max-width: 520px;
+            font-size: 0.92rem;
+            line-height: 1.65;
+            margin-bottom: 26px;
+            max-width: 580px;
         }
 
         .hero-cta-group {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
-        .btn-extraordinary-gold {
-            background: linear-gradient(135deg, #F6E27A 0%, #D4AF37 50%, #B8860B 100%);
-            color: #07090E;
-            font-weight: 800;
-            font-size: 0.85rem;
-            padding: 9px 20px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
+        .btn-hero-primary {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(135deg, #F6E27A 0%, #D4AF37 60%, #B8860B 100%);
+            color: #07090E;
+            font-weight: 700;
+            font-size: 0.82rem;
+            padding: 9px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
         }
-        .btn-extraordinary-gold:hover {
+        .btn-hero-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 22px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
             filter: brightness(1.08);
         }
 
-        .btn-extraordinary-outline {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #FFFFFF;
-            font-weight: 700;
-            font-size: 0.85rem;
-            padding: 9px 18px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
+        .btn-hero-secondary {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.18s ease;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 0.82rem;
+            padding: 9px 18px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
         }
-        .btn-extraordinary-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--gold-primary);
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(212, 175, 55, 0.35);
             color: var(--gold-light);
             transform: translateY(-1px);
         }
@@ -373,6 +380,7 @@
         .hero-media {
             position: relative;
             overflow: hidden;
+            background: #0B0F19;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -381,313 +389,357 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.95) contrast(1.05);
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: contrast(1.06) brightness(0.95);
+            transition: transform 0.8s ease;
         }
-        .hero-banner-card:hover .hero-media img {
-            transform: scale(1.04);
+        .hero-card:hover .hero-media img {
+            transform: scale(1.03);
         }
         .hero-media-scrim {
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, rgba(21, 29, 46, 1) 0%, rgba(21, 29, 46, 0.2) 40%, transparent 100%);
+            background: linear-gradient(90deg, rgba(16, 22, 36, 1) 0%, rgba(16, 22, 36, 0.15) 35%, transparent 100%);
             pointer-events: none;
         }
 
-        /* 4. SPEED FILTER & LIVE DISCIPLINE BAR (VÉLOCE) */
-        .speed-filter-section {
-            max-width: 1380px;
-            margin: 28px auto 10px;
+        /* 4. ACADEMIC KPI STRIP */
+        .kpi-section {
+            max-width: 1400px;
+            margin: 20px auto 0;
             padding: 0 24px;
         }
+        .kpi-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+        .kpi-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .kpi-val {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            font-variant-numeric: tabular-nums;
+        }
+        .kpi-label {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
 
-        .speed-filter-bar {
-            background: rgba(14, 19, 31, 0.8);
-            border: 1px solid var(--border-subtle);
-            backdrop-filter: blur(12px);
+        /* 5. FILTER & SEARCH CONTROL BAR */
+        .filter-section {
+            max-width: 1400px;
+            margin: 28px auto 0;
+            padding: 0 24px;
+        }
+        .filter-bar {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
             border-radius: var(--radius-md);
             padding: 8px 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 16px;
             flex-wrap: wrap;
         }
-
         .filter-tabs {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             overflow-x: auto;
             scrollbar-width: none;
-            padding: 4px 0;
         }
         .filter-tabs::-webkit-scrollbar { display: none; }
 
-        .filter-tab-btn {
+        .filter-btn {
             background: transparent;
             border: 1px solid transparent;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            padding: 8px 16px;
+            padding: 6px 13px;
             border-radius: var(--radius-sm);
             cursor: pointer;
             white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
         }
-        .filter-tab-btn:hover {
+        .filter-btn:hover {
             color: #FFFFFF;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
         }
-        .filter-tab-btn.active {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(245, 158, 11, 0.1));
-            border-color: rgba(212, 175, 55, 0.4);
+        .filter-btn.active {
+            background: rgba(212, 175, 55, 0.14);
+            border-color: rgba(212, 175, 55, 0.35);
             color: var(--gold-light);
             font-weight: 700;
         }
 
-        .search-quick-box {
+        .search-box {
             position: relative;
-            min-width: 240px;
+            min-width: 260px;
         }
-        .search-quick-box input {
+        .search-box input {
             width: 100%;
-            background: rgba(7, 9, 14, 0.8);
-            border: 1px solid var(--border-subtle);
-            padding: 8px 14px 8px 36px;
+            background: rgba(7, 10, 16, 0.9);
+            border: 1px solid var(--border-hairline);
+            padding: 7px 12px 7px 32px;
             border-radius: var(--radius-sm);
             color: #FFFFFF;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             outline: none;
+            font-family: var(--font-body);
         }
-        .search-quick-box input:focus {
+        .search-box input:focus {
             border-color: var(--gold-primary);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
-        .search-icon {
+        .search-icon-svg {
             position: absolute;
-            left: 12px;
+            left: 10px;
             top: 50%;
             transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
             color: var(--text-muted);
             pointer-events: none;
         }
 
-        /* 5. EXTRAORDINARY GRID OF SECTIONS */
-        .portal-grid {
-            max-width: 1380px;
-            margin: 24px auto 60px;
+        /* 6. PORTAL CARDS GRID */
+        .portal-grid-section {
+            max-width: 1400px;
+            margin: 22px auto 40px;
             padding: 0 24px;
+        }
+        .portal-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
-            gap: 22px;
+            gap: 20px;
         }
 
         .portal-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
             border-radius: var(--radius-md);
-            padding: 24px;
+            padding: 22px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(14px);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.22s ease;
         }
         .portal-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(212, 175, 55, 0.4);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.12);
-            background: rgba(21, 29, 46, 0.85);
+            transform: translateY(-3px);
+            border-color: rgba(212, 175, 55, 0.35);
+            background: var(--bg-surface-elevated);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
         }
 
-        /* Featured Gold Card (Official 4h Exam) */
-        .portal-card.card-featured-gold {
-            background: linear-gradient(145deg, rgba(30, 24, 12, 0.9), rgba(15, 20, 32, 0.95));
-            border: 1.5px solid rgba(212, 175, 55, 0.6);
-            box-shadow: 0 14px 40px rgba(212, 175, 55, 0.15);
-            grid-column: span 1;
+        /* Featured Exam Card */
+        .portal-card.card-featured {
+            border-color: rgba(212, 175, 55, 0.5);
+            background: linear-gradient(145deg, rgba(22, 28, 44, 0.9), rgba(14, 18, 30, 0.95));
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.1);
         }
-        .portal-card.card-featured-gold:hover {
-            border-color: #F6E27A;
-            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        .portal-card.card-featured:hover {
+            border-color: var(--gold-light);
+            box-shadow: 0 14px 36px rgba(212, 175, 55, 0.22);
         }
 
-        .card-top-header {
+        .card-header {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 14px;
-        }
-
-        .card-icon-title {
-            display: flex;
-            align-items: center;
             gap: 12px;
+            margin-bottom: 12px;
         }
-        .card-sigil-icon {
-            width: 44px;
-            height: 44px;
+        .card-sigil {
+            width: 40px;
+            height: 40px;
             border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.35rem;
+            font-size: 1.2rem;
             color: var(--gold-light);
+            shrink-0: 0;
         }
-        .card-featured-gold .card-sigil-icon {
+        .card-featured .card-sigil {
             background: linear-gradient(135deg, #D4AF37, #996515);
             color: #07090E;
-            font-weight: 800;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.35);
         }
 
+        .card-title-group {
+            flex: 1;
+        }
+        .card-meta-kicker {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 2px;
+        }
         .card-title-group h3 {
             font-family: var(--font-body);
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #FFFFFF;
             letter-spacing: -0.2px;
         }
-        .card-category-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
 
-        .card-status-pill {
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 9999px;
-            background: rgba(16, 185, 129, 0.12);
-            color: #34D399;
-            border: 1px solid rgba(16, 185, 129, 0.25);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .status-gold {
-            background: rgba(212, 175, 55, 0.15);
-            color: #F6E27A;
-            border-color: rgba(212, 175, 55, 0.35);
-        }
-
-        .card-description-text {
+        .card-body-text {
             color: var(--text-secondary);
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
-        /* Action Buttons Inside Cards */
-        .card-action-links {
+        .card-links {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 7px;
             margin-top: auto;
         }
 
-        .btn-card-primary {
+        .btn-card-main {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             color: #FFFFFF;
             padding: 7px 12px;
             border-radius: var(--radius-sm);
             text-decoration: none;
             font-size: 0.8rem;
-            font-weight: 700;
-            transition: all 0.18s ease;
+            font-weight: 600;
         }
-        .btn-card-primary:hover {
+        .btn-card-main:hover {
             background: var(--gold-primary);
             color: #07090E;
             border-color: var(--gold-primary);
-            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
             transform: translateX(2px);
         }
-        .btn-card-primary .action-arrow {
-            font-size: 0.95rem;
-            transition: transform 0.18s ease;
+        .card-featured .btn-card-main {
+            background: linear-gradient(135deg, #F6E27A, #D4AF37);
+            color: #07090E;
+            font-weight: 700;
+            border-color: transparent;
         }
-        .btn-card-primary:hover .action-arrow {
-            transform: translateX(3px);
+        .card-featured .btn-card-main:hover {
+            filter: brightness(1.1);
         }
 
-        .btn-card-secondary {
+        .btn-card-sub {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid var(--border-subtle);
+            background: transparent;
+            border: 1px solid var(--border-hairline);
             color: var(--text-secondary);
             padding: 6px 11px;
             border-radius: var(--radius-sm);
             text-decoration: none;
             font-size: 0.76rem;
-            font-weight: 600;
-            transition: all 0.18s ease;
+            font-weight: 500;
         }
-        .btn-card-secondary:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
+        .btn-card-sub:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.18);
             color: #FFFFFF;
             transform: translateX(2px);
         }
 
-        /* Gold Card Buttons */
-        .card-featured-gold .btn-card-primary {
-            background: linear-gradient(135deg, #F6E27A, #D4AF37);
-            color: #07090E;
-            border-color: transparent;
-            font-weight: 800;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-        .card-featured-gold .btn-card-primary:hover {
-            filter: brightness(1.1);
-            box-shadow: 0 6px 22px rgba(212, 175, 55, 0.5);
-        }
-
-        .card-meta-strip {
+        .card-footer-strip {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding-top: 14px;
+            justify-content: space-between;
+            padding-top: 12px;
             margin-top: 14px;
-            border-top: 1px solid var(--border-subtle);
-            font-size: 0.78rem;
+            border-top: 1px solid var(--border-hairline);
+            font-size: 0.76rem;
             color: var(--text-muted);
             font-family: var(--font-mono);
         }
-        .card-meta-strip span b {
+        .card-footer-strip span b {
             color: var(--gold-light);
-            font-weight: 600;
+            font-weight: 500;
         }
 
-        /* 6. SLIDING DRAWER DIRECTORY */
+        /* 7. PRESTIGIOUS MEMORIAL DEDICATION CONTAINER */
+        .memorial-tribute-section {
+            max-width: 1400px;
+            margin: 30px auto 50px;
+            padding: 0 24px;
+        }
+        .memorial-tribute-box {
+            background: linear-gradient(145deg, #0D121F 0%, #080C14 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+        }
+        .memorial-tribute-box .arabic-title {
+            font-family: var(--font-arabic);
+            font-size: 1.25rem;
+            color: var(--gold-light);
+            margin-bottom: 6px;
+        }
+        .memorial-tribute-box .person-name {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        .memorial-tribute-box .arabic-text {
+            font-family: var(--font-arabic);
+            font-size: 1.2rem;
+            color: #CBD5E1;
+            line-height: 1.8;
+            max-width: 860px;
+            margin: 0 auto 20px;
+            direction: rtl;
+        }
+        .memorial-tribute-box .french-quote {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* 8. SLIDING DRAWER DIRECTORY */
         .sliding-panel {
             position: fixed;
             top: 0;
             right: -360px;
             width: 360px;
             height: 100vh;
-            background: rgba(11, 15, 25, 0.98);
+            background: rgba(12, 16, 26, 0.98);
             backdrop-filter: blur(25px);
             border-left: 1px solid var(--border-gold);
             z-index: 100000;
             overflow-y: auto;
-            transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
             padding: 24px;
         }
@@ -697,9 +749,9 @@
         .panel-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(4px);
-            z-index: 99998;
+            z-index: 99999;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
@@ -708,700 +760,620 @@
             opacity: 1;
             pointer-events: auto;
         }
-
-        .panel-close-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #FFFFFF;
-            width: 36px;
-            height: 36px;
-            border-radius: var(--radius-sm);
+        .panel-header-row {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-left: auto;
+            justify-content: space-between;
             margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-hairline);
+        }
+        .panel-header-title {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+        .panel-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
         }
         .panel-close-btn:hover {
-            background: var(--gold-primary);
-            color: #07090E;
+            color: #FFFFFF;
         }
-
-        .panel-category-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+        .panel-cat-title {
+            font-size: 0.72rem;
+            font-weight: 700;
             color: var(--gold-primary);
-            font-weight: 800;
-            margin: 18px 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin: 16px 0 8px;
         }
-
-        .panel-link {
+        .panel-item-link {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #E2E8F0;
-            text-decoration: none;
-            padding: 10px 14px;
+            justify-content: space-between;
+            padding: 8px 12px;
             border-radius: var(--radius-sm);
-            font-size: 0.88rem;
-            font-weight: 500;
-            border-left: 2px solid transparent;
-            margin-bottom: 2px;
-        }
-        .panel-link:hover {
-            background: rgba(212, 175, 55, 0.1);
-            border-left-color: var(--gold-primary);
-            color: var(--gold-light);
-            transform: translateX(4px);
-        }
-
-        /* 7. PRESTIGIOUS MEMORIAL DEDICATION BOX */
-        .memorial-honor-container {
-            max-width: 1380px;
-            margin: 0 auto 50px;
-            padding: 0 24px;
-        }
-
-        .honor-box {
-            background: linear-gradient(145deg, rgba(22, 28, 44, 0.9), rgba(11, 15, 25, 0.95));
-            border: 1px solid var(--border-gold);
-            border-radius: var(--radius-lg);
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-        .honor-arabic-heading {
-            font-family: var(--font-arabic);
-            font-size: 2.2rem;
-            color: #F6E27A;
-            margin-bottom: 8px;
-            text-shadow: 0 0 15px rgba(246, 226, 122, 0.35);
-        }
-        .honor-name-spotlight {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #FFFFFF;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
-        .honor-arabic-body {
-            font-family: var(--font-arabic);
-            font-size: 1.3rem;
-            color: #CBD5E1;
-            max-width: 850px;
-            margin: 0 auto 24px;
-            line-height: 1.8;
-            direction: rtl;
-        }
-        .honor-french-tribute {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            max-width: 780px;
-            margin: 0 auto;
-            font-style: italic;
+            text-decoration: none;
+            font-size: 0.84rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .panel-item-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #FFFFFF;
+        }
+        .panel-item-link.highlight {
+            background: rgba(212, 175, 55, 0.12);
+            color: var(--gold-light);
+            font-weight: 600;
+            border: 1px solid rgba(212, 175, 55, 0.25);
         }
 
         /* FOOTER */
         .site-footer {
-            border-top: 1px solid var(--border-subtle);
-            background: #06080D;
-            padding: 40px 24px;
+            border-top: 1px solid var(--border-hairline);
+            background: #05070C;
+            padding: 36px 24px;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
         }
-        .footer-gold-quote {
+        .footer-quote {
             color: var(--gold-light);
             font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .hero-banner-card {
+        /* RESPONSIVE BREAKPOINTS */
+        @media (max-width: 980px) {
+            .hero-card {
                 grid-template-columns: 1fr;
             }
             .hero-content {
-                padding: 30px 20px;
+                padding: 32px 24px;
             }
             .hero-media {
-                height: 240px;
+                height: 280px;
+            }
+            .kpi-strip {
+                grid-template-columns: repeat(2, 1fr);
             }
             .portal-grid {
                 grid-template-columns: 1fr;
             }
+            .nav-links-zone {
+                display: none;
+            }
             .top-navbar {
-                padding: 12px 16px;
+                padding: 0 16px;
+            }
+        }
+        @media (max-width: 600px) {
+            .kpi-strip {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .memorial-sacred-ribbon {
+                font-size: 0.9rem;
+            }
+            .search-box {
+                min-width: 100%;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. CORANIC MEMORIAL RIBBON -->
+    <!-- 1. CORANIC SACRED MEMORIAL RIBBON -->
     <div class="memorial-sacred-ribbon">
-        قال الله تعالى: ﴿وَبَشِّرِ الصَّابِرِينَ * الَّذِينَ إِذَا أَصَابَتْهُم مُّصِيبَةٌ قَالُواْ إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ﴾ // 
-        رحِم الله الفَقيدة الطاهرة <span class="name-tribute">أسيل حامدي</span>، زهرة شعبة الرياضيات بسيدي بوزيد — صَدقة علمية جارية.
+        <span class="ayah">قال الله تعالى: ﴿وَبَشِّرِ الصَّابِرِينَ * الَّذِينَ إِذَا أَصَابَتْهُم مُّصِيبَةٌ قَالُواْ إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ﴾</span>
+        <span class="ribbon-sep">·</span>
+        <span class="tribute">صَدقة عِلمية جارية مهدَاة إلى رُوح الفَقيدة الطاهرة أسيل حامدي (سيدي بوزيد)</span>
     </div>
 
-    <!-- 2. EXTRAORDINARY TOP STICKY NAVBAR -->
+    <!-- 2. TOP BAR CONTRACT (Strict 3 Zones) -->
     <header class="top-navbar">
-        <div class="nav-brand-group">
-            <button type="button" class="btn-extraordinary-back" onclick="handleNavigationBack()" title="Revenir en arrière">
-                <span class="arrow-icon">&larr;</span>
-                <span>Retour / Back</span>
+        <!-- Zone 1: Brand & Discreet Back Affordance -->
+        <div class="nav-brand-zone">
+            <button type="button" class="btn-back-compact" onclick="handleNavigationBack()" title="Page précédente" aria-label="Retour">
+                <span class="back-arrow">&larr;</span>
+                <span>Retour</span>
             </button>
-            <a href="index.html" class="site-brand-logo">
-                <div class="brand-sigil">&Sigma;</div>
-                <div class="site-title-text">Mémorial Assil Math</div>
+            <a href="index.html" class="site-brand">
+                <div class="brand-monogram">&Sigma;</div>
+                <div class="brand-wordmark">Mémorial <span>Assil Hamdi</span></div>
             </a>
         </div>
 
-        <div class="nav-actions">
-            <a href="exam.html" class="btn-hero-action">
-                <span>🏆 Épreuves 4h</span>
+        <!-- Zone 2: 4-5 Concise Single-Line Navigation Links -->
+        <nav class="nav-links-zone">
+            <a href="exam.html" class="nav-link">Épreuves (4h)</a>
+            <a href="#disciplines" class="nav-link">Disciplines</a>
+            <a href="leaderboard.html" class="nav-link">Classement</a>
+            <a href="courses and problems.html" class="nav-link">Bibliothèque</a>
+            <a href="admin.html" class="nav-link">Direction</a>
+        </nav>
+
+        <!-- Zone 3: 1 Primary Action & Menu Trigger -->
+        <div class="nav-actions-zone">
+            <a href="exam.html" class="btn-top-cta">
+                <span>Concours 4h</span>
                 <span>&rarr;</span>
             </a>
-            <button type="button" class="menu-toggle-btn" onclick="toggleSlidingPanel()" title="Ouvrir le répertoire complet">
+            <button type="button" class="btn-menu-trigger" onclick="toggleSlidingPanel()" title="Répertoire complet">
                 <span>Menu</span>
-                <div class="menu-bars">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+                <span style="font-size: 1rem; line-height: 1;">&#9776;</span>
             </button>
         </div>
     </header>
 
-    <!-- 3. HERO SHOWCASE WITH ARTWORK -->
+    <!-- 3. HERO SHOWCASE WITH HIGH-FIDELITY ARTWORK -->
     <section class="hero-section">
-        <div class="hero-banner-card">
+        <div class="hero-card">
             <div class="hero-content">
-                <div class="hero-badge-pill">
-                    <span class="pulse-gem"></span>
-                    <span>Plateforme d'Élite &bull; Olympiades & Recherche</span>
+                <div class="hero-kicker">
+                    <span>Institut des Hautes Études Mathématiques</span>
+                    <span class="hero-kicker-sep">·</span>
+                    <span>Sadaqa Jariya</span>
                 </div>
                 <h1 class="hero-title">
-                    L'Excellence des <span>Mathématiques Pures</span>
+                    L'Élite des <span class="gold-gradient">Mathématiques Pures</span> & Olympiades
                 </h1>
-                <div class="hero-arabic-dedication">
+                <div class="hero-arabic-tribute">
                     إهداء متجدد وصدقة علمية جارية إلى روح شهيدة العلم التونسية: <strong>أسيل حامدي</strong>
                 </div>
                 <p class="hero-description">
-                    Espace académique de haut niveau conçu pour préparer les olympiades internationales, maîtriser la théorie des nombres, dompter la géométrie complexe et relever les épreuves officielles de 4 heures.
+                    Espace académique d'excellence pour préparer les olympiades internationales, maîtriser la théorie des nombres, dompter la géométrie complexe et relever les épreuves officielles de 4 heures sous surveillance stricte.
                 </p>
                 <div class="hero-cta-group">
-                    <a href="exam.html" class="btn-extraordinary-gold">
-                        <span>🏆 Rejoindre l'Épreuve Active (4h)</span>
+                    <a href="exam.html" class="btn-hero-primary">
+                        <span>Rejoindre l'Épreuve Active (4h)</span>
                         <span>&rarr;</span>
                     </a>
-                    <a href="courses and problems.html" class="btn-extraordinary-outline">
-                        <span>📚 Consulter la Bibliothèque</span>
+                    <a href="#disciplines" class="btn-hero-secondary">
+                        <span>Consulter les Disciplines</span>
                     </a>
                 </div>
             </div>
 
             <div class="hero-media">
-                <img src="assets/hero_math_memorial.jpg" alt="Art Mathématique & Géométrie Sacrée - Mémorial Assil Hamdi" loading="eager" onerror="this.src='src/assets/images/hero_math_memorial_1791646445781.jpg'">
+                <img src="/src/assets/images/memorial_math_hero_1791648864160.jpg" alt="Art et Géométrie Sacrée - Mémorial Assil Hamdi" loading="eager" onerror="this.src='assets/hero_math_memorial.jpg'">
                 <div class="hero-media-scrim"></div>
             </div>
         </div>
     </section>
 
-    <!-- 4. LIVE SPEED FILTER BAR (VÉLOCE & INSTANTANÉ) -->
-    <section class="speed-filter-section">
-        <div class="speed-filter-bar">
-            <div class="filter-tabs">
-                <button type="button" class="filter-tab-btn active" onclick="filterDiscipline('all', this)">✦ Toutes les Matières</button>
-                <button type="button" class="filter-tab-btn" onclick="filterDiscipline('arithmetic', this)">📐 Arithmétique</button>
-                <button type="button" class="filter-tab-btn" onclick="filterDiscipline('geometry', this)">🔺 Géométrie</button>
-                <button type="button" class="filter-tab-btn" onclick="filterDiscipline('inequality', this)">⚖️ Inégalités</button>
-                <button type="button" class="filter-tab-btn" onclick="filterDiscipline('combinatorics', this)">🎲 Combinatoire</button>
-                <button type="button" class="filter-tab-btn" onclick="filterDiscipline('exam', this)">🏆 Concours (4h)</button>
-                <button type="button" class="filter-tab-btn" onclick="filterDiscipline('tools', this)">⚡ Outils & IA</button>
+    <!-- 4. ACADEMIC KPI STRIP -->
+    <section class="kpi-section">
+        <div class="kpi-strip">
+            <div class="kpi-card">
+                <div class="kpi-val">4 Heures</div>
+                <div class="kpi-label">Épreuve Olympique Officielle Chronométrée</div>
             </div>
-
-            <div class="search-quick-box">
-                <span class="search-icon">&#128269;</span>
-                <input type="text" id="liveSearchInput" placeholder="Recherche rapide (ex: géométrie, p-adique...)" oninput="handleLiveSearch(this.value)">
+            <div class="kpi-card">
+                <div class="kpi-val">6 Disciplines</div>
+                <div class="kpi-label">Arithmétique, Géométrie, Algèbre, Inégalités</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-val">Anonymat Strict</div>
+                <div class="kpi-label">Double Correction par le Comité Académique</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-val">Sadaqa Jariya</div>
+                <div class="kpi-label">Héritage Perpétuel dédié à Assil Hamdi</div>
             </div>
         </div>
     </section>
 
-    <!-- 5. EXTRAORDINARY GRID OF PORTALS & COURSES -->
-    <main class="portal-grid" id="mainPortalGrid">
+    <!-- 5. SPEED FILTER & SEARCH SECTION -->
+    <section class="filter-section" id="disciplines">
+        <div class="filter-bar">
+            <div class="filter-tabs">
+                <button type="button" class="filter-btn active" onclick="filterDiscipline('all', this)">Toutes les Matières</button>
+                <button type="button" class="filter-btn" onclick="filterDiscipline('exam', this)">Concours (4h)</button>
+                <button type="button" class="filter-btn" onclick="filterDiscipline('arithmetic', this)">Arithmétique</button>
+                <button type="button" class="filter-btn" onclick="filterDiscipline('geometry', this)">Géométrie</button>
+                <button type="button" class="filter-btn" onclick="filterDiscipline('inequality', this)">Inégalités</button>
+                <button type="button" class="filter-btn" onclick="filterDiscipline('combinatorics', this)">Combinatoire</button>
+                <button type="button" class="filter-btn" onclick="filterDiscipline('tools', this)">Services & Outils</button>
+            </div>
 
-        <!-- 01. ÉPREUVES DE 4 HEURES (OFFICIELLES) -->
-        <div class="portal-card card-featured-gold" data-category="exam" data-keywords="concours examen epreuve 4h soumission test olympiade live">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">🏆</div>
-                    <div class="card-title-group">
-                        <span class="card-category-label">Session Officielle &bull; 4 Heures</span>
-                        <h3>Concours & Soumission des Tests</h3>
-                    </div>
-                </div>
-                <span class="card-status-pill status-gold">Session Active</span>
-            </div>
-            <p class="card-description-text">
-                Portail officiel d'examen sous contrainte stricte de 4 heures. Téléversement de vos solutions manuscrites en haute résolution avec horodatage, chronomètre temps réel et surveillance anti-triche.
-            </p>
-            <div class="card-action-links">
-                <a href="exam.html" class="btn-card-primary">
-                    <span>Accéder à l'Épreuve & Soumettre la Copie</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="leaderboard.html" class="btn-card-secondary">
-                    <span>Consulter le Classement & Statistiques Officiels</span>
-                    <span>&rarr;</span>
-                </a>
-                <a href="admin.html" class="btn-card-secondary">
-                    <span>Direction des Examens (Espace Jury & Correction)</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Durée : <b>4h Chronométrées</b></span>
-                <span>Correction : <b>Comité Académique</b></span>
+            <div class="search-box">
+                <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="liveSearchInput" placeholder="Recherche rapide (ex: p-adique, géométrie...)" oninput="handleLiveSearch(this.value)">
             </div>
         </div>
+    </section>
 
-        <!-- 02. ARITHMÉTIQUE & THÉORIE DES NOMBRES -->
-        <div class="portal-card" data-category="arithmetic" data-keywords="arithmetique theorie des nombres p-adique valuation division bezout fermat divisibilite">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">📐</div>
+    <!-- 6. PORTAL CARDS GRID -->
+    <main class="portal-grid-section">
+        <div class="portal-grid" id="mainPortalGrid">
+
+            <!-- 01. ÉPREUVE 4 HEURES (CONCOURS OFFICIEL) -->
+            <div class="portal-card card-featured" data-category="exam" data-keywords="concours examen epreuve 4h soumission test olympiade live">
+                <div class="card-header">
+                    <div class="card-sigil">🏆</div>
                     <div class="card-title-group">
-                        <span class="card-category-label">Discipline Fondamentale</span>
+                        <div class="card-meta-kicker">
+                            <span>Session Officielle</span>
+                            <span>·</span>
+                            <span style="color: var(--gold-light);">4 Heures Chrono</span>
+                        </div>
+                        <h3>Concours & Soumission des Épreuves</h3>
+                    </div>
+                </div>
+                <p class="card-body-text">
+                    Portail officiel d'examen sous contrainte stricte de 4 heures. Téléversement des solutions manuscrites en haute définition avec horodatage, chronomètre temps réel et évaluation rigoureuse.
+                </p>
+                <div class="card-links">
+                    <a href="exam.html" class="btn-card-main">
+                        <span>Rejoindre l'Épreuve & Soumettre la Copie</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="leaderboard.html" class="btn-card-sub">
+                        <span>Consulter le Classement & Statistiques Officiels</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="admin.html" class="btn-card-sub">
+                        <span>Direction des Examens (Espace Jury & Correction)</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+                <div class="card-footer-strip">
+                    <span>Durée : <b>4h Chronométrées</b></span>
+                    <span>Correction : <b>Comité Académique</b></span>
+                </div>
+            </div>
+
+            <!-- 02. ARITHMÉTIQUE & THÉORIE DES NOMBRES -->
+            <div class="portal-card" data-category="arithmetic" data-keywords="arithmetique theorie des nombres p-adique valuation division bezout fermat divisibilite">
+                <div class="card-header">
+                    <div class="card-sigil">📐</div>
+                    <div class="card-title-group">
+                        <div class="card-meta-kicker">
+                            <span>Discipline Fondamentale</span>
+                            <span>·</span>
+                            <span>120 Problèmes</span>
+                        </div>
                         <h3>Arithmétique & Théorie des Nombres</h3>
                     </div>
                 </div>
-                <span class="card-status-pill">120 Problèmes</span>
+                <p class="card-body-text">
+                    Explorez l'univers des entiers, des nombres premiers, des congruences avancées et des structures multiplicatives avec des cours de niveau international.
+                </p>
+                <div class="card-links">
+                    <a href="number theory.html" class="btn-card-main">
+                        <span>Mastering Number Theory (Cours & Problèmes)</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="p-adique-valuation.html" class="btn-card-sub">
+                        <span>Théorie Complète de l'Évaluation p-adique</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+                <div class="card-footer-strip">
+                    <span>Niveau : <b>Olympiade / Prépa</b></span>
+                    <span>Résolus : <b>85 / 120</b></span>
+                </div>
             </div>
-            <p class="card-description-text">
-                Explorez l'univers des entiers, des nombres premiers, des congruences avancées et des structures multiplicatives avec des cours de niveau international.
-            </p>
-            <div class="card-action-links">
-                <a href="number theory.html" class="btn-card-primary">
-                    <span>Mastering Number Theory (Cours & Problèmes)</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="p-adique-valuation.html" class="btn-card-secondary">
-                    <span>Théorie Complète de l'Évaluation p-adique</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Niveau : <b>Olympiade / Prépa</b></span>
-                <span>Résolus : <b>85 / 120</b></span>
-            </div>
-        </div>
 
-        <!-- 03. GÉOMÉTRIE AVANCÉE & COMPLEXE -->
-        <div class="portal-card" data-category="geometry" data-keywords="geometrie complexe cocyclique points puissance cercle triangle orthocentre simson">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">🔺</div>
+            <!-- 03. GÉOMÉTRIE AVANCÉE & COMPLEXE -->
+            <div class="portal-card" data-category="geometry" data-keywords="geometrie complexe cocyclique points puissance cercle triangle orthocentre simson">
+                <div class="card-header">
+                    <div class="card-sigil">🔺</div>
                     <div class="card-title-group">
-                        <span class="card-category-label">Géométrie Supérieure</span>
+                        <div class="card-meta-kicker">
+                            <span>Géométrie Supérieure</span>
+                            <span>·</span>
+                            <span>150 Problèmes</span>
+                        </div>
                         <h3>Géométrie Avancée & Démonstrations</h3>
                     </div>
                 </div>
-                <span class="card-status-pill">150 Problèmes</span>
+                <p class="card-body-text">
+                    Démonstrations géométriques de haut vol, transformations projectives, points cocycliques, inversion, puissance d'un point et configurations complexes de triangles.
+                </p>
+                <div class="card-links">
+                    <a href="geometry.html" class="btn-card-main">
+                        <span>Complex Geometry (Démonstrations Majeures)</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="Cocyclic points.html" class="btn-card-sub">
+                        <span>Points Cocycliques & Puissance d'un Point</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+                <div class="card-footer-strip">
+                    <span>Niveau : <b>Olympiade Supérieure</b></span>
+                    <span>Résolus : <b>100 / 150</b></span>
+                </div>
             </div>
-            <p class="card-description-text">
-                Démonstrations géométriques de haut vol, transformations projectives, points cocycliques, inversion, puissance d'un point et configurations complexes de triangles.
-            </p>
-            <div class="card-action-links">
-                <a href="geometry.html" class="btn-card-primary">
-                    <span>Complex Geometry (Démonstrations Majeures)</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="Cocyclic points.html" class="btn-card-secondary">
-                    <span>Points Cocycliques & Puissance d'un Point</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Niveau : <b>Olympiade Supérieure</b></span>
-                <span>Résolus : <b>100 / 150</b></span>
-            </div>
-        </div>
 
-        <!-- 04. INÉGALITÉS MATHÉMATIQUES -->
-        <div class="portal-card" data-category="inequality" data-keywords="inegalites moyenne am gm qm hm cauchy schwarz jensen schur extreme">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">⚖️</div>
+            <!-- 04. INÉGALITÉS MATHÉMATIQUES -->
+            <div class="portal-card" data-category="inequality" data-keywords="inegalites moyenne am gm qm hm cauchy schwarz jensen schur extreme">
+                <div class="card-header">
+                    <div class="card-sigil">⚖️</div>
                     <div class="card-title-group">
-                        <span class="card-category-label">Inégalités Olympiques</span>
+                        <div class="card-meta-kicker">
+                            <span>Inégalités Olympiques</span>
+                            <span>·</span>
+                            <span>Défis Extrêmes</span>
+                        </div>
                         <h3>Inégalités Algébriques & Moyennes</h3>
                     </div>
                 </div>
-                <span class="card-status-pill">Défis Extrêmes</span>
+                <p class="card-body-text">
+                    Maîtrisez les inégalités des moyennes (AM, GM, QM, HM), les techniques de lissage, Cauchy-Schwarz, et résolvez 12 problèmes d'inégalités d'une difficulté extrême.
+                </p>
+                <div class="card-links">
+                    <a href="inequality1.html" class="btn-card-main">
+                        <span>12 Inégalités Extrêmes pour Mathématiciens</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="inequality.html" class="btn-card-sub">
+                        <span>Inégalités des Moyennes (AM-GM-QM-HM)</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+                <div class="card-footer-strip">
+                    <span>Techniques : <b>Moyennes & Lissage</b></span>
+                    <span>Niveau : <b>Avancé</b></span>
+                </div>
             </div>
-            <p class="card-description-text">
-                Maîtrisez les inégalités des moyennes (AM, GM, QM, HM), les techniques de lissage, Cauchy-Schwarz, et résolvez 12 problèmes d'inégalités d'une difficulté extrême.
-            </p>
-            <div class="card-action-links">
-                <a href="inequality1.html" class="btn-card-primary">
-                    <span>12 Défis Extrêmes d'Inégalités Olympiques</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="inequality.html" class="btn-card-secondary">
-                    <span>Cours Approfondi sur les Moyennes (AM-GM-QM-HM)</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Difficulté : <b>Extrême</b></span>
-                <span>Méthodes : <b>Cauchy & Moyennes</b></span>
-            </div>
-        </div>
 
-        <!-- 05. COMBINATOIRE & DÉNOMBREMENT -->
-        <div class="portal-card" data-category="combinatorics" data-keywords="combinatoire denombrement tiroirs pigeonhole graphes probabilites nightmares">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">🎲</div>
+            <!-- 05. COMBINATOIRE & GRAPhES -->
+            <div class="portal-card" data-category="combinatorics" data-keywords="combinatoire combinatorics graphes denombrement pigeons tiroirs tournois jeux">
+                <div class="card-header">
+                    <div class="card-sigil">🎲</div>
                     <div class="card-title-group">
-                        <span class="card-category-label">Mathématiques Discrètes</span>
-                        <h3>Combinatoire & Dénombrement</h3>
+                        <div class="card-meta-kicker">
+                            <span>Combinatoire Pure</span>
+                            <span>·</span>
+                            <span>Haute Difficulté</span>
+                        </div>
+                        <h3>Combinatoire & Découpage Discret</h3>
                     </div>
                 </div>
-                <span class="card-status-pill">90 Problèmes</span>
+                <p class="card-body-text">
+                    Plongez dans les problèmes combinatoires redoutables : principe des tiroirs de Dirichlet, théorie des tournois, invariants d'états et partitions discrètes.
+                </p>
+                <div class="card-links">
+                    <a href="combinatoire.html" class="btn-card-main">
+                        <span>Mathematical Nightmares (Problèmes Extrêmes)</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="courses and problems.html" class="btn-card-sub">
+                        <span>Tous les Cours de Combinatoire</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+                <div class="card-footer-strip">
+                    <span>Méthodes : <b>Invariants & Pigeonhole</b></span>
+                    <span>Exercices : <b>40 Sujets</b></span>
+                </div>
             </div>
-            <p class="card-description-text">
-                Stratégies de comptage avancées, principe des tiroirs de Dirichlet, invariants, théorie des graphes et énigmes du recueil « Mathematical Nightmares ».
-            </p>
-            <div class="card-action-links">
-                <a href="combinatoire.html" class="btn-card-primary">
-                    <span>Mathematical Nightmares (Recueil de Défis)</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Niveau : <b>Avancé</b></span>
-                <span>Résolus : <b>60 / 90</b></span>
-            </div>
-        </div>
 
-        <!-- 06. ÉQUATIONS FONCTIONNELLES & ALGÈBRE -->
-        <div class="portal-card" data-category="tools" data-keywords="equations fonctionnelles algebre viete polynomes second degre cauchy">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">⚡</div>
+            <!-- 06. ALGÈBRE & ÉQUATIONS FONCTIONNELLES -->
+            <div class="portal-card" data-category="arithmetic" data-keywords="algebre equations fonctionnelles viete polynomes second degre racines cauchy">
+                <div class="card-header">
+                    <div class="card-sigil">⚡</div>
                     <div class="card-title-group">
-                        <span class="card-category-label">Algèbre & Analyse</span>
-                        <h3>Équations Fonctionnelles & Polynômes</h3>
+                        <div class="card-meta-kicker">
+                            <span>Algèbre Avancée</span>
+                            <span>·</span>
+                            <span>Polynômes</span>
+                        </div>
+                        <h3>Équations Fonctionnelles & Viète</h3>
                     </div>
                 </div>
-                <span class="card-status-pill">Essentiel</span>
+                <p class="card-body-text">
+                    Résolution rigoureuse d'équations fonctionnelles (méthode de Cauchy, injectivité, surjectivité), relations coefficients-racines de Viète et algèbre polynomiale.
+                </p>
+                <div class="card-links">
+                    <a href="functionnal equation.html" class="btn-card-main">
+                        <span>Équations Fonctionnelles (Méthodes & Cours)</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="viete .html" class="btn-card-sub">
+                        <span>Formules de Viète pour Polynômes de Degré n</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="equation.html" class="btn-card-sub">
+                        <span>Équations du Second Degré & Discriminant</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+                <div class="card-footer-strip">
+                    <span>Thèmes : <b>Polynômes & Fonctions</b></span>
+                    <span>Cours : <b>3 Modules</b></span>
+                </div>
             </div>
-            <p class="card-description-text">
-                Détermination des fonctions vérifiant des relations fonctionnelles globales, relations coefficients-racines de Viète et étude approfondie des polynômes.
-            </p>
-            <div class="card-action-links">
-                <a href="functionnal equation.html" class="btn-card-primary">
-                    <span>Décoder les Équations Fonctionnelles</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="viete .html" class="btn-card-secondary">
-                    <span>Formules de Viète (Racines & Polynômes)</span>
-                    <span>&rarr;</span>
-                </a>
-                <a href="equation.html" class="btn-card-secondary">
-                    <span>Équations du Second Degré & Discriminant</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Sujets : <b>Viète & Cauchy</b></span>
-                <span>Statut : <b>Opérationnel</b></span>
-            </div>
-        </div>
 
-        <!-- 07. RÉPERTOIRE DES COURS & EXERCICES INTERACTIFS -->
-        <div class="portal-card" data-category="arithmetic" data-keywords="cours problemes exercices entrainement bibliotheque score charisma">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">📚</div>
+            <!-- 07. CLASSEMENTS & STATISTIQUES -->
+            <div class="portal-card" data-category="exam" data-keywords="classement leaderboard statistiques rang score notes session officiel">
+                <div class="card-header">
+                    <div class="card-sigil">📊</div>
                     <div class="card-title-group">
-                        <span class="card-category-label">Bibliothèque Complète</span>
-                        <h3>Cours & Exercices Interactifs</h3>
+                        <div class="card-meta-kicker">
+                            <span>Données & Évaluations</span>
+                            <span>·</span>
+                            <span>Temps Réel</span>
+                        </div>
+                        <h3>Classement Officiel & Statistiques</h3>
                     </div>
                 </div>
-                <span class="card-status-pill">Interactif</span>
+                <p class="card-body-text">
+                    Tableau d'honneur officiel répertoriant les notes vérifiées, les classements par pays, les moyennes d'épreuve et les distinctions accordées par le jury.
+                </p>
+                <div class="card-links">
+                    <a href="leaderboard.html" class="btn-card-main">
+                        <span>Tableau d'Honneur & Classement Général</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="statistique.html" class="btn-card-sub">
+                        <span>Analyse Statistique des Résolutions</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+                <div class="card-footer-strip">
+                    <span>Mise à jour : <b>Instantanée</b></span>
+                    <span>Validation : <b>Jury Officiel</b></span>
+                </div>
             </div>
-            <p class="card-description-text">
-                Accédez à l'annuaire complet des cours théoriques et testez vos réflexes en direct avec le tableau de score et de charisme dans le module de défis.
-            </p>
-            <div class="card-action-links">
-                <a href="courses and problems.html" class="btn-card-primary">
-                    <span>Répertoire Global des Cours & Annonces</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="exercice.html" class="btn-card-secondary">
-                    <span>Module d'Exercices Interactifs & Scores</span>
-                    <span>&rarr;</span>
-                </a>
-                <a href="probleme.html" class="btn-card-secondary">
-                    <span>Problèmes d'Olympiades Rapides (-1)</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Format : <b>LaTeX MathJax</b></span>
-                <span>Notation : <b>Temps Réel</b></span>
-            </div>
-        </div>
 
-        <!-- 08. ASSISTANT INTELLIGENT IA (RAYENAI) -->
-        <div class="portal-card" data-category="tools" data-keywords="ia gbt rayenai intelligence artificielle assistant solveur">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">🤖</div>
+            <!-- 08. FORUM & CONTRIBUTION -->
+            <div class="portal-card" data-category="tools" data-keywords="forum communaute echange solutions soumettre proposition discution">
+                <div class="card-header">
+                    <div class="card-sigil">💬</div>
                     <div class="card-title-group">
-                        <span class="card-category-label">Intelligence Artificielle</span>
-                        <h3>Portail Intelligent RayenAI</h3>
+                        <div class="card-meta-kicker">
+                            <span>Espace Collaboratif</span>
+                            <span>·</span>
+                            <span>Échanges</span>
+                        </div>
+                        <h3>Forum Académique & Propostions</h3>
                     </div>
                 </div>
-                <span class="card-status-pill">v2.4 Pro</span>
+                <p class="card-body-text">
+                    Rejoignez le salon de discussion entre passionnés, échangez vos pistes de démonstration et proposez vos propres créations mathématiques au comité.
+                </p>
+                <div class="card-links">
+                    <a href="forum.html" class="btn-card-main">
+                        <span>Entrer dans le Forum de Discussion</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="submitproblem.html" class="btn-card-sub">
+                        <span>Soumettre un Nouveau Problème Mathématique</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="send.html" class="btn-card-sub">
+                        <span>Canal de Transmission & Contact</span>
+                        <span>&rarr;</span>
+                    </a>
+                </div>
+                <div class="card-footer-strip">
+                    <span>Accès : <b>Libre & Modéré</b></span>
+                    <span>Communauté : <b>Passionnés</b></span>
+                </div>
             </div>
-            <p class="card-description-text">
-                Assistant conversationnel et heuristique développé pour accompagner les élèves dans l'analyse logique, le débogage de raisonnements et la guidance mathématique.
-            </p>
-            <div class="card-action-links">
-                <a href="gbt.html" class="btn-card-primary">
-                    <span>Lancer l'Assistant Intelligent RayenAI</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Modèle : <b>Heuristique Avancée</b></span>
-                <span>Concepteur : <b>Med Rayen Bouazizi</b></span>
-            </div>
-        </div>
 
-        <!-- 09. COMMUNAUTÉ, FORUM & SOUMISSION DE PROBLÈMES -->
-        <div class="portal-card" data-category="tools" data-keywords="forum discussion soumission proposition echange entraide contact">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">💬</div>
+            <!-- 09. DIRECTION & ADMINISTRATION -->
+            <div class="portal-card" data-category="tools" data-keywords="direction admin correction jury note suspension candidat med rayen bouazizi">
+                <div class="card-header">
+                    <div class="card-sigil">🛡️</div>
                     <div class="card-title-group">
-                        <span class="card-category-label">Espace Communautaire</span>
-                        <h3>Forum & Partage de Problèmes</h3>
+                        <div class="card-meta-kicker">
+                            <span>Gouvernance</span>
+                            <span>·</span>
+                            <span>Direction des Examens</span>
+                        </div>
+                        <h3>Direction & Console Administrative</h3>
                     </div>
                 </div>
-                <span class="card-status-pill">1,210 Membres</span>
-            </div>
-            <p class="card-description-text">
-                Rejoignez le salon de discussion entre passionnés, échangez vos pistes de recherche et proposez vos propres créations mathématiques au comité.
-            </p>
-            <div class="card-action-links">
-                <a href="forum.html" class="btn-card-primary">
-                    <span>Entrer dans le Forum de Discussion</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="submitproblem.html" class="btn-card-secondary">
-                    <span>Soumettre un Nouveau Problème Mathématique</span>
-                    <span>&rarr;</span>
-                </a>
-                <a href="send.html" class="btn-card-secondary">
-                    <span>Canal de Transmission & Contact</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Messages : <b>5,432</b></span>
-                <span>Accès : <b>Libre & Ouvert</b></span>
-            </div>
-        </div>
-
-        <!-- 10. JEUX D'ESPRIT & DÉFIS LUDIQUES -->
-        <div class="portal-card" data-category="tools" data-keywords="jeux enigmes defis play game reflexe puzzle grille">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">🎮</div>
-                    <div class="card-title-group">
-                        <span class="card-category-label">Divertissement Mathématique</span>
-                        <h3>Jeux d'Esprit & Casse-Têtes</h3>
-                    </div>
+                <p class="card-body-text">
+                    Espace réservé à la direction des épreuves pour la notation des copies manuscrites, la surveillance de l'intégrité académique et la gestion des épreuves.
+                </p>
+                <div class="card-links">
+                    <a href="admin.html" class="btn-card-main">
+                        <span>Console de Correction des Épreuves (Admin)</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="rayen.html" class="btn-card-sub">
+                        <span>À Propos du Fondateur (Med Rayen Bouazizi)</span>
+                        <span>&rarr;</span>
+                    </a>
+                    <a href="news.html" class="btn-card-sub">
+                        <span>Journal des Actualités & Développements</span>
+                        <span>&rarr;</span>
+                    </a>
                 </div>
-                <span class="card-status-pill">Divertissement</span>
-            </div>
-            <p class="card-description-text">
-                Stimulez votre intuition logique à travers des jeux de grille numériques interactifs, des énigmes de polynômes à déverrouiller et des défis d'agilité mentale.
-            </p>
-            <div class="card-action-links">
-                <a href="play1.html" class="btn-card-primary">
-                    <span>Number Grid Game (Jeu de Grille Dynamique)</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="game2.html" class="btn-card-secondary">
-                    <span>Défi du Polynôme & Accès Exclusif</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Type : <b>Algorithmique & Logique</b></span>
-                <span>Plateforme : <b>Web & PC</b></span>
-            </div>
-        </div>
-
-        <!-- 11. APPLICATION OFFICIELLE & SERVICES -->
-        <div class="portal-card" data-category="tools" data-keywords="application telechargement installation apk pc android statistiques">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">📱</div>
-                    <div class="card-title-group">
-                        <span class="card-category-label">Portail Officiel</span>
-                        <h3>Application & Services Techniques</h3>
-                    </div>
+                <div class="card-footer-strip">
+                    <span>Fondateur : <b>Lycée Pilote Sidi Bouzid</b></span>
+                    <span>Statut : <b>Sadaqa Jariya</b></span>
                 </div>
-                <span class="card-status-pill">Officiel</span>
             </div>
-            <p class="card-description-text">
-                Installez l'application officielle du Mémorial pour travailler hors-ligne, consultez les statistiques de résolution et vérifiez la charte de confidentialité.
-            </p>
-            <div class="card-action-links">
-                <a href="install application.html" class="btn-card-primary">
-                    <span>Télécharger l'Application Officielle</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="statistique.html" class="btn-card-secondary">
-                    <span>Statistiques Détaillées des Problèmes</span>
-                    <span>&rarr;</span>
-                </a>
-                <a href="confidelity.html" class="btn-card-secondary">
-                    <span>Règles & Confidentialité des Données</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Version : <b>v2.4 Production</b></span>
-                <span>Mise à jour : <b>2026</b></span>
-            </div>
-        </div>
 
-        <!-- 12. ADMINISTRATION & PORTAIL CRÉATEUR -->
-        <div class="portal-card" data-category="tools" data-keywords="admin profil createur rayen bouazizi rayen journal actualites">
-            <div class="card-top-header">
-                <div class="card-icon-title">
-                    <div class="card-sigil-icon">🛡️</div>
-                    <div class="card-title-group">
-                        <span class="card-category-label">Administration & Direction</span>
-                        <h3>Espace Concepteur & Direction</h3>
-                    </div>
-                </div>
-                <span class="card-status-pill">Direction</span>
-            </div>
-            <p class="card-description-text">
-                Découvrez le parcours de l'architecte du projet Med Rayen Bouazizi, le journal d'actualités du centre et l'espace de gestion administrative.
-            </p>
-            <div class="card-action-links">
-                <a href="rayen.html" class="btn-card-primary">
-                    <span>À Propos du Concepteur (Med Rayen Bouazizi)</span>
-                    <span class="action-arrow">&rarr;</span>
-                </a>
-                <a href="admin1.html" class="btn-card-secondary">
-                    <span>Tableau de Bord du Profil Admin</span>
-                    <span>&rarr;</span>
-                </a>
-                <a href="news.html" class="btn-card-secondary">
-                    <span>Journal des Actualités & Développements</span>
-                    <span>&rarr;</span>
-                </a>
-                <a href="log.in.html" class="btn-card-secondary">
-                    <span>Espace Connexion des Membres</span>
-                    <span>&rarr;</span>
-                </a>
-            </div>
-            <div class="card-meta-strip">
-                <span>Fondateur : <b>Lycée Pilote Sidi Bouzid</b></span>
-                <span>Projet : <b>Sadaqa Jariya</b></span>
-            </div>
         </div>
-
     </main>
 
-    <!-- 6. PRESTIGIOUS MEMORIAL HONOR BLOCK -->
-    <section class="memorial-honor-container" id="memorialDedication">
-        <div class="honor-box">
-            <div class="honor-arabic-heading">إهداء ووفاء متجدد إلى روح:</div>
-            <div class="honor-name-spotlight">الفقيدة أسيل حامدي — رحِمها الله</div>
-            <div class="honor-arabic-body">
+    <!-- 7. PRESTIGIOUS MEMORIAL HONOR BLOCK -->
+    <section class="memorial-tribute-section" id="memorialDedication">
+        <div class="memorial-tribute-box">
+            <div class="arabic-title">إهداء ووفاء متجدد إلى روح:</div>
+            <div class="person-name">الفقيدة أسيل حامدي — رحِمها الله</div>
+            <div class="arabic-text">
                 نسأل الله العلي القدير أن يتغمدها بواسع رحمته، وأن يتقبلها قبولاً حسناً ويسكنها فسيح جناته. 
                 تم تشييد هذا الصرح الأكاديمي الشامخ كصدقة علمية جارية ونور مستدام مهدى إلى روح رفيقة العلم 
                 <strong>أسيل حامدي</strong>، زهرة شعبة الرياضيات بسيدي بوزيد — تونس، لتبقى ذكراها العطرة حية خالدة 
                 تُنير دروب أجيال الطلاب والمفكرين في محراب الرياضيات الصافية. ﴿إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ﴾.
             </div>
-            <div class="honor-french-tribute">
+            <div class="french-quote">
                 « Le véritable sens de la science est de bâtir un héritage éternel qui illumine les esprits et perpétue la mémoire des âmes pures. »
             </div>
         </div>
     </section>
 
-    <!-- 7. SLIDING DRAWER FULL DIRECTORY -->
+    <!-- 8. SLIDING DRAWER DIRECTORY -->
     <div id="panelOverlay" class="panel-overlay" onclick="toggleSlidingPanel()"></div>
     <aside id="slidingPanel" class="sliding-panel">
-        <button type="button" class="panel-close-btn" onclick="toggleSlidingPanel()" title="Fermer le menu">&times;</button>
-        
-        <a href="exam.html" style="background: linear-gradient(135deg, #F6E27A, #D4AF37); color: #07090E; font-weight: 800; padding: 12px 16px; border-radius: var(--radius-sm); text-decoration: none; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-            <span>🏆 Épreuves 4h & Soumission</span>
+        <div class="panel-header-row">
+            <div class="panel-header-title">Répertoire du Mémorial</div>
+            <button type="button" class="panel-close-btn" onclick="toggleSlidingPanel()" title="Fermer le menu">&times;</button>
+        </div>
+
+        <a href="exam.html" class="panel-item-link highlight">
+            <span>🏆 Concours 4h & Soumission</span>
             <span>&rarr;</span>
         </a>
-        <a href="leaderboard.html" class="panel-link" style="color: var(--gold-light); font-weight: 700;">📊 Classement Officiel & Notes</a>
-        <a href="admin.html" class="panel-link" style="color: #94A3B8;">🛡️ Direction des Examens (Admin)</a>
+        <a href="leaderboard.html" class="panel-item-link" style="color: var(--gold-light);">📊 Classement & Notes</a>
+        <a href="admin.html" class="panel-item-link">🛡️ Direction des Examens</a>
 
-        <div class="panel-category-title">Disciplines Mathématiques :</div>
-        <a href="number theory.html" class="panel-link">📐 Arithmétique & Théorie des Nombres</a>
-        <a href="p-adique-valuation.html" class="panel-link">🔢 Théorie de l'Évaluation p-adique</a>
-        <a href="geometry.html" class="panel-link">🔺 Géométrie Complexe & Démonstrations</a>
-        <a href="Cocyclic points.html" class="panel-link">⭕ Points Cocycliques & Puissance</a>
-        <a href="inequality1.html" class="panel-link">⚖️ Inégalités Olympiques Extrêmes (12)</a>
-        <a href="inequality.html" class="panel-link">📊 Inégalités des Moyennes (AM-GM)</a>
-        <a href="combinatoire.html" class="panel-link">🎲 Combinatoire (Nightmares)</a>
-        <a href="functionnal equation.html" class="panel-link">⚡ Équations Fonctionnelles</a>
+        <div class="panel-cat-title">Disciplines Mathématiques</div>
+        <a href="number theory.html" class="panel-item-link">📐 Arithmétique & Théorie des Nombres</a>
+        <a href="p-adique-valuation.html" class="panel-item-link">🔢 Théorie de l'Évaluation p-adique</a>
+        <a href="geometry.html" class="panel-item-link">🔺 Géométrie Complexe & Démonstrations</a>
+        <a href="Cocyclic points.html" class="panel-item-link">⭕ Points Cocycliques & Puissance</a>
+        <a href="inequality1.html" class="panel-item-link">⚖️ Inégalités Olympiques Extrêmes</a>
+        <a href="inequality.html" class="panel-item-link">📊 Inégalités des Moyennes (AM-GM)</a>
+        <a href="combinatoire.html" class="panel-item-link">🎲 Combinatoire (Nightmares)</a>
+        <a href="functionnal equation.html" class="panel-item-link">⚡ Équations Fonctionnelles</a>
         <a href="viete .html" class="panel-link">✨ Formules de Viète (Polynômes)</a>
-        <a href="equation.html" class="panel-link">✏️ Équations du Second Degré</a>
-        <a href="courses and problems.html" class="panel-link">📚 Répertoire Global des Cours</a>
-        <a href="probleme.html" class="panel-link">🎯 Olympiades & Problèmes (-1)</a>
-        <a href="exercice.html" class="panel-link">🏆 Math Challenges & Exercices</a>
+        <a href="courses and problems.html" class="panel-item-link">📚 Bibliothèque Globale</a>
+        <a href="probleme.html" class="panel-item-link">🎯 Défis Olympiques</a>
 
-        <div class="panel-category-title">Services & Communauté :</div>
-        <a href="gbt.html" class="panel-link">🤖 Assistant IA RayenAI</a>
-        <a href="forum.html" class="panel-link">💬 Forum Communautaire</a>
-        <a href="submitproblem.html" class="panel-link">📝 Proposer un Problème</a>
-        <a href="install application.html" class="panel-link">📱 Application Officielle</a>
-        <a href="play1.html" class="panel-link">🎮 Number Grid Game</a>
-        <a href="game2.html" class="panel-link">🧩 Défi du Polynôme</a>
-        <a href="statistique.html" class="panel-link">📈 Statistiques des Problèmes</a>
-        <a href="rayen.html" class="panel-link">👤 Med Rayen Bouazizi (Créateur)</a>
-        <a href="admin1.html" class="panel-link">⚙️ Tableau de Bord Profil</a>
-        <a href="news.html" class="panel-link">📰 Journal d'Actualités</a>
-        <a href="send.html" class="panel-link">✉️ Contact & Transmission</a>
-        <a href="foruser.html" class="panel-link">📜 Conditions d'Utilisation</a>
-        <a href="confidelity.html" class="panel-link">🔒 Confidentialité des Données</a>
-        <a href="aboutversion.html" class="panel-link">ℹ️ Détails de la Version</a>
-        <a href="log.in.html" class="panel-link">🔑 Connexion Membres</a>
+        <div class="panel-cat-title">Services & Communauté</div>
+        <a href="forum.html" class="panel-item-link">💬 Forum Communautaire</a>
+        <a href="submitproblem.html" class="panel-item-link">📝 Proposer un Problème</a>
+        <a href="statistique.html" class="panel-item-link">📈 Statistiques</a>
+        <a href="rayen.html" class="panel-item-link">👤 Med Rayen Bouazizi (Fondateur)</a>
+        <a href="news.html" class="panel-item-link">📰 Journal d'Actualités</a>
+        <a href="send.html" class="panel-item-link">✉️ Contact & Transmission</a>
+        <a href="confidelity.html" class="panel-item-link">🔒 Confidentialité</a>
     </aside>
 
     <!-- FOOTER -->
     <footer class="site-footer">
-        <p class="footer-gold-quote">« Mémorial Assil Hamdi pour les Mathématiques Avancées »</p>
+        <p class="footer-quote">« Mémorial Assil Hamdi pour les Mathématiques Avancées »</p>
         <p>Projet académique d'élite dédié comme Sadaqa Jariya à la mémoire d'Assil Hamdi (19/12/2006 – 2024).</p>
-        <p style="margin-top: 6px; font-size: 0.75rem; color: #475569;">&copy; 2026 Tous droits réservés. Conçu et programmé par Med Rayen Bouazizi — Lycée Pilote Sidi Bouzid, Tunisie.</p>
+        <p style="margin-top: 6px; font-size: 0.74rem; color: #475569;">&copy; 2026 Tous droits réservés · Conçu et programmé par Med Rayen Bouazizi · Lycée Pilote Sidi Bouzid, Tunisie.</p>
     </footer>
 
     <script>
-        // SMART GO BACK FUNCTION
+        // SMART DISCREET BACK FUNCTION
         function handleNavigationBack() {
             if (window.history.length > 1 && document.referrer) {
                 window.history.back();
@@ -1427,10 +1399,9 @@
             }
         }
 
-        // ULTRA-FAST (VÉLOCE) DISCIPLINE FILTERING
+        // ULTRA-FAST DISCIPLINE FILTERING
         function filterDiscipline(category, buttonEl) {
-            // Update active state
-            const buttons = document.querySelectorAll('.filter-tab-btn');
+            const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             if (buttonEl) buttonEl.classList.add('active');
 
@@ -1449,7 +1420,7 @@
             });
         }
 
-        // ULTRA-FAST (VÉLOCE) LIVE SEARCH
+        // ULTRA-FAST LIVE SEARCH
         function handleLiveSearch(query) {
             const cleanQuery = query.toLowerCase().trim();
             const cards = document.querySelectorAll('.portal-card');

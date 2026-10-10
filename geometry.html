@@ -12,102 +12,88 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complex Geometry</title>
+    <title>Complex Geometry - Mémorial Assil Hamdi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, #ff8a00, #e52e71, #dce35b, #45a247);
-            background-size: 400% 400%;
-            animation: gradientBackground 30s ease infinite;
-            color: #333;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #080B12;
+            color: #F8FAFC;
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
 
         .container {
             margin: 0 auto;
-            padding: 20px;
-            max-width: 900px;
+            padding: 24px;
+            max-width: 960px;
         }
 
         .problem {
-            background-color: #ffffff;
-            border: 1px solid #d1d1d1;
-            margin-bottom: 20px;
-            padding: 20px;
+            background-color: #0E1320;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 22px;
+            padding: 24px;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
         }
 
         .problem:hover {
-            background-color: #f9f9f9;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-color: rgba(212, 175, 55, 0.3);
+            background-color: #121828;
+            transform: translateY(-2px);
         }
 
         .statement {
-            background-color: #e0f7fa;
-            padding: 15px;
+            background-color: rgba(20, 27, 45, 0.7);
+            padding: 16px 20px;
             margin-top: 10px;
             border-radius: 8px;
-            font-size: 18px;
-            border: 1px solid #b2ebf2;
-        }
-
-        nav {
-            background-color: #343a40;
-            padding: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        nav a {
-            color: #4aa3df;
-            text-decoration: none;
-            margin-right: 20px;
-            font-size: 18px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-            color: #ffffff;
+            font-size: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: #E2E8F0;
+            line-height: 1.7;
         }
 
         .title {
             text-align: center;
-            margin-top: 50px;
-            font-size: 42px;
-            font-weight: bold;
-            color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 36px 0 16px;
+            font-size: 32px;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            color: #FFFFFF;
+            letter-spacing: 0.5px;
         }
 
-        button {
-            display: block;
-            margin: 30px auto;
-            padding: 12px 24px;
-            font-size: 22px;
-            background-color: #28a745;
-            color: #ffffff;
+        .btn-submit-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 24px auto 40px;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F6E27A, #D4AF37);
+            color: #080B12;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+            transition: all 0.2s;
         }
 
-        button:hover {
-            background-color: #218838;
-            transform: scale(1.05);
+        .btn-submit-action:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
         }
 
         a {
             text-decoration: none;
             color: inherit;
-        }
-
-        @keyframes gradientBackground {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
         }
     </style>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -115,19 +101,21 @@
 </head>
 <body>
     <!-- Top Back Navigation Bar -->
-    <div style="background: #1A1514; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D4AF37; position: sticky; top: 0; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-        <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(212,175,55,0.4); padding: 7px 15px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#D4AF37';this.style.color='#1A1514'" onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.color='#FFFFFF'" title="Retour au Mémorial">
-            <span style="font-size: 18px; line-height: 1;">&larr;</span>
-            <span>Retour / Back</span>
-        </button>
-        <div style="color: #D4AF37; font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
-            Mémorial Assil Hamdi &bull; Géométrie Complexe
+    <header style="background: rgba(10, 14, 24, 0.9); backdrop-filter: blur(16px); padding: 0 20px; height: 54px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.25); position: sticky; top: 0; z-index: 9999;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <button type="button" onclick="if(window.history.length>1&&document.referrer){window.history.back();}else{window.location.href='index.html';}" style="display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.05); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.15); height: 28px; padding: 0 9px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.18s;" title="Retour au Mémorial">
+                <span style="font-size: 12px; line-height: 1;">&larr;</span>
+                <span>Retour</span>
+            </button>
+            <div style="color: #FFFFFF; font-weight: 700; font-size: 13px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;">
+                Mémorial Assil Hamdi <span style="color: #D4AF37;">· Géométrie Complexe</span>
+            </div>
         </div>
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <a href="index.html" style="color: #FFFFFF; text-decoration: none; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 4px; background: rgba(255,255,255,0.08);">Accueil</a>
-            <a href="exam.html" style="color: #1A1514; text-decoration: none; font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 4px; background: #D4AF37;">Épreuves 4h</a>
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <a href="index.html" style="color: #94A3B8; text-decoration: none; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 4px;">Accueil</a>
+            <a href="exam.html" style="color: #080B12; text-decoration: none; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 4px; background: linear-gradient(135deg, #F6E27A, #D4AF37);">Épreuves 4h</a>
         </div>
-    </div>
+    </header>
     <div class="title">Complex Geometry</div>
     <div class="container">
         <div class="problem">
@@ -175,7 +163,8 @@
                 Let \( \triangle ABC \) be an acute-angled triangle. Let \( D \), \( E \), and \( F \) be the feet of the altitudes from vertices \( A \), \( B \), and \( C \), respectively. Let \( I_1 \) and \( I_2 \) be the centers of the circles inscribed in triangles \( AEF \) and \( BDF \), respectively. Let \( O_1 \) and \( O_2 \) be the centers of the circumcircles of triangles \( ACI_1 \) and \( BCI_2 \), respectively. Show that lines \( (O_1O_2) \) and \( (I_1I_2) \) are parallel.
             </div>
         </div>
+    <div style="text-align: center;">
+        <a href="submitproblem.html" class="btn-submit-action">Soumettre une Solution &rarr;</a>
     </div>
-    <button><a href="submitproblem.html">Submit your solutions</a></button>
 </body>
 </html>

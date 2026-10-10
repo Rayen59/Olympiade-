@@ -62,24 +62,25 @@
         .nav-back-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            background: rgba(255, 255, 255, 0.12);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 0.45rem 0.9rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 700;
+            gap: 0.35rem;
+            background: rgba(255, 255, 255, 0.06);
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.26rem 0.65rem;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.18s ease;
             text-decoration: none;
+            line-height: 1.2;
         }
 
         .nav-back-btn:hover {
-            background: #d97706;
+            background: rgba(217, 119, 6, 0.2);
             color: #ffffff;
             border-color: #d97706;
-            transform: translateX(-2px);
+            transform: translateX(-1px);
         }
 
         .brand {
@@ -571,8 +572,8 @@
     <header class="navbar">
         <div class="nav-left-group">
             <button type="button" class="nav-back-btn" onclick="smartGoBack()" title="Retour au Mémorial">
-                <span style="font-size: 1.15rem; line-height: 1;">&larr;</span>
-                <span>Retour / Back</span>
+                <span style="font-size: 0.85rem; line-height: 1;">&larr;</span>
+                <span>Retour</span>
             </button>
 
             <a href="index.html" class="brand">
