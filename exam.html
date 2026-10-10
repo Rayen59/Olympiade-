@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olympiad Examination Portal - Assil Hamdi Memorial</title>
-    <meta name="description" content="Official 4-Hour Olympiad Examination Submission Portal. Candidate authentication, PDF paper distribution, solution uploads, and strict academic integrity.">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Portail des Épreuves d'Olympiade - Mémorial Assil Hamdi</title>
+    <meta name="description" content="Portail officiel des Olympiades de Mathématiques Avancées. Épreuve de 4 heures sous surveillance, téléchargement du sujet PDF, dépôt des copies manuscrites et messagerie directe de correction.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --primary: #1e293b;
-            --primary-accent: #0f172a;
-            --gold: #d97706;
-            --gold-light: #fef3c7;
-            --red: #dc2626;
-            --red-light: #fee2e2;
-            --green: #16a34a;
-            --green-light: #dcfce7;
-            --border: #e2e8f0;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
+            --bg-canvas: #070A10;
+            --bg-surface: #0E1320;
+            --bg-elevated: #141B2D;
+            --bg-card: rgba(16, 23, 38, 0.95);
+            --border: rgba(255, 255, 255, 0.1);
+            --border-gold: rgba(212, 175, 55, 0.35);
+            --gold: #D4AF37;
+            --gold-light: #F6E27A;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --red: #EF4444;
+            --green: #10B981;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
         }
 
         * {
@@ -29,839 +33,849 @@
             padding: 0;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-dark);
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        header.navbar {
-            background-color: #0f172a;
-            color: #ffffff;
-            border-bottom: 2px solid #d97706;
-            padding: 0.75rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        a, button, input, textarea {
+            transition: all 0.18s ease;
+            font-family: inherit;
+        }
+
+        /* 1. TOP NAVBAR */
+        header.top-navbar {
+            background-color: rgba(10, 14, 24, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 8px 16px;
             position: sticky;
             top: 0;
             z-index: 99999;
-            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.25);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
             flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .nav-left-group {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
+            gap: 8px;
+            min-width: 0;
+            flex: 1;
         }
 
-        .nav-back-btn {
+        .btn-back-compact {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            background: rgba(255, 255, 255, 0.06);
-            color: #cbd5e1;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #CBD5E1;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 0.26rem 0.65rem;
-            border-radius: 4px;
+            height: 30px;
+            padding: 0 8px;
+            border-radius: var(--radius-sm);
             font-size: 0.72rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.18s ease;
             text-decoration: none;
-            line-height: 1.2;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .btn-back-compact:hover {
+            background: rgba(212, 175, 55, 0.18);
+            border-color: var(--gold);
+            color: #FFFFFF;
         }
 
-        .nav-back-btn:hover {
-            background: rgba(217, 119, 6, 0.2);
-            color: #ffffff;
-            border-color: #d97706;
-            transform: translateX(-1px);
-        }
-
-        .brand {
+        .site-brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 8px;
             text-decoration: none;
-            color: #ffffff;
+            color: #FFFFFF;
+            min-width: 0;
         }
-
-        .brand-logo {
-            width: 36px;
-            height: 36px;
-            background: #1e293b;
-            color: #f59e0b;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            border: 1px solid #d97706;
-        }
-
-        .brand-text h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.05rem;
-            letter-spacing: 0.5px;
-            color: #ffffff;
-        }
-
-        .brand-text span {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #cbd5e1;
-            font-weight: 500;
-            font-size: 0.88rem;
-            padding: 0.3rem 0.5rem;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .user-status-badge {
-            background: #f1f5f9;
-            padding: 0.4rem 0.8rem;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border: 1px solid var(--border);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.45rem;
-            padding: 0.45rem 1rem;
+        .brand-monogram {
+            width: 30px;
+            height: 30px;
             border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.82rem;
-            cursor: pointer;
-            border: none;
-            transition: all 0.18s ease;
-            text-decoration: none;
-            line-height: 1.2;
-        }
-
-        .btn-primary {
-            background-color: #0f172a;
-            color: #ffffff;
-        }
-
-        .btn-primary:hover {
-            background-color: #1e293b;
-        }
-
-        .btn-gold {
-            background: linear-gradient(135deg, #d97706, #b45309);
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
-        }
-
-        .btn-gold:hover {
-            background: linear-gradient(135deg, #b45309, #92400e);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-dark);
-        }
-
-        .btn-outline:hover {
-            background: #f8fafc;
-        }
-
-        .btn-danger {
-            background-color: var(--red);
-            color: #ffffff;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Sticky countdown bar */
-        .sticky-countdown-bar {
-            position: sticky;
-            top: 70px;
-            z-index: 90;
-            background: #0f172a;
-            color: #ffffff;
-            padding: 0.9rem 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-
-        .countdown-display {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #fbbf24;
-            letter-spacing: 2px;
-        }
-
-        .countdown-pulse {
-            animation: pulse-red 1.5s infinite;
-            color: #f87171 !important;
-        }
-
-        @keyframes pulse-red {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Card styles */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-
-        .card-header {
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 1rem;
-        }
-
-        .card-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #0f172a;
+            background: linear-gradient(135deg, #D4AF37, #996515);
+            color: #07090E;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 800;
+            font-size: 1.05rem;
+            flex-shrink: 0;
         }
-
-        .card-subtitle {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.25rem;
-        }
-
-        /* Rules Banner */
-        .rules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.25rem;
-            margin: 1.5rem 0;
-        }
-
-        .rule-item {
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--gold);
-            padding: 1rem 1.25rem;
-            border-radius: 8px;
-        }
-
-        .rule-item.danger {
-            border-left-color: var(--red);
-            background: #fff5f5;
-        }
-
-        .rule-item h4 {
+        .brand-title {
+            font-family: 'Cinzel', serif;
             font-size: 0.95rem;
             font-weight: 700;
-            margin-bottom: 0.35rem;
-            color: #0f172a;
-        }
-
-        .rule-item p {
-            font-size: 0.85rem;
-            color: #475569;
-        }
-
-        /* Auth Form */
-        .auth-container {
-            max-width: 520px;
-            margin: 2rem auto;
-        }
-
-        .auth-tabs {
-            display: flex;
-            border-bottom: 2px solid var(--border);
-            margin-bottom: 1.5rem;
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 0.8rem;
-            text-align: center;
-            font-weight: 600;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--text-muted);
-            border-bottom: 2px solid transparent;
-            margin-bottom: -2px;
-        }
-
-        .auth-tab.active {
-            color: #0f172a;
-            border-bottom-color: #0f172a;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #334155;
-            margin-bottom: 0.4rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            background: #ffffff;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #0f172a;
-            box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
-        }
-
-        /* Suspension Banner */
-        .banned-banner {
-            background-color: var(--red-light);
-            border: 2px solid var(--red);
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            color: #991b1b;
-            margin-bottom: 2rem;
-            display: flex;
-            gap: 1.25rem;
-            align-items: flex-start;
-        }
-
-        .banned-icon {
-            font-size: 2rem;
-        }
-
-        /* Exam Subject Box */
-        .exam-subject-box {
-            background: #f1f5f9;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        /* Image Upload Box */
-        .upload-dropzone {
-            border: 2px dashed #94a3b8;
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 2.5rem 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 1.5rem;
-        }
-
-        .upload-dropzone:hover {
-            border-color: #0f172a;
-            background: #f1f5f9;
-        }
-
-        .thumbnails-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .thumbnail-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            background: #ffffff;
-            position: relative;
-        }
-
-        .thumbnail-img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            display: block;
-            cursor: pointer;
-        }
-
-        .thumbnail-info {
-            padding: 0.5rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
+            color: #FFFFFF;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .thumbnail-delete {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background: rgba(220, 38, 38, 0.9);
-            color: #ffffff;
-            border: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 0.8rem;
+        .nav-right-group {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
+            flex-shrink: 0;
         }
 
-        /* Submission Receipt */
-        .receipt-badge {
-            display: inline-block;
-            background: var(--green-light);
-            color: var(--green);
-            padding: 0.35rem 0.8rem;
-            border-radius: 9999px;
+        .nav-links-desktop {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-link-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .nav-link-item:hover, .nav-link-item.active {
+            color: var(--gold-light);
+        }
+
+        .user-status-chip {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            color: var(--gold-light);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
             font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .score-pill {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #0f172a;
+        /* 2. BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.82rem;
+            cursor: pointer;
+            border: none;
+            min-height: 34px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #F6E27A 0%, #D4AF37 100%);
+            color: #07090E;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+        }
+        .btn-gold:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            color: #CBD5E1;
+        }
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+        }
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #F87171;
+        }
+        .btn-danger:hover {
+            background: #EF4444;
+            color: #FFFFFF;
+        }
+
+        /* 3. MAIN CONTAINER */
+        .portal-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 14px 40px;
+        }
+
+        /* BANNER SUSPENSION */
+        .ban-banner {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1.5px solid var(--red);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            color: #FECACA;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        /* STICKY LIVE TIMER BAR */
+        .live-timer-bar {
+            position: sticky;
+            top: 52px;
+            z-index: 999;
+            background: rgba(14, 19, 32, 0.95);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-sm);
+            padding: 10px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .timer-val {
             font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+        }
+        .timer-pulse {
+            color: #F87171 !important;
+            animation: pulse-red 1.2s infinite;
+        }
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
-        /* Lightbox modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* CARDS */
+        .portal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        .card-head {
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .card-head-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        /* AUTH FORMS */
+        .auth-box {
+            max-width: 440px;
+            margin: 30px auto;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+        }
+        .auth-tab-row {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 18px;
+        }
+        .auth-tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        .auth-tab-btn.active {
+            color: var(--gold-light);
+            border-bottom-color: var(--gold);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-label {
+            display: block;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .form-control {
+            width: 100%;
+            background: #080C14;
+            border: 1px solid var(--border);
+            padding: 9px 12px;
+            border-radius: var(--radius-sm);
+            color: #FFFFFF;
+            font-size: 0.86rem;
+            outline: none;
+        }
+        .form-control:focus {
+            border-color: var(--gold);
+        }
+
+        /* RULES */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .rule-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--gold);
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+        }
+        .rule-card.danger {
+            border-left-color: var(--red);
+        }
+        .rule-card h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 4px;
+        }
+        .rule-card p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* PDF BOX */
+        .pdf-box {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* DROPZONE */
+        .upload-dropzone {
+            border: 2px dashed rgba(212, 175, 55, 0.4);
+            background: rgba(14, 19, 32, 0.5);
+            border-radius: var(--radius-sm);
+            padding: 24px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 16px;
+        }
+        .upload-dropzone:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* THUMBNAILS GRID */
+        .thumbnails-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .thumbnail-card {
+            background: #080C14;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+        .thumbnail-card img {
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: none;
+            object-fit: cover;
+            display: block;
+        }
+        .thumbnail-card-bar {
+            position: absolute;
+            bottom: 0;
+            inset-inline: 0;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 3px 6px;
+            font-size: 0.68rem;
+            color: #E2E8F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .thumbnail-delete-btn {
+            background: rgba(239, 68, 68, 0.85);
+            color: #FFFFFF;
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            padding: 2rem;
+            cursor: pointer;
+            font-size: 0.7rem;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            z-index: 10;
         }
 
-        .modal.open {
+        /* MESSENGER CHAT BOX */
+        .chat-messenger-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin-top: 16px;
+        }
+        .chat-thread-box {
+            background: #080B12;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            max-height: 240px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .chat-bubble {
+            max-width: 82%;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            line-height: 1.45;
+        }
+        .bubble-admin {
+            align-self: flex-start;
+            background: #1E293B;
+            border: 1px solid var(--border);
+            color: #E2E8F0;
+        }
+        .bubble-candidate {
+            align-self: flex-end;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(246, 226, 122, 0.15));
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #FFFFFF;
+        }
+        .bubble-author {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 2px;
+        }
+        .bubble-time {
+            font-size: 0.64rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            text-align: right;
+        }
+
+        /* 4. INTERACTIVE IMAGE STUDIO MODAL (ENTER, EXIT, MODIFY, DELETE, ADD) */
+        .image-studio-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.94);
+            backdrop-filter: blur(10px);
+            z-index: 100000;
+            display: none;
+            flex-direction: column;
+        }
+        .image-studio-modal.open {
             display: flex;
         }
-
-        .modal-content {
-            max-width: 90vw;
-            max-height: 90vh;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #ffffff;
+        .studio-topbar {
+            background: rgba(10, 14, 24, 0.95);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .studio-actions-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .studio-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            padding: 12px;
             position: relative;
         }
-
-        .modal-content img {
-            max-width: 100%;
-            max-height: 85vh;
-            display: block;
+        .studio-stage img {
+            max-width: 96%;
+            max-height: 80vh;
             object-fit: contain;
+            border-radius: 4px;
+            transition: transform 0.2s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
         }
-
-        .modal-close {
+        .studio-nav-arrow {
             position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 2rem;
-            color: #ffffff;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(14, 19, 32, 0.8);
+            border: 1px solid var(--border);
+            color: #FFFFFF;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            z-index: 1010;
+            font-size: 1.1rem;
+            z-index: 20;
         }
+        .arrow-prev { left: 14px; }
+        .arrow-next { right: 14px; }
 
-        /* Notifications */
-        .toast {
+        /* TOAST */
+        .toast-box {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #0f172a;
-            color: #ffffff;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            z-index: 9999;
+            bottom: 20px;
+            right: 20px;
+            background: #111827;
+            border: 1px solid var(--border-gold);
+            color: #FFFFFF;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 0.84rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 100001;
             display: none;
-            max-width: 400px;
-            font-size: 0.9rem;
+            max-width: 90vw;
         }
+        .toast-box.success { border-color: var(--green); color: #34D399; }
+        .toast-box.error { border-color: var(--red); color: #F87171; }
 
-        .toast.error { background: #dc2626; }
-        .toast.success { background: #16a34a; }
-
-        @media (max-width: 768px) {
-            header.navbar {
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .sticky-countdown-bar {
-                top: 0;
-                flex-direction: column;
-                gap: 0.5rem;
-                text-align: center;
-            }
-            .countdown-display {
-                font-size: 1.3rem;
-            }
+        /* RESPONSIVE ANDROID / MOBILE */
+        @media (max-width: 680px) {
+            .nav-links-desktop { display: none; }
+            .portal-container { padding: 12px 10px 30px; }
+            .portal-card { padding: 14px; }
+            .card-head-title { font-size: 1.05rem; }
+            .rules-grid { grid-template-columns: 1fr; }
+            .thumbnails-grid { grid-template-columns: repeat(2, 1fr); }
+            .studio-topbar { padding: 6px 10px; }
+            .live-timer-bar { padding: 8px 12px; }
+            .timer-val { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation with Back Arrow -->
-    <header class="navbar">
+    <!-- 1. TOP NAVBAR -->
+    <header class="top-navbar">
         <div class="nav-left-group">
-            <button type="button" class="nav-back-btn" onclick="smartGoBack()" title="Retour au Mémorial">
-                <span style="font-size: 0.85rem; line-height: 1;">&larr;</span>
+            <button type="button" class="btn-back-compact" onclick="smartGoBack()" title="Retour au Mémorial">
+                <span>&larr;</span>
                 <span>Retour</span>
             </button>
-
-            <a href="index.html" class="brand">
-                <div class="brand-logo">&Sigma;</div>
-                <div class="brand-text">
-                    <h1>Assil Hamdi Memorial</h1>
-                    <span>Advanced Pure Mathematics</span>
-                </div>
+            <a href="index.html" class="site-brand">
+                <div class="brand-monogram">&Sigma;</div>
+                <div class="brand-title">Mémorial Assil Hamdi</div>
             </a>
         </div>
 
-        <nav class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="exam.html" class="nav-link active">Olympiad Test Portal</a>
-            <a href="leaderboard.html" class="nav-link">Rankings & Stats</a>
-            <a href="courses and problems.html" class="nav-link">Problem Archive</a>
-            <a href="admin.html" class="nav-link" id="navAdminLink">Admin Portal</a>
-            <div id="userHeaderBadge" style="display: none;" class="user-status-badge">
-                <span id="userNameHeader">Candidate</span>
-                <button class="btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.75rem; background: rgba(255,255,255,0.1); color: #ffffff;" onclick="logout()">Logout</button>
+        <div class="nav-right-group">
+            <nav class="nav-links-desktop">
+                <a href="index.html" class="nav-link-item">Accueil</a>
+                <a href="exam.html" class="nav-link-item active">Épreuves</a>
+                <a href="leaderboard.html" class="nav-link-item">Classement</a>
+                <a href="admin.html" class="nav-link-item">Direction</a>
+            </nav>
+
+            <div id="userHeaderBadge" style="display: none;" class="user-status-chip">
+                <span id="userNameHeader">Candidat</span>
+                <button type="button" class="btn btn-outline" style="padding: 2px 6px; font-size: 0.68rem; min-height: 22px;" onclick="candidateLogout()">Quitter</button>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <div class="container">
+    <div class="portal-container">
 
-        <!-- Suspension Notification Banner (Dynamic) -->
-        <div id="banAlert" class="banned-banner" style="display: none;">
-            <div class="banned-icon">&#x26A0;</div>
+        <!-- BANNER DE SUSPENSION -->
+        <div id="banAlert" class="ban-banner" style="display: none;">
+            <div style="font-size: 1.8rem; line-height: 1;">⚠️</div>
             <div>
-                <h3 style="font-weight: 700; margin-bottom: 0.25rem;">Account Suspended by Examination Directorate</h3>
-                <p id="banMessage">Your account has been suspended due to an academic integrity violation. You cannot start or submit tests until the suspension expires.</p>
-                <p style="margin-top: 0.5rem; font-size: 0.85rem; font-weight: 600;">Suspension expires: <span id="banExpiresText">--</span></p>
+                <h3 style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">Compte Suspendu par la Direction des Examens</h3>
+                <p id="banMessage" style="font-size: 0.82rem;">Votre compte fait l'objet d'une suspension suite à un manquement à l'intégrité académique.</p>
+                <div style="margin-top: 6px; font-size: 0.78rem; font-weight: 600;">Date de fin : <span id="banExpiresText">--</span></div>
             </div>
         </div>
 
-        <!-- Sticky Live Countdown Bar (Only active during in-progress test) -->
-        <div id="stickyTimerBar" class="sticky-countdown-bar" style="display: none;">
+        <!-- STICKY TIMER BAR (Pendant l'épreuve active de 4h) -->
+        <div id="stickyTimerBar" class="live-timer-bar" style="display: none;">
             <div>
-                <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Official Examination Timer</div>
-                <div style="font-weight: 600;">4-Hour Continuous Examination Session</div>
+                <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Compte à Rebours Officiel</div>
+                <div style="font-size: 0.84rem; font-weight: 600; color: #FFFFFF;">Session d'Olympiade (4h)</div>
             </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <div id="timerCountdown" class="countdown-display">04:00:00</div>
-                <button class="btn btn-gold" onclick="scrollToSubmission()">Submit Solutions</button>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div id="timerCountdown" class="timer-val">04:00:00</div>
+                <button type="button" class="btn btn-gold" style="min-height: 30px; font-size: 0.76rem;" onclick="scrollToSubmission()">Déposer ma Copie</button>
             </div>
         </div>
 
-        <!-- State 1: Authentication Form (When Logged Out) -->
-        <div id="authSection" class="auth-container">
-            <div class="card">
-                <div class="auth-tabs">
-                    <button class="auth-tab active" id="tabRegisterBtn" onclick="switchAuthTab('register')">Sign Up (Candidate)</button>
-                    <button class="auth-tab" id="tabLoginBtn" onclick="switchAuthTab('login')">Log In</button>
+        <!-- ÉTAT 1 : CONNEXION / INSCRIPTION -->
+        <div id="authSection" class="auth-box">
+            <div class="auth-tab-row">
+                <button type="button" class="auth-tab-btn active" id="tabRegisterBtn" onclick="switchAuthTab('register')">Inscription Candidat</button>
+                <button type="button" class="auth-tab-btn" id="tabLoginBtn" onclick="switchAuthTab('login')">Connexion</button>
+            </div>
+
+            <!-- Formulaire Inscription -->
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label class="form-label">Nom & Prénom Officiel *</label>
+                    <input type="text" id="regName" class="form-control" placeholder="ex: Rayen Bouazizi" required>
                 </div>
+                <div class="form-group">
+                    <label class="form-label">Adresse Email *</label>
+                    <input type="email" id="regEmail" class="form-control" placeholder="votre.email@domain.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de Passe *</label>
+                    <input type="password" id="regPassword" class="form-control" placeholder="Minimum 6 caractères" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Pays de Représentation *</label>
+                    <input type="text" id="regCountry" class="form-control" placeholder="ex: Tunisie, France, Algérie..." required>
+                </div>
+                <button type="submit" class="btn btn-gold" style="width: 100%; min-height: 38px; margin-top: 6px;">
+                    Créer mon Dossier Candidat &rarr;
+                </button>
+            </form>
 
-                <!-- Register Form -->
-                <form id="registerForm" onsubmit="handleRegister(event)">
-                    <div class="form-group">
-                        <label class="form-label" for="regName">Full Legal Name</label>
-                        <input type="text" id="regName" class="form-control" placeholder="e.g. Rayen Bouazizi" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="regEmail">Email Address</label>
-                        <input type="email" id="regEmail" class="form-control" placeholder="name@domain.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="regPassword">Password</label>
-                        <input type="password" id="regPassword" class="form-control" placeholder="Minimum 6 characters" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="regCountry">Country of Representation</label>
-                        <select id="regCountry" class="form-control" required>
-                            <option value="">-- Select Your Country --</option>
-                            <option value="Tunisia">Tunisia 🇹🇳</option>
-                            <option value="France">France 🇫🇷</option>
-                            <option value="Algeria">Algeria 🇩🇿</option>
-                            <option value="Morocco">Morocco 🇲🇦</option>
-                            <option value="Egypt">Egypt 🇪🇬</option>
-                            <option value="Saudi Arabia">Saudi Arabia 🇸🇦</option>
-                            <option value="United Arab Emirates">United Arab Emirates 🇦🇪</option>
-                            <option value="Lebanon">Lebanon 🇱🇧</option>
-                            <option value="Jordan">Jordan 🇯🇴</option>
-                            <option value="Qatar">Qatar 🇶🇦</option>
-                            <option value="United States">United States 🇺🇸</option>
-                            <option value="Canada">Canada 🇨🇦</option>
-                            <option value="United Kingdom">United Kingdom 🇬🇧</option>
-                            <option value="Germany">Germany 🇩🇪</option>
-                            <option value="Italy">Italy 🇮🇹</option>
-                            <option value="Spain">Spain 🇪🇸</option>
-                            <option value="Switzerland">Switzerland 🇨🇭</option>
-                            <option value="Belgium">Belgium 🇧🇪</option>
-                            <option value="Turkey">Turkey 🇹🇷</option>
-                            <option value="China">China 🇨🇳</option>
-                            <option value="Japan">Japan 🇯🇵</option>
-                            <option value="South Korea">South Korea 🇰🇷</option>
-                            <option value="India">India 🇮🇳</option>
-                            <option value="Brazil">Brazil 🇧🇷</option>
-                            <option value="Other International">Other International 🌍</option>
-                        </select>
-                    </div>
-
-                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">
-                        By creating an account, you pledge adherence to the Examination Code of Honor. All submitted solutions must be strictly handwritten.
-                    </p>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account & Enter Portal</button>
-                </form>
-
-                <!-- Login Form -->
-                <form id="loginForm" style="display: none;" onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label class="form-label" for="loginEmail">Email Address</label>
-                        <input type="email" id="loginEmail" class="form-control" placeholder="name@domain.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" class="form-control" placeholder="Enter password" required>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Log In</button>
-
-                    <div style="margin-top: 1.5rem; text-align: center; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--text-muted);">Exam Administrator?</span>
-                        <a href="admin.html" style="font-size: 0.85rem; font-weight: 600; color: #0f172a; margin-left: 0.5rem;">Access Admin Directorate &rarr;</a>
-                    </div>
-                </form>
-            </div>
+            <!-- Formulaire Connexion -->
+            <form id="loginForm" style="display: none;" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">Adresse Email *</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="votre.email@domain.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de Passe *</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-gold" style="width: 100%; min-height: 38px; margin-top: 6px;">
+                    Se Connecter &rarr;
+                </button>
+                <div style="margin-top: 14px; text-align: center; border-top: 1px solid var(--border); padding-top: 10px;">
+                    <a href="admin.html" style="font-size: 0.78rem; color: var(--gold-light); text-decoration: none;">Accès réservé à la Direction des Examens &rarr;</a>
+                </div>
+            </form>
         </div>
 
-        <!-- State 2: Main Examination Workspace (When Logged In) -->
+        <!-- ÉTAT 2 : ESPACE CANDIDAT CONNECTÉ -->
         <div id="examWorkspace" style="display: none;">
 
-            <!-- Header Card with Candidate Info & Honor Code -->
-            <div class="card">
-                <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+            <!-- Carte Présentation & Charte d'Intégrité -->
+            <div class="portal-card">
+                <div class="card-head">
                     <div>
-                        <div style="display: flex; align-items: center; gap: 0.75rem;">
-                            <h2 class="card-title" id="testTitleDisplay">Assil Hamdi Memorial International Olympiad</h2>
-                            <span class="user-status-badge" id="candidateCountryBadge">🇹🇳 Tunisia</span>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
+                            <h2 class="card-head-title" id="testTitleDisplay">Olympiade Internationale Assil Hamdi</h2>
+                            <span class="user-status-chip" id="candidateCountryBadge">Tunisie</span>
                         </div>
-                        <p class="card-subtitle" id="testDescDisplay">Strict 4-Hour Pure Mathematics Olympiad Examination.</p>
+                        <p style="font-size: 0.84rem; color: var(--text-muted);" id="testDescDisplay">Épreuve officielle de mathématiques pures.</p>
                     </div>
                     <div style="text-align: right;">
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">Allocated Duration</div>
-                        <div style="font-size: 1.25rem; font-weight: 700; color: #0f172a;">4 Hours (240 Minutes)</div>
+                        <span style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">Durée Allouée</span>
+                        <div style="font-size: 1.15rem; font-weight: 700; color: var(--gold-light);">4 Heures (240 min)</div>
                     </div>
                 </div>
 
-                <!-- Academic Integrity & Writing Clarity Mandate -->
-                <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: #0f172a;">Mandatory Examination Regulations & Honor Code:</h3>
-                
                 <div class="rules-grid">
-                    <div class="rule-item danger">
-                        <h4>1. Legible Handwriting & Clear Schemas</h4>
-                        <p>All proofs must be handwritten. Geometric figures and diagrams <strong>MUST be crisp, geometrically accurate, and fully legible</strong>. Any unreadable page or ambiguous schema will automatically receive <strong>0 points</strong>.</p>
+                    <div class="rule-card danger">
+                        <h4>1. Manuscrit Obligatoire & Figures Précises</h4>
+                        <p>Les démonstrations doivent être rédigées à la main. Les figures géométriques doivent être claires et tracées avec soin. Toute page illisible reçoit 0 point.</p>
                     </div>
-
-                    <div class="rule-item danger">
-                        <h4>2. Zero-Tolerance for AI & Plagiarism</h4>
-                        <p>Usage of Artificial Intelligence (ChatGPT, Claude, Gemini, MathGPT, etc.) or copying from external sources will result in <strong>immediate disqualification, 0 points, and a multi-day account suspension (1 to 30 days)</strong>.</p>
+                    <div class="rule-card danger">
+                        <h4>2. Tolérance Zéro : IA & Plagiat</h4>
+                        <p>L'utilisation d'IA (ChatGPT, Gemini, etc.) ou la copie externe entraîne la disqualification immédiate et une suspension de 1 à 30 jours.</p>
                     </div>
-
-                    <div class="rule-item">
-                        <h4>3. Strict 4-Hour Time Window</h4>
-                        <p>The timer begins the moment you click <strong>"Start 4-Hour Examination"</strong>. You must complete your writing, take high-resolution photos, and submit before the countdown reaches zero.</p>
+                    <div class="rule-card">
+                        <h4>3. Décompte Continu Ininterrompu</h4>
+                        <p>Dès le clic sur « Lancer l'Épreuve de 4 Heures », le chronomètre officiel se déclenche sans interruption possible.</p>
                     </div>
                 </div>
 
-                <!-- Actions: Start Test or Download PDF -->
-                <div id="preStartArea" style="text-align: center; padding: 1.5rem 0; border-top: 1px solid var(--border); margin-top: 1rem;">
-                    <button class="btn btn-gold" style="font-size: 1.1rem; padding: 0.9rem 2.5rem;" onclick="startExamSession()">
-                        &#x25B6; Start 4-Hour Examination Now
+                <!-- Bouton Lancer si non commencé -->
+                <div id="preStartArea" style="text-align: center; padding: 20px 0 10px; border-top: 1px solid var(--border); margin-top: 14px;">
+                    <button type="button" class="btn btn-gold" style="font-size: 1rem; padding: 10px 24px;" onclick="startExamSession()">
+                        🚀 Lancer mon Épreuve de 4 Heures
                     </button>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
-                        Note: The 4-hour countdown will initiate immediately and cannot be paused.
-                    </p>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 8px;">Le chronomètre officiel de 240 minutes débutera immédiatement.</p>
                 </div>
             </div>
 
-            <!-- Active Test Section: PDF Paper & Solution Submission Form -->
+            <!-- ZONE ÉPREUVE ACTIVE : TÉLÉCHARGEMENT PDF & DÉPÔT DES SOLUTIONS -->
             <div id="activeTestArea" style="display: none;">
                 
-                <!-- PDF Subject Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Official Examination Subject Paper</h3>
-                        <p class="card-subtitle">Read and solve all problems on separate white paper sheets using blue or black ink.</p>
+                <!-- Sujet PDF -->
+                <div class="portal-card">
+                    <div class="card-head">
+                        <h3 class="card-head-title">Sujet Officiel de l'Olympiade (PDF)</h3>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Résolvez les problèmes sur feuilles blanches distinctes</span>
                     </div>
 
-                    <div class="exam-subject-box">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 2.2rem; color: #dc2626;">&#x1F4C4;</div>
+                    <div class="pdf-box">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 2rem;">📄</span>
                             <div>
-                                <h4 style="font-size: 1.05rem; font-weight: 700;" id="pdfFilenameText">Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf</h4>
-                                <span style="font-size: 0.85rem; color: var(--text-muted);">Official High-Security Examination PDF</span>
+                                <h4 id="pdfFilenameText" style="font-size: 0.95rem; font-weight: 700; color: #FFFFFF;">Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf</h4>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">Document officiel authentifié</span>
                             </div>
                         </div>
-                        <div style="display: flex; gap: 0.75rem;">
-                            <a id="downloadPdfBtn" href="#" target="_blank" class="btn btn-primary">
-                                &#x2B07; Open / Download PDF Paper
-                            </a>
-                        </div>
+                        <a id="downloadPdfBtn" href="#" target="_blank" class="btn btn-gold">
+                            📥 Ouvrir / Télécharger le Sujet PDF
+                        </a>
                     </div>
                 </div>
 
-                <!-- Solution Upload & Final Submission Card -->
-                <div class="card" id="submissionBox">
-                    <div class="card-header">
-                        <h3 class="card-title">Upload Handwritten Solutions & Geometric Diagrams</h3>
-                        <p class="card-subtitle">Take well-lit, sharp photographs or scans of your papers. Multiple images can be uploaded.</p>
+                <!-- Dépôt des Copies & Photos Manuscrites -->
+                <div class="portal-card" id="submissionBox">
+                    <div class="card-head">
+                        <h3 class="card-head-title">Téléverser les Pages Manuscrites & Schémas</h3>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Prenez des photos nettes avec votre smartphone</span>
                     </div>
 
                     <!-- Dropzone -->
                     <div class="upload-dropzone" onclick="document.getElementById('solutionFileInput').click()">
-                        <div style="font-size: 2.5rem; color: #64748b; margin-bottom: 0.5rem;">&#x1F4F7;</div>
-                        <h4 style="font-weight: 700; margin-bottom: 0.25rem;">Click to Select Solution Photos</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-muted);">
-                            PNG, JPG, or WEBP supported. Ensure high resolution, adequate contrast, and proper lighting.
-                        </p>
+                        <div style="font-size: 2.2rem; margin-bottom: 6px;">📷</div>
+                        <h4 style="font-weight: 700; color: #FFFFFF; font-size: 0.95rem;">Appuyez pour prendre ou choisir vos photos de solution</h4>
+                        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">PNG, JPG, WEBP acceptés. Veillez à un bon éclairage.</p>
                         <input type="file" id="solutionFileInput" accept="image/*" multiple style="display: none;" onchange="handleImageSelection(event)">
                     </div>
 
-                    <!-- Uploaded Thumbnails Preview -->
+                    <!-- Grille des miniatures avec actions interactives -->
                     <div id="thumbnailsContainer" class="thumbnails-grid"></div>
 
-                    <!-- Candidate Notes -->
+                    <!-- Remarques candidat -->
                     <div class="form-group">
-                        <label class="form-label" for="studentRemarks">Candidate Remarks / Problem Numbering Notes (Optional)</label>
-                        <textarea id="studentRemarks" class="form-control" rows="3" placeholder="e.g. Sheet 1: Problems 1 & 2 (Synthetic Geometry with circle lemmas); Sheet 2: Problem 3 (p-adic valuation)..."></textarea>
+                        <label class="form-label">Remarques ou Ordre des Problèmes (Facultatif)</label>
+                        <textarea id="studentRemarks" class="form-control" rows="2" placeholder="ex: Page 1 : Problèmes 1 & 2 (Géométrie) ; Page 2 : Problème 3 (Équation fonctionnelle)..."></textarea>
                     </div>
 
-                    <!-- Academic Honesty Pledge Checkbox -->
-                    <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.9rem;">
-                            <input type="checkbox" id="pledgeCheckbox" style="margin-top: 0.25rem;" required>
-                            <span>
-                                <strong>Candidate Declaration:</strong> I solemnly declare on my honor that the solutions and geometric schemas uploaded here are entirely my own personal work produced within the allotted 4-hour window, without external assistance, plagiarism, or generative AI. I understand that illegible work receives 0 points.
-                            </span>
+                    <!-- Déclaration d'honneur -->
+                    <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 16px;">
+                        <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.82rem; color: #E2E8F0; cursor: pointer;">
+                            <input type="checkbox" id="pledgeCheckbox" style="margin-top: 3px;" required>
+                            <span><strong>Déclaration sur l'honneur :</strong> J'atteste que cette copie est le fruit exclusif de ma réflexion personnelle dans le temps imparti de 4 heures, sans recours à l'IA ni assistance extérieure.</span>
                         </label>
                     </div>
 
-                    <button id="finalSubmitBtn" class="btn btn-primary" style="font-size: 1.05rem; padding: 0.85rem 2rem; width: 100%;" onclick="submitExamSolutions()">
-                        Submit Official Examination Solutions
+                    <button type="button" id="finalSubmitBtn" class="btn btn-gold" style="width: 100%; min-height: 40px; font-size: 0.95rem;" onclick="submitExamSolutions()">
+                        Valider & Déposer Définitivement ma Copie
                     </button>
                 </div>
             </div>
 
-            <!-- Submitted Review State (When Candidate Has Already Submitted) -->
-            <div id="submittedReceiptArea" class="card" style="display: none;">
-                <div class="card-header">
-                    <span class="receipt-badge">&#x2713; Solutions Submitted Successfully</span>
-                    <h3 class="card-title">Official Examination Submission Dossier</h3>
-                    <p class="card-subtitle">Your work is recorded and securely queued for evaluation by the Examination Directorate.</p>
-                </div>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                    <div style="background: #f8fafc; padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border);">
-                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Submission Timestamp</div>
-                        <div style="font-weight: 700; font-size: 1.05rem;" id="receiptSubmitDate">--</div>
-                    </div>
-
-                    <div style="background: #f8fafc; padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border);">
-                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Review Status</div>
-                        <div style="font-weight: 700; font-size: 1.05rem;" id="receiptStatusText">Under Review</div>
-                    </div>
-
-                    <div style="background: #f8fafc; padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border);">
-                        <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Official Score</div>
-                        <div class="score-pill" id="receiptScoreText">Pending</div>
+            <!-- ÉTAT SOUMIS : DOSSIER CANDIDAT, NOTE & MESSENGER DE CORRECTION -->
+            <div id="submittedReceiptArea" class="portal-card" style="display: none;">
+                <div class="card-head">
+                    <div>
+                        <span class="user-status-chip" style="margin-bottom: 6px; display: inline-flex;">✓ Copie Reçue par le Jury</span>
+                        <h3 class="card-head-title">Dossier Officiel d'Examen</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Votre travail est enregistré et archivé pour correction par la Direction.</p>
                     </div>
                 </div>
 
-                <!-- Grader Feedback (If graded) -->
-                <div id="receiptFeedbackContainer" style="display: none; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 1.25rem; margin-bottom: 2rem;">
-                    <h4 style="font-size: 0.95rem; font-weight: 700; color: #92400e; margin-bottom: 0.5rem;">Examiner Comments & Feedback:</h4>
-                    <p id="receiptFeedbackText" style="color: #78350f; font-size: 0.95rem;"></p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px;">
+                    <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                        <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Date de Dépôt</div>
+                        <div style="font-weight: 700; font-size: 0.95rem;" id="receiptSubmitDate">--</div>
+                    </div>
+                    <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                        <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Statut d'Évaluation</div>
+                        <div style="font-weight: 700; font-size: 0.95rem;" id="receiptStatusText">En attente de correction</div>
+                    </div>
+                    <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                        <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Note Attribuée</div>
+                        <div style="font-weight: 700; font-size: 1.4rem; font-family: 'JetBrains Mono', monospace; color: var(--gold-light);" id="receiptScoreText">-- / 42</div>
+                    </div>
                 </div>
 
-                <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Submitted Solution Pages:</h4>
+                <!-- Avis officiel du jury -->
+                <div id="receiptFeedbackContainer" style="display: none; background: rgba(212, 175, 55, 0.12); border: 1px solid var(--border-gold); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 16px;">
+                    <h4 style="font-size: 0.88rem; font-weight: 700; color: var(--gold-light); margin-bottom: 4px;">Appréciation Officielle du Jury :</h4>
+                    <p id="receiptFeedbackText" style="color: #FFFFFF; font-size: 0.85rem;"></p>
+                </div>
+
+                <!-- Pages de la copie avec gestion interactive -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <h4 style="font-size: 0.88rem; font-weight: 700; color: #FFFFFF;">Pages de votre Copie Soumise :</h4>
+                    <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 2px 8px; min-height: 26px;" onclick="promptAddExtraImage()">➕ Ajouter une page</button>
+                </div>
                 <div id="receiptImagesGrid" class="thumbnails-grid"></div>
 
-                <div style="margin-top: 1.5rem; text-align: center;">
-                    <a href="leaderboard.html" class="btn btn-outline">View Global Leaderboard & Statistics &rarr;</a>
+                <!-- MESSENGER INDIVIDUEL DE CORRECTION (CANDIDAT <-> DIRECTION) -->
+                <div class="chat-messenger-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                        <div>
+                            <h4 style="font-size: 0.88rem; font-weight: 700; color: #FFFFFF;">💬 Discussion & Remarques avec le Jury (Messenger)</h4>
+                            <span style="font-size: 0.72rem; color: var(--text-muted);">Échangez en direct sur la correction et vos démonstrations</span>
+                        </div>
+                        <button type="button" class="btn btn-outline" style="font-size: 0.7rem; padding: 2px 7px; min-height: 24px;" onclick="loadCandidateMessages()">&#x21bb; Actualiser</button>
+                    </div>
+
+                    <div class="chat-thread-box" id="candidateChatBox">
+                        <!-- Loaded dynamically -->
+                    </div>
+
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="candidateChatInput" class="form-control" placeholder="Poser une question au correcteur ou répondre..." onkeydown="if(event.key==='Enter') sendCandidateMessage()">
+                        <button type="button" class="btn btn-gold" onclick="sendCandidateMessage()">Envoyer &rarr;</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 16px; text-align: center;">
+                    <a href="leaderboard.html" class="btn btn-outline">Consulter le Classement & Statistiques &rarr;</a>
                 </div>
             </div>
 
@@ -869,16 +883,37 @@
 
     </div>
 
-    <!-- Image Lightbox Modal -->
-    <div id="lightboxModal" class="modal" onclick="closeLightbox()">
-        <div class="modal-close">&times;</div>
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <img id="lightboxImage" src="" alt="Enlarged Solution">
+    <!-- 5. INTERACTIVE IMAGE STUDIO MODAL (SORTIR, MODIFIER, SUPPRIMER, AJOUTER, ZOOM) -->
+    <div id="imageStudioModal" class="image-studio-modal">
+        <div class="studio-topbar">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span id="studioImgTitle" style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">Page 1</span>
+                <span id="studioImgCounter" style="font-size: 0.75rem; color: var(--text-muted);">(1 / 1)</span>
+            </div>
+
+            <div class="studio-actions-group">
+                <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 3px 8px; min-height: 28px;" onclick="zoomStudio(-0.2)">🔍 -</button>
+                <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 3px 8px; min-height: 28px;" onclick="zoomStudio(0.2)">🔍 +</button>
+                <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 3px 8px; min-height: 28px;" onclick="triggerReplaceStudioImage()">🔄 Remplacer</button>
+                <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 3px 8px; min-height: 28px;" onclick="promptAddExtraImage()">➕ Ajouter</button>
+                <button type="button" class="btn btn-danger" style="font-size: 0.72rem; padding: 3px 8px; min-height: 28px;" onclick="deleteCurrentStudioImage()">🗑️ Supprimer</button>
+                <button type="button" class="btn btn-gold" style="font-size: 0.72rem; padding: 3px 12px; min-height: 28px; font-weight: 700;" onclick="closeImageStudio()">✕ Sortir</button>
+            </div>
         </div>
+
+        <div class="studio-stage" onclick="closeImageStudio()">
+            <button type="button" class="studio-nav-arrow arrow-prev" onclick="event.stopPropagation(); navStudioImg(-1);">&#9664;</button>
+            <img id="studioTargetImg" src="" alt="Copie manuscrite" onclick="event.stopPropagation()">
+            <button type="button" class="studio-nav-arrow arrow-next" onclick="event.stopPropagation(); navStudioImg(1);">&#9654;</button>
+        </div>
+
+        <!-- Hidden inputs for image replacements / adds -->
+        <input type="file" id="replaceImageFileInput" accept="image/*" style="display: none;" onchange="handleReplaceImageSelected(event)">
+        <input type="file" id="addImageFileInput" accept="image/*" multiple style="display: none;" onchange="handleAddExtraImagesSelected(event)">
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast"></div>
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast-box">Notification</div>
 
     <script>
         let currentUser = null;
@@ -887,14 +922,17 @@
         let countdownInterval = null;
         let uploadedImages = [];
 
+        // Image Studio state
+        let currentStudioIndex = 0;
+        let studioImagesList = [];
+        let studioZoom = 1;
+
         function showToast(message, type = 'info') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
-            toast.className = `toast ${type}`;
+            toast.className = `toast-box ${type}`;
             toast.style.display = 'block';
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 4000);
+            setTimeout(() => { toast.style.display = 'none'; }, 3800);
         }
 
         function switchAuthTab(tab) {
@@ -921,7 +959,7 @@
             const name = document.getElementById('regName').value.trim();
             const email = document.getElementById('regEmail').value.trim();
             const password = document.getElementById('regPassword').value;
-            const country = document.getElementById('regCountry').value;
+            const country = document.getElementById('regCountry').value.trim();
 
             try {
                 const res = await fetch('/api/auth/register', {
@@ -930,11 +968,11 @@
                     body: JSON.stringify({ name, email, password, country })
                 });
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Registration failed');
+                if (!res.ok) throw new Error(data.error || 'Erreur d\'inscription');
 
                 localStorage.setItem('olympiad_token', data.token);
                 currentUser = data.user;
-                showToast(`Welcome, ${currentUser.name}! Registration successful.`, 'success');
+                showToast(`Bienvenue, ${currentUser.name} ! Dossier créé.`, 'success');
                 initPortal();
             } catch (err) {
                 showToast(err.message, 'error');
@@ -953,11 +991,11 @@
                     body: JSON.stringify({ email, password })
                 });
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Login failed');
+                if (!res.ok) throw new Error(data.error || 'Identifiants invalides');
 
                 localStorage.setItem('olympiad_token', data.token);
                 currentUser = data.user;
-                showToast(`Logged in successfully as ${currentUser.name}.`, 'success');
+                showToast(`Connexion réussie : ${currentUser.name}`, 'success');
 
                 if (currentUser.role === 'admin') {
                     window.location.href = 'admin.html';
@@ -969,7 +1007,7 @@
             }
         }
 
-        function logout() {
+        function candidateLogout() {
             localStorage.removeItem('olympiad_token');
             currentUser = null;
             currentSession = null;
@@ -978,7 +1016,7 @@
             document.getElementById('examWorkspace').style.display = 'none';
             document.getElementById('userHeaderBadge').style.display = 'none';
             document.getElementById('stickyTimerBar').style.display = 'none';
-            showToast('Logged out.');
+            showToast('Déconnexion effectuée.');
         }
 
         async function initPortal() {
@@ -996,34 +1034,33 @@
                 const data = await res.json();
                 if (!res.ok) {
                     if (res.status === 401) {
-                        logout();
+                        candidateLogout();
                         return;
                     }
-                    throw new Error(data.error || 'Failed to load exam');
+                    throw new Error(data.error || 'Impossible de charger l\'examen');
                 }
 
                 activeExam = data.test;
                 currentSession = data.session;
 
-                // Fetch user info
+                // Load me
                 const userRes = await fetch('/api/auth/me', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const userData = await userRes.json();
                 currentUser = userData.user;
 
-                // Update UI state
                 document.getElementById('authSection').style.display = 'none';
                 document.getElementById('examWorkspace').style.display = 'block';
                 document.getElementById('userHeaderBadge').style.display = 'flex';
                 document.getElementById('userNameHeader').textContent = currentUser.name;
-                document.getElementById('candidateCountryBadge').textContent = currentUser.country;
+                document.getElementById('candidateCountryBadge').textContent = currentUser.country || 'Tunisie';
 
-                // Check suspension
+                // Ban check
                 const banAlert = document.getElementById('banAlert');
                 if (data.isBanned && data.banDetails) {
                     banAlert.style.display = 'flex';
-                    document.getElementById('banMessage').textContent = data.banDetails.banReason || 'Academic integrity suspension.';
+                    document.getElementById('banMessage').textContent = data.banDetails.banReason || 'Suspension pour intégrité académique.';
                     document.getElementById('banExpiresText').textContent = new Date(data.banDetails.bannedUntil).toLocaleString();
                     document.getElementById('preStartArea').style.display = 'none';
                     return;
@@ -1031,15 +1068,12 @@
                     banAlert.style.display = 'none';
                 }
 
-                // Render test details
                 document.getElementById('testTitleDisplay').textContent = activeExam.title;
                 document.getElementById('testDescDisplay').textContent = activeExam.description;
-                document.getElementById('pdfFilenameText').textContent = activeExam.pdfFilename || 'Olympiad_Subject_Paper.pdf';
+                document.getElementById('pdfFilenameText').textContent = activeExam.pdfFilename || 'Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf';
                 document.getElementById('downloadPdfBtn').href = activeExam.pdfUrl || '#';
 
-                // Check session state
                 renderSessionState();
-
             } catch (err) {
                 showToast(err.message, 'error');
             }
@@ -1052,37 +1086,34 @@
             const stickyTimerBar = document.getElementById('stickyTimerBar');
 
             if (!currentSession) {
-                // Not started
                 preStartArea.style.display = 'block';
                 activeTestArea.style.display = 'none';
                 submittedReceiptArea.style.display = 'none';
                 stickyTimerBar.style.display = 'none';
             } else if (currentSession.status === 'in_progress') {
-                // In progress (4-hour countdown)
                 preStartArea.style.display = 'none';
                 activeTestArea.style.display = 'block';
                 submittedReceiptArea.style.display = 'none';
                 stickyTimerBar.style.display = 'flex';
                 startTimerCountdown(currentSession.remainingSeconds);
 
-                // Restore uploaded images if any
                 if (currentSession.images && currentSession.images.length > 0) {
                     uploadedImages = currentSession.images;
-                    renderThumbnails();
                 }
+                renderThumbnails();
             } else if (currentSession.status === 'submitted' || currentSession.status === 'expired') {
-                // Submitted / Graded
                 preStartArea.style.display = 'none';
                 activeTestArea.style.display = 'none';
                 submittedReceiptArea.style.display = 'block';
                 stickyTimerBar.style.display = 'none';
                 renderReceipt(currentSession);
+                loadCandidateMessages();
             }
         }
 
         async function startExamSession() {
             const token = localStorage.getItem('olympiad_token');
-            if (!confirm("Are you ready to begin? The 4-hour countdown will start immediately and cannot be paused.")) {
+            if (!confirm("Êtes-vous prêt ? Le compte à rebours de 4 heures va commencer immédiatement sans interruption possible.")) {
                 return;
             }
 
@@ -1092,10 +1123,10 @@
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Failed to start exam');
+                if (!res.ok) throw new Error(data.error || 'Erreur de démarrage');
 
                 currentSession = data.session;
-                showToast('4-Hour Examination started! Good luck!', 'success');
+                showToast('Épreuve de 4 heures lancée ! Bon courage !', 'success');
                 renderSessionState();
                 window.scrollTo({ top: 300, behavior: 'smooth' });
             } catch (err) {
@@ -1105,7 +1136,6 @@
 
         function startTimerCountdown(remainingSec) {
             if (countdownInterval) clearInterval(countdownInterval);
-
             let secondsLeft = remainingSec;
             const timerDisplay = document.getElementById('timerCountdown');
 
@@ -1113,24 +1143,23 @@
                 if (secondsLeft <= 0) {
                     clearInterval(countdownInterval);
                     timerDisplay.textContent = '00:00:00';
-                    timerDisplay.classList.add('countdown-pulse');
-                    showToast('Time expired! Please submit your solutions immediately.', 'error');
+                    timerDisplay.classList.add('timer-pulse');
+                    showToast('Temps écoulé ! Déposez vos solutions immédiatement.', 'error');
                     return;
                 }
 
                 const h = Math.floor(secondsLeft / 3600);
                 const m = Math.floor((secondsLeft % 3600) / 60);
                 const s = secondsLeft % 60;
-
                 const pad = (n) => String(n).padStart(2, '0');
+
                 timerDisplay.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
 
-                if (secondsLeft < 1800) { // under 30 mins
-                    timerDisplay.classList.add('countdown-pulse');
+                if (secondsLeft < 1800) {
+                    timerDisplay.classList.add('timer-pulse');
                 } else {
-                    timerDisplay.classList.remove('countdown-pulse');
+                    timerDisplay.classList.remove('timer-pulse');
                 }
-
                 secondsLeft--;
             }
 
@@ -1149,7 +1178,7 @@
                 const formData = new FormData();
                 formData.append('image', file);
 
-                showToast(`Uploading ${file.name}...`);
+                showToast(`Téléversement de ${file.name}...`);
                 try {
                     const res = await fetch('/api/exam/upload-image', {
                         method: 'POST',
@@ -1157,13 +1186,13 @@
                         body: formData
                     });
                     const data = await res.json();
-                    if (!res.ok) throw new Error(data.error || 'Upload failed');
+                    if (!res.ok) throw new Error(data.error || 'Échec du téléversement');
 
                     uploadedImages.push(data.image);
                     renderThumbnails();
-                    showToast(`${file.name} uploaded successfully!`, 'success');
+                    showToast(`${file.name} ajouté !`, 'success');
                 } catch (err) {
-                    showToast(`Failed to upload ${file.name}: ${err.message}`, 'error');
+                    showToast(`Erreur : ${err.message}`, 'error');
                 }
             }
         }
@@ -1176,9 +1205,12 @@
                 const card = document.createElement('div');
                 card.className = 'thumbnail-card';
                 card.innerHTML = `
-                    <img src="${img.url}" class="thumbnail-img" onclick="openLightbox('${img.url}')" title="Click to enlarge">
-                    <div class="thumbnail-info">Page ${idx + 1}: ${img.name}</div>
-                    <button class="thumbnail-delete" onclick="removeImage(${idx})" title="Remove page">&times;</button>
+                    <img src="${img.url}" alt="${img.name}" onclick="openImageStudio(uploadedImages, ${idx})">
+                    <button type="button" class="thumbnail-delete-btn" onclick="event.stopPropagation(); removeImage(${idx})" title="Supprimer la page">&times;</button>
+                    <div class="thumbnail-card-bar" onclick="openImageStudio(uploadedImages, ${idx})">
+                        <span>Page ${idx + 1}</span>
+                        <span>🔍 Voir</span>
+                    </div>
                 `;
                 container.appendChild(card);
             });
@@ -1187,6 +1219,7 @@
         function removeImage(index) {
             uploadedImages.splice(index, 1);
             renderThumbnails();
+            showToast('Page retirée.');
         }
 
         async function submitExamSolutions() {
@@ -1194,16 +1227,16 @@
             const pledge = document.getElementById('pledgeCheckbox').checked;
 
             if (uploadedImages.length === 0) {
-                showToast('Please upload at least one image showing your handwritten solutions and geometric schemas.', 'error');
+                showToast('Veuillez téléverser au moins une photo de vos solutions manuscrites.', 'error');
                 return;
             }
 
             if (!pledge) {
-                showToast('You must certify the Candidate Declaration of academic honesty.', 'error');
+                showToast('Veuillez cocher la Déclaration sur l\'honneur.', 'error');
                 return;
             }
 
-            if (!confirm('Are you sure you want to submit your final solutions? You cannot modify them after submission.')) {
+            if (!confirm('Êtes-vous certain de vouloir soumettre définitivement votre copie ?')) {
                 return;
             }
 
@@ -1222,10 +1255,10 @@
                     })
                 });
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Submission failed');
+                if (!res.ok) throw new Error(data.error || 'Erreur lors de la soumission');
 
                 currentSession = data.session;
-                showToast('Examination submitted successfully!', 'success');
+                showToast('Copie d\'olympiade déposée avec succès !', 'success');
                 renderSessionState();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } catch (err) {
@@ -1234,7 +1267,7 @@
         }
 
         function renderReceipt(session) {
-            document.getElementById('receiptSubmitDate').textContent = session.submittedAt ? new Date(session.submittedAt).toLocaleString() : 'Submitted';
+            document.getElementById('receiptSubmitDate').textContent = session.submittedAt ? new Date(session.submittedAt).toLocaleString() : 'Déposé';
             
             const statusEl = document.getElementById('receiptStatusText');
             const scoreEl = document.getElementById('receiptScoreText');
@@ -1242,7 +1275,7 @@
             const feedbackText = document.getElementById('receiptFeedbackText');
 
             if (session.score !== null) {
-                statusEl.textContent = 'Graded & Evaluated';
+                statusEl.textContent = 'Corrigé & Évalué par le Jury';
                 statusEl.style.color = 'var(--green)';
                 scoreEl.textContent = `${session.score} / ${activeExam?.maxScore || 42}`;
                 
@@ -1253,32 +1286,292 @@
                     feedbackContainer.style.display = 'none';
                 }
             } else {
-                statusEl.textContent = 'Under Examiner Review';
-                statusEl.style.color = '#d97706';
-                scoreEl.textContent = 'Pending';
+                statusEl.textContent = 'En cours d\'examen par le Jury';
+                statusEl.style.color = '#F59E0B';
+                scoreEl.textContent = 'En attente';
                 feedbackContainer.style.display = 'none';
             }
 
             const grid = document.getElementById('receiptImagesGrid');
             grid.innerHTML = '';
-            (session.images || []).forEach((img, idx) => {
+            const images = session.images || [];
+
+            images.forEach((img, idx) => {
                 const card = document.createElement('div');
                 card.className = 'thumbnail-card';
                 card.innerHTML = `
-                    <img src="${img.url}" class="thumbnail-img" onclick="openLightbox('${img.url}')" title="Click to inspect">
-                    <div class="thumbnail-info">Sheet ${idx + 1}: ${img.name}</div>
+                    <img src="${img.url}" alt="${img.name}" onclick="openImageStudio(currentSession.images, ${idx})">
+                    <div class="thumbnail-card-bar" onclick="openImageStudio(currentSession.images, ${idx})">
+                        <span>Page ${idx + 1}</span>
+                        <span>🔍 Inspecter</span>
+                    </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        function openLightbox(url) {
-            document.getElementById('lightboxImage').src = url;
-            document.getElementById('lightboxModal').classList.add('open');
+        // ================= 5. INTERACTIVE IMAGE STUDIO (ENTRER, SORTIR, MODIFIER, SUPPRIMER, AJOUTER) =================
+        function openImageStudio(imagesList, index) {
+            studioImagesList = imagesList || [];
+            currentStudioIndex = index >= 0 && index < studioImagesList.length ? index : 0;
+            studioZoom = 1;
+            renderStudioImage();
+
+            document.getElementById('imageStudioModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
         }
 
-        function closeLightbox() {
-            document.getElementById('lightboxModal').classList.remove('open');
+        function renderStudioImage() {
+            if (studioImagesList.length === 0) {
+                closeImageStudio();
+                return;
+            }
+            const img = studioImagesList[currentStudioIndex];
+            const target = document.getElementById('studioTargetImg');
+            target.src = img.url;
+            target.style.transform = `scale(${studioZoom})`;
+
+            document.getElementById('studioImgTitle').textContent = img.name || `Page ${currentStudioIndex + 1}`;
+            document.getElementById('studioImgCounter').textContent = `(${currentStudioIndex + 1} / ${studioImagesList.length})`;
+        }
+
+        function closeImageStudio() {
+            document.getElementById('imageStudioModal').classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        function zoomStudio(delta) {
+            studioZoom = Math.max(0.5, Math.min(3.5, studioZoom + delta));
+            document.getElementById('studioTargetImg').style.transform = `scale(${studioZoom})`;
+        }
+
+        function navStudioImg(direction) {
+            if (studioImagesList.length <= 1) return;
+            currentStudioIndex = (currentStudioIndex + direction + studioImagesList.length) % studioImagesList.length;
+            studioZoom = 1;
+            renderStudioImage();
+        }
+
+        // Supprimer l'image actuelle
+        async function deleteCurrentStudioImage() {
+            if (studioImagesList.length === 0) return;
+            if (!confirm("Voulez-vous supprimer cette page de votre copie ?")) return;
+
+            const deletedImg = studioImagesList[currentStudioIndex];
+            const token = localStorage.getItem('olympiad_token');
+
+            // If session is already submitted, call delete API
+            if (currentSession && (currentSession.status === 'submitted' || currentSession.status === 'in_progress')) {
+                try {
+                    await fetch('/api/exam/delete-image', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ imageId: deletedImg.id })
+                    });
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+
+            studioImagesList.splice(currentStudioIndex, 1);
+            uploadedImages = studioImagesList;
+
+            if (currentSession) {
+                currentSession.images = studioImagesList;
+                renderReceipt(currentSession);
+            } else {
+                renderThumbnails();
+            }
+
+            showToast("Page supprimée avec succès.", "info");
+
+            if (studioImagesList.length === 0) {
+                closeImageStudio();
+            } else {
+                if (currentStudioIndex >= studioImagesList.length) {
+                    currentStudioIndex = studioImagesList.length - 1;
+                }
+                renderStudioImage();
+            }
+        }
+
+        // Remplacer l'image actuelle
+        function triggerReplaceStudioImage() {
+            document.getElementById('replaceImageFileInput').click();
+        }
+
+        async function handleReplaceImageSelected(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const token = localStorage.getItem('olympiad_token');
+            const formData = new FormData();
+            formData.append('image', file);
+
+            showToast(`Remplacement en cours...`);
+            try {
+                const res = await fetch('/api/exam/upload-image', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur lors du téléversement');
+
+                // Swap in current index
+                studioImagesList[currentStudioIndex] = data.image;
+                uploadedImages = studioImagesList;
+
+                if (currentSession) {
+                    currentSession.images = studioImagesList;
+                    await fetch('/api/exam/update-images', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ images: studioImagesList })
+                    });
+                    renderReceipt(currentSession);
+                } else {
+                    renderThumbnails();
+                }
+
+                renderStudioImage();
+                showToast("Page remplacée avec succès !", "success");
+            } catch (err) {
+                showToast(err.message, "error");
+            }
+        }
+
+        // Ajouter une image supplémentaire
+        function promptAddExtraImage() {
+            document.getElementById('addImageFileInput').click();
+        }
+
+        async function handleAddExtraImagesSelected(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            const token = localStorage.getItem('olympiad_token');
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const formData = new FormData();
+                formData.append('image', file);
+
+                try {
+                    const res = await fetch('/api/exam/upload-image', {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${token}` },
+                        body: formData
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error);
+
+                    studioImagesList.push(data.image);
+                    uploadedImages = studioImagesList;
+                } catch (err) {
+                    showToast(err.message, "error");
+                }
+            }
+
+            if (currentSession) {
+                currentSession.images = studioImagesList;
+                await fetch('/api/exam/update-images', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ images: studioImagesList })
+                });
+                renderReceipt(currentSession);
+            } else {
+                renderThumbnails();
+            }
+
+            currentStudioIndex = studioImagesList.length - 1;
+            renderStudioImage();
+            document.getElementById('imageStudioModal').classList.add('open');
+            showToast("Nouvelle(s) page(s) ajoutée(s) !", "success");
+        }
+
+        // ================= 6. MESSENGER DE CORRECTION CANDIDAT =================
+        async function loadCandidateMessages() {
+            if (!currentSession) return;
+            const token = localStorage.getItem('olympiad_token');
+
+            try {
+                const res = await fetch(`/api/exam/sessions/${currentSession.id}/messages`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (data.messages) {
+                    renderCandidateChat(data.messages);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function renderCandidateChat(messages) {
+            const chatBox = document.getElementById('candidateChatBox');
+            chatBox.innerHTML = '';
+
+            if (messages.length === 0) {
+                chatBox.innerHTML = '<div style="color: var(--text-muted); font-size: 0.8rem; text-align: center; padding: 12px;">Aucun échange pour le moment. Vous pouvez poser une question au Jury ci-dessous.</div>';
+                return;
+            }
+
+            messages.forEach(msg => {
+                const isCandidate = msg.sender === 'candidate';
+                const bubble = document.createElement('div');
+                bubble.className = `chat-bubble ${isCandidate ? 'bubble-candidate' : 'bubble-admin'}`;
+
+                const author = isCandidate ? 'Vous (Candidat)' : (msg.authorName || 'Direction des Examens');
+                const time = msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+
+                bubble.innerHTML = `
+                    <div class="bubble-author">${author}</div>
+                    <div>${msg.text}</div>
+                    <div class="bubble-time">${time}</div>
+                `;
+                chatBox.appendChild(bubble);
+            });
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendCandidateMessage() {
+            if (!currentSession) return;
+            const input = document.getElementById('candidateChatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const token = localStorage.getItem('olympiad_token');
+
+            try {
+                const res = await fetch(`/api/exam/sessions/${currentSession.id}/message`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ text })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur lors de l\'envoi');
+
+                input.value = '';
+                loadCandidateMessages();
+                showToast('Message envoyé au Jury.', 'success');
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
         }
 
         function scrollToSubmission() {
@@ -1293,7 +1586,14 @@
             }
         }
 
-        // Initialize on load
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeImageStudio();
+            if (document.getElementById('imageStudioModal').classList.contains('open')) {
+                if (e.key === 'ArrowLeft') navStudioImg(-1);
+                if (e.key === 'ArrowRight') navStudioImg(1);
+            }
+        });
+
         window.addEventListener('DOMContentLoaded', initPortal);
     </script>
 </body>

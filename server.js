@@ -77,6 +77,35 @@ function ensureSeedData() {
     modified = true;
   }
 
+  if (!db.settings) {
+    db.settings = {
+      isResultsPublic: false,
+      goldCutoff: 35,
+      silverCutoff: 28,
+      bronzeCutoff: 20
+    };
+    modified = true;
+  }
+
+  // Ensure sessions have messages array initialized
+  if (db.sessions && Array.isArray(db.sessions)) {
+    db.sessions.forEach(s => {
+      if (!Array.isArray(s.messages)) {
+        s.messages = [];
+        if (s.feedback) {
+          s.messages.push({
+            id: 'msg-init-' + (s.id || '1'),
+            sender: 'admin',
+            authorName: s.gradedBy || 'Examination Directorate',
+            text: s.feedback,
+            timestamp: s.gradedAt || s.submittedAt || new Date().toISOString()
+          });
+        }
+        modified = true;
+      }
+    });
+  }
+
   if (modified) {
     writeDB(db);
   }
@@ -405,6 +434,114 @@ app.post('/api/exam/submit', (req, res) => {
   });
 });
 
+// 7b. Candidate Image Management: Update Images in Session
+app.post('/api/exam/update-images', (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user) {
+    return res.status(401).json({ error: 'Unauthorized.' });
+  }
+
+  const { images } = req.body;
+  if (!Array.isArray(images)) {
+    return res.status(400).json({ error: 'Images must be an array.' });
+  }
+
+  const db = readDB();
+  const test = db.tests.find(t => t.isActive) || db.tests[0];
+  const session = db.sessions.find(s => s.userId === user.id && s.testId === test?.id);
+
+  if (!session) {
+    return res.status(404).json({ error: 'No active session found.' });
+  }
+
+  session.images = images;
+  writeDB(db);
+
+  res.json({ message: 'Images updated successfully.', session });
+});
+
+// 7c. Candidate Image Management: Delete Single Image
+app.post('/api/exam/delete-image', (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user) {
+    return res.status(401).json({ error: 'Unauthorized.' });
+  }
+
+  const { imageId } = req.body;
+  if (!imageId) {
+    return res.status(400).json({ error: 'imageId is required.' });
+  }
+
+  const db = readDB();
+  const test = db.tests.find(t => t.isActive) || db.tests[0];
+  const session = db.sessions.find(s => s.userId === user.id && s.testId === test?.id);
+
+  if (!session) {
+    return res.status(404).json({ error: 'No active session found.' });
+  }
+
+  session.images = (session.images || []).filter(img => img.id !== imageId);
+  writeDB(db);
+
+  res.json({ message: 'Image removed successfully.', session });
+});
+
+// 7d. Candidate Messenger: Send Message to Directorate
+app.post('/api/exam/sessions/:sessionId/message', (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user) {
+    return res.status(401).json({ error: 'Unauthorized.' });
+  }
+
+  const { text } = req.body;
+  if (!text || !text.trim()) {
+    return res.status(400).json({ error: 'Message text is required.' });
+  }
+
+  const db = readDB();
+  const session = db.sessions.find(s => s.id === req.params.sessionId);
+  if (!session) {
+    return res.status(404).json({ error: 'Session not found.' });
+  }
+
+  if (session.userId !== user.id && user.role !== 'admin') {
+    return res.status(403).json({ error: 'Access denied.' });
+  }
+
+  session.messages = session.messages || [];
+  const newMsg = {
+    id: 'msg-' + Date.now() + '-' + crypto.randomBytes(3).toString('hex'),
+    sender: 'candidate',
+    authorName: user.name,
+    text: text.trim(),
+    timestamp: new Date().toISOString()
+  };
+  session.messages.push(newMsg);
+  writeDB(db);
+
+  res.json({ message: 'Message sent.', msg: newMsg, session });
+});
+
+// 7e. Candidate Messenger: Get Messages for Session
+app.get('/api/exam/sessions/:sessionId/messages', (req, res) => {
+  const user = getAuthenticatedUser(req);
+  if (!user) {
+    return res.status(401).json({ error: 'Unauthorized.' });
+  }
+
+  const db = readDB();
+  const session = db.sessions.find(s => s.id === req.params.sessionId);
+  if (!session) {
+    return res.status(404).json({ error: 'Session not found.' });
+  }
+
+  if (session.userId !== user.id && user.role !== 'admin') {
+    return res.status(403).json({ error: 'Access denied.' });
+  }
+
+  res.json({ messages: session.messages || [], session });
+});
+
 // ======================== ADMIN ROUTES ========================
 
 function requireAdmin(req, res, next) {
@@ -524,7 +661,156 @@ app.post('/api/admin/ban', requireAdmin, (req, res) => {
   });
 });
 
-// 11. Admin: Upload / Update Test PDF & Parameters
+// 10b. Admin: Send Messenger message to candidate
+app.post('/api/admin/sessions/:sessionId/message', requireAdmin, (req, res) => {
+  const { text } = req.body;
+  if (!text || !text.trim()) {
+    return res.status(400).json({ error: 'Message text is required.' });
+  }
+
+  const db = readDB();
+  const session = db.sessions.find(s => s.id === req.params.sessionId);
+  if (!session) {
+    return res.status(404).json({ error: 'Session not found.' });
+  }
+
+  session.messages = session.messages || [];
+  const newMsg = {
+    id: 'msg-' + Date.now() + '-' + crypto.randomBytes(3).toString('hex'),
+    sender: 'admin',
+    authorName: req.adminUser.name || 'Examination Directorate',
+    text: text.trim(),
+    timestamp: new Date().toISOString()
+  };
+  session.messages.push(newMsg);
+  writeDB(db);
+
+  res.json({ message: 'Message sent successfully to candidate.', msg: newMsg, session });
+});
+
+// 11. Admin: Tests Management (CRUD, Launch, Pause)
+// 11a. List all Olympiad tests
+app.get('/api/admin/tests', requireAdmin, (req, res) => {
+  const db = readDB();
+  const testsWithStats = (db.tests || []).map(t => {
+    const sessions = (db.sessions || []).filter(s => s.testId === t.id);
+    const submitted = sessions.filter(s => s.status === 'submitted');
+    return {
+      ...t,
+      sessionsCount: sessions.length,
+      submittedCount: submitted.length
+    };
+  });
+  res.json({ tests: testsWithStats, activeTestId: db.tests.find(t => t.isActive)?.id });
+});
+
+// 11b. Create new Olympiad test
+app.post('/api/admin/tests', requireAdmin, uploadExamPdf.single('testPdf'), (req, res) => {
+  const { title, description, durationMinutes, maxScore, totalProblems, launchImmediately } = req.body;
+  if (!title) {
+    return res.status(400).json({ error: 'Olympiad title is required.' });
+  }
+
+  const db = readDB();
+  db.tests = db.tests || [];
+
+  const shouldLaunch = launchImmediately === 'true' || launchImmediately === true;
+
+  if (shouldLaunch) {
+    db.tests.forEach(t => { t.isActive = false; });
+  }
+
+  const newTest = {
+    id: 'test-' + Date.now(),
+    title: title.trim(),
+    description: (description || '').trim(),
+    durationMinutes: parseInt(durationMinutes, 10) || 240,
+    maxScore: parseFloat(maxScore) || 42,
+    totalProblems: parseInt(totalProblems, 10) || 6,
+    pdfUrl: req.file ? `/uploads/exams/${req.file.filename}` : (db.tests[0]?.pdfUrl || '/uploads/exams/Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf'),
+    pdfFilename: req.file ? req.file.originalname : (db.tests[0]?.pdfFilename || 'Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf'),
+    isActive: shouldLaunch,
+    createdAt: new Date().toISOString()
+  };
+
+  db.tests.unshift(newTest);
+  writeDB(db);
+
+  res.json({ message: shouldLaunch ? 'Olympiade créée et lancée avec succès !' : 'Olympiade enregistrée avec succès en brouillon.', test: newTest });
+});
+
+// 11c. Edit existing Olympiad test
+app.put('/api/admin/tests/:id', requireAdmin, uploadExamPdf.single('testPdf'), (req, res) => {
+  const { title, description, durationMinutes, maxScore, totalProblems } = req.body;
+  const db = readDB();
+  const test = db.tests.find(t => t.id === req.params.id);
+  if (!test) {
+    return res.status(404).json({ error: 'Olympiade non trouvée.' });
+  }
+
+  if (title) test.title = title.trim();
+  if (description !== undefined) test.description = description.trim();
+  if (durationMinutes) test.durationMinutes = parseInt(durationMinutes, 10) || 240;
+  if (maxScore) test.maxScore = parseFloat(maxScore) || 42;
+  if (totalProblems) test.totalProblems = parseInt(totalProblems, 10) || 6;
+
+  if (req.file) {
+    test.pdfUrl = `/uploads/exams/${req.file.filename}`;
+    test.pdfFilename = req.file.originalname;
+  }
+
+  writeDB(db);
+  res.json({ message: 'Olympiade mise à jour avec succès.', test });
+});
+
+// 11d. Delete Olympiad test
+app.delete('/api/admin/tests/:id', requireAdmin, (req, res) => {
+  const db = readDB();
+  const testIndex = db.tests.findIndex(t => t.id === req.params.id);
+  if (testIndex === -1) {
+    return res.status(404).json({ error: 'Olympiade non trouvée.' });
+  }
+
+  const deletedTest = db.tests.splice(testIndex, 1)[0];
+
+  if (deletedTest.isActive && db.tests.length > 0) {
+    db.tests[0].isActive = true;
+  }
+
+  writeDB(db);
+  res.json({ message: `Olympiade "${deletedTest.title}" supprimée avec succès.` });
+});
+
+// 11e. Launch Olympiad test
+app.post('/api/admin/tests/:id/launch', requireAdmin, (req, res) => {
+  const db = readDB();
+  const test = db.tests.find(t => t.id === req.params.id);
+  if (!test) {
+    return res.status(404).json({ error: 'Olympiade non trouvée.' });
+  }
+
+  db.tests.forEach(t => { t.isActive = false; });
+  test.isActive = true;
+  writeDB(db);
+
+  res.json({ message: `L'Olympiade "${test.title}" est maintenant active et lancée !`, test });
+});
+
+// 11f. Pause Olympiad test
+app.post('/api/admin/tests/:id/pause', requireAdmin, (req, res) => {
+  const db = readDB();
+  const test = db.tests.find(t => t.id === req.params.id);
+  if (!test) {
+    return res.status(404).json({ error: 'Olympiade non trouvée.' });
+  }
+
+  test.isActive = false;
+  writeDB(db);
+
+  res.json({ message: `L'Olympiade "${test.title}" est suspendue / mise en pause.`, test });
+});
+
+// 11g. Legacy Upload / Update Test Route
 app.post('/api/admin/upload-test', requireAdmin, uploadExamPdf.single('testPdf'), (req, res) => {
   const { title, description, durationMinutes, maxScore, totalProblems } = req.body;
   const db = readDB();
@@ -542,21 +828,77 @@ app.post('/api/admin/upload-test', requireAdmin, uploadExamPdf.single('testPdf')
   }
 
   writeDB(db);
-
   res.json({ message: 'Olympiad examination updated successfully.', test });
+});
+
+// 11h. Leaderboard Settings & Cutoffs
+app.get('/api/leaderboard/settings', (req, res) => {
+  const db = readDB();
+  res.json({ settings: db.settings || { isResultsPublic: false, goldCutoff: 35, silverCutoff: 28, bronzeCutoff: 20 } });
+});
+
+app.post('/api/admin/leaderboard/settings', requireAdmin, (req, res) => {
+  const { isResultsPublic, goldCutoff, silverCutoff, bronzeCutoff } = req.body;
+  const db = readDB();
+
+  db.settings = db.settings || {};
+  if (isResultsPublic !== undefined) db.settings.isResultsPublic = Boolean(isResultsPublic);
+  if (goldCutoff !== undefined) db.settings.goldCutoff = parseFloat(goldCutoff) || 35;
+  if (silverCutoff !== undefined) db.settings.silverCutoff = parseFloat(silverCutoff) || 28;
+  if (bronzeCutoff !== undefined) db.settings.bronzeCutoff = parseFloat(bronzeCutoff) || 20;
+
+  writeDB(db);
+  res.json({ message: 'Paramètres du classement et seuils des médailles enregistrés avec succès.', settings: db.settings });
 });
 
 // ======================== PUBLIC LEADERBOARD & STATS ========================
 
-// 12. Leaderboard
+// 12. Leaderboard with Public Access Lock & Dynamic Medal Awards
 app.get('/api/leaderboard', (req, res) => {
   const db = readDB();
   const test = db.tests.find(t => t.isActive) || db.tests[0];
+
+  const caller = getAuthenticatedUser(req);
+  const isAdmin = caller && caller.role === 'admin';
+
+  const settings = db.settings || { isResultsPublic: false, goldCutoff: 35, silverCutoff: 28, bronzeCutoff: 20 };
+
+  if (!settings.isResultsPublic && !isAdmin) {
+    return res.json({
+      isResultsPublic: false,
+      message: "Les délibérations du Jury sont en cours. La Direction des Examens n'a pas encore ouvert l'accès public aux résultats.",
+      settings,
+      test,
+      rankings: []
+    });
+  }
+
+  const goldCutoff = settings.goldCutoff ?? 35;
+  const silverCutoff = settings.silverCutoff ?? 28;
+  const bronzeCutoff = settings.bronzeCutoff ?? 20;
 
   const rankings = db.sessions
     .filter(s => s.status === 'submitted' && s.score !== null)
     .map(s => {
       const student = db.users.find(u => u.id === s.userId);
+      let medal = 'none';
+      let medalLabel = 'Certificat de Participation';
+      let medalBadge = '📜';
+
+      if (s.score >= goldCutoff) {
+        medal = 'gold';
+        medalLabel = "Médaille d'Or";
+        medalBadge = '🥇';
+      } else if (s.score >= silverCutoff) {
+        medal = 'silver';
+        medalLabel = "Médaille d'Argent";
+        medalBadge = '🥈';
+      } else if (s.score >= bronzeCutoff) {
+        medal = 'bronze';
+        medalLabel = "Mention Honorable";
+        medalBadge = '🥉';
+      }
+
       return {
         sessionId: s.id,
         candidateName: student?.name || 'Anonymous Candidate',
@@ -564,7 +906,10 @@ app.get('/api/leaderboard', (req, res) => {
         score: s.score,
         maxScore: test?.maxScore || 42,
         submittedAt: s.submittedAt,
-        feedback: s.feedback || ''
+        feedback: s.feedback || '',
+        medal,
+        medalLabel,
+        medalBadge
       };
     })
     .sort((a, b) => {
@@ -576,7 +921,13 @@ app.get('/api/leaderboard', (req, res) => {
       ...item
     }));
 
-  res.json({ test, rankings });
+  res.json({
+    isResultsPublic: true,
+    isAdmin,
+    settings,
+    test,
+    rankings
+  });
 });
 
 // 13. Statistics
@@ -649,3 +1000,5 @@ app.get('*', (req, res, next) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://0.0.0.0:${PORT}`);
 });
+
+export default app;

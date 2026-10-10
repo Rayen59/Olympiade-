@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: memorial-assil-hamdi-olympiades
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    disk:
+      name: olympiad-data
+      mountPath: /data
+      sizeGB: 1

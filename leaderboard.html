@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Rankings & Statistics - Assil Hamdi Memorial</title>
-    <meta name="description" content="Official Leaderboard and Examination Statistics of the Assil Hamdi Memorial International Mathematics Olympiad.">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Classement Officiel & Médailles - Mémorial Assil Hamdi</title>
+    <meta name="description" content="Classement officiel international, proclamation des médailles d'or, d'argent et mentions honorables, et statistiques de l'Olympiade Assil Hamdi.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --primary: #0f172a;
-            --gold: #d97706;
-            --gold-light: #fef3c7;
-            --border: #e2e8f0;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
+            --bg-canvas: #070A10;
+            --bg-surface: #0E1320;
+            --bg-elevated: #141B2D;
+            --border: rgba(255, 255, 255, 0.1);
+            --border-gold: rgba(212, 175, 55, 0.35);
+            --gold: #D4AF37;
+            --gold-light: #F6E27A;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --radius-sm: 6px;
+            --radius-md: 12px;
         }
 
         * {
@@ -24,354 +29,411 @@
             padding: 0;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-dark);
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        header.navbar {
-            background-color: #0f172a;
-            color: #ffffff;
-            border-bottom: 2px solid #d97706;
-            padding: 0.75rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        a, button {
+            transition: all 0.18s ease;
+            font-family: inherit;
+        }
+
+        /* NAVBAR */
+        header.top-navbar {
+            background-color: rgba(10, 14, 24, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 8px 16px;
             position: sticky;
             top: 0;
             z-index: 99999;
-            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.25);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
             flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .nav-left-group {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
+            gap: 8px;
+            min-width: 0;
+            flex: 1;
         }
 
-        .nav-back-btn {
+        .btn-back-compact {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            background: rgba(255, 255, 255, 0.06);
-            color: #cbd5e1;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #CBD5E1;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 0.26rem 0.65rem;
-            border-radius: 4px;
+            height: 30px;
+            padding: 0 8px;
+            border-radius: var(--radius-sm);
             font-size: 0.72rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.18s ease;
             text-decoration: none;
-            line-height: 1.2;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .btn-back-compact:hover {
+            background: rgba(212, 175, 55, 0.18);
+            border-color: var(--gold);
+            color: #FFFFFF;
         }
 
-        .nav-back-btn:hover {
-            background: rgba(217, 119, 6, 0.2);
-            color: #ffffff;
-            border-color: #d97706;
-            transform: translateX(-1px);
-        }
-
-        .brand {
+        .site-brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 8px;
             text-decoration: none;
-            color: #ffffff;
+            color: #FFFFFF;
+            min-width: 0;
         }
-
-        .brand-logo {
-            width: 36px;
-            height: 36px;
-            background: #1e293b;
-            color: #f59e0b;
-            border-radius: 8px;
+        .brand-monogram {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #D4AF37, #996515);
+            color: #07090E;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Cinzel', serif;
-            font-weight: 700;
-            border: 1px solid #d97706;
-        }
-
-        .brand-text h1 {
-            font-family: 'Cinzel', serif;
+            font-weight: 800;
             font-size: 1.05rem;
-            color: #ffffff;
+            flex-shrink: 0;
+        }
+        .brand-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .nav-links {
+        .nav-links-desktop {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
-            flex-wrap: wrap;
+            gap: 12px;
         }
-
-        .nav-link {
+        .nav-link-item {
+            color: var(--text-muted);
             text-decoration: none;
-            color: #cbd5e1;
+            font-size: 0.8rem;
             font-weight: 500;
-            font-size: 0.88rem;
-            padding: 0.3rem 0.5rem;
-            border-radius: 4px;
+        }
+        .nav-link-item:hover, .nav-link-item.active {
+            color: var(--gold-light);
         }
 
-        .nav-link:hover, .nav-link.active {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
+        /* BUTTONS */
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.55rem 1.25rem;
-            border-radius: 8px;
+            justify-content: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
+            border: none;
+            min-height: 32px;
             text-decoration: none;
-            border: 1px solid transparent;
+            white-space: nowrap;
         }
-
         .btn-gold {
-            background: linear-gradient(135deg, #d97706, #b45309);
-            color: #ffffff;
+            background: linear-gradient(135deg, #F6E27A 0%, #D4AF37 100%);
+            color: #07090E;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+        }
+        .btn-gold:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            color: #CBD5E1;
+        }
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
         }
 
-        .container {
+        /* CONTAINER */
+        .page-container {
+            width: 100%;
             max-width: 1100px;
-            margin: 2.5rem auto;
-            padding: 0 1.5rem;
+            margin: 0 auto;
+            padding: 20px 14px 40px;
         }
 
-        /* Stats Grid */
+        /* CARDS */
+        .portal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* STATS GRID */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
         }
-
         .stat-card {
-            background: var(--bg-card);
+            background: var(--bg-elevated);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            border-radius: var(--radius-sm);
+            padding: 14px;
             text-align: center;
         }
-
         .stat-value {
-            font-size: 2.2rem;
-            font-weight: 800;
             font-family: 'JetBrains Mono', monospace;
-            color: #0f172a;
-            margin: 0.25rem 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin: 4px 0;
         }
-
         .stat-label {
-            font-size: 0.85rem;
+            font-size: 0.74rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        /* Table Card */
-        .table-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-            margin-bottom: 2.5rem;
-        }
-
-        .table-header-box {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border);
+        /* CUTOFFS STRIP */
+        .cutoffs-strip {
+            background: linear-gradient(135deg, rgba(20, 27, 45, 0.9), rgba(10, 14, 24, 0.95));
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            margin-bottom: 16px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 10px;
+        }
+        .cutoff-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+        }
+        .cutoff-item b {
+            color: var(--gold-light);
+            font-family: 'JetBrains Mono', monospace;
         }
 
+        /* TABLE */
+        .table-responsive-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
         table.leaderboard-table {
             width: 100%;
             border-collapse: collapse;
-            text-align: left;
+            font-size: 0.85rem;
+            min-width: 600px;
         }
-
         table.leaderboard-table th {
-            background: #f8fafc;
-            padding: 1rem 1.5rem;
-            font-size: 0.8rem;
+            background: #0B0F19;
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #475569;
+            color: var(--text-muted);
             border-bottom: 1px solid var(--border);
         }
-
         table.leaderboard-table td {
-            padding: 1.2rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.95rem;
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #CBD5E1;
         }
-
-        tr.rank-1 td { background: #fffbeb; }
-        tr.rank-2 td { background: #f8fafc; }
-        tr.rank-3 td { background: #fff7ed; }
+        tr.rank-1 td { background: rgba(212, 175, 55, 0.08); }
+        tr.rank-2 td { background: rgba(148, 163, 184, 0.05); }
+        tr.rank-3 td { background: rgba(180, 83, 9, 0.06); }
 
         .rank-badge {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
         }
+        .rank-gold { background: rgba(212, 175, 55, 0.25); color: var(--gold-light); border: 1px solid var(--gold); }
+        .rank-silver { background: rgba(148, 163, 184, 0.2); color: #E2E8F0; border: 1px solid #94A3B8; }
+        .rank-bronze { background: rgba(180, 83, 9, 0.2); color: #F59E0B; border: 1px solid #D97706; }
+        .rank-normal { color: var(--text-muted); }
 
-        .rank-badge.gold { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-        .rank-badge.silver { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
-        .rank-badge.bronze { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
-        .rank-badge.normal { background: transparent; color: var(--text-muted); }
-
-        .score-cell {
+        .score-pill {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 700;
-            font-size: 1.15rem;
-            color: #0f172a;
+            font-size: 1.05rem;
+            color: var(--gold-light);
         }
 
-        /* Countries list */
         .countries-flex {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 1rem;
+            gap: 8px;
+            margin-top: 10px;
         }
-
         .country-pill {
-            background: #f1f5f9;
+            background: var(--bg-elevated);
             border: 1px solid var(--border);
-            padding: 0.4rem 0.8rem;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            color: #E2E8F0;
+            display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 6px;
         }
 
-        @media (max-width: 768px) {
-            header.navbar { flex-direction: column; gap: 1rem; padding: 1rem; }
-            table.leaderboard-table th, table.leaderboard-table td { padding: 0.75rem 0.75rem; }
+        @media (max-width: 680px) {
+            .nav-links-desktop { display: none; }
+            .page-container { padding: 12px 10px 30px; }
+            .portal-card { padding: 14px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 400px) {
+            .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
+    <!-- TOP NAVBAR -->
+    <header class="top-navbar">
         <div class="nav-left-group">
-            <button type="button" class="nav-back-btn" onclick="smartGoBack()" title="Retour au Mémorial">
-                <span style="font-size: 0.85rem; line-height: 1;">&larr;</span>
+            <button type="button" class="btn-back-compact" onclick="smartGoBack()" title="Retour au Mémorial">
+                <span>&larr;</span>
                 <span>Retour</span>
             </button>
-
-            <a href="index.html" class="brand">
-                <div class="brand-logo">&Sigma;</div>
-                <div class="brand-text">
-                    <h1>Assil Hamdi Memorial</h1>
-                </div>
+            <a href="index.html" class="site-brand">
+                <div class="brand-monogram">&Sigma;</div>
+                <div class="brand-title">Mémorial Assil Hamdi</div>
             </a>
         </div>
 
-        <nav class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="exam.html" class="nav-link">Olympiad Test Portal</a>
-            <a href="leaderboard.html" class="nav-link active">Rankings & Stats</a>
-            <a href="courses and problems.html" class="nav-link">Problem Archive</a>
-            <a href="exam.html" class="btn btn-gold" style="padding: 0.45rem 1rem; font-size: 0.85rem;">Take Exam &rarr;</a>
+        <nav class="nav-links-desktop">
+            <a href="index.html" class="nav-link-item">Accueil</a>
+            <a href="exam.html" class="nav-link-item">Épreuves (4h)</a>
+            <a href="leaderboard.html" class="nav-link-item active">Classement</a>
+            <a href="admin.html" class="nav-link-item">Direction</a>
         </nav>
+
+        <div>
+            <a href="exam.html" class="btn btn-gold">Participer &rarr;</a>
+        </div>
     </header>
 
-    <div class="container">
-        
-        <div style="text-align: center; margin-bottom: 2.5rem;">
-            <h1 style="font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Official Leaderboard & Academic Analytics</h1>
-            <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto;">
-                Real-time official standings for the Assil Hamdi Memorial International Mathematics Olympiad. Ranked by verified examiner score on the international 42-point scale.
-            </p>
+    <div class="page-container">
+
+        <!-- EN-TÊTE -->
+        <div style="text-align: center; margin-bottom: 24px;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--gold); letter-spacing: 1.5px; font-weight: 700; margin-bottom: 4px;">Évaluation Académique Certifiée</div>
+            <h1 style="font-family: 'Cinzel', serif; font-size: 1.85rem; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Classement Officiel & Médailles</h1>
+            <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 600px; margin: 0 auto;">Palmarès international de l'Olympiade Assil Hamdi, proclamé sur l'échelle officielle de 42 points après vérification des démonstrations par le Jury.</p>
         </div>
 
-        <!-- Global Stats Row -->
+        <!-- STATS TOTALES -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-label">Total Registered Candidates</div>
+                <div class="stat-label">Candidats Inscrits</div>
                 <div class="stat-value" id="statCandidates">--</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Submissions Evaluated</div>
+                <div class="stat-label">Copies Évaluées</div>
                 <div class="stat-value" id="statEvaluated">--</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Average Score (IMO Scale)</div>
-                <div class="stat-value" id="statAverage" style="color: #d97706;">--</div>
+                <div class="stat-label">Moyenne Internationale</div>
+                <div class="stat-value" id="statAverage">--</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Maximum Available Points</div>
+                <div class="stat-label">Score Maximum</div>
                 <div class="stat-value">42.0</div>
             </div>
         </div>
 
-        <!-- Leaderboard Table -->
-        <div class="table-card">
-            <div class="table-header-box">
-                <div>
-                    <h2 style="font-size: 1.25rem; font-weight: 700;">Official Examination Standings ("Classement")</h2>
-                    <span style="font-size: 0.85rem; color: var(--text-muted);">Evaluated by the Examination Directorate</span>
-                </div>
-                <a href="exam.html" class="btn btn-gold">&#x25B6; Participate in Examination</a>
+        <!-- AVIS SI RÉSULTATS VERROUILLÉS (DÉLIBÉRATION PRIVÉE) -->
+        <div id="resultsLockedNotice" class="portal-card" style="display: none; text-align: center; padding: 36px 20px; border-color: var(--border-gold);">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🔒</div>
+            <h2 style="font-family: 'Cinzel', serif; font-size: 1.35rem; color: #FFFFFF; margin-bottom: 8px;">Délibérations du Jury en Cours</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 580px; margin: 0 auto 16px;">
+                La Direction des Examens procède actuellement à la vérification minutieuse des copies manuscrites et des figures géométriques. L'accès public au palmarès sera ouvert dès la fin des délibérations.
+            </p>
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 175, 55, 0.12); border: 1px solid var(--border-gold); padding: 6px 14px; border-radius: 4px; font-size: 0.78rem; color: var(--gold-light);">
+                <span>⚖️ Évaluation en double correction anonyme</span>
+            </div>
+        </div>
+
+        <!-- CLASSEMENT PUBLIC (VISIBLE SI OUVERT) -->
+        <div id="resultsTableCard" class="portal-card" style="display: none;">
+            
+            <!-- Bandeau des seuils de médailles -->
+            <div class="cutoffs-strip" id="cutoffsDisplayStrip">
+                <div style="font-size: 0.78rem; font-weight: 700; color: #FFFFFF;">🏅 Seuils des Médailles :</div>
+                <div class="cutoff-item">🥇 Or &ge; <b id="cutoffGoldTxt">35</b> pts</div>
+                <div class="cutoff-item">🥈 Argent &ge; <b id="cutoffSilverTxt">28</b> pts</div>
+                <div class="cutoff-item">🥉 Mention &ge; <b id="cutoffBronzeTxt">20</b> pts</div>
             </div>
 
-            <div style="overflow-x: auto;">
+            <div class="table-responsive-wrapper">
                 <table class="leaderboard-table">
                     <thead>
                         <tr>
-                            <th style="width: 80px;">Rank</th>
-                            <th>Candidate Name</th>
-                            <th>Country</th>
-                            <th>Official Score</th>
-                            <th>Submission Date</th>
-                            <th>Examiner Recognition</th>
+                            <th style="width: 70px;">Rang</th>
+                            <th>Candidat</th>
+                            <th>Délégation / Pays</th>
+                            <th>Note / 42</th>
+                            <th>Date de Dépôt</th>
+                            <th>Distinction Attribuée</th>
                         </tr>
                     </thead>
                     <tbody id="leaderboardTbody">
-                        <tr>
-                            <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
-                                Loading certified standings...
-                            </td>
-                        </tr>
+                        <!-- Loaded dynamically -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Top Countries Representation -->
-        <div class="stat-card" style="text-align: left; padding: 2rem;">
-            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Participating Nations & Regional Delegations:</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Number of registered mathematical talents by nation.</p>
+        <!-- DÉLÉGATIONS NATIONALES -->
+        <div class="portal-card">
+            <h3 style="font-family: 'Cinzel', serif; font-size: 1rem; color: #FFFFFF; margin-bottom: 4px;">Délégations & Nations Représentées</h3>
+            <p style="font-size: 0.78rem; color: var(--text-muted);">Répartition géographique des talents mathématiques inscrits.</p>
             <div class="countries-flex" id="countriesPillsContainer"></div>
         </div>
 
@@ -380,15 +442,12 @@
     <script>
         async function loadLeaderboardAndStats() {
             try {
-                // 1. Fetch Leaderboard
                 const rankRes = await fetch('/api/leaderboard');
                 const rankData = await rankRes.json();
-                
-                // 2. Fetch Stats
+
                 const statsRes = await fetch('/api/statistics');
                 const statsData = await statsRes.json();
 
-                // Populate stats
                 document.getElementById('statCandidates').textContent = statsData.totalRegistered || '0';
                 document.getElementById('statEvaluated').textContent = statsData.totalGraded || '0';
                 document.getElementById('statAverage').textContent = statsData.averageScore || '0';
@@ -399,22 +458,34 @@
                 (statsData.topCountries || []).forEach(c => {
                     const pill = document.createElement('div');
                     pill.className = 'country-pill';
-                    pill.innerHTML = `<span>${c.country}</span> <span style="color: var(--gold); font-weight: 700;">(${c.count})</span>`;
+                    pill.innerHTML = `<span>🌍 ${c.country}</span> <b style="color: var(--gold-light);">${c.count}</b>`;
                     pillsContainer.appendChild(pill);
                 });
 
-                // Populate table
+                const lockedNotice = document.getElementById('resultsLockedNotice');
+                const tableCard = document.getElementById('resultsTableCard');
+
+                if (!rankData.isResultsPublic && !rankData.isAdmin) {
+                    lockedNotice.style.display = 'block';
+                    tableCard.style.display = 'none';
+                    return;
+                }
+
+                lockedNotice.style.display = 'none';
+                tableCard.style.display = 'block';
+
+                // Populate cutoffs
+                if (rankData.settings) {
+                    document.getElementById('cutoffGoldTxt').textContent = rankData.settings.goldCutoff ?? 35;
+                    document.getElementById('cutoffSilverTxt').textContent = rankData.settings.silverCutoff ?? 28;
+                    document.getElementById('cutoffBronzeTxt').textContent = rankData.settings.bronzeCutoff ?? 20;
+                }
+
                 const tbody = document.getElementById('leaderboardTbody');
                 tbody.innerHTML = '';
 
                 if (!rankData.rankings || rankData.rankings.length === 0) {
-                    tbody.innerHTML = `
-                        <tr>
-                            <td colspan="6" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
-                                No graded submissions yet. Be the first to take the test and earn the top rank!
-                            </td>
-                        </tr>
-                    `;
+                    tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 30px; color: var(--text-muted);">Aucune copie notée pour l'instant.</td></tr>`;
                     return;
                 }
 
@@ -424,20 +495,20 @@
                     else if (r.rank === 2) tr.className = 'rank-2';
                     else if (r.rank === 3) tr.className = 'rank-3';
 
-                    let rankBadgeClass = 'normal';
-                    if (r.rank === 1) rankBadgeClass = 'gold';
-                    else if (r.rank === 2) rankBadgeClass = 'silver';
-                    else if (r.rank === 3) rankBadgeClass = 'bronze';
+                    let rankClass = 'rank-normal';
+                    if (r.rank === 1) rankClass = 'rank-gold';
+                    else if (r.rank === 2) rankClass = 'rank-silver';
+                    else if (r.rank === 3) rankClass = 'rank-bronze';
 
                     const dateStr = r.submittedAt ? new Date(r.submittedAt).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) : '--';
 
                     tr.innerHTML = `
-                        <td><span class="rank-badge ${rankBadgeClass}">#${r.rank}</span></td>
-                        <td><strong>${r.candidateName}</strong></td>
+                        <td><span class="rank-badge ${rankClass}">#${r.rank}</span></td>
+                        <td style="color: #FFFFFF; font-weight: 600;">${r.candidateName}</td>
                         <td>${r.country}</td>
-                        <td class="score-cell">${r.score} <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">/ ${r.maxScore}</span></td>
-                        <td style="color: var(--text-muted); font-size: 0.85rem;">${dateStr}</td>
-                        <td style="font-size: 0.85rem; color: #475569;">${r.feedback ? r.feedback : '<span style="color: #94a3b8;">Full marks confirmed</span>'}</td>
+                        <td><span class="score-pill">${r.score}</span> <span style="font-size: 0.72rem; color: var(--text-muted);">/ ${r.maxScore}</span></td>
+                        <td style="font-size: 0.78rem; color: var(--text-muted);">${dateStr}</td>
+                        <td><span style="font-weight: 600;">${r.medalBadge || ''} ${r.medalLabel}</span></td>
                     `;
                     tbody.appendChild(tr);
                 });

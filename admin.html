@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examination Directorate - Admin Console</title>
-    <meta name="description" content="Official administrative dashboard for the Assil Hamdi Memorial Olympiad. Messenger-style submission review, grading, disciplinary management, and exam dispatch.">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Direction des Examens - Administration du Mémorial</title>
+    <meta name="description" content="Console administrative officielle pour la correction des copies, le dépôt et lancement des épreuves PDF, la messagerie individuelle et la proclamation des médailles.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #0f172a;
-            --bg-surface: #1e293b;
-            --bg-card: #1e293b;
-            --border: #334155;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --gold: #f59e0b;
-            --gold-light: #fef3c7;
-            --red: #ef4444;
-            --green: #10b981;
-            --blue: #3b82f6;
+            --bg-body: #070A10;
+            --bg-surface: #0E1320;
+            --bg-surface-elevated: #141B2C;
+            --bg-card: rgba(16, 23, 38, 0.95);
+            --border: rgba(255, 255, 255, 0.1);
+            --border-gold: rgba(212, 175, 55, 0.35);
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --gold: #D4AF37;
+            --gold-light: #F6E27A;
+            --red: #EF4444;
+            --green: #10B981;
+            --blue: #3B82F6;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
         }
 
         * {
@@ -27,684 +34,1230 @@
             padding: 0;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
             background-color: var(--bg-body);
             color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
         }
 
+        a, button, input, select, textarea {
+            transition: all 0.16s ease;
+            font-family: inherit;
+        }
+
+        /* HEADER */
         header.admin-header {
-            background-color: #0b1120;
-            border-bottom: 2px solid var(--gold);
-            padding: 0.85rem 2rem;
+            background-color: rgba(10, 14, 24, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 8px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 99999;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            gap: 12px;
             flex-wrap: wrap;
-            gap: 1rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-back-compact {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #CBD5E1;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            height: 32px;
+            padding: 0 10px;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            line-height: 1;
+        }
+        .btn-back-compact:hover {
+            background: rgba(212, 175, 55, 0.18);
+            border-color: var(--gold);
+            color: #FFFFFF;
         }
 
         .admin-brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 8px;
             text-decoration: none;
-            color: #ffffff;
+            color: #FFFFFF;
         }
-
-        .admin-badge {
-            background: #b45309;
-            color: #fef3c7;
-            font-size: 0.7rem;
+        .brand-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.98rem;
             font-weight: 700;
-            padding: 0.2rem 0.5rem;
+            letter-spacing: 0.5px;
+        }
+        .admin-pill {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold-light);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 7px;
             border-radius: 4px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
+        /* NAVIGATION TABS */
+        .admin-nav-tabs {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 4px 0;
+            max-width: 100%;
+        }
+        .admin-nav-tabs::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 6px 13px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 34px;
+        }
+        .tab-btn:hover {
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(246, 226, 122, 0.08));
+            border-color: var(--gold);
+            color: var(--gold-light);
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        /* BUTTONS */
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            padding: 0.42rem 0.9rem;
-            border-radius: 6px;
+            justify-content: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
             font-weight: 600;
             font-size: 0.8rem;
             cursor: pointer;
             border: none;
-            transition: all 0.18s ease;
+            min-height: 34px;
             text-decoration: none;
-            line-height: 1.2;
+            white-space: nowrap;
         }
-
         .btn-gold {
-            background: linear-gradient(135deg, #f6e27a, #d4af37);
-            color: #07090e;
+            background: linear-gradient(135deg, #F6E27A 0%, #D4AF37 100%);
+            color: #07090E;
+            font-weight: 700;
             box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
         }
         .btn-gold:hover {
             filter: brightness(1.08);
             transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
         }
-
         .btn-outline {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
-            color: var(--text-main);
+            color: #CBD5E1;
         }
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--gold-light);
-            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
         }
-
         .btn-danger {
-            background-color: var(--red);
-            color: #ffffff;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #F87171;
         }
         .btn-danger:hover {
-            filter: brightness(1.1);
-            transform: translateY(-1px);
+            background: #EF4444;
+            color: #FFFFFF;
         }
-
         .btn-success {
-            background-color: var(--green);
-            color: #ffffff;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34D399;
         }
         .btn-success:hover {
-            filter: brightness(1.1);
-            transform: translateY(-1px);
+            background: #10B981;
+            color: #FFFFFF;
         }
 
-        .nav-tabs {
-            display: flex;
-            gap: 0.4rem;
+        /* MAIN WRAPPER */
+        .admin-main-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px;
+            min-height: calc(100vh - 65px);
         }
 
-        .nav-tab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 0.45rem 0.85rem;
-            font-size: 0.82rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.15s ease;
-        }
-
-        .nav-tab-btn:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .nav-tab-btn.active {
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--gold-light);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        /* Messenger Split Layout */
-        .messenger-layout {
+        /* 1. MESSENGER & CORRECTIONS VIEW */
+        .messenger-wrapper {
             display: grid;
-            grid-template-columns: 340px 1fr;
-            flex: 1;
+            grid-template-columns: 320px 1fr;
+            gap: 16px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            height: calc(100vh - 65px);
+            min-height: calc(100vh - 110px);
         }
 
-        /* Left Inbox Column */
-        .messenger-sidebar {
-            background: #111827;
+        /* Left Inbox */
+        .messenger-inbox {
+            background: #0B0F19;
             border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            max-height: calc(100vh - 110px);
         }
-
-        .sidebar-header {
-            padding: 1rem 1.25rem;
+        .inbox-header {
+            padding: 12px 16px;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .search-box {
-            padding: 0.75rem 1rem;
+        .inbox-search {
+            padding: 10px 14px;
             border-bottom: 1px solid var(--border);
         }
-
-        .search-input {
+        .inbox-search input {
             width: 100%;
-            background: #1f2937;
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
-            border-radius: 6px;
-            color: #ffffff;
-            padding: 0.5rem 0.75rem;
-            font-size: 0.85rem;
-        }
-
-        .candidate-thread-list {
-            flex: 1;
-            overflow-y: auto;
-            list-style: none;
-        }
-
-        .candidate-thread-item {
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid rgba(51, 65, 85, 0.4);
-            cursor: pointer;
-            transition: background 0.15s;
-            display: flex;
-            gap: 0.75rem;
-            align-items: flex-start;
-        }
-
-        .candidate-thread-item:hover {
-            background: rgba(30, 41, 59, 0.7);
-        }
-
-        .candidate-thread-item.active {
-            background: #1e293b;
-            border-left: 3px solid var(--gold);
-        }
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #334155;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #ffffff;
-            flex-shrink: 0;
-            font-size: 0.9rem;
-        }
-
-        .thread-details {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .thread-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.2rem;
-        }
-
-        .candidate-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .thread-time {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .thread-meta {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .status-chip {
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
-        }
-
-        .status-chip.graded {
-            background: rgba(16, 185, 129, 0.2);
-            color: #34d399;
-        }
-
-        .status-chip.pending {
-            background: rgba(245, 158, 11, 0.2);
-            color: #fbbf24;
-        }
-
-        .status-chip.banned {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-        }
-
-        /* Right Detail View */
-        .messenger-content {
-            background: #0f172a;
-            overflow-y: auto;
-            padding: 1.5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .detail-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.5rem;
-        }
-
-        .detail-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .solution-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .gallery-item {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            background: #0b1120;
-            position: relative;
-        }
-
-        .gallery-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .gallery-img:hover {
-            transform: scale(1.03);
-        }
-
-        .gallery-caption {
-            padding: 0.5rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .grading-panel {
-            background: #131d31;
-            border: 1px solid #25334e;
-            border-radius: 8px;
-            padding: 1.25rem;
-            margin-top: 1rem;
-        }
-
-        .form-control {
-            background: #0f172a;
-            border: 1px solid var(--border);
-            color: #ffffff;
-            border-radius: 6px;
-            padding: 0.6rem 0.8rem;
-            font-size: 0.9rem;
-            width: 100%;
-            margin-top: 0.3rem;
-        }
-
-        .form-control:focus {
+            padding: 7px 12px;
+            border-radius: var(--radius-sm);
+            color: #FFFFFF;
+            font-size: 0.8rem;
             outline: none;
+        }
+        .inbox-search input:focus {
             border-color: var(--gold);
         }
 
-        /* Modal Lightbox */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            display: none;
+        .candidate-list {
+            list-style: none;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .candidate-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .candidate-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .candidate-item.active {
+            background: rgba(212, 175, 55, 0.12);
+            border-left: 3px solid var(--gold);
+        }
+        .candidate-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #1E293B;
+            border: 1px solid var(--border);
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            padding: 2rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--gold-light);
+            flex-shrink: 0;
         }
-
-        .modal.open { display: flex; }
-
-        .modal-content {
-            max-width: 90vw;
-            max-height: 90vh;
-            border-radius: 8px;
+        .candidate-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .candidate-row-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+        .candidate-name-txt {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            white-space: nowrap;
             overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .candidate-sub-txt {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .status-badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .badge-graded { background: rgba(16, 185, 129, 0.18); color: #34D399; }
+        .badge-pending { background: rgba(245, 158, 11, 0.18); color: #FBBF24; }
+        .badge-banned { background: rgba(239, 68, 68, 0.18); color: #F87171; }
+
+        /* Right Dossier & Messenger Area */
+        .messenger-main-pane {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            max-height: calc(100vh - 110px);
+            padding: 18px;
+            gap: 16px;
         }
 
-        .modal-content img {
-            max-width: 100%;
+        .mobile-back-to-list {
+            display: none;
+            margin-bottom: 8px;
+        }
+
+        .dossier-header-card {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .score-box-display {
+            background: #090D16;
+            border: 1px solid var(--border-gold);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            text-align: right;
+        }
+        .score-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        /* Handwritten Proofs Gallery */
+        .proofs-gallery-card {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .proof-thumb-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: #000;
+            position: relative;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+        .proof-thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .proof-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.15s;
+            color: #FFFFFF;
+            font-size: 0.76rem;
+            font-weight: 600;
+            gap: 4px;
+        }
+        .proof-thumb-item:hover .proof-thumb-overlay {
+            opacity: 1;
+        }
+
+        /* Messenger Chat Thread */
+        .chat-messenger-card {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chat-thread-box {
+            background: #080B12;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            max-height: 260px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-bubble {
+            max-width: 82%;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            line-height: 1.45;
+        }
+        .bubble-admin {
+            align-self: flex-end;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(246, 226, 122, 0.15));
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #FFFFFF;
+        }
+        .bubble-candidate {
+            align-self: flex-start;
+            background: #1E293B;
+            border: 1px solid var(--border);
+            color: #E2E8F0;
+        }
+        .bubble-author {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 2px;
+        }
+        .bubble-time {
+            font-size: 0.64rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            text-align: right;
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 8px;
+        }
+        .chat-input-row input {
+            flex: 1;
+            background: #070A10;
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            color: #FFFFFF;
+            font-size: 0.82rem;
+            outline: none;
+        }
+        .chat-input-row input:focus {
+            border-color: var(--gold);
+        }
+
+        /* Grade Action Card */
+        .grade-action-card {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+        .grade-form-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .form-field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .field-label {
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .field-input {
+            background: #080C14;
+            border: 1px solid var(--border);
+            padding: 7px 12px;
+            border-radius: var(--radius-sm);
+            color: #FFFFFF;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .field-input:focus { border-color: var(--gold); }
+
+        /* 2. OLYMPIAD MANAGEMENT VIEW (PDF, LANCEMENT, MODIF, SUPPR) */
+        .olympiad-manage-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .manage-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+        }
+        .manage-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .manage-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .active-exam-banner {
+            background: linear-gradient(135deg, rgba(22, 29, 45, 0.95), rgba(12, 17, 28, 0.98));
+            border: 1.5px solid var(--border-gold);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .exam-status-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+        .chip-active { background: rgba(16, 185, 129, 0.15); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .chip-paused { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+            gap: 16px;
+            margin-top: 14px;
+        }
+        .test-item-card {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .test-item-card.is-active {
+            border-color: var(--gold);
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.12);
+        }
+
+        /* 3. LEADERBOARD & MEDAL THRESHOLDS VIEW */
+        .medals-config-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .threshold-inputs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .threshold-card {
+            background: #090E18;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .threshold-card.gold-border { border-color: rgba(212, 175, 55, 0.5); }
+        .threshold-card.silver-border { border-color: rgba(148, 163, 184, 0.5); }
+        .threshold-card.bronze-border { border-color: rgba(180, 83, 9, 0.5); }
+
+        /* LIGHTBOX MODAL */
+        .lightbox-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 100000;
+            display: none;
+            flex-direction: column;
+        }
+        .lightbox-modal.open { display: flex; }
+        .lightbox-topbar {
+            height: 52px;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 14, 24, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .lightbox-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            padding: 12px;
+        }
+        .lightbox-stage img {
+            max-width: 96%;
             max-height: 85vh;
             object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            transition: transform 0.2s ease;
         }
 
-        .toast {
+        /* TOAST NOTIFICATION */
+        .toast-msg {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #1e293b;
-            color: #ffffff;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            z-index: 9999;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100001;
+            background: #111827;
+            border: 1px solid var(--border-gold);
+            color: #FFFFFF;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            font-size: 0.84rem;
             display: none;
         }
-        .toast.success { border-color: var(--green); }
-        .toast.error { border-color: var(--red); }
+
+        /* RESPONSIVE MOBILE FIXES FOR ANDROID */
+        @media (max-width: 860px) {
+            header.admin-header {
+                padding: 8px 12px;
+            }
+            .brand-title {
+                font-size: 0.88rem;
+            }
+            .messenger-wrapper {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            .messenger-inbox {
+                max-height: none;
+            }
+            .messenger-inbox.hidden-mobile {
+                display: none;
+            }
+            .messenger-main-pane {
+                max-height: none;
+                padding: 12px;
+            }
+            .messenger-main-pane.hidden-mobile {
+                display: none;
+            }
+            .mobile-back-to-list {
+                display: block;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .threshold-inputs-grid {
+                grid-template-columns: 1fr;
+            }
+            .tests-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header.admin-header {
+                padding: 6px 10px;
+                gap: 8px;
+            }
+            .admin-nav-tabs {
+                width: 100%;
+                order: 3;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 4px;
+            }
+            .header-actions {
+                margin-left: 0;
+            }
+            .tab-btn {
+                padding: 5px 9px;
+                font-size: 0.72rem;
+                min-height: 30px;
+            }
+            .manage-card {
+                padding: 14px;
+            }
+            .active-exam-banner {
+                padding: 14px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header Bar with Back Arrow -->
+    <!-- TOP HEADER -->
     <header class="admin-header">
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-            <button type="button" class="btn btn-outline" onclick="smartGoBack()" title="Retour au Mémorial" style="padding: 0.25rem 0.6rem; font-weight: 600; font-size: 0.72rem; border-radius: 4px;">
-                <span style="font-size: 0.85rem; line-height: 1;">&larr;</span>
+        <div class="header-left">
+            <a href="index.html" class="btn-back-compact" title="Retourner au Mémorial">
+                <span>&larr;</span>
                 <span>Retour</span>
-            </button>
-
-            <a href="index.html" class="admin-brand">
-                <span style="font-family: 'Cinzel', serif; font-size: 1.15rem; font-weight: 700;">Assil Hamdi Memorial</span>
-                <span class="admin-badge">Directorate Console</span>
             </a>
-
-            <div class="nav-tabs">
-                <button class="nav-tab-btn active" id="tabSubmissionsBtn" onclick="switchView('submissions')">Submissions Inbox</button>
-                <button class="nav-tab-btn" id="tabExamManageBtn" onclick="switchView('manage')">Exam PDF & Dispatch</button>
-                <a href="leaderboard.html" target="_blank" class="nav-tab-btn" style="text-decoration: none;">Public Leaderboard &rarr;</a>
-            </div>
+            <a href="index.html" class="admin-brand">
+                <span class="brand-title">Mémorial Assil Hamdi</span>
+                <span class="admin-pill">Direction</span>
+            </a>
         </div>
 
-        <div style="display: flex; align-items: center; gap: 1rem;">
-            <span style="font-size: 0.85rem; color: var(--text-muted);">Authenticated as <strong>Directorate</strong></span>
-            <button class="btn btn-outline" onclick="adminLogout()">Log Out</button>
+        <nav class="admin-nav-tabs">
+            <button type="button" class="tab-btn active" id="tabCorrectionsBtn" onclick="switchAdminTab('corrections')">
+                <span>📥 Corrections & Messenger</span>
+                <span id="unreadCountBadge" style="background: var(--gold); color: #070A10; font-size: 0.65rem; font-weight: 800; padding: 1px 5px; border-radius: 9999px;">0</span>
+            </button>
+            <button type="button" class="tab-btn" id="tabOlympiadsBtn" onclick="switchAdminTab('olympiads')">
+                <span>🚀 Épreuves & PDF</span>
+            </button>
+            <button type="button" class="tab-btn" id="tabMedalsBtn" onclick="switchAdminTab('medals')">
+                <span>🏅 Publication & Médailles</span>
+            </button>
+        </nav>
+
+        <div class="header-actions">
+            <a href="leaderboard.html" target="_blank" class="btn btn-outline" style="font-size: 0.72rem; padding: 4px 8px; min-height: 28px;">
+                <span>Classement Public &rarr;</span>
+            </a>
+            <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 4px 8px; min-height: 28px;" onclick="adminLogout()">
+                <span>Quitter</span>
+            </button>
         </div>
     </header>
 
-    <!-- Admin Login Overlay if unauthenticated (Locked by default, requires secret credentials) -->
-    <div id="adminLoginOverlay" style="display: flex; position: fixed; inset: 0; background: rgba(7, 9, 14, 0.96); backdrop-filter: blur(20px); z-index: 999999; align-items: center; justify-content: center; padding: 20px;">
-        <div style="background: #111827; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 420px; box-shadow: 0 25px 60px rgba(0,0,0,0.8);">
-            <div style="text-align: center; margin-bottom: 1.5rem;">
-                <span class="admin-badge" style="background: rgba(212, 175, 55, 0.15); color: #F6E27A; border: 1px solid rgba(212, 175, 55, 0.3); padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Session Protégée &bull; Direction</span>
-                <h2 style="font-size: 1.4rem; color: #FFFFFF; font-weight: 800; margin-top: 0.75rem;">Direction des Examens</h2>
-                <p style="font-size: 0.85rem; color: #94A3B8; margin-top: 0.35rem;">Authentification obligatoire avec les identifiants administrateurs réservés.</p>
+    <!-- ADMIN LOGIN OVERLAY (Locked by default) -->
+    <div id="adminLoginOverlay" style="display: flex; position: fixed; inset: 0; background: rgba(7, 9, 14, 0.98); backdrop-filter: blur(25px); z-index: 999999; align-items: center; justify-content: center; padding: 16px;">
+        <div style="background: #0E1320; border: 1px solid var(--border-gold); border-radius: 14px; padding: 28px 24px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="width: 44px; height: 44px; margin: 0 auto 10px; border-radius: 8px; background: linear-gradient(135deg, #D4AF37, #996515); color: #07090E; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 800;">&Sigma;</div>
+                <h2 style="font-family: 'Cinzel', serif; font-size: 1.25rem; color: #FFFFFF; font-weight: 700;">Direction des Examens</h2>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Accès sécurisé réservé au comité d'organisation des Olympiades.</p>
             </div>
-
             <form onsubmit="handleAdminLogin(event)">
-                <div style="margin-bottom: 1.1rem;">
-                    <label style="display: block; font-size: 0.8rem; font-weight: 600; color: #CBD5E1; margin-bottom: 0.35rem;">Email Officiel Direction</label>
-                    <input type="email" id="adminEmail" class="form-control" placeholder="Adresse email officielle réservée" autocomplete="off" required style="width: 100%; background: #07090E; border: 1px solid rgba(255,255,255,0.15); color: #FFFFFF; padding: 9px 12px; border-radius: 6px; font-size: 0.86rem;">
+                <div style="margin-bottom: 14px;">
+                    <label style="display: block; font-size: 0.74rem; font-weight: 600; color: #CBD5E1; margin-bottom: 4px; text-transform: uppercase;">Email Officiel</label>
+                    <input type="email" id="adminEmail" required class="field-input" placeholder="admin12@gmail.com" style="width: 100%;">
                 </div>
-                <div style="margin-bottom: 1.3rem;">
-                    <label style="display: block; font-size: 0.8rem; font-weight: 600; color: #CBD5E1; margin-bottom: 0.35rem;">Mot de Passe Secret</label>
-                    <input type="password" id="adminPassword" class="form-control" placeholder="Mot de passe secret" autocomplete="off" required style="width: 100%; background: #07090E; border: 1px solid rgba(255,255,255,0.15); color: #FFFFFF; padding: 9px 12px; border-radius: 6px; font-size: 0.86rem;">
+                <div style="margin-bottom: 18px;">
+                    <label style="display: block; font-size: 0.74rem; font-weight: 600; color: #CBD5E1; margin-bottom: 4px; text-transform: uppercase;">Mot de Passe</label>
+                    <input type="password" id="adminPassword" required class="field-input" placeholder="••••••••" style="width: 100%;">
                 </div>
-                <button type="submit" class="btn btn-gold" style="width: 100%; padding: 9px 14px; font-weight: 700; font-size: 0.85rem; border-radius: 6px; justify-content: center;">
-                    Autoriser la Session Administrateur &rarr;
+                <button type="submit" class="btn btn-gold" style="width: 100%; min-height: 40px; font-weight: 700;">
+                    Déverrouiller la Console &rarr;
                 </button>
             </form>
-            <div style="text-align: center; margin-top: 1.1rem;">
-                <a href="index.html" style="color: #94A3B8; text-decoration: none; font-size: 0.8rem;">&larr; Retourner au portail d'accueil</a>
+            <div style="text-align: center; margin-top: 14px;">
+                <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.75rem;">&larr; Revenir au portail public</a>
             </div>
         </div>
     </div>
 
-    <!-- View 1: Messenger Submissions View (Hidden until authenticated) -->
-    <div id="submissionsView" class="messenger-layout" style="display: none;">
-        
-        <!-- Left Sidebar: Candidate List -->
-        <aside class="messenger-sidebar">
-            <div class="sidebar-header">
-                <div>
-                    <h3 style="font-size: 0.95rem; font-weight: 700;">Candidate Submissions</h3>
-                    <span style="font-size: 0.75rem; color: var(--text-muted);" id="subCountText">0 candidates</span>
+    <!-- MAIN INTERFACE -->
+    <main class="admin-main-container">
+
+        <!-- ================= TAB 1: CORRECTIONS & MESSENGER ================= -->
+        <section id="correctionsSection" class="messenger-wrapper" style="display: none;">
+            <!-- Left Inbox Sidebar -->
+            <aside class="messenger-inbox" id="inboxSidebar">
+                <div class="inbox-header">
+                    <div>
+                        <h3 style="font-size: 0.88rem; font-weight: 700; color: #FFFFFF;">Copies Reçues</h3>
+                        <span id="subCountLabel" style="font-size: 0.72rem; color: var(--text-muted);">0 candidats</span>
+                    </div>
+                    <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 3px 8px; min-height: 26px;" onclick="loadSubmissions()">&#x21bb; Actualiser</button>
                 </div>
-                <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="loadSubmissions()">&#x21bb; Refresh</button>
-            </div>
+                <div class="inbox-search">
+                    <input type="text" id="candidateSearchInput" placeholder="Chercher par nom, pays..." oninput="filterCandidates()">
+                </div>
+                <ul class="candidate-list" id="candidateListEl">
+                    <!-- Loaded dynamically -->
+                </ul>
+            </aside>
 
-            <div class="search-box">
-                <input type="text" id="candidateSearchInput" class="search-input" placeholder="Search by name, country, or email..." oninput="filterCandidates()">
-            </div>
-
-            <ul class="candidate-thread-list" id="candidateThreadList">
-                <!-- Dynamically populated -->
-            </ul>
-        </aside>
-
-        <!-- Right Pane: Individual Candidate Review Dossier -->
-        <main class="messenger-content" id="dossierPane">
-            <div style="text-align: center; padding: 4rem 2rem; color: var(--text-muted);" id="emptySelectMessage">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">&#x1F4E8;</div>
-                <h3>Select a Candidate Submission from the Inbox</h3>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Review uploaded handwriting, verify geometric schemas, assign grades, and apply disciplinary sanctions.</p>
-            </div>
-
-            <div id="selectedCandidateDetail" style="display: none; display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- Right Detail Pane -->
+            <div class="messenger-main-pane hidden-mobile" id="dossierPane">
                 
-                <!-- Candidate Dossier Header -->
-                <div class="detail-card">
-                    <div class="detail-header">
-                        <div>
-                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.3rem;">
-                                <h2 id="candNameDisplay" style="font-size: 1.4rem; font-weight: 700;">Sarah Mansouri</h2>
-                                <span id="candCountryBadge" class="status-chip graded">Tunisia</span>
-                                <span id="candBanChip" class="status-chip banned" style="display: none;">Suspended</span>
-                            </div>
-                            <div style="font-size: 0.85rem; color: var(--text-muted);">
-                                Email: <span id="candEmailDisplay">sarah@gmail.com</span> | Submitted: <span id="candSubmitTimeDisplay">--</span>
-                            </div>
-                        </div>
-
-                        <!-- Current Score Badge -->
-                        <div style="text-align: right;">
-                            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Assigned Score</div>
-                            <div style="font-size: 1.8rem; font-weight: 800; font-family: 'JetBrains Mono';" id="candScoreDisplay">-- / 42</div>
-                        </div>
-                    </div>
-
-                    <!-- Candidate Notes -->
-                    <div style="background: #0f172a; padding: 1rem; border-radius: 6px; border: 1px solid var(--border);">
-                        <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem;">Candidate Submission Remarks:</div>
-                        <p id="candNotesDisplay" style="font-size: 0.9rem; color: #cbd5e1;">None provided.</p>
-                    </div>
+                <div class="mobile-back-to-list">
+                    <button type="button" class="btn btn-outline" style="width: 100%; min-height: 36px;" onclick="returnToCandidateListMobile()">
+                        <span>&larr; Retour à la liste des candidats</span>
+                    </button>
                 </div>
 
-                <!-- Solution Pages & Geometric Schemas Inspection Gallery -->
-                <div class="detail-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <h3 style="font-size: 1.05rem; font-weight: 700;">Uploaded Proof Sheets & Geometric Schemas</h3>
-                        <span style="font-size: 0.8rem; color: var(--gold);">Click any sheet to inspect full resolution</span>
-                    </div>
-
-                    <div class="solution-gallery" id="candGalleryGrid">
-                        <!-- Solution Images -->
-                    </div>
-
-                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
-                        &#x26A0; <strong>Directorate Guideline:</strong> Ensure writing is fully legible and figures have valid geometric labels. If work is illegible or generated by AI, assign 0 points and apply account ban below.
-                    </div>
+                <!-- Empty Placeholder -->
+                <div id="noCandidateSelectedNotice" style="text-align: center; padding: 48px 16px; color: var(--text-muted);">
+                    <div style="font-size: 2.8rem; margin-bottom: 10px;">📋</div>
+                    <h3 style="color: #FFFFFF; font-size: 1.1rem; margin-bottom: 6px;">Sélectionnez une copie dans la liste</h3>
+                    <p style="font-size: 0.85rem; max-width: 440px; margin: 0 auto;">Visualisez les solutions manuscrites en haute définition, discutez en direct comme sur Messenger avec le candidat, et attribuez la note officielle.</p>
                 </div>
 
-                <!-- Grading & Evaluation Action Panel -->
-                <div class="detail-card">
-                    <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem;">Official Evaluation & Score Award</h3>
+                <!-- Selected Candidate View -->
+                <div id="selectedCandidateContainer" style="display: none; display: flex; flex-direction: column; gap: 16px;">
                     
-                    <div style="display: grid; grid-template-columns: 180px 1fr; gap: 1rem;">
+                    <!-- Candidate Dossier Header -->
+                    <div class="dossier-header-card">
                         <div>
-                            <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Score (out of 42)</label>
-                            <input type="number" id="inputScore" class="form-control" min="0" max="42" step="0.5" placeholder="e.g. 38">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
+                                <h2 id="candDossierName" style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF;">Nom du Candidat</h2>
+                                <span id="candDossierCountry" class="status-badge badge-graded">Tunisie</span>
+                                <span id="candDossierBan" class="status-badge badge-banned" style="display: none;">Suspendu</span>
+                            </div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted);">
+                                Email : <span id="candDossierEmail" style="color: #E2E8F0;">email@test.com</span> · Soumis le : <span id="candDossierTime" style="color: #E2E8F0;">--</span>
+                            </div>
+                            <div id="candDossierNotes" style="font-size: 0.8rem; color: #CBD5E1; margin-top: 6px; font-style: italic;">
+                                Notes du candidat : Aucune
+                            </div>
                         </div>
-                        <div>
-                            <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Examiner Feedback / Marks Breakdown</label>
-                            <textarea id="inputFeedback" class="form-control" rows="2" placeholder="e.g. Full marks on Geometry. Outstanding radical axis lemma. P4 functional equation Cauchy boundary error (-2 pts)."></textarea>
+
+                        <div class="score-box-display">
+                            <div style="font-size: 0.68rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Note Actuelle</div>
+                            <div class="score-number" id="candScoreDisplay">-- / 42</div>
                         </div>
                     </div>
 
-                    <div style="margin-top: 1rem; display: flex; justify-content: flex-end;">
-                        <button class="btn btn-success" onclick="saveGrade()">Save Grade & Notify Candidate</button>
+                    <!-- Handwritten Proofs Gallery -->
+                    <div class="proofs-gallery-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="font-size: 0.88rem; font-weight: 700; color: #FFFFFF;">Pages Manuscrites & Schémas Géométriques (<span id="proofsCount">0</span>)</h3>
+                            <span style="font-size: 0.72rem; color: var(--gold-light);">Cliquez pour agrandir en plein écran</span>
+                        </div>
+                        <div class="gallery-grid" id="proofsGridContainer">
+                            <!-- Populated with thumbnails -->
+                        </div>
                     </div>
+
+                    <!-- Messenger Chat Thread (Direcorate <-> Candidate) -->
+                    <div class="chat-messenger-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="font-size: 0.88rem; font-weight: 700; color: #FFFFFF;">Discussion Directe & Remarques (Style Messenger)</h3>
+                            <span style="font-size: 0.72rem; color: var(--text-muted);">Échange confidentiel avec le candidat</span>
+                        </div>
+                        <div class="chat-thread-box" id="messengerChatBox">
+                            <!-- Chat bubbles -->
+                        </div>
+                        <div class="chat-input-row">
+                            <input type="text" id="messengerInputText" placeholder="Écrire un message d'encouragement ou une remarque de correction..." onkeydown="if(event.key==='Enter') sendMessengerMsg()">
+                            <button type="button" class="btn btn-gold" onclick="sendMessengerMsg()">Envoyer &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- Grading Form Card -->
+                    <div class="grade-action-card">
+                        <h3 style="font-size: 0.88rem; font-weight: 700; color: #FFFFFF; margin-bottom: 12px;">Évaluation & Attribution des Points</h3>
+                        <div class="grade-form-row">
+                            <div class="form-field-group" style="width: 140px;">
+                                <label class="field-label">Score (sur 42)</label>
+                                <input type="number" step="0.5" min="0" max="42" id="gradeScoreInput" class="field-input" placeholder="ex: 38">
+                            </div>
+                            <div class="form-field-group" style="flex: 1; min-width: 220px;">
+                                <label class="field-label">Commentaire Officiel du Jury</label>
+                                <input type="text" id="gradeFeedbackInput" class="field-input" placeholder="ex: Démonstration géométrique remarquable sur le P1...">
+                            </div>
+                            <button type="button" class="btn btn-gold" onclick="submitGradeEvaluation()">Enregistrer la Note</button>
+                        </div>
+
+                        <!-- Discipline / Ban section -->
+                        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Sanction Disciplinaire (Intégrité académique) :</span>
+                            <button type="button" class="btn btn-danger" style="font-size: 0.72rem; padding: 4px 8px; min-height: 28px;" onclick="applyCandidateBan(1)">Suspendre 24h</button>
+                            <button type="button" class="btn btn-danger" style="font-size: 0.72rem; padding: 4px 8px; min-height: 28px;" onclick="applyCandidateBan(7)">Suspendre 7j</button>
+                            <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 4px 8px; min-height: 28px;" onclick="applyCandidateBan(0)">Lever la sanction</button>
+                        </div>
+                    </div>
+
                 </div>
-
-                <!-- Disciplinary & Ban Management Panel -->
-                <div class="detail-card" style="border-left: 4px solid var(--red);">
-                    <h3 style="font-size: 1.05rem; font-weight: 700; color: #f87171; margin-bottom: 0.5rem;">Disciplinary Action & Account Suspension</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
-                        Enforce penalties for AI usage, plagiarism, dishonest collaboration, or deliberately unreadable submissions. Banning suspends test participation for the specified duration.
-                    </p>
-
-                    <div style="display: grid; grid-template-columns: 180px 1fr auto; gap: 1rem; align-items: flex-end;">
-                        <div>
-                            <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Suspension Period</label>
-                            <select id="selectBanDays" class="form-control">
-                                <option value="1">1 Day Suspension</option>
-                                <option value="2">2 Days Suspension</option>
-                                <option value="7">7 Days Suspension</option>
-                                <option value="30">30 Days Suspension</option>
-                                <option value="0">Lift Suspension (Unban)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Violation Reason</label>
-                            <input type="text" id="inputBanReason" class="form-control" placeholder="e.g. AI-generated solution detected (Score: 0 & Ban)">
-                        </div>
-                        <button class="btn btn-danger" onclick="applyDisciplinaryBan()">Apply Suspension</button>
-                    </div>
-                </div>
-
             </div>
-        </main>
+        </section>
 
+        <!-- ================= TAB 2: GESTION DES OLYMPIADES (PDF, LANCEMENT, MODIF, SUPPR) ================= -->
+        <section id="olympiadsSection" class="olympiad-manage-wrapper" style="display: none;">
+            
+            <!-- Active Test Showcase Card -->
+            <div class="manage-card">
+                <div class="manage-card-header">
+                    <div>
+                        <h2 class="manage-title">Épreuve Actuelle en Ligne</h2>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Contrôle du sujet officiel et statut d'accès pour les candidats</span>
+                    </div>
+                    <div id="activeTestStatusBadge">
+                        <span class="exam-status-chip chip-active">🟢 Épreuve Lancée & Active</span>
+                    </div>
+                </div>
+
+                <div class="active-exam-banner" id="activeExamBanner">
+                    <div style="flex: 1; min-width: 260px;">
+                        <h3 id="currentExamTitleDisplay" style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Titre de l'épreuve</h3>
+                        <p id="currentExamDescDisplay" style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 10px;">Description de l'épreuve...</p>
+                        <div style="font-size: 0.78rem; color: #CBD5E1; display: flex; gap: 14px; flex-wrap: wrap;">
+                            <span>⏱️ Durée : <b id="currentExamDurationDisplay">240</b> minutes (4h)</span>
+                            <span>🎯 Score Max : <b id="currentExamScoreDisplay">42</b> points</span>
+                            <span>📄 Sujet PDF : <a id="currentExamPdfLink" href="#" target="_blank" style="color: var(--gold-light); text-decoration: underline;">Voir le PDF</a></span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button type="button" class="btn btn-outline" onclick="openEditTestModal(currentActiveTestId)">✏️ Modifier l'Épreuve</button>
+                        <button type="button" class="btn btn-gold" id="btnLaunchActive" onclick="launchTest(currentActiveTestId)">🚀 Lancer l'Épreuve</button>
+                        <button type="button" class="btn btn-outline" id="btnPauseActive" onclick="pauseTest(currentActiveTestId)">⏸ Mettre en Pause</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteTest(currentActiveTestId)">🗑 Supprimer l'Épreuve</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload / Create New Olympiad Card -->
+            <div class="manage-card">
+                <div class="manage-card-header">
+                    <div>
+                        <h2 class="manage-title">Déposer un Nouveau Sujet PDF & Configurer l'Olympiade</h2>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Téléversez votre épreuve officielle sous format PDF et lancez le concours</span>
+                    </div>
+                </div>
+
+                <form id="createTestForm" onsubmit="handleCreateTestSubmit(event)">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                        <div class="form-field-group">
+                            <label class="field-label">Titre Officiel de l'Olympiade *</label>
+                            <input type="text" id="newTestTitle" required class="field-input" placeholder="ex: Olympiade Internationale Assil Hamdi - Hiver 2026">
+                        </div>
+                        <div class="form-field-group">
+                            <label class="field-label">Fichier Sujet d'Examen (PDF) *</label>
+                            <input type="file" id="newTestPdfFile" accept=".pdf" class="field-input" style="padding: 5px;">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                        <div class="form-field-group">
+                            <label class="field-label">Durée (Minutes)</label>
+                            <input type="number" id="newTestDuration" value="240" min="30" max="600" class="field-input">
+                        </div>
+                        <div class="form-field-group">
+                            <label class="field-label">Score Maximal</label>
+                            <input type="number" id="newTestMaxScore" value="42" min="1" max="100" class="field-input">
+                        </div>
+                        <div class="form-field-group">
+                            <label class="field-label">Nombre de Problèmes</label>
+                            <input type="number" id="newTestProblems" value="6" min="1" max="20" class="field-input">
+                        </div>
+                    </div>
+
+                    <div class="form-field-group" style="margin-bottom: 16px;">
+                        <label class="field-label">Instructions & Consignes aux Candidats</label>
+                        <textarea id="newTestDesc" rows="3" class="field-input" placeholder="Épreuve stricte de 4 heures. Solutions manuscrites obligatoires avec figures géométriques..."></textarea>
+                    </div>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: #FFFFFF; cursor: pointer;">
+                            <input type="checkbox" id="newTestLaunchImmediately" checked style="width: 16px; height: 16px;">
+                            <span>Lancer immédiatement cette épreuve (activer pour tous les candidats)</span>
+                        </label>
+                        <button type="submit" class="btn btn-gold" id="btnCreateTestSubmit">
+                            <span>📄 Déposer le PDF & Créer l'Olympiade</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- All Tests Catalog Card -->
+            <div class="manage-card">
+                <div class="manage-card-header">
+                    <div>
+                        <h2 class="manage-title">Toutes les Épreuves Enregistrées</h2>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Historique et gestion des sujets archivés ou programmés</span>
+                    </div>
+                </div>
+
+                <div class="tests-grid" id="testsGridContainer">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= TAB 3: PUBLICATION & SEUILS DE MÉDAILLES ================= -->
+        <section id="medalsSection" class="medals-config-wrapper" style="display: none;">
+            
+            <div class="manage-card">
+                <div class="manage-card-header">
+                    <div>
+                        <h2 class="manage-title">Publication des Résultats au Grand Public</h2>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Contrôlez si le classement officiel est visible sur la page publique</span>
+                    </div>
+                    <div>
+                        <span id="publicReleaseStatusChip" class="exam-status-chip chip-paused">🔒 Résultats Masqués (Délibérations Secrètes)</span>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+                    <div style="max-width: 540px;">
+                        <div style="font-size: 0.9rem; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">Accès au Classement Général</div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">
+                            Tant que l'accès n'est pas ouvert, le public voit une mention sécurisée indiquant que le jury délibère encore. Ouvrez l'accès uniquement lorsque les corrections sont finalisées.
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" class="btn btn-success" onclick="setLeaderboardVisibility(true)">🔓 Ouvrir l'Accès Public</button>
+                        <button type="button" class="btn btn-danger" onclick="setLeaderboardVisibility(false)">🔒 Masquer les Résultats</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manage-card">
+                <div class="manage-card-header">
+                    <div>
+                        <h2 class="manage-title">Configuration des Seuils de Médailles</h2>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Définissez les notes minimales pour l'attribution des distinctions (Or, Argent, Mention Honorable)</span>
+                    </div>
+                </div>
+
+                <div class="threshold-inputs-grid">
+                    <div class="threshold-card gold-border">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="font-size: 1.4rem;">🥇</span>
+                            <div>
+                                <div style="font-size: 0.86rem; font-weight: 700; color: var(--gold-light);">Médaille d'Or</div>
+                                <div style="font-size: 0.72rem; color: var(--text-muted);">Excellence absolue</div>
+                            </div>
+                        </div>
+                        <label class="field-label">Note Minimale (sur 42)</label>
+                        <input type="number" id="cutoffGoldInput" class="field-input" value="35" min="0" max="42" step="0.5">
+                    </div>
+
+                    <div class="threshold-card silver-border">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="font-size: 1.4rem;">🥈</span>
+                            <div>
+                                <div style="font-size: 0.86rem; font-weight: 700; color: #E2E8F0;">Médaille d'Argent</div>
+                                <div style="font-size: 0.72rem; color: var(--text-muted);">Haute distinction</div>
+                            </div>
+                        </div>
+                        <label class="field-label">Note Minimale (sur 42)</label>
+                        <input type="number" id="cutoffSilverInput" class="field-input" value="28" min="0" max="42" step="0.5">
+                    </div>
+
+                    <div class="threshold-card bronze-border">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="font-size: 1.4rem;">🥉</span>
+                            <div>
+                                <div style="font-size: 0.86rem; font-weight: 700; color: #F59E0B;">Mention Honorable</div>
+                                <div style="font-size: 0.72rem; color: var(--text-muted);">Reconnaissance académique</div>
+                            </div>
+                        </div>
+                        <label class="field-label">Note Minimale (sur 42)</label>
+                        <input type="number" id="cutoffBronzeInput" class="field-input" value="20" min="0" max="42" step="0.5">
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                    <button type="button" class="btn btn-gold" onclick="saveMedalThresholds()">💾 Enregistrer les Seuils & Recalculer les Médailles</button>
+                </div>
+            </div>
+
+            <!-- Live Medal Preview Card -->
+            <div class="manage-card">
+                <div class="manage-card-header">
+                    <div>
+                        <h2 class="manage-title">Aperçu en Direct de la Proclamation</h2>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Attribution automatique des médailles selon les notes actuelles</span>
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border); text-align: left; color: var(--text-muted);">
+                                <th style="padding: 8px 12px;">Rang</th>
+                                <th style="padding: 8px 12px;">Candidat</th>
+                                <th style="padding: 8px 12px;">Pays</th>
+                                <th style="padding: 8px 12px;">Note</th>
+                                <th style="padding: 8px 12px;">Médaille Attribuée</th>
+                            </tr>
+                        </thead>
+                        <tbody id="medalsPreviewTbody">
+                            <!-- Populated with preview -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FULLSCREEN LIGHTBOX MODAL WITH ZOOM & TOUCH CLOSE -->
+    <div id="imageLightboxModal" class="lightbox-modal">
+        <div class="lightbox-topbar">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span id="lightboxTitleText" style="font-size: 0.85rem; font-weight: 600; color: #FFFFFF;">Page de démonstration</span>
+                <span id="lightboxIndexText" style="font-size: 0.75rem; color: var(--text-muted);">1 / 1</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <button type="button" class="btn btn-outline" style="min-height: 28px; padding: 2px 8px; font-size: 0.75rem;" onclick="zoomLightbox(0.2)">🔍 Zoom +</button>
+                <button type="button" class="btn btn-outline" style="min-height: 28px; padding: 2px 8px; font-size: 0.75rem;" onclick="zoomLightbox(-0.2)">🔍 Zoom -</button>
+                <button type="button" class="btn btn-danger" style="min-height: 32px; padding: 4px 14px; font-size: 0.85rem; font-weight: 700;" onclick="closeLightboxModal()">✕ Fermer</button>
+            </div>
+        </div>
+        <div class="lightbox-stage" onclick="closeLightboxModal()">
+            <img id="lightboxTargetImg" src="" alt="Démonstration géométrique" onclick="event.stopPropagation()">
     </div>
 
-    <!-- View 2: Exam PDF & Dispatch Settings -->
-    <div id="manageView" style="display: none; padding: 2rem; max-width: 900px; margin: 0 auto; width: 100%;">
-        <div class="detail-card">
-            <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem;">Olympiad Subject Paper Dispatch</h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-                Upload the official examination PDF paper distributed to candidates during their 4-hour test session.
-            </p>
-
-            <form onsubmit="handleUploadExamPdf(event)">
-                <div style="margin-bottom: 1rem;">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: block;">Examination Title</label>
-                    <input type="text" id="examTitleInput" class="form-control" value="Assil Hamdi Memorial International Mathematics Olympiad - Winter 2026" required>
+    <!-- EDIT TEST MODAL -->
+    <div id="editTestModal" class="lightbox-modal" style="background: rgba(0,0,0,0.85); align-items: center; justify-content: center; padding: 16px;">
+        <div style="background: #0E1320; border: 1px solid var(--border-gold); border-radius: 14px; padding: 24px; width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                <h3 style="font-family: 'Cinzel', serif; font-size: 1.15rem; color: #FFFFFF;">✏️ Modifier l'Épreuve d'Olympiade</h3>
+                <button type="button" class="btn btn-outline" style="padding: 2px 8px; font-size: 0.85rem;" onclick="closeEditTestModal()">✕</button>
+            </div>
+            <form id="editTestForm" onsubmit="handleEditTestSubmit(event)">
+                <input type="hidden" id="editTestId">
+                <div class="form-field-group" style="margin-bottom: 12px;">
+                    <label class="field-label">Titre Officiel de l'Olympiade *</label>
+                    <input type="text" id="editTestTitle" required class="field-input">
                 </div>
-
-                <div style="margin-bottom: 1rem;">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: block;">Examination Description & Scope</label>
-                    <textarea id="examDescInput" class="form-control" rows="3" required>Strict 4-Hour Advanced Pure Mathematics Examination (Synthetic Geometry, Algebraic Number Theory, Functional Inequalities, Extremal Combinatorics). Zero tolerance for AI or plagiarism.</textarea>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                    <div>
-                        <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: block;">Duration (Minutes)</label>
-                        <input type="number" id="examDurationInput" class="form-control" value="240" required>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 12px;">
+                    <div class="form-field-group">
+                        <label class="field-label">Durée (Minutes)</label>
+                        <input type="number" id="editTestDuration" min="30" max="600" class="field-input">
                     </div>
-                    <div>
-                        <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: block;">Maximum Points</label>
-                        <input type="number" id="examMaxScoreInput" class="form-control" value="42" required>
+                    <div class="form-field-group">
+                        <label class="field-label">Score Maximal</label>
+                        <input type="number" id="editTestMaxScore" min="1" max="100" class="field-input">
+                    </div>
+                    <div class="form-field-group">
+                        <label class="field-label">Nb Problèmes</label>
+                        <input type="number" id="editTestProblems" min="1" max="20" class="field-input">
                     </div>
                 </div>
-
-                <div style="margin-bottom: 1.5rem; background: #0f172a; padding: 1.25rem; border-radius: 8px; border: 1px dashed var(--border);">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: var(--gold); display: block; margin-bottom: 0.5rem;">Upload New Subject PDF Document (Optional if keeping current)</label>
-                    <input type="file" id="examPdfFile" accept="application/pdf" style="color: #ffffff;">
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">Current active paper: <span id="currentPdfFilenameText" style="color: #ffffff;">Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf</span></p>
+                <div class="form-field-group" style="margin-bottom: 12px;">
+                    <label class="field-label">Instructions & Consignes</label>
+                    <textarea id="editTestDesc" rows="3" class="field-input"></textarea>
                 </div>
-
-                <button type="submit" class="btn btn-gold" style="width: 100%;">Save Examination Paper & Parameters</button>
+                <div class="form-field-group" style="margin-bottom: 16px;">
+                    <label class="field-label">Remplacer le Sujet PDF (facultatif)</label>
+                    <input type="file" id="editTestPdfFile" accept=".pdf" class="field-input" style="padding: 5px;">
+                    <small style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">Laissez vide pour conserver le PDF actuel (<span id="editCurrentPdfName" style="color: var(--gold-light);"></span>)</small>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 8px;">
+                    <button type="button" class="btn btn-outline" onclick="closeEditTestModal()">Annuler</button>
+                    <button type="submit" class="btn btn-gold" id="btnEditTestSubmit">Enregistrer les Modifications</button>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- Lightbox Modal -->
-    <div id="adminLightbox" class="modal" onclick="closeAdminLightbox()">
-        <div style="position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #ffffff; cursor: pointer;">&times;</div>
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <img id="adminLightboxImg" src="" alt="Enlarged Sheet">
-        </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast"></div>
+    <!-- TOAST ALERT -->
+    <div id="toastAlert" class="toast-msg">Notification</div>
 
     <script>
+        let currentAdminToken = sessionStorage.getItem('admin_active_token') || localStorage.getItem('olympiad_token');
         let allSubmissions = [];
+        let allTests = [];
+        let currentActiveTestId = null;
         let selectedSession = null;
-        let activeTest = null;
+        let currentZoomLevel = 1;
 
-        function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = `toast ${type}`;
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 4000);
-        }
+        // AUTH INITIALIZATION
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (currentAdminToken) {
+                const isValid = await verifyAdminAuth();
+                if (isValid) {
+                    initAdminData();
+                } else {
+                    showLoginOverlay();
+                }
+            } else {
+                showLoginOverlay();
+            }
+        });
 
-        let currentAdminToken = null;
-
-        function getAuthToken() {
-            return currentAdminToken || sessionStorage.getItem('admin_active_token');
+        function showLoginOverlay() {
+            document.getElementById('adminLoginOverlay').style.display = 'flex';
         }
 
         async function verifyAdminAuth() {
-            const token = getAuthToken();
-            if (!token) {
-                document.getElementById('adminLoginOverlay').style.display = 'flex';
-                document.getElementById('submissionsView').style.display = 'none';
-                return false;
-            }
-
+            if (!currentAdminToken) return false;
             try {
                 const res = await fetch('/api/auth/me', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: { 'Authorization': `Bearer ${currentAdminToken}` }
                 });
+                if (!res.ok) throw new Error('Unauthorized');
                 const data = await res.json();
-                if (!res.ok || data.user.role !== 'admin') {
-                    currentAdminToken = null;
-                    sessionStorage.removeItem('admin_active_token');
-                    document.getElementById('adminLoginOverlay').style.display = 'flex';
-                    document.getElementById('submissionsView').style.display = 'none';
-                    return false;
-                }
+                if (data.user?.role !== 'admin') throw new Error('Not admin');
                 document.getElementById('adminLoginOverlay').style.display = 'none';
-                document.getElementById('submissionsView').style.display = 'grid';
                 return true;
-            } catch (err) {
+            } catch (e) {
                 currentAdminToken = null;
                 sessionStorage.removeItem('admin_active_token');
-                document.getElementById('adminLoginOverlay').style.display = 'flex';
-                document.getElementById('submissionsView').style.display = 'none';
+                showLoginOverlay();
                 return false;
             }
         }
@@ -713,8 +1266,6 @@
             e.preventDefault();
             const email = document.getElementById('adminEmail').value.trim();
             const password = document.getElementById('adminPassword').value.trim();
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Vérification...'; }
 
             try {
                 const res = await fetch('/api/auth/login', {
@@ -723,23 +1274,18 @@
                     body: JSON.stringify({ email, password })
                 });
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Identifiants direction invalides');
-
-                if (!data.user || data.user.role !== 'admin') {
-                    throw new Error('Ce compte ne possède pas les privilèges de la Direction.');
-                }
+                if (!res.ok) throw new Error(data.error || 'Connexion échouée');
+                if (data.user?.role !== 'admin') throw new Error('Accès réservé aux administrateurs.');
 
                 currentAdminToken = data.token;
                 sessionStorage.setItem('admin_active_token', data.token);
                 localStorage.setItem('olympiad_token', data.token);
+
                 document.getElementById('adminLoginOverlay').style.display = 'none';
-                document.getElementById('submissionsView').style.display = 'grid';
                 showToast('Direction authentifiée avec succès.', 'success');
-                loadSubmissions();
+                initAdminData();
             } catch (err) {
-                showToast(err.message, 'error');
-            } finally {
-                if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = 'Autoriser la Session Administrateur &rarr;'; }
+                alert(err.message);
             }
         }
 
@@ -747,73 +1293,67 @@
             currentAdminToken = null;
             sessionStorage.removeItem('admin_active_token');
             localStorage.removeItem('olympiad_token');
-            document.getElementById('submissionsView').style.display = 'none';
-            document.getElementById('manageView').style.display = 'none';
-            document.getElementById('adminLoginOverlay').style.display = 'flex';
-            document.getElementById('adminEmail').value = '';
-            document.getElementById('adminPassword').value = '';
-            showToast('Session Direction verrouillée.', 'info');
+            showLoginOverlay();
         }
 
-        function switchView(view) {
-            const subView = document.getElementById('submissionsView');
-            const manView = document.getElementById('manageView');
-            const tabSub = document.getElementById('tabSubmissionsBtn');
-            const tabMan = document.getElementById('tabExamManageBtn');
+        function initAdminData() {
+            switchAdminTab('corrections');
+            loadSubmissions();
+            loadTestsData();
+            loadMedalsSettings();
+        }
 
-            if (view === 'submissions') {
-                subView.style.display = 'grid';
-                manView.style.display = 'none';
-                tabSub.classList.add('active');
-                tabMan.classList.remove('active');
-            } else {
-                subView.style.display = 'none';
-                manView.style.display = 'block';
-                tabMan.classList.add('active');
-                tabSub.classList.remove('active');
+        // TABS SWITCHER
+        function switchAdminTab(tabKey) {
+            const tabs = ['corrections', 'olympiads', 'medals'];
+            tabs.forEach(t => {
+                const sec = document.getElementById(t + 'Section');
+                const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1) + 'Btn');
+                if (t === tabKey) {
+                    sec.style.display = t === 'corrections' ? 'grid' : 'flex';
+                    btn.classList.add('active');
+                } else {
+                    sec.style.display = 'none';
+                    btn.classList.remove('active');
+                }
+            });
+            if (tabKey === 'medals') {
+                loadMedalsSettings();
             }
         }
 
+        // ================= TAB 1: CORRECTIONS & MESSENGER =================
         async function loadSubmissions() {
-            const authed = await verifyAdminAuth();
-            if (!authed) return;
-
-            const token = getAuthToken();
+            if (!currentAdminToken) return;
             try {
                 const res = await fetch('/api/admin/submissions', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: { 'Authorization': `Bearer ${currentAdminToken}` }
                 });
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Failed to fetch submissions');
+                allSubmissions = data.submissions || [];
+                
+                document.getElementById('subCountLabel').textContent = `${allSubmissions.length} copies`;
+                document.getElementById('unreadCountBadge').textContent = allSubmissions.filter(s => s.score === null).length;
 
-                allSubmissions = data.submissions;
-                activeTest = data.test;
-
-                document.getElementById('subCountText').textContent = `${allSubmissions.length} candidates`;
                 renderCandidateList(allSubmissions);
 
-                // Populate manage view inputs
-                if (activeTest) {
-                    document.getElementById('examTitleInput').value = activeTest.title || '';
-                    document.getElementById('examDescInput').value = activeTest.description || '';
-                    document.getElementById('examDurationInput').value = activeTest.durationMinutes || 240;
-                    document.getElementById('examMaxScoreInput').value = activeTest.maxScore || 42;
-                    document.getElementById('currentPdfFilenameText').textContent = activeTest.pdfFilename || 'Assil_Hamdi_Memorial_Olympiad_Paper_2026.pdf';
-                }
-
-                // If a session was previously selected, re-select it
                 if (selectedSession) {
                     const fresh = allSubmissions.find(s => s.id === selectedSession.id);
                     if (fresh) selectCandidate(fresh);
                 }
             } catch (err) {
-                showToast(err.message, 'error');
+                showToast(err.message);
             }
         }
 
         function renderCandidateList(list) {
-            const container = document.getElementById('candidateThreadList');
+            const container = document.getElementById('candidateListEl');
             container.innerHTML = '';
+
+            if (list.length === 0) {
+                container.innerHTML = '<li style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.8rem;">Aucune copie pour le moment.</li>';
+                return;
+            }
 
             list.forEach(session => {
                 const student = session.student || {};
@@ -821,31 +1361,29 @@
                 const initials = (student.name || 'C').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
 
                 const li = document.createElement('li');
-                li.className = `candidate-thread-item ${isSelected ? 'active' : ''}`;
+                li.className = `candidate-item ${isSelected ? 'active' : ''}`;
                 li.onclick = () => selectCandidate(session);
 
-                let statusBadge = '';
+                let badgeHtml = '';
                 if (student.isBanned) {
-                    statusBadge = '<span class="status-chip banned">Suspended</span>';
+                    badgeHtml = '<span class="status-badge badge-banned">Suspendu</span>';
                 } else if (session.score !== null) {
-                    statusBadge = `<span class="status-chip graded">${session.score}/42</span>`;
+                    badgeHtml = `<span class="status-badge badge-graded">${session.score} / 42</span>`;
                 } else {
-                    statusBadge = '<span class="status-chip pending">Pending</span>';
+                    badgeHtml = '<span class="status-badge badge-pending">À corriger</span>';
                 }
 
-                const submitTimeStr = session.submittedAt ? new Date(session.submittedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
-
                 li.innerHTML = `
-                    <div class="avatar">${initials}</div>
-                    <div class="thread-details">
-                        <div class="thread-top">
-                            <span class="candidate-name">${student.name || 'Anonymous'}</span>
-                            <span class="thread-time">${submitTimeStr}</span>
+                    <div class="candidate-avatar">${initials}</div>
+                    <div class="candidate-info">
+                        <div class="candidate-row-top">
+                            <span class="candidate-name-txt">${student.name || 'Anonyme'}</span>
+                            ${badgeHtml}
                         </div>
-                        <div class="thread-meta">
-                            <span>${student.country || 'Global'}</span>
-                            <span>&bull;</span>
-                            ${statusBadge}
+                        <div class="candidate-sub-txt">
+                            <span>${student.country || 'International'}</span>
+                            <span>·</span>
+                            <span>${(session.images || []).length} page(s)</span>
                         </div>
                     </div>
                 `;
@@ -854,16 +1392,12 @@
         }
 
         function filterCandidates() {
-            const query = document.getElementById('candidateSearchInput').value.toLowerCase().trim();
-            if (!query) {
-                renderCandidateList(allSubmissions);
-                return;
-            }
+            const q = document.getElementById('candidateSearchInput').value.toLowerCase().trim();
             const filtered = allSubmissions.filter(s => {
                 const name = (s.student?.name || '').toLowerCase();
                 const country = (s.student?.country || '').toLowerCase();
                 const email = (s.student?.email || '').toLowerCase();
-                return name.includes(query) || country.includes(query) || email.includes(query);
+                return name.includes(q) || country.includes(q) || email.includes(q);
             });
             renderCandidateList(filtered);
         }
@@ -872,181 +1406,565 @@
             selectedSession = session;
             renderCandidateList(allSubmissions);
 
-            document.getElementById('emptySelectMessage').style.display = 'none';
-            const detailPane = document.getElementById('selectedCandidateDetail');
-            detailPane.style.display = 'flex';
+            document.getElementById('noCandidateSelectedNotice').style.display = 'none';
+            document.getElementById('selectedCandidateContainer').style.display = 'flex';
+
+            // Mobile toggle
+            document.getElementById('inboxSidebar').classList.add('hidden-mobile');
+            document.getElementById('dossierPane').classList.remove('hidden-mobile');
 
             const student = session.student || {};
-            document.getElementById('candNameDisplay').textContent = student.name || 'Candidate';
-            document.getElementById('candCountryBadge').textContent = student.country || 'Global';
-            document.getElementById('candEmailDisplay').textContent = student.email || '--';
-            document.getElementById('candSubmitTimeDisplay').textContent = session.submittedAt ? new Date(session.submittedAt).toLocaleString() : '--';
+            document.getElementById('candDossierName').textContent = student.name || 'Anonyme';
+            document.getElementById('candDossierCountry').textContent = student.country || 'International';
+            document.getElementById('candDossierEmail').textContent = student.email || '--';
+            document.getElementById('candDossierTime').textContent = session.submittedAt ? new Date(session.submittedAt).toLocaleString() : '--';
+            document.getElementById('candDossierNotes').textContent = session.studentNotes ? `« ${session.studentNotes} »` : 'Aucune remarque soumise.';
             
-            // Score display
-            const scoreDisplay = document.getElementById('candScoreDisplay');
-            if (session.score !== null) {
-                scoreDisplay.textContent = `${session.score} / ${activeTest?.maxScore || 42}`;
-                scoreDisplay.style.color = '#34d399';
+            document.getElementById('candDossierBan').style.display = student.isBanned ? 'inline-block' : 'none';
+            document.getElementById('candScoreDisplay').textContent = session.score !== null ? `${session.score} / 42` : '-- / 42';
+
+            document.getElementById('gradeScoreInput').value = session.score !== null ? session.score : '';
+            document.getElementById('gradeFeedbackInput').value = session.feedback || '';
+
+            // Render proofs gallery
+            const proofsContainer = document.getElementById('proofsGridContainer');
+            proofsContainer.innerHTML = '';
+            const images = session.images || [];
+            document.getElementById('proofsCount').textContent = images.length;
+
+            if (images.length === 0) {
+                proofsContainer.innerHTML = '<div style="font-size: 0.8rem; color: var(--text-muted); grid-column: 1/-1;">Aucune image de copie trouvée.</div>';
             } else {
-                scoreDisplay.textContent = `Pending / ${activeTest?.maxScore || 42}`;
-                scoreDisplay.style.color = '#fbbf24';
+                images.forEach((img, idx) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'proof-thumb-item';
+                    thumb.innerHTML = `
+                        <img src="${img.url}" alt="${img.name || 'Page ' + (idx + 1)}">
+                        <div class="proof-thumb-overlay">🔍 Page ${idx + 1}</div>
+                    `;
+                    thumb.onclick = () => openLightbox(img.url, img.name || `Page ${idx + 1}`, idx + 1, images.length);
+                    proofsContainer.appendChild(thumb);
+                });
             }
 
-            // Ban chip
-            const banChip = document.getElementById('candBanChip');
-            if (student.isBanned) {
-                banChip.style.display = 'inline-block';
-                banChip.textContent = `Suspended until ${new Date(student.bannedUntil).toLocaleDateString()}`;
-            } else {
-                banChip.style.display = 'none';
-            }
-
-            // Notes
-            document.getElementById('candNotesDisplay').textContent = session.studentNotes || 'No notes attached.';
-
-            // Populate grading inputs
-            document.getElementById('inputScore').value = session.score !== null ? session.score : '';
-            document.getElementById('inputFeedback').value = session.feedback || '';
-
-            // Populate gallery
-            const gallery = document.getElementById('candGalleryGrid');
-            gallery.innerHTML = '';
-            (session.images || []).forEach((img, idx) => {
-                const div = document.createElement('div');
-                div.className = 'gallery-item';
-                div.innerHTML = `
-                    <img src="${img.url}" class="gallery-img" onclick="openAdminLightbox('${img.url}')" title="Click to enlarge and inspect">
-                    <div class="gallery-caption">Sheet ${idx + 1}: ${img.name}</div>
-                `;
-                gallery.appendChild(div);
-            });
+            // Render Messenger Chat
+            renderMessengerThread(session.messages || []);
         }
 
-        async function saveGrade() {
-            if (!selectedSession) return;
-            const score = document.getElementById('inputScore').value;
-            const feedback = document.getElementById('inputFeedback').value.trim();
+        function returnToCandidateListMobile() {
+            document.getElementById('inboxSidebar').classList.remove('hidden-mobile');
+            document.getElementById('dossierPane').classList.add('hidden-mobile');
+        }
 
-            if (score === '' || isNaN(score)) {
-                showToast('Please enter a valid numeric score.', 'error');
+        function renderMessengerThread(messages) {
+            const chatBox = document.getElementById('messengerChatBox');
+            chatBox.innerHTML = '';
+
+            if (messages.length === 0) {
+                chatBox.innerHTML = '<div style="font-size: 0.78rem; color: var(--text-muted); text-align: center; padding: 20px;">Aucun message échangé pour le moment.</div>';
                 return;
             }
 
-            const token = getAuthToken();
+            messages.forEach(msg => {
+                const bubble = document.createElement('div');
+                const isAdmin = msg.sender === 'admin';
+                bubble.className = `chat-bubble ${isAdmin ? 'bubble-admin' : 'bubble-candidate'}`;
+                
+                const author = isAdmin ? (msg.authorName || 'Direction des Examens') : (msg.authorName || 'Candidat');
+                const time = msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+
+                bubble.innerHTML = `
+                    <div class="bubble-author">${author}</div>
+                    <div>${msg.text}</div>
+                    <div class="bubble-time">${time}</div>
+                `;
+                chatBox.appendChild(bubble);
+            });
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendMessengerMsg() {
+            if (!selectedSession) return;
+            const input = document.getElementById('messengerInputText');
+            const text = input.value.trim();
+            if (!text) return;
+
+            try {
+                const res = await fetch(`/api/admin/sessions/${selectedSession.id}/message`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentAdminToken}`
+                    },
+                    body: JSON.stringify({ text })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur lors de l\'envoi');
+
+                input.value = '';
+                selectedSession.messages = data.session.messages;
+                renderMessengerThread(selectedSession.messages);
+                showToast('Message envoyé au candidat.', 'success');
+            } catch (err) {
+                showToast(err.message);
+            }
+        }
+
+        async function submitGradeEvaluation() {
+            if (!selectedSession) return;
+            const scoreVal = document.getElementById('gradeScoreInput').value;
+            const feedbackVal = document.getElementById('gradeFeedbackInput').value;
+
+            if (scoreVal === '') {
+                alert('Veuillez entrer une note numérique.');
+                return;
+            }
+
             try {
                 const res = await fetch('/api/admin/grade', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${currentAdminToken}`
                     },
                     body: JSON.stringify({
                         sessionId: selectedSession.id,
-                        score: parseFloat(score),
-                        feedback
+                        score: scoreVal,
+                        feedback: feedbackVal
                     })
                 });
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Grading failed');
+                if (!res.ok) throw new Error(data.error || 'Erreur d\'enregistrement de la note');
 
-                showToast('Grade and feedback saved successfully!', 'success');
+                showToast('Note et appréciation enregistrées !', 'success');
+                selectedSession.score = data.session.score;
+                selectedSession.feedback = data.session.feedback;
+                document.getElementById('candScoreDisplay').textContent = `${data.session.score} / 42`;
                 loadSubmissions();
             } catch (err) {
-                showToast(err.message, 'error');
+                showToast(err.message);
             }
         }
 
-        async function applyDisciplinaryBan() {
+        async function applyCandidateBan(days) {
             if (!selectedSession || !selectedSession.student) return;
-            const days = parseInt(document.getElementById('selectBanDays').value, 10);
-            const reason = document.getElementById('inputBanReason').value.trim();
+            const userId = selectedSession.student.id;
+            const reason = prompt(days > 0 ? "Raison de la suspension (ex: Plagiat, utilisation d'IA, copie non manuscrite) :" : "Confirmation de la levée de sanction");
+            if (reason === null) return;
 
-            const actionName = days === 0 ? "lift the suspension for" : `suspend ${selectedSession.student.name} for ${days} days`;
-            if (!confirm(`Are you sure you want to ${actionName}?`)) return;
-
-            const token = getAuthToken();
             try {
                 const res = await fetch('/api/admin/ban', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${currentAdminToken}`
                     },
-                    body: JSON.stringify({
-                        userId: selectedSession.student.id,
-                        days,
-                        reason
-                    })
+                    body: JSON.stringify({ userId, days, reason })
                 });
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Ban update failed');
+                if (!res.ok) throw new Error(data.error || 'Erreur');
 
                 showToast(data.message, 'success');
                 loadSubmissions();
             } catch (err) {
-                showToast(err.message, 'error');
+                showToast(err.message);
             }
         }
 
-        async function handleUploadExamPdf(e) {
-            e.preventDefault();
-            const token = getAuthToken();
-            const formData = new FormData();
-            formData.append('title', document.getElementById('examTitleInput').value.trim());
-            formData.append('description', document.getElementById('examDescInput').value.trim());
-            formData.append('durationMinutes', document.getElementById('examDurationInput').value);
-            formData.append('maxScore', document.getElementById('examMaxScoreInput').value);
+        // ================= TAB 2: OLYMPIADS (PDF, LAUNCH, EDIT, DELETE) =================
+        async function loadTestsData() {
+            if (!currentAdminToken) return;
+            try {
+                const res = await fetch('/api/admin/tests', {
+                    headers: { 'Authorization': `Bearer ${currentAdminToken}` }
+                });
+                const data = await res.json();
+                allTests = data.tests || [];
+                currentActiveTestId = data.activeTestId || allTests[0]?.id;
 
-            const fileInput = document.getElementById('examPdfFile');
-            if (fileInput.files.length > 0) {
-                formData.append('testPdf', fileInput.files[0]);
+                renderActiveTestSection();
+                renderAllTestsGrid();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function renderActiveTestSection() {
+            const active = allTests.find(t => t.id === currentActiveTestId) || allTests[0];
+            if (!active) return;
+
+            document.getElementById('currentExamTitleDisplay').textContent = active.title;
+            document.getElementById('currentExamDescDisplay').textContent = active.description || 'Aucune consigne spécifique.';
+            document.getElementById('currentExamDurationDisplay').textContent = active.durationMinutes || 240;
+            document.getElementById('currentExamScoreDisplay').textContent = active.maxScore || 42;
+            
+            const pdfLink = document.getElementById('currentExamPdfLink');
+            pdfLink.href = active.pdfUrl || '#';
+            pdfLink.textContent = active.pdfFilename || 'Sujet officiel PDF';
+
+            const statusBadge = document.getElementById('activeTestStatusBadge');
+            const btnLaunch = document.getElementById('btnLaunchActive');
+            const btnPause = document.getElementById('btnPauseActive');
+
+            if (active.isActive) {
+                statusBadge.innerHTML = '<span class="exam-status-chip chip-active">🟢 Épreuve Lancée & Active</span>';
+                btnLaunch.style.display = 'none';
+                btnPause.style.display = 'inline-flex';
+            } else {
+                statusBadge.innerHTML = '<span class="exam-status-chip chip-paused">⏸️ Épreuve en Pause / Brouillon</span>';
+                btnLaunch.style.display = 'inline-flex';
+                btnPause.style.display = 'none';
+            }
+        }
+
+        function renderAllTestsGrid() {
+            const container = document.getElementById('testsGridContainer');
+            container.innerHTML = '';
+
+            if (allTests.length === 0) {
+                container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85rem;">Aucune épreuve archivée.</div>';
+                return;
             }
 
+            allTests.forEach(test => {
+                const card = document.createElement('div');
+                card.className = `test-item-card ${test.isActive ? 'is-active' : ''}`;
+                card.innerHTML = `
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+                            <span class="exam-status-chip ${test.isActive ? 'chip-active' : 'chip-paused'}">${test.isActive ? 'Active' : 'Pause'}</span>
+                            <span style="font-size: 0.72rem; color: var(--text-muted);">${test.durationMinutes || 240} min · ${test.maxScore || 42} pts</span>
+                        </div>
+                        <h4 style="font-size: 0.95rem; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">${test.title}</h4>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">
+                            <span>📄 ${test.pdfFilename || 'Sujet PDF'}</span>
+                            <div style="margin-top: 4px;">Soumissions : <b>${test.submittedCount || 0}</b></div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px;">
+                        ${test.isActive 
+                            ? `<button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 4px 8px; min-height: 28px;" onclick="pauseTest('${test.id}')">Mettre en pause</button>`
+                            : `<button type="button" class="btn btn-gold" style="font-size: 0.72rem; padding: 4px 8px; min-height: 28px;" onclick="launchTest('${test.id}')">🚀 Lancer</button>`
+                        }
+                        <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 4px 8px; min-height: 28px;" onclick="openEditTestModal('${test.id}')">✏️ Modifier</button>
+                        <button type="button" class="btn btn-danger" style="font-size: 0.72rem; padding: 4px 8px; min-height: 28px;" onclick="deleteTest('${test.id}')">Supprimer</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function handleCreateTestSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('newTestTitle').value.trim();
+            const durationMinutes = document.getElementById('newTestDuration').value;
+            const maxScore = document.getElementById('newTestMaxScore').value;
+            const totalProblems = document.getElementById('newTestProblems').value;
+            const description = document.getElementById('newTestDesc').value.trim();
+            const launchImmediately = document.getElementById('newTestLaunchImmediately').checked;
+            const pdfFile = document.getElementById('newTestPdfFile').files[0];
+
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('durationMinutes', durationMinutes);
+            formData.append('maxScore', maxScore);
+            formData.append('totalProblems', totalProblems);
+            formData.append('description', description);
+            formData.append('launchImmediately', launchImmediately);
+            if (pdfFile) {
+                formData.append('testPdf', pdfFile);
+            }
+
+            const btn = document.getElementById('btnCreateTestSubmit');
+            btn.disabled = true;
+            btn.textContent = 'Téléversement en cours...';
+
             try {
-                const res = await fetch('/api/admin/upload-test', {
+                const res = await fetch('/api/admin/tests', {
                     method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` },
+                    headers: { 'Authorization': `Bearer ${currentAdminToken}` },
                     body: formData
                 });
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Update failed');
+                if (!res.ok) throw new Error(data.error || 'Erreur lors de la création');
 
-                showToast('Olympiad examination parameters & PDF updated!', 'success');
-                activeTest = data.test;
-                document.getElementById('currentPdfFilenameText').textContent = activeTest.pdfFilename || 'Exam_Paper.pdf';
+                showToast(data.message, 'success');
+                document.getElementById('createTestForm').reset();
+                loadTestsData();
             } catch (err) {
-                showToast(err.message, 'error');
+                alert(err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>📄 Déposer le PDF & Créer l\'Olympiade</span>';
             }
         }
 
-        function openAdminLightbox(url) {
-            document.getElementById('adminLightboxImg').src = url;
-            document.getElementById('adminLightbox').classList.add('open');
-        }
-
-        function closeAdminLightbox() {
-            document.getElementById('adminLightbox').classList.remove('open');
-        }
-
-        function smartGoBack() {
-            if (window.history.length > 1 && document.referrer) {
-                window.history.back();
-            } else {
-                window.location.href = 'index.html';
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const token = getAuthToken();
-            if (token) {
-                verifyAdminAuth().then(ok => {
-                    if (ok) loadSubmissions();
+        async function launchTest(id) {
+            if (!confirm("Voulez-vous lancer officiellement cette olympiade ? Elle deviendra immédiatement active pour tous les candidats.")) return;
+            try {
+                const res = await fetch(`/api/admin/tests/${id}/launch`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${currentAdminToken}` }
                 });
-            } else {
-                document.getElementById('adminLoginOverlay').style.display = 'flex';
-                document.getElementById('submissionsView').style.display = 'none';
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur');
+                showToast(data.message, 'success');
+                loadTestsData();
+            } catch (err) {
+                showToast(err.message);
             }
+        }
+
+        async function pauseTest(id) {
+            try {
+                const res = await fetch(`/api/admin/tests/${id}/pause`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${currentAdminToken}` }
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur');
+                showToast(data.message, 'info');
+                loadTestsData();
+            } catch (err) {
+                showToast(err.message);
+            }
+        }
+
+        async function deleteTest(id) {
+            if (!confirm("Êtes-vous certain de vouloir supprimer définitivement cette épreuve ?")) return;
+            try {
+                const res = await fetch(`/api/admin/tests/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${currentAdminToken}` }
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur');
+                showToast(data.message, 'success');
+                loadTestsData();
+            } catch (err) {
+                showToast(err.message);
+            }
+        }
+
+        function openEditTestModal(id) {
+            const test = allTests.find(t => t.id === id);
+            if (!test) return;
+
+            document.getElementById('editTestId').value = test.id;
+            document.getElementById('editTestTitle').value = test.title || '';
+            document.getElementById('editTestDuration').value = test.durationMinutes || 240;
+            document.getElementById('editTestMaxScore').value = test.maxScore || 42;
+            document.getElementById('editTestProblems').value = test.totalProblems || 6;
+            document.getElementById('editTestDesc').value = test.description || '';
+            document.getElementById('editCurrentPdfName').textContent = test.pdfFilename || 'Aucun fichier';
+            document.getElementById('editTestPdfFile').value = '';
+
+            document.getElementById('editTestModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEditTestModal() {
+            document.getElementById('editTestModal').classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        async function handleEditTestSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('editTestId').value;
+            const title = document.getElementById('editTestTitle').value.trim();
+            const durationMinutes = document.getElementById('editTestDuration').value;
+            const maxScore = document.getElementById('editTestMaxScore').value;
+            const totalProblems = document.getElementById('editTestProblems').value;
+            const description = document.getElementById('editTestDesc').value.trim();
+            const pdfFile = document.getElementById('editTestPdfFile').files[0];
+
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('durationMinutes', durationMinutes);
+            formData.append('maxScore', maxScore);
+            formData.append('totalProblems', totalProblems);
+            formData.append('description', description);
+            if (pdfFile) {
+                formData.append('testPdf', pdfFile);
+            }
+
+            const btn = document.getElementById('btnEditTestSubmit');
+            btn.disabled = true;
+            btn.textContent = 'Enregistrement...';
+
+            try {
+                const res = await fetch(`/api/admin/tests/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${currentAdminToken}` },
+                    body: formData
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur lors de la modification');
+
+                showToast(data.message, 'success');
+                closeEditTestModal();
+                loadTestsData();
+            } catch (err) {
+                alert(err.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Enregistrer les Modifications';
+            }
+        }
+
+        // ================= TAB 3: PUBLICATION & MEDALS =================
+        async function loadMedalsSettings() {
+            try {
+                const res = await fetch('/api/leaderboard/settings');
+                const data = await res.json();
+                const settings = data.settings || {};
+
+                document.getElementById('cutoffGoldInput').value = settings.goldCutoff ?? 35;
+                document.getElementById('cutoffSilverInput').value = settings.silverCutoff ?? 28;
+                document.getElementById('cutoffBronzeInput').value = settings.bronzeCutoff ?? 20;
+
+                const chip = document.getElementById('publicReleaseStatusChip');
+                if (settings.isResultsPublic) {
+                    chip.className = 'exam-status-chip chip-active';
+                    chip.textContent = '🔓 Résultats Proclamés en Public';
+                } else {
+                    chip.className = 'exam-status-chip chip-paused';
+                    chip.textContent = '🔒 Résultats Masqués (Délibérations Secrètes)';
+                }
+
+                // Render live preview
+                renderMedalsPreview(settings);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function setLeaderboardVisibility(isPublic) {
+            try {
+                const res = await fetch('/api/admin/leaderboard/settings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentAdminToken}`
+                    },
+                    body: JSON.stringify({ isResultsPublic: isPublic })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur');
+
+                showToast(isPublic ? "Accès public ouvert ! Les médailles sont visibles." : "Résultats verrouillés en privé.", 'success');
+                loadMedalsSettings();
+            } catch (err) {
+                showToast(err.message);
+            }
+        }
+
+        async function saveMedalThresholds() {
+            const goldCutoff = parseFloat(document.getElementById('cutoffGoldInput').value) || 35;
+            const silverCutoff = parseFloat(document.getElementById('cutoffSilverInput').value) || 28;
+            const bronzeCutoff = parseFloat(document.getElementById('cutoffBronzeInput').value) || 20;
+
+            if (silverCutoff >= goldCutoff || bronzeCutoff >= silverCutoff) {
+                alert("Attention : Le seuil Or doit être strictement supérieur au seuil Argent, qui doit être supérieur au seuil Bronze !");
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/admin/leaderboard/settings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentAdminToken}`
+                    },
+                    body: JSON.stringify({ goldCutoff, silverCutoff, bronzeCutoff })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Erreur');
+
+                showToast("Seuils de médailles enregistrés avec succès.", 'success');
+                loadMedalsSettings();
+            } catch (err) {
+                showToast(err.message);
+            }
+        }
+
+        function renderMedalsPreview(settings) {
+            const tbody = document.getElementById('medalsPreviewTbody');
+            tbody.innerHTML = '';
+
+            const gold = settings.goldCutoff ?? 35;
+            const silver = settings.silverCutoff ?? 28;
+            const bronze = settings.bronzeCutoff ?? 20;
+
+            const gradedSubs = (allSubmissions || [])
+                .filter(s => s.score !== null)
+                .sort((a, b) => b.score - a.score);
+
+            if (gradedSubs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="padding: 16px; text-align: center; color: var(--text-muted);">Aucune copie notée pour l\'instant.</td></tr>';
+                return;
+            }
+
+            gradedSubs.forEach((s, idx) => {
+                let badge = '<span style="color: #64748B;">📜 Certificat de Participation</span>';
+                if (s.score >= gold) {
+                    badge = '<span style="color: var(--gold-light); font-weight: 700;">🥇 Médaille d\'Or</span>';
+                } else if (s.score >= silver) {
+                    badge = '<span style="color: #E2E8F0; font-weight: 700;">🥈 Médaille d\'Argent</span>';
+                } else if (s.score >= bronze) {
+                    badge = '<span style="color: #F59E0B; font-weight: 700;">🥉 Mention Honorable</span>';
+                }
+
+                const tr = document.createElement('tr');
+                tr.style.borderBottom = '1px solid rgba(255, 255, 255, 0.05)';
+                tr.innerHTML = `
+                    <td style="padding: 10px 12px; font-weight: 700;">#${idx + 1}</td>
+                    <td style="padding: 10px 12px; color: #FFFFFF;">${s.student?.name || 'Anonyme'}</td>
+                    <td style="padding: 10px 12px; color: var(--text-muted);">${s.student?.country || 'International'}</td>
+                    <td style="padding: 10px 12px; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--gold-light);">${s.score} / 42</td>
+                    <td style="padding: 10px 12px;">${badge}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ================= LIGHTBOX VIEWER =================
+        function openLightbox(url, title, index, total) {
+            const modal = document.getElementById('imageLightboxModal');
+            const img = document.getElementById('lightboxTargetImg');
+            img.src = url;
+            currentZoomLevel = 1;
+            img.style.transform = `scale(1)`;
+
+            document.getElementById('lightboxTitleText').textContent = title || 'Copie manuscrite';
+            document.getElementById('lightboxIndexText').textContent = `${index} / ${total}`;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightboxModal() {
+            const modal = document.getElementById('imageLightboxModal');
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        function zoomLightbox(delta) {
+            currentZoomLevel = Math.max(0.5, Math.min(3.5, currentZoomLevel + delta));
+            const img = document.getElementById('lightboxTargetImg');
+            img.style.transform = `scale(${currentZoomLevel})`;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightboxModal();
         });
+
+        // TOAST HELPER
+        function showToast(text, type = 'info') {
+            const t = document.getElementById('toastAlert');
+            t.textContent = text;
+            t.style.display = 'block';
+            setTimeout(() => { t.style.display = 'none'; }, 3500);
+        }
     </script>
 </body>
 </html>
