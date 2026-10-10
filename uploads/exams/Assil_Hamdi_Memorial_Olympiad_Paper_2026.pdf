@@ -6,40 +6,52 @@ endobj
 << /Type /Pages /Kids [3 0 R] /Count 1 >>
 endobj
 3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
 endobj
 4 0 obj
-<< /Length 520 >>
+<< /Length 1150 >>
 stream
 BT
 /F1 18 Tf
-50 780 Td
-(ASSIL HAMDI MEMORIAL MATHEMATICS OLYMPIAD - 2026) Tj
+50 750 Td
+(ASSIL HAMDI MEMORIAL MATHEMATICS OLYMPIAD) Tj
 /F1 12 Tf
-0 -30 Td
-(Official Examination Paper - 4 Hours Strict Duration) Tj
 0 -25 Td
-(Rules: 1. Legible handwriting required. 2. Clear geometric schemas mandatory.) Tj
+(Official Examination Paper - 4 Hours Strict Limit) Tj
+0 -20 Td
+(Rules: 1. Legible handwriting required. 2. Fully justified proofs mandatory.) Tj
 0 -15 Td
-(3. Zero tolerance for AI or plagiarism: Result will be 0 points and account ban.) Tj
+(3. Zero tolerance for AI or plagiarism: Results in score invalidation and account ban.) Tj
 0 -35 Td
 (Problem 1 (Geometry - 7 Points):) Tj
 0 -18 Td
-(Let ABC be an acute triangle with circumcircle Omega. Points D and E lie on sides AB) Tj
+(Let ABC be an acute triangle with circumcircle Gamma. Let D be the foot of the altitude) Tj
 0 -15 Td
-(and AC respectively. Prove that the radical axis of the two circles passes through...) Tj
-0 -35 Td
+(from A to BC, and M be the midpoint of BC. The line AD meets Gamma again at X.) Tj
+0 -15 Td
+(Let P be the intersection of AM with Gamma (P != A). The tangent to Gamma at P meets BC) Tj
+0 -15 Td
+(at T. The line TD meets Gamma again at K. Prove that A, M, K, D are concyclic.) Tj
+0 -30 Td
 (Problem 2 (Number Theory - 7 Points):) Tj
 0 -18 Td
-(Find all pairs of positive integers (x, y) such that 2^x + 3^y is a perfect square.) Tj
-0 -35 Td
-(Problem 3 (Functional Equations - 7 Points):) Tj
+(Find all pairs of positive integers (n, p) with p prime such that:) Tj
+0 -20 Td
+(n^p + p^n = (n + p)!) Tj
+0 -30 Td
+(Problem 3 (Algebra - 7 Points):) Tj
 0 -18 Td
-(Find all functions f: R -> R satisfying f(xf(y) + f(x)) = 2f(x) + xy for all reals x, y.) Tj
-0 -35 Td
+(Find all functions f : R -> R such that for all real numbers x, y:) Tj
+0 -20 Td
+(f(x * f(x + y)) = f(y * f(x)) + x^2) Tj
+0 -30 Td
 (Problem 4 (Combinatorics - 7 Points):) Tj
 0 -18 Td
-(A 2026 x 2026 grid is tiled by dominoes. Prove that the number of symmetric tilings is...) Tj
+(On an n x n board (n >= 3 odd), n^2 - 1 checkers are placed leaving the central cell empty.) Tj
+0 -15 Td
+(A valid jump moves a checker over an adjacent one into an empty space, removing it.) Tj
+0 -15 Td
+(Determine if it is possible to reduce the board to exactly one remaining checker.) Tj
 ET
 endstream
 endobj
@@ -52,10 +64,10 @@ xref
 0000000009 00000 n 
 0000000058 00000 n 
 0000000115 00000 n 
-0000000228 00000 n 
-0000000800 00000 n 
+0000000246 00000 n 
+0000001448 00000 n 
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-869
+1517
 %%EOF
